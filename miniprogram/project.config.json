@@ -1,0 +1,13 @@
+{
+  "description": "红旅薪传小程序",
+  "setting": {
+    "urlCheck": false,
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "minified": true,
+    "newFeature": true
+  },
+  "appid": "wx71269755a3711ceb",
+  "settingVersion": "16.0.0"
+}

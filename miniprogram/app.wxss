@@ -1,0 +1,4 @@
+page {
+  background: #F8F5F0;
+  font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+}

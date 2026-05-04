@@ -1,0 +1,4 @@
+.container {
+  padding: 40rpx;
+  font-size: 32rpx;
+}
