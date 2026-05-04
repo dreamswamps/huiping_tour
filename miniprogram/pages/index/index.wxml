@@ -16,7 +16,7 @@
         id="mySwiper"
       >
         <swiper-item wx:for="{{5}}" wx:key="index">
-          <image class="banner-img" src="/images/banner1.svg" mode="aspectFill"></image>
+          <image class="banner-img" src="{{baseUrl}}/img/banner1.svg" mode="aspectFill"></image>
         </swiper-item>
       </swiper>
 
@@ -32,16 +32,16 @@
       
       <!-- 左侧箭头 -->
       <view class="arrow-left" catchtap="onPrevSlide">
-        <image class="arrow-icon" src="/images/9.svg"></image>
+        <image class="arrow-icon" src="{{baseUrl}}/img/9.svg"></image>
       </view>
 
       <!-- 右侧箭头 -->
       <view class="arrow-right" catchtap="onNextSlide">
-        <image class="arrow-icon" src="/images/8.svg"></image>
+        <image class="arrow-icon" src="{{baseUrl}}/img/8.svg"></image>
       </view>
 
       <!-- 右上角用户头像 -->
-      <image class="user-avatar" src="/images/14.svg" catchtap="onUserTap"></image>
+      <image class="user-avatar" src="{{baseUrl}}/img/14.svg" catchtap="onUserTap"></image>
     </view>
 
     <!-- 内容区域 -->
@@ -50,15 +50,15 @@
       <!-- 功能入口卡片 -->
       <view class="func-cards">
         <view class="func-card" data-type="map" catchtap="onFuncCard">
-          <image class="card-img" src="/images/2.svg" mode="aspectFit"></image>
+          <image class="card-img" src="{{baseUrl}}/img/2.svg" mode="aspectFit"></image>
           <text class="card-text">传薪地图</text>
         </view>
         <view class="func-card" data-type="ar" catchtap="onFuncCard">
-          <image class="card-img" src="/images/3.svg" mode="aspectFit"></image>
+          <image class="card-img" src="{{baseUrl}}/img/3.svg" mode="aspectFit"></image>
           <text class="card-text">AR扫描</text>
         </view>
         <view class="func-card" data-type="badge" catchtap="onFuncCard">
-          <image class="card-img" src="/images/15.svg" mode="aspectFit"></image>
+          <image class="card-img" src="{{baseUrl}}/img/15.svg" mode="aspectFit"></image>
           <text class="card-text">任务徽章</text>
         </view>
       </view>
@@ -69,8 +69,8 @@
           <text class="ai-triangle">▶</text>
         </view>
         <view class="ai-right">
-          <image class="star" src="/images/12.svg" mode="aspectFit"></image>
-          <image class="star" src="/images/13.svg" mode="aspectFit"></image>
+          <image class="star" src="{{baseUrl}}/img/12.svg" mode="aspectFit"></image>
+          <image class="star" src="{{baseUrl}}/img/13.svg" mode="aspectFit"></image>
           <text class="ai-text">AI导览</text>
         </view>
       </view>
@@ -84,21 +84,21 @@
       <!-- 景点列表 -->
       <view class="spot-list">
         <view class="spot-item" catchtap="onSpotDetail">
-          <image class="spot-bg" src="/images/16.svg" mode="aspectFill"></image>
+          <image class="spot-bg" src="{{baseUrl}}/img/16.svg" mode="aspectFill"></image>
           <view class="spot-overlay">
             <text class="spot-name">陈列馆·夜袭镇公所</text>
             <text class="spot-desc">1930年秋，红军夜袭镇公所，打响了革命第一枪</text>
           </view>
         </view>
         <view class="spot-item" catchtap="onSpotDetail">
-          <image class="spot-bg" src="/images/17.svg" mode="aspectFill"></image>
+          <image class="spot-bg" src="{{baseUrl}}/img/17.svg" mode="aspectFill"></image>
           <view class="spot-overlay">
             <text class="spot-name">红军路·薪火相传</text>
             <text class="spot-desc">沿着先辈足迹，感受长征精神的伟大力量</text>
           </view>
         </view>
         <view class="spot-item" catchtap="onSpotDetail">
-          <image class="spot-bg" src="/images/18.svg" mode="aspectFill"></image>
+          <image class="spot-bg" src="{{baseUrl}}/img/18.svg" mode="aspectFill"></image>
           <view class="spot-overlay">
             <text class="spot-name">党史馆·淬火成钢</text>
             <text class="spot-desc">百年党史，铭记奋斗历程与革命先烈</text>
@@ -108,7 +108,7 @@
         <!-- 查看更多提示 -->
         <view class="more-tip">
           <text class="more-text">下滑查看更多</text>
-          <image class="more-arrow" src="/images/10.svg" mode="aspectFit"></image>
+          <image class="more-arrow" src="{{baseUrl}}/img/10.svg" mode="aspectFit"></image>
         </view>
       </view>
 
@@ -125,7 +125,7 @@
         <text class="tab-page-desc">探索红色文化地标</text>
       </view>
       <view class="map-placeholder">
-        <image class="map-icon" src="/images/7.svg" mode="aspectFit"></image>
+        <image class="map-icon" src="{{baseUrl}}/img/7.svg" mode="aspectFit"></image>
         <text>地图功能开发中...</text>
       </view>
       <view class="safe-bottom"></view>
@@ -140,7 +140,7 @@
         <text class="tab-page-desc">精选红色文创产品</text>
       </view>
       <view class="mall-placeholder">
-        <image class="mall-icon" src="/images/4.svg" mode="aspectFit"></image>
+        <image class="mall-icon" src="{{baseUrl}}/img/4.svg" mode="aspectFit"></image>
         <text>商城功能开发中...</text>
       </view>
       <view class="safe-bottom"></view>
@@ -155,7 +155,7 @@
         <text class="tab-page-desc">个人中心</text>
       </view>
       <view class="profile-placeholder">
-        <image class="profile-icon" src="/images/6.svg" mode="aspectFit"></image>
+        <image class="profile-icon" src="{{baseUrl}}/img/6.svg" mode="aspectFit"></image>
         <text>个人中心开发中...</text>
       </view>
       <view class="safe-bottom"></view>
@@ -169,7 +169,7 @@
       catchtap="switchTab" 
       data-index="0"
     >
-      <image class="tab-icon" src="/images/5.svg" mode="aspectFit"></image>
+      <image class="tab-icon" src="{{baseUrl}}/img/5.svg" mode="aspectFit"></image>
       <text class="tab-text {{currentTab === 0 ? 'active' : ''}}">首页</text>
     </view>
     <view 
@@ -177,7 +177,7 @@
       catchtap="switchTab" 
       data-index="1"
     >
-      <image class="tab-icon" src="/images/7.svg" mode="aspectFit"></image>
+      <image class="tab-icon" src="{{baseUrl}}/img/7.svg" mode="aspectFit"></image>
       <text class="tab-text {{currentTab === 1 ? 'active' : ''}}">传薪地图</text>
     </view>
     <view 
@@ -185,7 +185,7 @@
       catchtap="switchTab" 
       data-index="2"
     >
-      <image class="tab-icon" src="/images/4.svg" mode="aspectFit"></image>
+      <image class="tab-icon" src="{{baseUrl}}/img/4.svg" mode="aspectFit"></image>
       <text class="tab-text {{currentTab === 2 ? 'active' : ''}}">商城</text>
     </view>
     <view 
@@ -193,7 +193,7 @@
       catchtap="switchTab" 
       data-index="3"
     >
-      <image class="tab-icon" src="/images/6.svg" mode="aspectFit"></image>
+      <image class="tab-icon" src="{{baseUrl}}/img/6.svg" mode="aspectFit"></image>
       <text class="tab-text {{currentTab === 3 ? 'active' : ''}}">我的</text>
     </view>
   </view>

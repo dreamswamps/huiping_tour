@@ -1,7 +1,10 @@
+const config = require('../../config');
+
 Page({
   data: {
-    swiperCurrent: 2,  // 默认第3张（中间）
-    currentTab: 0      // 当前选中的tab索引：0=首页, 1=传薪地图, 2=商城, 3=我的
+    baseUrl: config.baseUrl,
+    swiperCurrent: 2,
+    currentTab: 0
   },
 
   onLoad() {},
