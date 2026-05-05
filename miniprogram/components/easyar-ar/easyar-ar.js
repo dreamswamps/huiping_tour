@@ -173,8 +173,8 @@ Component({
             const t = el.getComponent(this.xrFrameSystem.Transform);
             setting.scale = 0.4;
             t.scale.setValue(setting.scale, setting.scale, setting.scale);
-            // 让模型正对相机：绕Y轴旋转180度
-            t.rotation.setValue(0, 1, 0, 0);
+            // 绕X轴旋转-90度，使模型从水平状态变为垂直于地面
+            t.rotation.setValue(-90, 0, 0);
 
             wx.showToast({
                 icon: 'none',
