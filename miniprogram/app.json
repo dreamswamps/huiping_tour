@@ -1,1 +1,11 @@
-{"pages": ["pages/index/index", "pages/map/index", "pages/mall/index", "pages/profile/index"], "window": {"backgroundTextStyle": "light", "navigationBarBackgroundColor": "#A80101", "navigationBarTitleText": "红旅薪传", "navigationBarTextStyle": "white"}, "style": "v2", "sitemapLocation": "sitemap.json"}
+{"pages": ["pages/index/index", 
+  "pages/map/index", 
+  "pages/mall/index", 
+  "pages/profile/index",
+  "pages/tracking/index"
+  ], 
+"window": {"backgroundTextStyle": "light", "navigationBarBackgroundColor": "#A80101", "navigationBarTitleText": "红旅薪传", "navigationBarTextStyle": "white"},
+ "style": "v2", 
+ "sitemapLocation": "sitemap.json",
+ "lazyCodeLoading": "requiredComponents"
+}

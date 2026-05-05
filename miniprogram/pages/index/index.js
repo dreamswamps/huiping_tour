@@ -60,6 +60,14 @@ Page({
       wx.showToast({ title: titles[type], icon: 'none' });
     }
   },
+  
+  goToSubmodule(e) {
+    const { url } = e.currentTarget.dataset
+    if (!url) return
+    wx.navigateTo({
+      url
+    })
+  },
 
   // AI导览
   onAIGuide() {

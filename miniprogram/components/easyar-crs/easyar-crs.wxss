@@ -1,0 +1,153 @@
+.container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.controller {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 10;
+    width: 100%;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(63, 63, 63, 0.6);
+    z-index: 30;
+}
+
+.overlay-top {
+    position: absolute;
+    margin: 60rpx 44rpx 0 54rpx;
+    left: 0;
+    right: 0;
+}
+
+.title {
+    position: absolute;
+    font-size: 36rpx;
+    font-family: PingFangSC-Medium, PingFang SC, serif;
+    font-weight: 500;
+    color: #FFFFFF;
+    line-height: 46rpx;
+}
+
+.logo {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 178rpx;
+    height: 54rpx;
+}
+
+.desc {
+    position: absolute;
+    top: 106rpx;
+    font-size: 28rpx;
+    font-family: PingFangSC-Medium, PingFang SC, serif;
+    font-weight: 500;
+    color: #FFFFFF;
+    line-height: 46rpx;
+}
+
+.back-icon{
+    position: absolute;
+    width: 60rpx;
+    height: 60rpx;
+    top: 30rpx;
+    left: 30rpx;
+    z-index: 30;
+}
+
+.overlay-bottom {
+    position: absolute;
+    width: 540rpx;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0 auto;
+}
+
+.loading {
+    position: absolute;
+    width: fit-content;
+    height: fit-content;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 40;
+}
+
+.primary-button {
+    width: 540rpx;
+    height: 112rpx;
+    margin-top: 22rpx;
+    text-align: center;
+
+    font-size: 32rpx;
+    font-family: PingFangSC-Medium, PingFang SC, serif;
+    font-weight: 500;
+    color: #FFFFFF;
+    line-height: 112rpx;
+}
+
+.secondary-button {
+    width: 540rpx;
+    height: 80rpx;
+    margin-top: 22rpx;
+    text-align: center;
+
+    font-size: 24rpx;
+    font-family: PingFangSC-Medium, PingFang SC, serif;
+    font-weight: 500;
+    color: #EDEDED;
+    line-height: 80rpx;
+}
+
+.select {
+    position: absolute;
+    bottom: 210rpx;
+    right: 0;
+    z-index: 20;
+}
+
+.select {
+    width: 180rpx;
+    height: 88rpx;
+    color: white;
+    line-height: 88rpx;
+    text-align: center;
+    margin-top: 20rpx;
+    border-top-left-radius: 10rpx;
+    border-bottom-left-radius: 10rpx;
+
+    font-size: 28rpx;
+    font-family: PingFangSC-Medium, PingFang SC, serif;
+    font-weight: 500;
+
+    box-shadow: 0 4rpx 8rpx 0 rgba(0, 0, 0, 0.5);
+    background: linear-gradient(90deg, #EEA167 0%, #F97605 50%, #EEA167 100%);
+}
+
+.selected {
+    color: black;
+
+    background: linear-gradient(90deg, #ABABAB 0%, #D6D6D6 50%, #ABABAB 100%);
+}
+
+.hide-marker {
+    position: absolute; 
+    top: -1000px; 
+    left: -1000px; 
+    z-index:0
+}

@@ -1,0 +1,8 @@
+{
+    "component": true,
+    "disableScroll": true,
+    "usingComponents": {
+        "loading": "../loading/loading",
+        "easyar-ar": "../easyar-ar/easyar-ar"
+    }
+}

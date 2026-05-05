@@ -1,0 +1,23 @@
+<view class="container">
+    <easyar-ar runingCrs="{{runingCrs}}" tracking="{{tracking}}" config="{{config}}" width="{{width * dpi}}" height="{{height * dpi}}" style="width:{{width}}px;height:{{height}}px" bind:searchSuccess="onSearchSuccess" bind:showImage="showImage" markerImg="{{markerImg}}"></easyar-ar>
+</view>
+<view class="controller">
+    <view class="overlay" wx:if="{{showOverlay}}">
+        <view class="overlay-top">
+            <view class="title">EasyAR微信小程序AR</view>
+            <image class="logo" src="../images/logo@2x.png"></image>
+            <view class="desc">
+                帮助您迅速在微信小程序中实现扫描识别图呈现3D动画模型、视频、图片、文字、UI按钮等效果，并且支持3D模型交互。区别于原生 AR 应用，具有模式轻、部署快、传播性强等特点。
+            </view>
+        </view>
+        <view class="overlay-bottom">
+            <image id="scan" class="primary-button" src="../images/scan@2x.png" bind:tap="scan"></image>
+            <view id="download" class="primary-button" bind:tap="download">保存识别图</view>
+            <view id="email" class="secondary-button">support@sightp.com</view>
+        </view>
+    </view>
+    <image class="back-icon" wx:if="{{!showOverlay}}" src="../images/arrow_left.png" bind:tap="back"></image>
+    <view class="loading" wx:if="{{showLoading}}">
+        <loading text="{{showLoadingText}}"></loading>
+    </view>
+</view>
