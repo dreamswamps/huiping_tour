@@ -34,7 +34,7 @@
   <!-- ========== 优惠券列表 ========== -->
   <view class="coupon-list">
     <block wx:for="{{coupons}}" wx:key="id">
-      <view class="coupon-item" style="width: calc(100% - 44rpx); max-width: 100%; overflow: hidden;">
+      <view class="coupon-item">
         <!-- 左侧红色标签 -->
         <view class="coupon-tag">
           <text class="tag-value">{{item.value}}</text>

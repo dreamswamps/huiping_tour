@@ -121,19 +121,22 @@
 /* 单张优惠券 */
 .coupon-item {
   display: flex;
+  align-items: stretch;
   width: 100%;
   box-sizing: border-box;
   background: #FFFFFF;
   border-radius: 40rpx;
   border: 2rpx solid rgba(201, 31, 55, 0.5);
-  margin-bottom: 24rpx;
+  margin-bottom: 22rpx;
   overflow: hidden;
 }
 
-/* 左侧红色标签 */
+/* 左侧红色标签（约 28% 宽度，大屏用 max 限制避免过宽） */
 .coupon-tag {
-  width: 170rpx;
-  min-height: 230rpx;
+  flex: 0 0 28%;
+  width: 28%;
+  min-width: 168rpx;
+  max-width: 220rpx;
   background: linear-gradient(136deg, #A80101 0%, #420000 100%);
   border-top-left-radius: 40rpx;
   border-bottom-left-radius: 40rpx;
@@ -142,6 +145,7 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  box-sizing: border-box;
 }
 .tag-value {
   font-size: 40rpx;
@@ -152,7 +156,7 @@
 .tag-type {
   font-size: 24rpx;
   color: #FFFFFF;
-  margin-top: 4rpx;
+  margin-top: 6rpx;
 }
 
 /* 右侧内容区 */
@@ -161,7 +165,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 14rpx 24rpx 14rpx 20rpx;
+  padding: 16rpx 20rpx 16rpx 24rpx;
   min-width: 0; /* 关键：允许 flex 子元素收缩 */
 }
 .coupon-detail {
@@ -182,19 +186,20 @@
   display: block;
   font-size: 26rpx;
   color: #9E9E9E;
-  margin-top: 4rpx;
+  margin-top: 5rpx;
 }
 .detail-expiry {
   display: block;
   font-size: 26rpx;
   color: #BDBDBD;
-  margin-top: 4rpx;
+  margin-top: 5rpx;
 }
 
 /* 领取按钮 */
 .claim-btn {
-  width: 146rpx;
-  height: 62rpx;
+  width: 132rpx;
+  height: 60rpx;
+  margin-left: 16rpx;
   background: #C91F37;
   border-radius: 20rpx;
   display: flex;
