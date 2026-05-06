@@ -1,0 +1,84 @@
+<view class="page">
+
+  <!-- 顶部背景图 -->
+  <image class="top-bg" src="{{baseUrl}}/img/station4-top-bg.png" mode="widthFix"></image>
+
+  <!-- 返回首页按钮 -->
+  <view class="back-home-btn" bindtap="onBackHome">
+    <image class="home-icon" src="{{baseUrl}}/img/station4-btn-home.svg" mode="aspectFit"></image>
+    <text>返回首页</text>
+  </view>
+
+  <!-- 圆角内容容器 -->
+  <view class="content-panel">
+
+    <!-- 站点信息 -->
+    <view class="station-info">
+      <view class="station-num-wrap">
+        <text class="num-line"></text>
+        <text class="station-num">{{stationNum}}</text>
+        <text class="num-line"></text>
+      </view>
+      <text class="station-title">{{stationTitle}}</text>
+      <text class="station-name">{{stationName}}</text>
+      <text class="station-desc">{{stationDesc}}</text>
+    </view>
+
+    <!-- AR卡片：献花致敬英雄 -->
+    <view class="ar-card">
+      <view class="ar-header">
+        <text class="ar-icon">✨</text>
+        <view class="ar-title-wrap">
+          <text class="ar-title">献花致敬英雄</text>
+          <text class="ar-sub">AR扫描体验·互动献花</text>
+        </view>
+      </view>
+      <text class="ar-desc">用手机扫描现场指定AR标识，在虚拟空间献上一束花，完成第四站打卡。</text>
+      <view class="ar-btn" bindtap="onArFlower">
+        <image class="ar-btn-icon" src="{{baseUrl}}/img/station4-ar-flowericon.svg" mode="aspectFit"></image>
+        <text>献上虚拟花束·AR扫描</text>
+      </view>
+    </view>
+
+    <!-- 薪火传递卡片 -->
+    <view class="torch-card">
+      <view class="torch-header">
+        <image class="torch-icon" src="{{baseUrl}}/img/station4-torch-icon.svg" mode="aspectFit"></image>
+        <view class="torch-text-wrap">
+          <text class="torch-title">传递薪火·点燃火炬</text>
+          <text class="torch-hint">手机晃动感应，完成火炬传递</text>
+        </view>
+      </view>
+      <text class="torch-desc">举起手机，感应传递薪火火炬。当屏幕火焰从暗淡到明亮，意味着精神的传承已完成。</text>
+      <view class="torch-btn" bindtap="onPassTorch">
+        <image class="torch-btn-icon" src="{{baseUrl}}/img/station4-torch-btnicon.svg" mode="aspectFit"></image>
+        <text>传递薪火</text>
+      </view>
+    </view>
+
+    <!-- 传薪人证书卡片 -->
+    <view class="cert-card {{certUnlocked ? 'unlocked' : ''}}">
+      <view class="cert-left">
+        <view class="cert-icons">
+          <image class="cert-main-icon" src="{{baseUrl}}/img/station4-cert-main.svg" mode="aspectFit"></image>
+          <image class="cert-sub-icon" src="{{baseUrl}}/img/station4-cert-sub.svg" mode="aspectFit"></image>
+        </view>
+        <view class="cert-text-wrap">
+          <text class="cert-title">传薪人证书</text>
+          <text class="cert-hint">完成上方两项仪式后解锁</text>
+        </view>
+      </view>
+      <view class="cert-status">
+        <image class="cert-lock-icon" src="{{baseUrl}}/img/station4-cert-lock.svg" mode="aspectFit"></image>
+        <text>{{certUnlocked ? '已解锁' : '待解锁'}}</text>
+      </view>
+    </view>
+
+    <!-- 返回地图 -->
+    <view class="back-map-btn" bindtap="onBackToMap">
+      <text>返回地图</text>
+    </view>
+
+  </view>
+
+</view>

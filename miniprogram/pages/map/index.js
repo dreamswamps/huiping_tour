@@ -46,6 +46,8 @@ Page({
   // 进入站点详情
   onEnterStation(e) {
     const { id } = e.currentTarget.dataset;
-    wx.showToast({ title: `进入第${id}站`, icon: 'none' });
+    wx.navigateTo({
+      url: `/pages/stations/${id}/index?id=${id}`
+    });
   }
 });

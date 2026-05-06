@@ -1,0 +1,76 @@
+<view class="page">
+
+  <!-- 顶部背景图 -->
+  <image class="top-bg" src="{{baseUrl}}/img/station5-top-bg.png" mode="widthFix"></image>
+
+  <!-- 返回首页按钮 -->
+  <view class="back-home-btn" bindtap="onBackHome">
+    <image class="home-icon" src="{{baseUrl}}/img/station5-btn-home.svg" mode="aspectFit"></image>
+    <text>返回首页</text>
+  </view>
+
+  <!-- 圆角内容容器 -->
+  <view class="content-panel">
+
+    <!-- 站点信息 -->
+    <view class="station-info">
+      <view class="station-num-wrap">
+        <text class="num-line"></text>
+        <text class="station-num">{{stationNum}}</text>
+        <text class="num-line"></text>
+      </view>
+      <text class="station-title">{{stationTitle}}</text>
+      <text class="station-name">{{stationName}}</text>
+      <text class="station-desc">{{stationDesc}}</text>
+    </view>
+
+    <!-- 发布传薪宣言卡片 -->
+    <view class="declaration-card">
+      <view class="decl-header">
+        <text class="decl-icon">📣</text>
+        <text class="decl-title">发布传薪宣言</text>
+      </view>
+
+      <view class="decl-input-wrap">
+        <textarea
+          class="decl-input"
+          placeholder="写下你的传薪宣言，分享给所有传薪者…"
+          maxlength="{{maxLen}}"
+          value="{{declarationText}}"
+          bindinput="onInputDecl"
+        ></textarea>
+
+        <view class="input-footer">
+          <text class="char-count">{{declarationText.length}}/{{maxLen}}字</text>
+          <text class="pub-status">{{declarationText.length > 0 ? '可发布' : '尚未发布'}}</text>
+        </view>
+
+        <view class="publish-btn {{declarationText.length > 0 ? 'active' : ''}}" bindtap="onPublish">
+          <image wx:if="{{declarationText.length > 0}}" class="pub-btn-icon" src="{{baseUrl}}/img/station5-publish-icon.svg" mode="aspectFit"></image>
+          <text>发布传薪宣言</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 传薪宣言墙·实时滚动 -->
+    <view class="wall-card">
+      <view class="wall-header">
+        <text class="wall-icon">📜</text>
+        <text class="wall-title">传薪宣言墙·实时滚动</text>
+      </view>
+      <scroll-view class="wall-list" scroll-y enhanced show-scrollbar="{{false}}">
+        <view class="wall-item" wx:for="{{declarations}}" wx:key="index">
+          <text class="wall-content">{{item.content}}</text>
+          <text class="wall-time">{{item.time}}</text>
+        </view>
+      </scroll-view>
+    </view>
+
+    <!-- 返回地图 -->
+    <view class="back-map-btn" bindtap="onBackToMap">
+      <text>返回地图</text>
+    </view>
+
+  </view>
+
+</view>

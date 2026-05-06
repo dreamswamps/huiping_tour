@@ -1,0 +1,232 @@
+/* ==================== 页面容器 ==================== */
+.page {
+  min-height: 100vh;
+  background: #F8F5F0;
+  position: relative;
+}
+
+/* ==================== 顶部背景 ==================== */
+.top-bg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ==================== 返回首页按钮 ==================== */
+.back-home-btn {
+  position: fixed;
+  top: 44rpx;
+  left: 34rpx;
+  width: 192rpx;
+  height: 68rpx;
+  background: white;
+  border-radius: 20rpx;
+  box-shadow: 0 0 5rpx rgba(88, 5, 5, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+.home-icon {
+  width: 30rpx;
+  height: 30rpx;
+}
+.back-home-btn text {
+  font-size: 24rpx;
+  color: #C91F37;
+}
+
+/* ==================== 圆角内容面板 ==================== */
+.content-panel {
+  margin-top: -40rpx;
+  background: #F8F5F0;
+  border-top-left-radius: 80rpx;
+  border-top-right-radius: 80rpx;
+  padding: 60rpx 56rpx 80rpx;
+  position: relative;
+  z-index: 1;
+}
+
+/* ==================== 站点信息 ==================== */
+.station-info {
+  text-align: center;
+  margin-bottom: 36rpx;
+}
+.station-num-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16rpx;
+}
+.num-line {
+  width: 112rpx;
+  height: 2rpx;
+  background: #D4A017;
+}
+.station-num {
+  font-size: 28rpx;
+  color: #D4A017;
+  letter-spacing: 4rpx;
+  margin: 0 20rpx;
+  font-family: 'Noto Sans SC', sans-serif;
+}
+.station-title {
+  display: block;
+  text-align: center;
+  font-size: 64rpx;
+  font-weight: 700;
+  color: #D4A017;
+  letter-spacing: 5rpx;
+  font-family: 'Noto Sans SC', sans-serif;
+}
+.station-name {
+  display: block;
+  text-align: center;
+  font-size: 32rpx;
+  color: #C8A87A;
+  margin-top: 18rpx;
+  font-family: 'Noto Sans SC', sans-serif;
+}
+.station-desc {
+  display: block;
+  text-align: left;
+  font-size: 30rpx;
+  color: #C8A87A;
+  line-height: 1.5;
+  letter-spacing: 0.72rpx;
+  margin-top: 30rpx;
+  font-family: 'Noto Sans SC', sans-serif;
+}
+
+/* ==================== AR扫描卡片 ==================== */
+.ar-card {
+  background: white;
+  border-radius: 40rpx;
+  box-shadow: 0 8rpx 13rpx rgba(0, 0, 0, 0.25);
+  padding: 30rpx 26rpx 28rpx;
+  margin-bottom: 28rpx;
+}
+.ar-header {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20rpx;
+}
+.ar-icon {
+  font-size: 36rpx;
+  margin-right: 12rpx;
+  line-height: 1;
+}
+.ar-title-wrap {
+  display: flex;
+  flex-direction: column;
+}
+.ar-title {
+  font-size: 28rpx;
+  color: #C91F37;
+  font-weight: 700;
+}
+.ar-sub {
+  font-size: 24rpx;
+  color: #5C3A21;
+  margin-top: 10rpx;
+}
+.ar-desc {
+  display: block;
+  font-size: 24rpx;
+  color: #5C3A21;
+  line-height: 1.5;
+  margin-bottom: 22rpx;
+}
+.ar-btn {
+  width: 100%;
+  height: 76rpx;
+  background: linear-gradient(274deg, #CE3B45 3%, #E4B983 46%, #CD3542 76%);
+  border-radius: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ar-btn-icon {
+  width: 36rpx;
+  height: 36rpx;
+  margin-right: 12rpx;
+}
+.ar-btn text {
+  font-size: 28rpx;
+  color: white;
+  font-weight: 700;
+}
+
+/* ==================== 红色故事卡片 ==================== */
+.red-card {
+  width: 100%;
+  height: 184rpx;
+  background: #A80101;
+  border-radius: 40rpx;
+  box-shadow: 0 8rpx 13rpx rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32rpx;
+  margin-bottom: 28rpx;
+  box-sizing: border-box;
+}
+.red-left {
+  display: flex;
+  align-items: center;
+}
+.red-icon-wrap {
+  width: 60rpx;
+  height: 60rpx;
+  position: relative;
+  flex-shrink: 0;
+}
+.red-main-icon {
+  width: 56rpx;
+  height: 56rpx;
+}
+.red-sub-icon {
+  width: 54rpx;
+  height: 54rpx;
+  position: absolute;
+  left: 6rpx;
+  top: 6rpx;
+}
+.red-text-wrap {
+  display: flex;
+  flex-direction: column;
+  margin-left: 24rpx;
+}
+.red-title {
+  font-size: 30rpx;
+  color: #F5E6C8;
+  font-weight: 700;
+  font-family: 'Noto Sans SC', sans-serif;
+}
+.red-sub {
+  font-size: 22rpx;
+  color: #C8A87A;
+  margin-top: 8rpx;
+  font-family: 'Noto Sans SC', sans-serif;
+}
+.play-icon {
+  width: 44rpx;
+  height: 44rpx;
+}
+
+/* ==================== 返回地图按钮 ==================== */
+.back-map-btn {
+  width: 636rpx;
+  height: 88rpx;
+  background: #F3E1D6;
+  border-radius: 40rpx;
+  border: 1rpx solid rgba(168, 1, 1, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+.back-map-btn text {
+  font-size: 32rpx;
+  color: #C91F37;
+}
