@@ -1,1 +1,50 @@
-{"pages": ["pages/index/index", "pages/map/index", "pages/mall/index", "pages/profile/index", "pages/tracking/index", "pages/benefits/index"], "window": {"backgroundTextStyle": "light", "navigationBarBackgroundColor": "#A80101", "navigationBarTitleText": "", "navigationStyle": "custom"}, "tabBar": {"custom": true, "color": "#B8ABA0", "selectedColor": "#A80101", "backgroundColor": "#FEF6F1", "list": [{"pagePath": "pages/index/index", "text": "首页"}, {"pagePath": "pages/map/index", "text": "传薪地图"}, {"pagePath": "pages/mall/index", "text": "商城"}, {"pagePath": "pages/profile/index", "text": "我的"}]}, "style": "v2", "sitemapLocation": "sitemap.json", "lazyCodeLoading": "requiredComponents"}
+{
+  "pages": [
+    "pages/index/index",
+    "pages/map/index",
+    "pages/mall/index",
+    "pages/profile/index",
+    "pages/tracking/index",
+    "pages/benefits/index",
+    "pages/cloudar/cloudar"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#A80101",
+    "navigationBarTitleText": "",
+    "navigationStyle": "custom"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#B8ABA0",
+    "selectedColor": "#A80101",
+    "backgroundColor": "#FEF6F1",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/map/index",
+        "text": "传薪地图"
+      },
+      {
+        "pagePath": "pages/mall/index",
+        "text": "商城"
+      },
+      {
+        "pagePath": "pages/profile/index",
+        "text": "我的"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents",
+  "plugins": {
+    "kivicube": {
+      "version": "2.16.2",
+      "provider": "wx3bbab3920eabccb2"
+    }
+  }
+}
