@@ -51,7 +51,7 @@
         <image class="card-img" src="{{baseUrl}}/img/card-map.svg" mode="aspectFit"></image>
         <text class="card-text">传薪地图</text>
       </view>
-      <view class="func-card" catchtap="goToSubmodule" data-url="/pages/tracking/index">
+      <view class="func-card" catchtap="goToSubmodule" data-url="/pages/cloudar/cloudar">
         <image class="card-img" src="{{baseUrl}}/img/card-ar.svg" mode="aspectFit"></image>
         <text class="card-text">AR扫描</text>
       </view>
