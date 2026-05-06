@@ -22,11 +22,9 @@
 
           <!-- ===== 左侧站点卡片 ===== -->
           <view wx:if="{{item.position === 'left'}}" class="station-card-wrap card-left">
-            <!-- 卡片背景（白色圆角+红边框） -->
-            <view class="station-card">
-              <image src="{{baseUrl}}{{item.bgImg}}" mode="aspectFill" class="card-bg"></image>
-            </view>
-            <!-- 信息覆盖层 -->
+            <!-- 白色卡片 + 红色边框 -->
+            <view class="station-card"></view>
+            <!-- 文字信息（绝对定位覆盖在卡片上） -->
             <view class="station-info">
               <view class="info-row-num">
                 <text class="info-num">{{item.num}}</text>
@@ -45,16 +43,14 @@
 
           <!-- ===== 右侧站点卡片 ===== -->
           <view wx:if="{{item.position === 'right'}}" class="station-card-wrap card-right">
-            <view class="station-card">
-              <image src="{{baseUrl}}{{item.bgImg}}" mode="aspectFill" class="card-bg"></image>
-            </view>
+            <view class="station-card"></view>
             <view class="station-info info-right">
               <view class="info-row-num">
                 <text class="info-num">{{item.num}}</text>
                 <text class="info-dot">·</text>
                 <text class="info-name">{{item.name}}</text>
               </view>
-              <text class="status-tag tag-right {{item.status === '进行中' ? 'status-active' : ''}}">{{item.status}}</text>
+              <text class="status-tag {{item.status === '进行中' ? 'status-active' : ''}}">{{item.status}}</text>
               <text class="info-title">{{item.title}}</text>
               <text class="info-desc">{{item.desc}}</text>
               <view class="enter-link" catchtap="onEnterStation" data-id="{{item.id}}" wx:if="{{index < stations.length - 1 || item.position === 'right'}}">
@@ -64,11 +60,6 @@
             </view>
           </view>
 
-        </view>
-
-        <!-- 连接线（站点间） -->
-        <view class="connector" wx:if="{{index < stations.length - 1}}">
-          <image class="line-img" src="{{baseUrl}}/img/{{lines[index]}}" mode="aspectFit"></image>
         </view>
 
       </block>

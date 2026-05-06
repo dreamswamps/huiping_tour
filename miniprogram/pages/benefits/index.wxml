@@ -1,0 +1,60 @@
+<!-- 我的权益 - 传薪人权益中心 -->
+<view class="page">
+
+  <!-- ========== 顶部导航栏 ========== -->
+  <view class="nav-bar">
+    <!-- 返回按钮 -->
+    <view class="back-btn" catchtap="onBack">
+      <image class="back-icon" src="{{baseUrl}}/img/benefits-back-arrow.svg" mode="aspectFit"></image>
+      <text class="back-text">返回</text>
+    </view>
+    <!-- 页面标题 -->
+    <text class="page-title">传薪人权益中心</text>
+  </view>
+
+  <!-- ========== 茶园权益卡（渐变卡片）========== -->
+  <view class="benefit-card">
+    <view class="card-inner">
+      <view class="card-info">
+        <text class="card-tag">传薪人专属</text>
+        <text class="card-name">茶园权益卡</text>
+        <text class="card-holder">持有者：传薪旅行者</text>
+      </view>
+      <text class="card-hint">完成更多站点，解锁更多茶园权益</text>
+    </view>
+  </view>
+
+  <!-- ========== 我的优惠券 ========== -->
+  <view class="coupon-header">
+    <image class="coupon-icon-bg" src="{{baseUrl}}/img/benefits-coupon-bg.svg" mode="aspectFit"></image>
+    <image class="coupon-icon-fg" src="{{baseUrl}}/img/benefits-coupon-fg.svg" mode="aspectFit"></image>
+    <text class="coupon-title">我的优惠券</text>
+  </view>
+
+  <!-- ========== 优惠券列表 ========== -->
+  <scroll-view class="coupon-list" scroll-y enhanced show-scrollbar="{{false}}">
+    <block wx:for="{{coupons}}" wx:key="id">
+      <view class="coupon-item">
+        <!-- 左侧红色标签 -->
+        <view class="coupon-tag">
+          <text class="tag-value">{{item.value}}</text>
+          <text class="tag-type">{{item.type}}</text>
+        </view>
+        <!-- 右侧内容区 -->
+        <view class="coupon-body">
+          <view class="coupon-detail">
+            <text class="detail-title">{{item.title}}</text>
+            <text class="detail-desc">{{item.desc}}</text>
+            <text class="detail-expiry">{{item.expiry}}</text>
+          </view>
+          <view class="claim-btn" catchtap="onClaim" data-id="{{item.id}}">
+            <text>立即领取</text>
+          </view>
+        </view>
+      </view>
+    </block>
+
+    <view class="safe-bottom-lg"></view>
+  </scroll-view>
+
+</view>

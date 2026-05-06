@@ -1,0 +1,203 @@
+/* ==================== 页面容器 ==================== */
+.page {
+  min-height: 100vh;
+  background: #F8F5F0;
+}
+
+/* ==================== 顶部导航栏 ==================== */
+.nav-bar {
+  position: relative;
+  padding: 20rpx 22rpx 16rpx;
+}
+
+/* 返回按钮 */
+.back-btn {
+  display: flex;
+  align-items: center;
+  width: 192rpx;
+  height: 82rpx;
+  background: #F5E4E1;
+  border-radius: 30rpx;
+  padding-left: 28rpx;
+}
+.back-icon {
+  width: 26rpx;
+  height: 26rpx;
+}
+.back-text {
+  margin-left: 18rpx;
+  font-size: 32rpx;
+  color: #C91F37;
+  font-weight: 400;
+}
+
+/* 页面标题 */
+.page-title {
+  display: block;
+  text-align: center;
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #C91F37;
+  margin-top: 8rpx;
+}
+
+/* ==================== 茶园权益卡（渐变卡片）==================== */
+.benefit-card {
+  margin: 0 22rpx;
+  height: 450rpx;
+  background: linear-gradient(149deg, #C21E35 0%, #881728 50%, #59301F 100%);
+  border-radius: 40rpx;
+  box-shadow: 0rpx 8rpx 31rpx rgba(7D1818, 0.59);
+  padding: 52rpx 24rpx 24rpx;
+  box-sizing: border-box;
+}
+
+.card-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+.card-info {
+  display: flex;
+  flex-direction: column;
+}
+.card-tag {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.7);
+}
+.card-name {
+  font-size: 40rpx;
+  font-weight: 900;
+  color: #FFFFFF;
+  margin-top: 8rpx;
+  font-family: 'Noto Sans SC', sans-serif;
+}
+.card-holder {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 12rpx;
+}
+.card-hint {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ==================== 我的优惠券标题 ==================== */
+.coupon-header {
+  display: flex;
+  align-items: center;
+  padding: 36rpx 22rpx 16rpx;
+}
+.coupon-icon-bg {
+  width: 32rpx;
+  height: 34rpx;
+  position: relative;
+  z-index: 1;
+}
+.coupon-icon-fg {
+  width: 24rpx;
+  height: 26rpx;
+  position: relative;
+  left: -4rpx;
+  z-index: 2;
+}
+.coupon-title {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #5C3A21;
+  margin-left: 10rpx;
+}
+
+/* ==================== 优惠券列表区 ==================== */
+.coupon-list {
+  height: calc(100vh - 800rpx);
+  padding: 0 22rpx;
+}
+
+/* 单张优惠券 */
+.coupon-item {
+  display: flex;
+  background: #FFFFFF;
+  border-radius: 40rpx;
+  border: 2rpx solid rgba(201, 31, 55, 0.5);
+  margin-bottom: 24rpx;
+  overflow: hidden;
+}
+
+/* 左侧红色标签 */
+.coupon-tag {
+  width: 170rpx;
+  min-height: 230rpx;
+  background: linear-gradient(136deg, #A80101 0%, #420000 100%);
+  border-top-left-radius: 40rpx;
+  border-bottom-left-radius: 40rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.tag-value {
+  font-size: 40rpx;
+  font-weight: 900;
+  color: #E6C288;
+  font-family: 'Noto Sans SC', sans-serif;
+}
+.tag-type {
+  font-size: 24rpx;
+  color: #FFFFFF;
+  margin-top: 4rpx;
+}
+
+/* 右侧内容区 */
+.coupon-body {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14rpx 24rpx 14rpx 20rpx;
+}
+.coupon-detail {
+  flex: 1;
+}
+.detail-title {
+  display: block;
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #212121;
+}
+.detail-desc {
+  display: block;
+  font-size: 26rpx;
+  color: #9E9E9E;
+  margin-top: 4rpx;
+}
+.detail-expiry {
+  display: block;
+  font-size: 26rpx;
+  color: #BDBDBD;
+  margin-top: 4rpx;
+}
+
+/* 领取按钮 */
+.claim-btn {
+  width: 146rpx;
+  height: 62rpx;
+  background: #C91F37;
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.claim-btn text {
+  font-size: 24rpx;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+/* ==================== 底部安全距离 ==================== */
+.safe-bottom-lg {
+  height: 140rpx;
+}
