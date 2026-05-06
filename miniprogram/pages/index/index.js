@@ -3,16 +3,15 @@ const config = require('../../config');
 Page({
   data: {
     baseUrl: config.baseUrl,
-    swiperCurrent: 2,
-    currentTab: 0
+    swiperCurrent: 2
   },
 
   onLoad() {},
 
-  // ========== TabBar 切换（容器内切换，不跳转页面） ==========
-  switchTab(e) {
-    const index = parseInt(e.currentTarget.dataset.index);
-    this.setData({ currentTab: index });
+  onShow() {
+    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
+      this.getTabBar().setData({ selected: 0 });
+    }
   },
 
   // 轮播图切换事件
@@ -53,12 +52,8 @@ Page({
   // 功能卡片点击
   onFuncCard(e) {
     const type = e.currentTarget.dataset.type;
-    const titles = { map: '传薪地图', ar: 'AR扫描', badge: '任务徽章' };
-    if (type === 'map') {
-      wx.switchTab({ url: '/pages/map/index' });
-    } else {
-      wx.showToast({ title: titles[type], icon: 'none' });
-    }
+    const titles = { ar: 'AR扫描', badge: '任务徽章' };
+    wx.showToast({ title: titles[type], icon: 'none' });
   },
   
   goToSubmodule(e) {

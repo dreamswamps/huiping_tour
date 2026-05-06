@@ -1,200 +1,116 @@
-<!-- 首页 - 容器内多Tab切换 -->
+<!-- 首页 -->
 <view class="page">
 
-  <!-- ========== Tab 0: 首页内容 ========== -->
-  <block wx:if="{{currentTab === 0}}">
-    <!-- 轮播图区域 -->
-    <view class="banner-section">
-      <swiper 
-        class="banner-swiper" 
-        autoplay="{{true}}" 
-        interval="{{3000}}" 
-        duration="{{500}}"
-        circular="{{true}}"
-        current="{{swiperCurrent}}"
-        bindchange="onSwiperChange"
-        id="mySwiper"
-      >
-        <swiper-item wx:for="{{5}}" wx:key="index">
-          <image class="banner-img" src="{{baseUrl}}/img/banner1.svg" mode="aspectFill"></image>
-        </swiper-item>
-      </swiper>
-
-      <!-- 自定义指示器：5个点，选中拉成条 -->
-      <view class="custom-dots">
-        <view 
-          wx:for="{{5}}" 
-          wx:key="index"
-          class="dot {{swiperCurrent === index ? 'dot-active' : ''}}"
-          style="--dot-index: {{index}};"
-        ></view>
-      </view>
-      
-      <!-- 左侧箭头 -->
-      <view class="arrow-left" catchtap="onPrevSlide">
-        <image class="arrow-icon" src="{{baseUrl}}/img/9.svg"></image>
-      </view>
-
-      <!-- 右侧箭头 -->
-      <view class="arrow-right" catchtap="onNextSlide">
-        <image class="arrow-icon" src="{{baseUrl}}/img/8.svg"></image>
-      </view>
-
-      <!-- 右上角用户头像 -->
-      <image class="user-avatar" src="{{baseUrl}}/img/14.svg" catchtap="onUserTap"></image>
-    </view>
-
-    <!-- 内容区域 -->
-    <scroll-view class="content-area" scroll-y enhanced show-scrollbar="{{false}}">
-      
-      <!-- 功能入口卡片 -->
-      <view class="func-cards">
-        <view class="func-card" data-type="map" catchtap="onFuncCard">
-          <image class="card-img" src="{{baseUrl}}/img/2.svg" mode="aspectFit"></image>
-          <text class="card-text">传薪地图</text>
-        </view>
-        <view class="func-card" data-type="ar" catchtap="goToSubmodule" data-url="/pages/tracking/index">
-          <image class="card-img" src="{{baseUrl}}/img/3.svg" mode="aspectFit"></image>
-          <text class="card-text">AR扫描</text>
-        </view>
-        <view class="func-card" data-type="badge" catchtap="onFuncCard">
-          <image class="card-img" src="{{baseUrl}}/img/15.svg" mode="aspectFit"></image>
-          <text class="card-text">任务徽章</text>
-        </view>
-      </view>
-
-      <!-- AI导览卡片 -->
-      <view class="ai-guide" catchtap="onAIGuide">
-        <view class="ai-circle">
-          <text class="ai-triangle">▶</text>
-        </view>
-        <view class="ai-right">
-          <image class="star" src="{{baseUrl}}/img/12.svg" mode="aspectFit"></image>
-          <image class="star" src="{{baseUrl}}/img/13.svg" mode="aspectFit"></image>
-          <text class="ai-text">AI导览</text>
-        </view>
-      </view>
-
-      <!-- 热门景点 -->
-      <view class="section-header">
-        <view class="title-bar"></view>
-        <text class="section-title">热门景点</text>
-      </view>
-
-      <!-- 景点列表 -->
-      <view class="spot-list">
-        <view class="spot-item" catchtap="onSpotDetail">
-          <image class="spot-bg" src="{{baseUrl}}/img/16.svg" mode="aspectFill"></image>
-          <view class="spot-overlay">
-            <text class="spot-name">陈列馆·夜袭镇公所</text>
-            <text class="spot-desc">1930年秋，红军夜袭镇公所，打响了革命第一枪</text>
-          </view>
-        </view>
-        <view class="spot-item" catchtap="onSpotDetail">
-          <image class="spot-bg" src="{{baseUrl}}/img/17.svg" mode="aspectFill"></image>
-          <view class="spot-overlay">
-            <text class="spot-name">红军路·薪火相传</text>
-            <text class="spot-desc">沿着先辈足迹，感受长征精神的伟大力量</text>
-          </view>
-        </view>
-        <view class="spot-item" catchtap="onSpotDetail">
-          <image class="spot-bg" src="{{baseUrl}}/img/18.svg" mode="aspectFill"></image>
-          <view class="spot-overlay">
-            <text class="spot-name">党史馆·淬火成钢</text>
-            <text class="spot-desc">百年党史，铭记奋斗历程与革命先烈</text>
-          </view>
-        </view>
-
-        <!-- 查看更多提示 -->
-        <view class="more-tip">
-          <text class="more-text">下滑查看更多</text>
-          <image class="more-arrow" src="{{baseUrl}}/img/10.svg" mode="aspectFit"></image>
-        </view>
-      </view>
-
-      <!-- 底部安全距离 -->
-      <view class="safe-bottom"></view>
-    </scroll-view>
-  </block>
-
-  <!-- ========== Tab 1: 传薪地图 ========== -->
-  <block wx:if="{{currentTab === 1}}">
-    <scroll-view class="page-content" scroll-y enhanced show-scrollbar="{{false}}">
-      <view class="tab-page-header">
-        <text class="tab-page-title">传薪地图</text>
-        <text class="tab-page-desc">探索红色文化地标</text>
-      </view>
-      <view class="map-placeholder">
-        <image class="map-icon" src="{{baseUrl}}/img/7.svg" mode="aspectFit"></image>
-        <text>地图功能开发中...</text>
-      </view>
-      <view class="safe-bottom"></view>
-    </scroll-view>
-  </block>
-
-  <!-- ========== Tab 2: 商城 ========== -->
-  <block wx:if="{{currentTab === 2}}">
-    <scroll-view class="page-content" scroll-y enhanced show-scrollbar="{{false}}">
-      <view class="tab-page-header">
-        <text class="tab-page-title">商城</text>
-        <text class="tab-page-desc">精选红色文创产品</text>
-      </view>
-      <view class="mall-placeholder">
-        <image class="mall-icon" src="{{baseUrl}}/img/4.svg" mode="aspectFit"></image>
-        <text>商城功能开发中...</text>
-      </view>
-      <view class="safe-bottom"></view>
-    </scroll-view>
-  </block>
-
-  <!-- ========== Tab 3: 我的 ========== -->
-  <block wx:if="{{currentTab === 3}}">
-    <scroll-view class="page-content" scroll-y enhanced show-scrollbar="{{false}}">
-      <view class="tab-page-header">
-        <text class="tab-page-title">我的</text>
-        <text class="tab-page-desc">个人中心</text>
-      </view>
-      <view class="profile-placeholder">
-        <image class="profile-icon" src="{{baseUrl}}/img/6.svg" mode="aspectFit"></image>
-        <text>个人中心开发中...</text>
-      </view>
-      <view class="safe-bottom"></view>
-    </scroll-view>
-  </block>
-
-  <!-- ========== 底部TabBar（始终固定） ========== -->
-  <view class="custom-tabbar">
-    <view 
-      class="tab-item {{currentTab === 0 ? 'active' : ''}}" 
-      catchtap="switchTab" 
-      data-index="0"
+  <!-- 轮播图区域 -->
+  <view class="banner-section">
+    <swiper 
+      class="banner-swiper" 
+      autoplay="{{true}}" 
+      interval="{{3000}}" 
+      duration="{{500}}"
+      circular="{{true}}"
+      current="{{swiperCurrent}}"
+      bindchange="onSwiperChange"
+      id="mySwiper"
     >
-      <image class="tab-icon" src="{{baseUrl}}/img/5.svg" mode="aspectFit"></image>
-      <text class="tab-text {{currentTab === 0 ? 'active' : ''}}">首页</text>
+      <swiper-item wx:for="{{5}}" wx:key="index">
+        <image class="banner-img" src="{{baseUrl}}/img/banner-main.svg" mode="aspectFill"></image>
+      </swiper-item>
+    </swiper>
+
+    <!-- 自定义指示器：5个点，选中拉成条 -->
+    <view class="custom-dots">
+      <view 
+        wx:for="{{5}}" 
+        wx:key="index"
+        class="dot {{swiperCurrent === index ? 'dot-active' : ''}}"
+        style="--dot-index: {{index}};"
+      ></view>
     </view>
-    <view 
-      class="tab-item {{currentTab === 1 ? 'active' : ''}}" 
-      catchtap="switchTab" 
-      data-index="1"
-    >
-      <image class="tab-icon" src="{{baseUrl}}/img/7.svg" mode="aspectFit"></image>
-      <text class="tab-text {{currentTab === 1 ? 'active' : ''}}">传薪地图</text>
+    
+    <!-- 左侧箭头 -->
+    <view class="arrow-left" catchtap="onPrevSlide">
+      <image class="arrow-icon" src="{{baseUrl}}/img/arrow-left.svg"></image>
     </view>
-    <view 
-      class="tab-item {{currentTab === 2 ? 'active' : ''}}" 
-      catchtap="switchTab" 
-      data-index="2"
-    >
-      <image class="tab-icon" src="{{baseUrl}}/img/4.svg" mode="aspectFit"></image>
-      <text class="tab-text {{currentTab === 2 ? 'active' : ''}}">商城</text>
+
+    <!-- 右侧箭头 -->
+    <view class="arrow-right" catchtap="onNextSlide">
+      <image class="arrow-icon" src="{{baseUrl}}/img/arrow-right.svg"></image>
     </view>
-    <view 
-      class="tab-item {{currentTab === 3 ? 'active' : ''}}" 
-      catchtap="switchTab" 
-      data-index="3"
-    >
-      <image class="tab-icon" src="{{baseUrl}}/img/6.svg" mode="aspectFit"></image>
-      <text class="tab-text {{currentTab === 3 ? 'active' : ''}}">我的</text>
-    </view>
+
+    <!-- 右上角用户头像 -->
+    <image class="user-avatar" src="{{baseUrl}}/img/avatar-default.svg" catchtap="onUserTap"></image>
   </view>
+
+  <!-- 内容区域 -->
+  <scroll-view class="content-area" scroll-y enhanced show-scrollbar="{{false}}">
+    
+    <!-- 功能入口卡片 -->
+    <view class="func-cards">
+      <view class="func-card" catchtap="goMap">
+        <image class="card-img" src="{{baseUrl}}/img/card-map.svg" mode="aspectFit"></image>
+        <text class="card-text">传薪地图</text>
+      </view>
+      <view class="func-card" catchtap="goToSubmodule" data-url="/pages/tracking/index">
+        <image class="card-img" src="{{baseUrl}}/img/card-ar.svg" mode="aspectFit"></image>
+        <text class="card-text">AR扫描</text>
+      </view>
+      <view class="func-card" catchtap="onFuncCard">
+        <image class="card-img" src="{{baseUrl}}/img/card-badge.svg" mode="aspectFit"></image>
+        <text class="card-text">任务徽章</text>
+      </view>
+    </view>
+
+    <!-- AI导览卡片 -->
+    <view class="ai-guide" catchtap="onAIGuide">
+      <view class="ai-circle">
+        <text class="ai-triangle">▶</text>
+      </view>
+      <view class="ai-right">
+        <image class="star" src="{{baseUrl}}/img/star-1.svg" mode="aspectFit"></image>
+        <image class="star" src="{{baseUrl}}/img/star-2.svg" mode="aspectFit"></image>
+        <text class="ai-text">AI导览</text>
+      </view>
+    </view>
+
+    <!-- 热门景点 -->
+    <view class="section-header">
+      <view class="title-bar"></view>
+      <text class="section-title">热门景点</text>
+    </view>
+
+    <!-- 景点列表 -->
+    <view class="spot-list">
+      <view class="spot-item" catchtap="onSpotDetail">
+        <image class="spot-bg" src="{{baseUrl}}/img/spot-night-raid.svg" mode="aspectFill"></image>
+        <view class="spot-overlay">
+          <text class="spot-name">陈列馆·夜袭镇公所</text>
+          <text class="spot-desc">1930年秋，红军夜袭镇公所，打响了革命第一枪</text>
+        </view>
+      </view>
+      <view class="spot-item" catchtap="onSpotDetail">
+        <image class="spot-bg" src="{{baseUrl}}/img/spot-red-army.svg" mode="aspectFill"></image>
+        <view class="spot-overlay">
+          <text class="spot-name">红军路·薪火相传</text>
+          <text class="spot-desc">沿着先辈足迹，感受长征精神的伟大力量</text>
+        </view>
+      </view>
+      <view class="spot-item" catchtap="onSpotDetail">
+        <image class="spot-bg" src="{{baseUrl}}/img/spot-party-history.svg" mode="aspectFill"></image>
+        <view class="spot-overlay">
+          <text class="spot-name">党史馆·淬火成钢</text>
+          <text class="spot-desc">百年党史，铭记奋斗历程与革命先烈</text>
+        </view>
+      </view>
+
+      <!-- 查看更多提示 -->
+      <view class="more-tip">
+        <text class="more-text">下滑查看更多</text>
+        <image class="more-arrow" src="{{baseUrl}}/img/arrow-down.svg" mode="aspectFit"></image>
+      </view>
+    </view>
+
+    <!-- 底部安全距离 -->
+    <view class="safe-bottom"></view>
+  </scroll-view>
 </view>

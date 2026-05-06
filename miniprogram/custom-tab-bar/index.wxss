@@ -1,0 +1,47 @@
+.tabbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 110rpx;
+  background: #FEF6F1;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-bottom: env(safe-area-inset-bottom);
+  border-top: 1rpx solid #EDE4DC;
+  z-index: 999;
+}
+
+.tab-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8rpx 0;
+}
+
+.tab-icon {
+  width: 46rpx;
+  height: 46rpx;
+  margin-bottom: 4rpx;
+}
+
+/* 未选中态 - 灰色 */
+.tab-item:not(.active) .tab-icon {
+  filter: brightness(0) saturate(100%) invert(84%) sepia(6%) saturate(416%) hue-rotate(3deg) brightness(92%) contrast(88%);
+}
+
+/* 选中态 - 红色 */
+.tab-item.active .tab-icon {
+  filter: brightness(0) saturate(100%) invert(27%) sepia(95%) saturate(6000%) hue-rotate(355deg) brightness(85%) contrast(112%);
+}
+
+.tab-text {
+  font-size: 22rpx;
+  color: #B8ABA0;
+  font-weight: 600;
+}
+
+.tab-text.active {
+  color: #A80101;
+}

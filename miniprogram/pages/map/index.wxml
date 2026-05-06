@@ -1,1 +1,81 @@
-<view class="container"><text>传薪地图</text></view>
+<!-- 传薪地图 - 站点路线图 -->
+<view class="page">
+
+  <!-- ========== 顶部导航 ========== -->
+  <view class="map-header">
+    <!-- 标题 -->
+    <text class="header-title">传薪地图</text>
+    <!-- 副标题 -->
+    <text class="header-sub">🔥 重走传薪路 · 点亮五站火种 · 获取传薪人认证</text>
+  </view>
+
+  <!-- ========== 地图内容区 ========== -->
+  <scroll-view class="map-body" scroll-y enhanced show-scrollbar="{{false}}">
+
+    <!-- 站点卡片列表 -->
+    <view class="station-list">
+
+      <block wx:for="{{stations}}" wx:key="id">
+
+        <!-- 站点行：左/右交错 -->
+        <view class="station-row {{item.position === 'left' ? 'row-left' : 'row-right'}}">
+
+          <!-- ===== 左侧站点卡片 ===== -->
+          <view wx:if="{{item.position === 'left'}}" class="station-card-wrap card-left">
+            <!-- 卡片背景（白色圆角+红边框） -->
+            <view class="station-card">
+              <image src="{{baseUrl}}{{item.bgImg}}" mode="aspectFill" class="card-bg"></image>
+            </view>
+            <!-- 信息覆盖层 -->
+            <view class="station-info">
+              <view class="info-row-num">
+                <text class="info-num">{{item.num}}</text>
+                <text class="info-dot">·</text>
+                <text class="info-name">{{item.name}}</text>
+              </view>
+              <text class="status-tag {{item.status === '进行中' ? 'status-active' : ''}}">{{item.status}}</text>
+              <text class="info-title">{{item.title}}</text>
+              <text class="info-desc">{{item.desc}}</text>
+              <view class="enter-link" catchtap="onEnterStation" data-id="{{item.id}}">
+                <text>进入站点</text>
+                <image class="enter-arrow" src="{{baseUrl}}/img/map-enter-arrow-{{item.id}}.svg" mode="aspectFit"></image>
+              </view>
+            </view>
+          </view>
+
+          <!-- ===== 右侧站点卡片 ===== -->
+          <view wx:if="{{item.position === 'right'}}" class="station-card-wrap card-right">
+            <view class="station-card">
+              <image src="{{baseUrl}}{{item.bgImg}}" mode="aspectFill" class="card-bg"></image>
+            </view>
+            <view class="station-info info-right">
+              <view class="info-row-num">
+                <text class="info-num">{{item.num}}</text>
+                <text class="info-dot">·</text>
+                <text class="info-name">{{item.name}}</text>
+              </view>
+              <text class="status-tag tag-right {{item.status === '进行中' ? 'status-active' : ''}}">{{item.status}}</text>
+              <text class="info-title">{{item.title}}</text>
+              <text class="info-desc">{{item.desc}}</text>
+              <view class="enter-link" catchtap="onEnterStation" data-id="{{item.id}}" wx:if="{{index < stations.length - 1 || item.position === 'right'}}">
+                <text>进入站点</text>
+                <image class="enter-arrow" src="{{baseUrl}}/img/map-enter-arrow-{{item.id}}.svg" mode="aspectFit"></image>
+              </view>
+            </view>
+          </view>
+
+        </view>
+
+        <!-- 连接线（站点间） -->
+        <view class="connector" wx:if="{{index < stations.length - 1}}">
+          <image class="line-img" src="{{baseUrl}}/img/{{lines[index]}}" mode="aspectFit"></image>
+        </view>
+
+      </block>
+
+    </view>
+
+    <view class="safe-bottom-lg"></view>
+  </scroll-view>
+
+</view>
