@@ -2,6 +2,7 @@
 .page {
   min-height: 100vh;
   background: #F8F5F0;
+  overflow: hidden;
 }
 
 /* ==================== 顶部导航栏 ==================== */
@@ -113,11 +114,15 @@
 .coupon-list {
   height: calc(100vh - 800rpx);
   padding: 0 22rpx;
+  box-sizing: border-box;
+  overflow-y: auto;
 }
 
 /* 单张优惠券 */
 .coupon-item {
   display: flex;
+  width: 100%;
+  box-sizing: border-box;
   background: #FFFFFF;
   border-radius: 40rpx;
   border: 2rpx solid rgba(201, 31, 55, 0.5);
@@ -157,15 +162,21 @@
   justify-content: space-between;
   align-items: center;
   padding: 14rpx 24rpx 14rpx 20rpx;
+  min-width: 0; /* 关键：允许 flex 子元素收缩 */
 }
 .coupon-detail {
   flex: 1;
+  min-width: 0; /* 关键：允许收缩，文字溢出时截断 */
+  overflow: hidden;
 }
 .detail-title {
   display: block;
   font-size: 32rpx;
   font-weight: 700;
   color: #212121;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .detail-desc {
   display: block;

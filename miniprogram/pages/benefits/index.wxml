@@ -32,9 +32,9 @@
   </view>
 
   <!-- ========== 优惠券列表 ========== -->
-  <scroll-view class="coupon-list" scroll-y enhanced show-scrollbar="{{false}}">
+  <view class="coupon-list">
     <block wx:for="{{coupons}}" wx:key="id">
-      <view class="coupon-item">
+      <view class="coupon-item" style="width: calc(100% - 44rpx); max-width: 100%; overflow: hidden;">
         <!-- 左侧红色标签 -->
         <view class="coupon-tag">
           <text class="tag-value">{{item.value}}</text>
@@ -55,6 +55,6 @@
     </block>
 
     <view class="safe-bottom-lg"></view>
-  </scroll-view>
+  </view>
 
 </view>
