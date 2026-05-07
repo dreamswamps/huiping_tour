@@ -4,6 +4,16 @@ Page({
   data: {
     baseUrl: config.baseUrl,
 
+    // 登录状态
+    isLogin: false,
+    userInfo: {
+      nickname: '',
+      avatar: '',
+      uid: '',
+      openid: '',
+      code: ''
+    },
+
     // 功能卡片（4宫格）
     funcList: [
       { id: 1, icon: '🗺️', label: '传薪足迹' },
@@ -52,6 +62,121 @@ Page({
     if (typeof this.getTabBar === 'function' && this.getTabBar()) {
       this.getTabBar().setData({ selected: 3 });
     }
+    // 检查登录状态
+    this.checkLoginStatus();
+  },
+
+  // 检查登录状态
+  checkLoginStatus() {
+    const userInfo = wx.getStorageSync('userInfo');
+    if (userInfo) {
+      this.setData({
+        isLogin: true,
+        userInfo: userInfo
+      });
+    }
+  },
+
+  // 微信一键登录 - 获取用户信息
+  onLogin() {
+    wx.showLoading({ title: '登录中...' });
+
+    // 使用 wx.getUserProfile 获取用户信息（包含头像）
+    wx.getUserProfile({
+      desc: '用于展示您的头像和昵称',
+      success: (userRes) => {
+        const { avatarUrl, nickName } = userRes.userInfo;
+
+        // 获取登录凭证
+        wx.login({
+          success: (loginRes) => {
+            if (loginRes.code) {
+              // 调用后端接口换取 openid
+              wx.request({
+                url: `${config.baseUrl}/api/login`,
+                method: 'POST',
+                data: {
+                  code: loginRes.code,
+                  nickname: nickName,
+                  avatar: avatarUrl
+                },
+                success: (res) => {
+                  wx.hideLoading();
+
+                  if (res.data.code === 200 && res.data.data.openid) {
+                    const openid = res.data.data.openid;
+                    const userInfo = {
+                      nickname: nickName || '旅行者',
+                      avatar: avatarUrl,
+                      uid: res.data.data.uid || 'CX' + Date.now().toString().slice(-8),
+                      openid: openid,
+                      code: loginRes.code
+                    };
+
+                    // 保存到本地存储
+                    wx.setStorageSync('userInfo', userInfo);
+
+                    this.setData({
+                      isLogin: true,
+                      userInfo: userInfo
+                    });
+
+                    console.log('登录成功 - openid:', openid, '头像:', avatarUrl);
+                    wx.showToast({ title: '登录成功', icon: 'success' });
+                  } else {
+                    wx.showToast({ title: '登录失败，请重试', icon: 'none' });
+                  }
+                },
+                fail: () => {
+                  wx.hideLoading();
+                  wx.showToast({ title: '网络错误', icon: 'none' });
+                }
+              });
+            } else {
+              wx.hideLoading();
+              wx.showToast({ title: '获取登录凭证失败', icon: 'none' });
+            }
+          },
+          fail: () => {
+            wx.hideLoading();
+            wx.showToast({ title: '登录失败', icon: 'none' });
+          }
+        });
+      },
+      fail: (err) => {
+        wx.hideLoading();
+        console.error('获取用户信息失败:', err);
+        wx.showToast({ title: '请允许获取头像', icon: 'none' });
+      }
+    });
+  },
+
+  // 退出登录
+  onLogout() {
+    wx.showModal({
+      title: '提示',
+      content: '确定要退出登录吗？',
+      success: (res) => {
+        if (res.confirm) {
+          // 清除本地存储的用户信息
+          wx.removeStorageSync('userInfo');
+
+          // 重置页面状态
+          this.setData({
+            isLogin: false,
+            userInfo: {
+              nickname: '',
+              avatar: '',
+              uid: '',
+              openid: '',
+              code: ''
+            }
+          });
+
+          wx.showToast({ title: '已退出登录', icon: 'success' });
+        }
+      }
+    });
   },
 
   onMenuTap(e) {

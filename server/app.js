@@ -2,9 +2,16 @@ const express = require('express');
 const path = require('path');
 const cors = require('cors');
 const pool = require('./config/db');
+const axios = require('axios');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// 微信小程序配置（请替换为你的小程序实际 AppID 和 AppSecret）
+const WX_CONFIG = {
+  appid: 'wxdf09d26595d7b44f',        // 替换为你的小程序 AppID
+  secret: '6447dd283bb6408912dfb19b4cfd1774'    // 替换为你的小程序 AppSecret
+};
 
 // ========== 中间件 ==========
 app.use(cors()); // 允许跨域（小程序请求需要）
@@ -22,6 +29,73 @@ app.get('/', (req, res) => {
     message: '红旅薪传后端服务运行中',
     timestamp: new Date().toLocaleString()
   });
+});
+
+// 微信小程序登录 - 通过 code 换取 openid
+app.post('/api/login', async (req, res) => {
+  const { code } = req.body;
+
+  if (!code) {
+    return res.status(400).json({ code: 400, message: '缺少 code 参数' });
+  }
+
+  try {
+    // 调用微信接口用 code 换取 openid
+    const wxApiUrl = `https://api.weixin.qq.com/sns/jscode2session`;
+    const wxResponse = await axios.get(wxApiUrl, {
+      params: {
+        appid: WX_CONFIG.appid,
+        secret: WX_CONFIG.secret,
+        js_code: code,
+        grant_type: 'authorization_code'
+      }
+    });
+
+    const { openid, session_key, errcode, errmsg } = wxResponse.data;
+
+    if (errcode) {
+      console.error('微信登录失败:', errcode, errmsg);
+      return res.status(400).json({ code: 400, message: '微信登录失败', error: errmsg });
+    }
+
+    // 记录 openid 日志（实际项目中应存入数据库）
+    console.log('用户 openid:', openid);
+
+    // 查找或创建用户（示例逻辑）
+    let user = null;
+    try {
+      const [rows] = await pool.query('SELECT * FROM users WHERE openid = ?', [openid]);
+      if (rows.length > 0) {
+        user = rows[0];
+      } else {
+        // 新用户：插入数据库
+        const nickname = '旅行者' + Math.floor(Math.random() * 10000);
+        const uid = 'CX' + Date.now().toString().slice(-8);
+        await pool.query(
+          'INSERT INTO users (openid, nickname, uid, create_time) VALUES (?, ?, ?, NOW())',
+          [openid, nickname, uid]
+        );
+        user = { openid, nickname, uid };
+      }
+    } catch (dbError) {
+      console.error('数据库操作失败:', dbError.message);
+      // 数据库出错时仍返回 openid，前端可以继续
+    }
+
+    res.json({
+      code: 200,
+      message: '登录成功',
+      data: {
+        openid,
+        nickname: user?.nickname || '旅行者',
+        uid: user?.uid || ''
+      }
+    });
+
+  } catch (error) {
+    console.error('登录接口异常:', error.message);
+    res.status(500).json({ code: 500, message: '服务器错误' });
+  }
 });
 
 // 获取图片列表

@@ -10,13 +10,25 @@
     <!-- 用户信息 -->
     <view class="user-info">
       <view class="avatar-box">
-        <image class="avatar-img" src="{{baseUrl}}/img/profile-avatar.svg" mode="aspectFill" wx:if="{{false}}"></image>
-        <text class="avatar-emoji">🙍</text>
+        <image class="avatar-img" src="{{userInfo.avatar}}" mode="aspectFill" wx:if="{{isLogin && userInfo.avatar}}"></image>
+        <text class="avatar-emoji" wx:if="{{!isLogin || !userInfo.avatar}}">🙍</text>
       </view>
-      <view class="user-detail">
-        <text class="user-name">传薪旅行者</text>
-        <text class="user-uid">UID: CX20250115</text>
+      <view class="user-detail" wx:if="{{!isLogin}}">
+        <text class="user-name login-tip">登录后体验更多功能</text>
       </view>
+      <view class="user-detail" wx:if="{{isLogin}}">
+        <text class="user-name">{{userInfo.nickname || '微信用户'}}</text>
+        <text class="user-uid">UID: {{userInfo.uid || '---'}}</text>
+      </view>
+    </view>
+
+    <!-- 登录按钮区域 -->
+    <view class="login-btn-area" wx:if="{{!isLogin}}">
+      <button class="wx-login-btn" bindtap="onLogin">
+        <text class="wx-icon">💬</text>
+        <text class="wx-login-text">微信一键登录</text>
+      </button>
+      <text class="login-hint">登录即表示同意《用户协议》和《隐私政策》</text>
     </view>
 
   </view>
@@ -44,7 +56,13 @@
       </view>
     </block>
 
-    <view class="safe-bottom-lg"></view>
+    <view class="safe-bottom"></view>
+
+    <!-- 退出登录按钮 -->
+    <view class="logout-btn-wrapper" wx:if="{{isLogin}}">
+      <button class="logout-btn" bindtap="onLogout" plain="true">退出登录</button>
+    </view>
+
   </scroll-view>
 
 </view>
