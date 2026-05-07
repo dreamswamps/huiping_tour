@@ -1,0 +1,6 @@
+<view wx:if="{{visible}}" class="mall-figma-tip-mask" catchtouchmove="onCatchMove">
+  <view class="mall-figma-tip-box">
+    <image wx:if="{{iconSrc}}" class="mall-figma-tip-icon" src="{{iconSrc}}" mode="aspectFit" />
+    <text class="mall-figma-tip-text">{{message}}</text>
+  </view>
+</view>

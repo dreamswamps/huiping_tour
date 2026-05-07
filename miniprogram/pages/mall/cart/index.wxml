@@ -1,0 +1,78 @@
+<view class="page">
+  <mall-figma-tip id="mallFigmaTip" />
+  <view class="header">
+    <view class="header-inner">
+      <view class="header-bar">
+        <image class="header-back" src="{{baseUrl}}/img/mall-cart-back.svg" mode="aspectFit" bindtap="onBack" />
+        <text class="header-title">购物车</text>
+        <view class="header-placeholder" />
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{isEmpty}}" class="main main--empty">
+    <view class="empty-visual">
+      <view class="empty-circle">
+        <image class="empty-circle-icon" src="{{baseUrl}}/img/mall-fab-cart-icon.svg" mode="aspectFit" />
+      </view>
+      <text class="empty-text">购物车是空的</text>
+    </view>
+  </view>
+
+  <scroll-view wx:else class="list-scroll" scroll-y enhanced show-scrollbar="{{false}}">
+    <view class="cart-list">
+      <view class="cart-row" wx:for="{{items}}" wx:key="id">
+        <view class="row-check" catchtap="onToggleItem" data-id="{{item.id}}">
+          <view class="check-ring {{item.selected ? 'check-ring--on' : ''}}">
+            <view wx:if="{{item.selected}}" class="check-dot" />
+          </view>
+        </view>
+        <image class="row-thumb" src="{{baseUrl}}/img/{{item.thumb}}" mode="aspectFill" />
+        <view class="row-body">
+          <text class="row-name">{{item.name}}</text>
+          <text class="row-spec">规格：{{item.spec}}</text>
+          <view class="row-foot">
+            <text class="row-price">¥{{item.price}}</text>
+            <view class="row-qty">
+              <image
+                class="qty-btn"
+                src="{{baseUrl}}/img/mall-cart-minus.svg"
+                mode="aspectFit"
+                catchtap="onMinus"
+                data-id="{{item.id}}"
+              />
+              <text class="qty-num">{{item.quantity}}</text>
+              <image
+                class="qty-btn"
+                src="{{baseUrl}}/img/mall-cart-plus.svg"
+                mode="aspectFit"
+                catchtap="onPlus"
+                data-id="{{item.id}}"
+              />
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <view class="checkout-wrap">
+    <view class="checkout-bar">
+      <view class="checkout-left" bindtap="onToggleAll">
+        <view class="check-ring {{selectAll ? 'check-ring--on' : ''}}">
+          <view wx:if="{{selectAll}}" class="check-dot" />
+        </view>
+        <text class="check-label">全选</text>
+      </view>
+      <view class="total-wrap">
+        <text class="total-label">合计：</text>
+        <text class="total-amount">¥{{totalPrice}}</text>
+      </view>
+      <view class="checkout-btn" bindtap="onCheckout">
+        <text>结算</text>
+      </view>
+    </view>
+  </view>
+
+  <mall-bottom-tab selected="{{2}}" />
+</view>

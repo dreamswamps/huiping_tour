@@ -1,1 +1,71 @@
-<view class="container"><text>商城</text></view>
+<view class="page">
+  <scroll-view class="scroll" scroll-y enhanced show-scrollbar="{{false}}">
+    <view class="hero">
+      <view class="hero-inner">
+        <text class="hero-title">传薪茶社</text>
+        <text class="hero-sub">品传薪茶，续红色魂</text>
+        <view class="hero-deco">
+          <image class="hero-flame" src="{{baseUrl}}/img/mall-hero-spark.svg" mode="aspectFit" />
+        </view>
+      </view>
+    </view>
+
+    <view class="sheet">
+      <view class="intro-card">
+        <text class="intro-title">一茶载薪，文脉永续</text>
+        <text class="intro-body">千里岗山脉，地处赣东北革命根据地腹地，是方志敏等革命先烈浴血奋战之地。传薪茶，生于红色沃土，每一片茶叶皆承载军民鱼水情深的历史记忆，以茶为媒，赓续红色血脉，让精神薪火代代相传。</text>
+      </view>
+
+      <view class="section-head">
+        <view class="section-line" />
+        <image class="section-flame" src="{{baseUrl}}/img/mall-hero-spark.svg" mode="aspectFit" />
+        <text class="section-title">产品系列</text>
+        <image class="section-flame section-flame--flip" src="{{baseUrl}}/img/mall-hero-spark.svg" mode="aspectFit" />
+        <view class="section-line" />
+      </view>
+
+      <view class="product-list">
+        <view
+          class="product-card {{item.id === 'huozhong' || item.id === 'xinghuo' || item.id === 'liaoyuan' ? 'product-card--hot' : ''}}"
+          wx:for="{{products}}"
+          wx:key="id"
+          bindtap="onProductCardTap"
+          data-id="{{item.id}}"
+        >
+          <image class="product-thumb" src="{{baseUrl}}/img/{{item.thumb}}" mode="aspectFill" />
+          <view class="product-body">
+            <text class="product-name">{{item.name}}</text>
+            <text class="product-desc">{{item.desc}}</text>
+            <view class="product-foot">
+              <text class="product-price">¥{{item.price}}</text>
+              <view class="product-actions">
+                <view class="btn-cart" data-id="{{item.id}}" catchtap="onAddCart">
+                  <text>加入购物车</text>
+                </view>
+                <view class="btn-buy" data-id="{{item.id}}" catchtap="onBuyNow">
+                  <text>立即购买</text>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="page-footer">
+        <image class="footer-deco" src="{{baseUrl}}/img/mall-footer-deco.svg" mode="widthFix" />
+        <text class="footer-text">传薪茶社 · 品传薪茶，续红色魂</text>
+      </view>
+
+      <view class="scroll-bottom-space" />
+    </view>
+  </scroll-view>
+
+  <view class="fab-cart" bindtap="onFabCart">
+    <view class="fab-inner">
+      <image class="fab-icon" src="{{baseUrl}}/img/mall-fab-cart-icon.svg" mode="aspectFit" />
+      <text class="fab-label">购物车</text>
+    </view>
+  </view>
+
+  <mall-figma-tip id="mallFigmaTip" />
+</view>

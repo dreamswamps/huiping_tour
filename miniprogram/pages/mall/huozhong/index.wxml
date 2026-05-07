@@ -1,0 +1,78 @@
+<view class="page">
+  <view class="hero-bg" />
+
+  <view class="nav-bar">
+    <view class="nav-row">
+      <image class="nav-icon" src="{{baseUrl}}/img/mall-detail-back.svg" mode="aspectFit" bindtap="onBack" />
+      <button class="nav-share-wrap" open-type="share" hover-class="none">
+        <image class="nav-icon" src="{{baseUrl}}/img/mall-detail-share.svg" mode="aspectFit" />
+      </button>
+    </view>
+  </view>
+
+  <scroll-view class="scroll" scroll-y enhanced show-scrollbar="{{false}}">
+    <view class="sheet">
+      <view class="info-card">
+        <text class="info-title">传薪·火种</text>
+        <view class="tag-row">
+          <view class="tag-pill"><text>高端典藏</text></view>
+          <view class="tag-pill"><text>星星之火</text></view>
+        </view>
+        <text class="info-desc">特级明前高山岩茶，象征革命最初星火，每一泡皆是先辈精神的淬炼与传承。采自千里岗千米以上高山茶园，清明前精采细制。</text>
+        <view class="badge-row">
+          <text class="badge-item">无公害认证</text>
+          <text class="badge-item">正品保障</text>
+          <text class="badge-item">千里岗山场溯源</text>
+        </view>
+        <text class="info-price">¥268</text>
+      </view>
+
+      <view class="params-card">
+        <view class="block-title">
+          <view class="block-title-bar" />
+          <text class="block-title-text">产品参数</text>
+        </view>
+        <view class="param-row">
+          <text class="param-k">产地</text>
+          <text class="param-v">江西上饶·千里岗山脉</text>
+        </view>
+        <view class="param-line" />
+        <view class="param-row">
+          <text class="param-k">等级</text>
+          <text class="param-v">特级明前</text>
+        </view>
+        <view class="param-line" />
+        <view class="param-row">
+          <text class="param-k">净含量</text>
+          <text class="param-v">250g / 罐</text>
+        </view>
+        <view class="param-line" />
+        <view class="param-row">
+          <text class="param-k">保质期</text>
+          <text class="param-v">24个月（密封干燥储存）</text>
+        </view>
+      </view>
+
+      <view class="package-head">
+        <view class="block-title-bar block-title-bar--sm" />
+        <text class="package-title">包装展示</text>
+      </view>
+
+      <image class="package-img" src="{{baseUrl}}/img/mall-huozhong-package.png" mode="widthFix" />
+
+      <view class="page-footer">
+        <image class="footer-deco" src="{{baseUrl}}/img/mall-footer-deco.svg" mode="widthFix" />
+        <text class="footer-text">传薪茶社 · 品传薪茶，续红色魂</text>
+      </view>
+
+      <view class="scroll-bottom-space" />
+    </view>
+  </scroll-view>
+
+  <view class="fab-cart" bindtap="onFabCart">
+    <view class="fab-inner">
+      <image class="fab-icon" src="{{baseUrl}}/img/mall-fab-cart-icon.svg" mode="aspectFit" />
+      <text class="fab-label">购物车</text>
+    </view>
+  </view>
+</view>

@@ -1,4 +1,319 @@
-.container {
-  padding: 40rpx;
-  font-size: 32rpx;
+/* 品牌色与设计图总稿对齐 */
+.page {
+  min-height: 100vh;
+  background: #fdf8f2;
+  position: relative;
+}
+
+.scroll {
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+/* 顶部渐变 */
+.hero {
+  padding-top: calc(env(safe-area-inset-top) + 48rpx);
+  padding-bottom: 72rpx;
+  background: linear-gradient(
+    180deg,
+    #3d0a14 0%,
+    #6b1a1f 45%,
+    #8b3828 100%
+  );
+}
+
+.hero-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 48rpx;
+}
+
+.hero-title {
+  font-size: 52rpx;
+  font-weight: 900;
+  color: #c8161d;
+  letter-spacing: 0.12em;
+  line-height: 1.45;
+  text-shadow: 0 4rpx 24rpx rgba(0, 0, 0, 0.45), 0 0 48rpx rgba(200, 22, 29, 0.35);
+}
+
+.hero-sub {
+  margin-top: 20rpx;
+  font-size: 28rpx;
+  color: #ffffff;
+  letter-spacing: 0.12em;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+.hero-deco {
+  margin-top: 36rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-flame {
+  width: 28rpx;
+  height: 44rpx;
+}
+
+/* 主内容上收，介绍卡压住顶部红区 */
+.sheet {
+  margin-top: -48rpx;
+  padding: 0 32rpx 0;
+  background: #fdf8f2;
+  border-radius: 48rpx 48rpx 0 0;
+  position: relative;
+  z-index: 1;
+}
+
+.intro-card {
+  margin-top: -8rpx;
+  padding: 40rpx 32rpx 36rpx;
+  background: #ffffff;
+  border: 1rpx solid #c8161d;
+  border-radius: 24rpx;
+  box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.08);
+}
+
+.intro-title {
+  display: block;
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #c8161d;
+  letter-spacing: 0.06em;
+  line-height: 1.4;
+  margin-bottom: 20rpx;
+}
+
+.intro-body {
+  display: block;
+  font-size: 26rpx;
+  color: #4a4a4a;
+  line-height: 1.65;
+}
+
+/* 产品系列：居中 + 双线 + 火焰装饰 */
+.section-head {
+  margin-top: 44rpx;
+  margin-bottom: 32rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 16rpx;
+  padding: 0 8rpx;
+}
+
+.section-line {
+  flex: 1;
+  height: 2rpx;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    #e0d5c8 20%,
+    #e0d5c8 80%,
+    transparent 100%
+  );
+  border-radius: 1rpx;
+  min-width: 48rpx;
+}
+
+.section-flame {
+  width: 22rpx;
+  height: 34rpx;
+  flex-shrink: 0;
+}
+
+.section-flame--flip {
+  transform: scaleX(-1);
+}
+
+.section-title {
+  font-size: 28rpx;
+  font-weight: 900;
+  color: #c8161d;
+  letter-spacing: 0.14em;
+  flex-shrink: 0;
+}
+
+.product-list {
+  display: flex;
+  flex-direction: column;
+  gap: 28rpx;
+}
+
+.product-card {
+  display: flex;
+  flex-direction: row;
+  padding: 24rpx 22rpx 24rpx 24rpx;
+  background: #ffffff;
+  border-radius: 24rpx;
+  box-shadow: 0 6rpx 28rpx rgba(0, 0, 0, 0.07);
+  border: 1rpx solid rgba(224, 213, 200, 0.6);
+  box-sizing: border-box;
+}
+
+.product-card--hot {
+  position: relative;
+}
+
+.product-card--hot:active {
+  opacity: 0.92;
+}
+
+.product-thumb {
+  width: 188rpx;
+  height: 184rpx;
+  border-radius: 16rpx;
+  flex-shrink: 0;
+  background: #c8161d;
+}
+
+.product-body {
+  flex: 1;
+  margin-left: 22rpx;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.product-name {
+  font-size: 28rpx;
+  font-weight: 900;
+  color: #c8161d;
+  line-height: 1.35;
+}
+
+.product-desc {
+  margin-top: 10rpx;
+  font-size: 24rpx;
+  color: #4a4a4a;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.product-foot {
+  margin-top: auto;
+  padding-top: 16rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12rpx;
+}
+
+.product-price {
+  font-size: 40rpx;
+  font-weight: 900;
+  color: #c8161d;
+  line-height: 1.2;
+  flex-shrink: 0;
+}
+
+.product-actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12rpx;
+  flex-shrink: 0;
+}
+
+.btn-cart {
+  padding: 0 16rpx;
+  height: 54rpx;
+  line-height: 54rpx;
+  border-radius: 999rpx;
+  background: #ffffff;
+  border: 1rpx solid #c8161d;
+  box-sizing: border-box;
+}
+
+.btn-cart text {
+  font-size: 22rpx;
+  color: #c8161d;
+}
+
+.btn-buy {
+  padding: 0 20rpx;
+  height: 54rpx;
+  line-height: 54rpx;
+  border-radius: 999rpx;
+  background: #c8161d;
+  box-sizing: border-box;
+}
+
+.btn-buy text {
+  font-size: 24rpx;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.page-footer {
+  margin-top: 56rpx;
+  margin-bottom: 24rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.footer-deco {
+  width: 246rpx;
+  height: 22rpx;
+}
+
+.footer-text {
+  font-size: 24rpx;
+  color: #8a8a8a;
+  letter-spacing: 0.08em;
+}
+
+.scroll-bottom-space {
+  height: calc(200rpx + env(safe-area-inset-bottom));
+}
+
+.fab-cart {
+  position: fixed;
+  right: 32rpx;
+  bottom: calc(132rpx + env(safe-area-inset-bottom));
+  z-index: 1000;
+}
+
+/* 购物车悬浮按钮：第二种稿 — 左图标 + 右侧单行「购物车」横向排列 */
+.fab-inner {
+  min-width: 0;
+  width: auto;
+  height: 88rpx;
+  padding: 0 36rpx 0 28rpx;
+  background: #d32029;
+  border-radius: 999rpx;
+  box-shadow: 0 8rpx 24rpx rgba(211, 32, 41, 0.35);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 12rpx;
+  box-sizing: border-box;
+}
+
+.fab-icon {
+  width: 40rpx;
+  height: 38rpx;
+  flex-shrink: 0;
+}
+
+.fab-label {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 1.2;
+  white-space: nowrap;
+  flex-shrink: 0;
 }

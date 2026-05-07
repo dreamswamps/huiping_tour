@@ -1,0 +1,10 @@
+@import '../huozhong/index.wxss';
+
+.tag-pill--rose {
+  background: #f3dfde;
+  border-color: #e8afb4;
+}
+
+.tag-pill--rose text {
+  color: #5c3a21;
+}

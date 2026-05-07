@@ -1,0 +1,42 @@
+.mall-figma-tip-mask {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.12);
+  box-sizing: border-box;
+}
+
+.mall-figma-tip-box {
+  margin: 0 72rpx;
+  padding: 40rpx 44rpx 36rpx;
+  background: #ffffff;
+  border: 1rpx solid #e5e5e5;
+  border-radius: 12rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20rpx;
+  max-width: 600rpx;
+  box-sizing: border-box;
+  box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.06);
+}
+
+.mall-figma-tip-icon {
+  width: 80rpx;
+  height: 80rpx;
+  flex-shrink: 0;
+}
+
+.mall-figma-tip-text {
+  font-size: 30rpx;
+  color: #000000;
+  text-align: center;
+  line-height: 1.5;
+  font-weight: 400;
+}
