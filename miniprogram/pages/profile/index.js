@@ -7,11 +7,12 @@ Page({
     // 登录状态
     isLogin: false,
     userInfo: {
+      id: null,
       nickname: '',
       avatar: '',
       uid: '',
       openid: '',
-      code: ''
+      token: ''
     },
 
     // 功能卡片（4宫格）
@@ -95,6 +96,9 @@ Page({
               wx.request({
                 url: `${config.baseUrl}/api/login`,
                 method: 'POST',
+                header: {
+                  'content-type': 'application/json'
+                },
                 data: {
                   code: loginRes.code,
                   nickname: nickName,
@@ -103,28 +107,52 @@ Page({
                 success: (res) => {
                   wx.hideLoading();
 
-                  if (res.data.code === 200 && res.data.data.openid) {
-                    const openid = res.data.data.openid;
+                  const body = res.data;
+                  if (res.statusCode !== 200 || !body) {
+                    wx.showToast({ title: '请求失败', icon: 'none' });
+                    return;
+                  }
+
+                  if (body.code === 503) {
+                    const detail = (body.data && body.data.dbError) || '';
+                    const content = detail ? `${body.message}\n\n${detail}` : body.message;
+                    wx.showModal({
+                      title: '登录未完成',
+                      content: content.length > 800 ? content.slice(0, 800) + '…' : content,
+                      showCancel: false
+                    });
+                    return;
+                  }
+
+                  const payload = body.data;
+                  if (body.code === 200 && payload && payload.openid) {
+                    if (payload.id != null && !payload.token) {
+                      wx.showToast({ title: '登录异常：未返回 token', icon: 'none' });
+                      return;
+                    }
                     const userInfo = {
-                      nickname: nickName || '旅行者',
-                      avatar: avatarUrl,
-                      uid: res.data.data.uid || 'CX' + Date.now().toString().slice(-8),
-                      openid: openid,
-                      code: loginRes.code
+                      id: payload.id != null ? payload.id : null,
+                      nickname: payload.nickname || nickName || '旅行者',
+                      avatar: payload.avatar || avatarUrl || '',
+                      uid: payload.uid || '',
+                      openid: payload.openid,
+                      token: payload.token || ''
                     };
 
-                    // 保存到本地存储
                     wx.setStorageSync('userInfo', userInfo);
 
                     this.setData({
                       isLogin: true,
-                      userInfo: userInfo
+                      userInfo
                     });
 
-                    console.log('登录成功 - openid:', openid, '头像:', avatarUrl);
+                    console.log('登录成功，已同步服务端用户', userInfo);
                     wx.showToast({ title: '登录成功', icon: 'success' });
                   } else {
-                    wx.showToast({ title: '登录失败，请重试', icon: 'none' });
+                    wx.showToast({
+                      title: body.message || '登录失败，请重试',
+                      icon: 'none'
+                    });
                   }
                 },
                 fail: () => {
@@ -165,11 +193,12 @@ Page({
           this.setData({
             isLogin: false,
             userInfo: {
+              id: null,
               nickname: '',
               avatar: '',
               uid: '',
               openid: '',
-              code: ''
+              token: ''
             }
           });
 
@@ -181,6 +210,18 @@ Page({
 
   onMenuTap(e) {
     const { id } = e.currentTarget.dataset;
+    if (id === 2) {
+      if (!this.data.isLogin || !this.data.userInfo.id) {
+        wx.showToast({ title: '请先登录', icon: 'none' });
+        return;
+      }
+      if (!this.data.userInfo.token) {
+        wx.showToast({ title: '请重新登录以更新授权', icon: 'none' });
+        return;
+      }
+      wx.navigateTo({ url: '/pages/profile/address/index' });
+      return;
+    }
     wx.showToast({ title: `菜单项${id}`, icon: 'none' });
   },
 

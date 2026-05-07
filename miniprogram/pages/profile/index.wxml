@@ -7,16 +7,18 @@
     <!-- 标题 -->
     <text class="page-title">个人中心</text>
 
-    <!-- 用户信息 -->
-    <view class="user-info">
+    <!-- 未登录：不展示头像与昵称，仅提示语 -->
+    <view class="guest-header" wx:if="{{!isLogin}}">
+      <!-- <text class="login-tip">登录后体验更多功能</text> -->
+    </view>
+
+    <!-- 已登录：展示头像、昵称、UID -->
+    <view class="user-info" wx:if="{{isLogin}}">
       <view class="avatar-box">
-        <image class="avatar-img" src="{{userInfo.avatar}}" mode="aspectFill" wx:if="{{isLogin && userInfo.avatar}}"></image>
-        <text class="avatar-emoji" wx:if="{{!isLogin || !userInfo.avatar}}">🙍</text>
+        <image class="avatar-img" src="{{userInfo.avatar}}" mode="aspectFill" wx:if="{{userInfo.avatar}}"></image>
+        <text class="avatar-emoji" wx:else>🙍</text>
       </view>
-      <view class="user-detail" wx:if="{{!isLogin}}">
-        <text class="user-name login-tip">登录后体验更多功能</text>
-      </view>
-      <view class="user-detail" wx:if="{{isLogin}}">
+      <view class="user-detail">
         <text class="user-name">{{userInfo.nickname || '微信用户'}}</text>
         <text class="user-uid">UID: {{userInfo.uid || '---'}}</text>
       </view>
@@ -24,7 +26,12 @@
 
     <!-- 登录按钮区域 -->
     <view class="login-btn-area" wx:if="{{!isLogin}}">
-      <button class="wx-login-btn" bindtap="onLogin">
+      <button
+        class="wx-login-btn"
+        hover-class="wx-login-btn-hover"
+        hover-stay-time="120"
+        bindtap="onLogin"
+      >
         <text class="wx-icon">💬</text>
         <text class="wx-login-text">微信一键登录</text>
       </button>

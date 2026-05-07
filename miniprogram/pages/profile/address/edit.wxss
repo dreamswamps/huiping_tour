@@ -1,0 +1,174 @@
+.page {
+  min-height: 100vh;
+  background: #f8f5f0;
+  padding-bottom: calc(140rpx + env(safe-area-inset-bottom));
+  box-sizing: border-box;
+}
+
+.nav-bar {
+  padding: 20rpx 22rpx 16rpx;
+}
+
+.back-btn {
+  display: flex;
+  align-items: center;
+  width: 192rpx;
+  height: 82rpx;
+  background: #f5e4e1;
+  border-radius: 30rpx;
+  padding-left: 28rpx;
+}
+
+.back-icon {
+  width: 26rpx;
+  height: 26rpx;
+}
+
+.back-text {
+  margin-left: 18rpx;
+  font-size: 32rpx;
+  color: #c91f37;
+}
+
+.nav-title {
+  display: block;
+  text-align: center;
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #c91f37;
+  margin-top: 8rpx;
+}
+
+.form-scroll {
+  height: calc(100vh - 280rpx);
+  padding: 0 26rpx;
+  box-sizing: border-box;
+}
+
+.form-card {
+  background: #fff;
+  border-radius: 40rpx;
+  border: 2rpx solid #e3e3e3;
+  padding: 8rpx 26rpx 28rpx;
+  margin-top: 8rpx;
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  min-height: 100rpx;
+  border-bottom: 2rpx solid #f0f0f0;
+}
+
+.field:last-child {
+  border-bottom: none;
+}
+
+.field-block {
+  flex-direction: column;
+  align-items: stretch;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+}
+
+.field-switch {
+  justify-content: space-between;
+}
+
+.label {
+  width: 160rpx;
+  flex-shrink: 0;
+  font-size: 28rpx;
+  color: #212121;
+  font-weight: 600;
+}
+
+.field-block .label {
+  width: auto;
+  margin-bottom: 12rpx;
+}
+
+.input {
+  flex: 1;
+  font-size: 28rpx;
+  color: #333;
+  height: 88rpx;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 120rpx;
+  font-size: 28rpx;
+  color: #333;
+  line-height: 1.5;
+  padding: 12rpx 0;
+  box-sizing: border-box;
+}
+
+.picker-field {
+  width: 100%;
+}
+
+.picker-value-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 88rpx;
+}
+
+.picker-value {
+  font-size: 28rpx;
+  color: #333;
+  text-align: right;
+  max-width: 420rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.picker-value.placeholder {
+  color: #bbb;
+}
+
+.picker-arrow {
+  margin-left: 12rpx;
+  font-size: 36rpx;
+  color: #ccc;
+  font-weight: 300;
+}
+
+.form-bottom {
+  height: 40rpx;
+}
+
+.footer-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 20rpx 26rpx calc(20rpx + env(safe-area-inset-bottom));
+  background: linear-gradient(180deg, rgba(248, 245, 240, 0) 0%, #f8f5f0 28%);
+}
+
+.btn-save {
+  width: 100%;
+  height: 92rpx;
+  line-height: 92rpx;
+  border-radius: 46rpx;
+  border: 2rpx solid rgba(230, 194, 136, 0.65);
+  background: linear-gradient(180deg, #fff9f0 0%, #f0dfc4 55%, #e6c288 100%);
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #4a0d14;
+  padding: 0;
+  margin: 0;
+}
+
+.btn-save::after {
+  border: none;
+}
+
+.btn-save-hover {
+  opacity: 0.92;
+}

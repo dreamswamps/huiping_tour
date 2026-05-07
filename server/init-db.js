@@ -51,11 +51,35 @@ const mysql = require('mysql2/promise');
       
       `CREATE TABLE IF NOT EXISTS users (
         id INT PRIMARY KEY AUTO_INCREMENT,
-        openid VARCHAR(64) UNIQUE NOT NULL COMMENT '微信openid',
-        nickname VARCHAR(50) COMMENT '昵称',
-        avatar VARCHAR(255) COMMENT '头像',
+        openid VARCHAR(64) NOT NULL COMMENT '微信openid',
+        unionid VARCHAR(64) DEFAULT NULL COMMENT '微信unionid',
+        uid VARCHAR(32) NOT NULL COMMENT '业务UID',
+        nickname VARCHAR(100) DEFAULT NULL COMMENT '昵称',
+        avatar VARCHAR(512) DEFAULT NULL COMMENT '头像',
         score INT DEFAULT 0 COMMENT '积分',
-        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        UNIQUE KEY uk_users_openid (openid),
+        UNIQUE KEY uk_users_uid (uid),
+        KEY idx_users_unionid (unionid)
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4`,
+      
+      `CREATE TABLE IF NOT EXISTS user_addresses (
+        id INT PRIMARY KEY AUTO_INCREMENT,
+        user_id INT NOT NULL COMMENT '关联users.id',
+        receiver_name VARCHAR(50) NOT NULL COMMENT '收货人',
+        receiver_phone VARCHAR(20) NOT NULL COMMENT '手机号',
+        province VARCHAR(32) NOT NULL COMMENT '省',
+        city VARCHAR(32) NOT NULL COMMENT '市',
+        district VARCHAR(32) NOT NULL COMMENT '区县',
+        detail_address VARCHAR(255) NOT NULL COMMENT '详细地址',
+        postal_code VARCHAR(10) DEFAULT NULL COMMENT '邮编',
+        label VARCHAR(20) DEFAULT NULL COMMENT '标签',
+        is_default TINYINT(1) NOT NULL DEFAULT 0 COMMENT '是否默认',
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        KEY idx_user_addresses_user (user_id),
+        CONSTRAINT fk_user_addresses_user FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4`,
       
       `CREATE TABLE IF NOT EXISTS badges (

@@ -1,0 +1,47 @@
+<!-- 收货地址列表 -->
+<view class="page">
+  <view class="nav-bar">
+    <view class="back-btn" catchtap="onBack">
+      <image class="back-icon" src="{{baseUrl}}/img/benefits-back-arrow.svg" mode="aspectFit"></image>
+      <text class="back-text">返回</text>
+    </view>
+    <text class="nav-title">收货地址</text>
+  </view>
+
+  <scroll-view class="list-wrap" scroll-y enhanced show-scrollbar="{{false}}" wx:if="{{!loading}}">
+    <block wx:if="{{list.length === 0}}">
+      <view class="empty">
+        <text class="empty-icon">📍</text>
+        <text class="empty-text">暂无收货地址</text>
+        <text class="empty-hint">点击下方按钮添加，便于商城配送</text>
+      </view>
+    </block>
+
+    <block wx:for="{{list}}" wx:key="id">
+      <view class="addr-card">
+        <view class="addr-top" data-id="{{item.id}}" bindtap="onEdit">
+          <view class="addr-name-row">
+            <text class="addr-name">{{item.receiverName}}</text>
+            <text class="addr-phone">{{item.receiverPhone}}</text>
+            <view class="tag-default" wx:if="{{item.isDefault}}">默认</view>
+          </view>
+          <text class="addr-full">{{item.province}}{{item.city}}{{item.district}}{{item.detailAddress}}</text>
+          <text class="addr-label" wx:if="{{item.label}}">{{item.label}}</text>
+        </view>
+        <view class="addr-actions">
+          <text class="act-link" catchtap="onSetDefault" data-id="{{item.id}}" wx:if="{{!item.isDefault}}">设为默认</text>
+          <text class="act-link danger" catchtap="onDelete" data-id="{{item.id}}">删除</text>
+        </view>
+      </view>
+    </block>
+    <view class="list-bottom"></view>
+  </scroll-view>
+
+  <view class="loading-mask" wx:if="{{loading}}">
+    <text class="loading-text">加载中…</text>
+  </view>
+
+  <view class="footer-bar">
+    <button class="btn-add" hover-class="btn-add-hover" bindtap="onAdd">添加收货地址</button>
+  </view>
+</view>
