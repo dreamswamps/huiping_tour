@@ -1,14 +1,16 @@
-/* 页面容器 */
+/* 页面容器 — Figma「改动-剩余」首页 2:112 */
 .page {
   min-height: 100vh;
-  background: #F8F5F0;
+  background: #f8f5f0;
 }
 
-/* ========== 轮播图区域 ========== */
+/* ========== 顶栏轮播（整页导出图顶部裁切） ========== */
 .banner-section {
   position: relative;
   width: 100%;
-  height: 480rpx;
+  height: 520rpx;
+  overflow: hidden;
+  background: #111;
 }
 
 .banner-swiper {
@@ -16,99 +18,129 @@
   height: 100%;
 }
 
-.banner-img {
+.banner-slide {
   width: 100%;
   height: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  background: #0a0a0a;
+}
+
+.banner-hero-img {
+  width: 100%;
+  height: auto;
   display: block;
 }
 
-/* ========== 自定义轮播指示器 ========== */
-.custom-dots {
+/* 指示条：中间红、两侧半透白 */
+.custom-bars {
   position: absolute;
-  bottom: 30rpx;
+  bottom: 32rpx;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   align-items: center;
-  gap: 12rpx;
+  gap: 16rpx;
   z-index: 10;
 }
 
-/* 圆点（未选中） */
-.dot {
-  width: 16rpx;
-  height: 16rpx;
-  border-radius: 8rpx;
-  background: rgba(255,255,255,0.5);
-  transition: all 0.3s ease;
+.bar {
+  width: 56rpx;
+  height: 8rpx;
+  border-radius: 4rpx;
+  background: rgba(255, 255, 255, 0.5);
+  transition: background 0.25s ease;
 }
 
-/* 选中态 - 拉成条形 */
-.dot-active {
-  width: 48rpx;   /* 拉长 */
-  border-radius: 8rpx;
-  background: #ffffff;
+.bar-active {
+  background: #c91f37;
 }
 
-/* 右上角头像 */
-.user-avatar {
+.banner-overlay-ui {
   position: absolute;
-  top: 40rpx;
-  right: 30rpx;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 9;
+}
+
+.banner-overlay-ui .arrow-hit,
+.banner-scan-wrap {
+  pointer-events: auto;
+}
+
+.banner-scan-wrap {
+  position: absolute;
+  top: calc(env(safe-area-inset-top) + 16rpx);
+  right: 28rpx;
+}
+
+.banner-scan {
   width: 64rpx;
   height: 64rpx;
-  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* 左右箭头 */
-.arrow-left,
-.arrow-right {
+.banner-scan-icon {
+  width: 44rpx;
+  height: 44rpx;
+}
+
+.arrow-hit {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 10;
+  width: 100rpx;
+  height: 160rpx;
+  z-index: 2;
 }
 
-.arrow-left {
-  left: 20rpx;
+.arrow-hit-left {
+  left: 0;
 }
 
-.arrow-right {
-  right: 20rpx;
+.arrow-hit-right {
+  right: 0;
 }
 
-.arrow-icon {
-  width: 52rpx;
-  height: 52rpx;
-}
-
-/* ========== 内容区域 ========== */
+/* ========== 内容区（卡片压住轮播底） ========== */
 .content-area {
-  margin-top: -60rpx;
-  border-radius: 48rpx 48rpx 0 0;
-  background: #F8F5F0;
-  padding: 24rpx 28rpx;
+  margin-top: -56rpx;
+  border-radius: 40rpx 40rpx 0 0;
+  background: #f8f5f0;
+  padding: 28rpx 28rpx 0;
   box-sizing: border-box;
+  position: relative;
+  z-index: 2;
 }
 
-/* ========== 功能卡片 ========== */
+.func-cards-wrap {
+  margin-bottom: 32rpx;
+}
+
 .func-cards {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
-  margin-top: 10rpx;
-  margin-bottom: 28rpx;
+  margin-bottom: 20rpx;
 }
 
 .func-card {
   width: 200rpx;
   height: 176rpx;
-  background: #FFFFFF;
-  border-radius: 24rpx;
+  background: #ffffff;
+  border-radius: 28rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8rpx 20rpx rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.06);
 }
 
 .card-img {
@@ -119,56 +151,49 @@
 
 .card-text {
   font-size: 24rpx;
-  color: #5C3A21;
-  font-weight: 400;
+  color: #5c3a21;
+  font-weight: 500;
 }
 
-/* ========== AI导览卡片 ========== */
-.ai-guide {
-  background: #FFFFFF;
-  border-radius: 24rpx;
-  padding: 20rpx 28rpx;
+/* 语音导览整行 */
+.voice-guide {
+  background: #ffffff;
+  border-radius: 28rpx;
+  padding: 22rpx 28rpx;
   display: flex;
+  flex-direction: row;
   align-items: center;
-  margin-bottom: 36rpx;
-  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.06);
+  box-shadow: 0 6rpx 20rpx rgba(0, 0, 0, 0.05);
 }
 
-/* 红色圆圈 + 白色三角符号 */
-.ai-circle {
+.voice-play {
   width: 72rpx;
   height: 72rpx;
   border-radius: 50%;
-  background: #A80101;
+  background: #c91f37;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
 
-.ai-triangle {
+.voice-tri {
   color: #ffffff;
-  font-size: 28rpx;
+  font-size: 26rpx;
   margin-left: 4rpx;
   line-height: 1;
 }
 
-/* 右侧内容区 */
-.ai-right {
-  display: flex;
-  align-items: center;
-  margin-left: 24rpx;
+.voice-mic {
+  width: 40rpx;
+  height: 48rpx;
+  margin-left: 20rpx;
+  flex-shrink: 0;
 }
 
-.star {
-  width: 36rpx;
-  height: 36rpx;
-  margin-right: 8rpx;
-}
-
-.ai-text {
+.voice-text {
   font-size: 34rpx;
-  color: #C91F37;
+  color: #c91f37;
   font-weight: 700;
   margin-left: 16rpx;
 }
@@ -176,28 +201,51 @@
 /* ========== 热门景点 ========== */
 .section-header {
   display: flex;
+  flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   margin-bottom: 24rpx;
+  padding-right: 4rpx;
 }
 
-.title-deco {
-  width: 200rpx;
-  height: 56rpx;
+.section-header-left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .title-bar {
   width: 6rpx;
   height: 36rpx;
-  background: #A80101;
-  margin-left: 16rpx;
+  background: #a80101;
   margin-right: 12rpx;
   border-radius: 3rpx;
 }
 
 .section-title {
   font-size: 36rpx;
-  color: #A80101;
+  color: #a80101;
   font-weight: 700;
+}
+
+.section-more {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.section-more-text {
+  font-size: 22rpx;
+  color: #b0a090;
+  font-weight: 500;
+}
+
+.section-more-arrow {
+  width: 22rpx;
+  height: 22rpx;
+  margin-left: 6rpx;
+  opacity: 0.75;
 }
 
 .spot-list {
@@ -208,8 +256,8 @@
 .spot-item {
   position: relative;
   width: 100%;
-  height: 182rpx;
-  border-radius: 20rpx;
+  min-height: 182rpx;
+  border-radius: 24rpx;
   overflow: hidden;
   margin-bottom: 20rpx;
 }
@@ -223,51 +271,31 @@
 }
 
 .spot-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 20rpx 26rpx;
-  background: linear-gradient(transparent, rgba(92,58,33,0.25));
+  position: relative;
+  z-index: 1;
+  padding: 22rpx 26rpx 24rpx;
+  min-height: 182rpx;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background: linear-gradient(180deg, rgba(40, 24, 12, 0.1) 0%, rgba(40, 24, 12, 0.55) 100%);
 }
 
 .spot-name {
-  display: block;
   font-size: 28rpx;
-  color: #FFFFFF;
+  color: #ffffff;
   font-weight: 700;
-  line-height: 1.3;
+  line-height: 1.35;
 }
 
 .spot-desc {
-  display: block;
   font-size: 22rpx;
-  color: rgba(255,235,220,0.88);
-  margin-top: 6rpx;
-  line-height: 1.3;
+  color: rgba(255, 245, 235, 0.92);
+  margin-top: 8rpx;
+  line-height: 1.4;
 }
 
-/* 查看更多 */
-.more-tip {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 24rpx 0;
-}
-
-.more-text {
-  font-size: 26rpx;
-  color: #C9B7AB;
-  font-weight: 600;
-}
-
-.more-arrow {
-  width: 24rpx;
-  height: 24rpx;
-  margin-left: 8rpx;
-}
-
-/* 底部安全距离(自定义tabBar) */
 .safe-bottom {
   height: 180rpx;
 }

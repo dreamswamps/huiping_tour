@@ -1,0 +1,32 @@
+<!-- 白塔洞详情 · Figma 9MYxTcRZCTWlumWzZ3UxS3 node 2:89 -->
+<view class="page">
+  <scroll-view class="scroll" scroll-y enhanced show-scrollbar="{{false}}">
+    <view class="hero-wrap">
+      <image
+        class="hero"
+        src="{{baseUrl}}/img/voice-guide-hero.png"
+        mode="aspectFill"
+      />
+      <view class="hero-safe" />
+      <image
+        class="btn-back"
+        src="{{baseUrl}}/img/baitadong-back.svg"
+        mode="aspectFit"
+        bindtap="onBack"
+      />
+    </view>
+
+    <view class="panel">
+      <view class="content">
+        <text class="name">白塔洞</text>
+        <text class="tagline">洞崖滴水，常年不绝</text>
+        <view class="divider" />
+        <text class="body">{{body}}</text>
+      </view>
+    </view>
+
+    <view class="bottom-pad" />
+  </scroll-view>
+
+  <mall-bottom-tab selected="{{0}}" />
+</view>

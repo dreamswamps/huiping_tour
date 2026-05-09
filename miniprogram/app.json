@@ -1,6 +1,10 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/index/voice-guide/index",
+    "pages/index/liangtoudong/index",
+    "pages/index/baitadong/index",
+    "pages/index/dierquweijiuzhi/index",
     "pages/map/index",
     "pages/mall/index",
     "pages/mall/huozhong/index",

@@ -1,0 +1,32 @@
+<!-- 中共衢遂寿中心县委第二区委旧址 · Figma 9MYxTcRZCTWlumWzZ3UxS3 node 2:100 -->
+<view class="page">
+  <scroll-view class="scroll" scroll-y enhanced show-scrollbar="{{false}}">
+    <view class="hero-wrap">
+      <image
+        class="hero"
+        src="{{baseUrl}}/img/voice-guide-hero.png"
+        mode="aspectFill"
+      />
+      <view class="hero-safe" />
+      <image
+        class="btn-back"
+        src="{{baseUrl}}/img/dierquweijiuzhi-back.svg"
+        mode="aspectFit"
+        bindtap="onBack"
+      />
+    </view>
+
+    <view class="panel">
+      <view class="content">
+        <text class="name">中共衢遂寿中心县委第二区委旧址</text>
+        <text class="tagline">光荣革命传统的圣地</text>
+        <view class="divider" />
+        <text class="body">{{body}}</text>
+      </view>
+    </view>
+
+    <view class="bottom-pad" />
+  </scroll-view>
+
+  <mall-bottom-tab selected="{{0}}" />
+</view>

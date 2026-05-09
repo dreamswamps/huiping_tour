@@ -1,0 +1,105 @@
+/* Figma node 2:100，版式与白塔洞详情一致，标题左对齐以适配长标题 */
+.page {
+  min-height: 100vh;
+  background: #ffffff;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.scroll {
+  flex: 1;
+  height: 0;
+  box-sizing: border-box;
+}
+
+.hero-wrap {
+  position: relative;
+  width: 100%;
+  height: 582rpx;
+  overflow: hidden;
+  background: #e8e0d8;
+}
+
+.hero {
+  width: 118%;
+  height: 100%;
+  margin-left: -9%;
+  display: block;
+}
+
+.hero-safe {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: env(safe-area-inset-top);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+.btn-back {
+  position: absolute;
+  left: 24rpx;
+  top: calc(env(safe-area-inset-top) + 28rpx);
+  width: 65rpx;
+  height: 65rpx;
+  z-index: 10;
+}
+
+.panel {
+  position: relative;
+  margin-top: -144rpx;
+  padding: 48rpx 48rpx 48rpx;
+  background: #f8f5f0;
+  border-radius: 74rpx 74rpx 0 0;
+  box-shadow: 0 -18rpx 30rpx rgba(0, 0, 0, 0.25);
+  box-sizing: border-box;
+  min-height: 400rpx;
+}
+
+.divider {
+  width: 100%;
+  height: 2rpx;
+  background: #dfcfb8;
+  margin: 36rpx 0 40rpx;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+}
+
+.name {
+  font-size: 38rpx;
+  font-weight: 700;
+  color: #940a0a;
+  line-height: 1.35;
+  text-align: left;
+}
+
+.tagline {
+  margin-top: 16rpx;
+  font-size: 24rpx;
+  font-weight: 400;
+  color: rgba(130, 125, 121, 0.88);
+  line-height: 1.3;
+  text-align: left;
+}
+
+.body {
+  width: 100%;
+  font-size: 37rpx;
+  font-weight: 400;
+  color: #8e8475;
+  line-height: 43rpx;
+  letter-spacing: 0.05em;
+  text-align: justify;
+  white-space: pre-wrap;
+}
+
+.bottom-pad {
+  height: calc(230rpx + env(safe-area-inset-bottom));
+}

@@ -1,116 +1,89 @@
-<!-- 首页 -->
+<!-- 首页 · Figma 改动-剩余 node 2:112 -->
 <view class="page">
-
-  <!-- 轮播图区域 -->
   <view class="banner-section">
-    <swiper 
-      class="banner-swiper" 
-      autoplay="{{true}}" 
-      interval="{{3000}}" 
+    <swiper
+      class="banner-swiper"
+      autoplay="{{true}}"
+      interval="{{4000}}"
       duration="{{500}}"
       circular="{{true}}"
       current="{{swiperCurrent}}"
       bindchange="onSwiperChange"
-      id="mySwiper"
     >
-      <swiper-item wx:for="{{banners}}" wx:key="index">
-        <image class="banner-img" src="{{item}}" mode="aspectFill"></image>
+      <swiper-item wx:for="{{bannerList}}" wx:key="id">
+        <view class="banner-slide">
+          <image class="banner-hero-img" src="{{baseUrl}}/img/{{item.img}}" mode="aspectFill" />
+        </view>
       </swiper-item>
     </swiper>
 
-    <!-- 自定义指示器：5个点，选中拉成条 -->
-    <view class="custom-dots">
-      <view 
-        wx:for="{{banners}}" 
-        wx:key="index"
-        class="dot {{swiperCurrent === index ? 'dot-active' : ''}}"
-        style="--dot-index: {{index}};"
-      ></view>
-    </view>
-    
-    <!-- 左侧箭头 -->
-    <view class="arrow-left" catchtap="onPrevSlide">
-      <image class="arrow-icon" src="{{baseUrl}}/img/arrow-left.svg"></image>
+    <view class="banner-overlay-ui">
+      <!-- 底图已含箭头时勿再叠 SVG，否则会重影；仅保留透明热区便于点击切页 -->
+      <view class="arrow-hit arrow-hit-left" catchtap="onPrevSlide" />
+      <view class="arrow-hit arrow-hit-right" catchtap="onNextSlide" />
+      <view class="banner-scan-wrap">
+        <view class="banner-scan" catchtap="onScanTap">
+          <image class="banner-scan-icon" src="{{baseUrl}}/img/home-icon-scan.svg" mode="aspectFit" />
+        </view>
+      </view>
     </view>
 
-    <!-- 右侧箭头 -->
-    <view class="arrow-right" catchtap="onNextSlide">
-      <image class="arrow-icon" src="{{baseUrl}}/img/arrow-right.svg"></image>
+    <view class="custom-bars">
+      <view
+        wx:for="{{bannerList}}"
+        wx:key="id"
+        class="bar {{swiperCurrent === index ? 'bar-active' : ''}}"
+      />
     </view>
-
-    <!-- 右上角用户头像 -->
-    <image class="user-avatar" src="{{baseUrl}}/img/avatar-default.svg" catchtap="onUserTap"></image>
   </view>
 
-  <!-- 内容区域 -->
   <scroll-view class="content-area" scroll-y enhanced show-scrollbar="{{false}}">
-    
-    <!-- 功能入口卡片 -->
-    <view class="func-cards">
-      <view class="func-card" catchtap="goMap">
-        <image class="card-img" src="{{baseUrl}}/img/card-map.svg" mode="aspectFit"></image>
-        <text class="card-text">传薪地图</text>
+    <view class="func-cards-wrap">
+      <view class="func-cards">
+        <view class="func-card" catchtap="goMap">
+          <image class="card-img" src="{{baseUrl}}/img/card-map.svg" mode="aspectFit" />
+          <text class="card-text">传薪地图</text>
+        </view>
+        <view class="func-card" catchtap="goToSubmodule" data-url="/pages/cloudar/cloudar">
+          <image class="card-img" src="{{baseUrl}}/img/card-ar.svg" mode="aspectFit" />
+          <text class="card-text">AR扫描</text>
+        </view>
+        <view class="func-card" catchtap="onFuncCard" data-type="badge">
+          <image class="card-img" src="{{baseUrl}}/img/card-badge.svg" mode="aspectFit" />
+          <text class="card-text">我的徽章</text>
+        </view>
       </view>
-      <view class="func-card" catchtap="goToSubmodule" data-url="/pages/cloudar/cloudar">
-        <image class="card-img" src="{{baseUrl}}/img/card-ar.svg" mode="aspectFit"></image>
-        <text class="card-text">AR扫描</text>
-      </view>
-      <view class="func-card" catchtap="onFuncCard">
-        <image class="card-img" src="{{baseUrl}}/img/card-badge.svg" mode="aspectFit"></image>
-        <text class="card-text">任务徽章</text>
+
+      <view class="voice-guide" catchtap="onVoiceGuide">
+        <view class="voice-play">
+          <text class="voice-tri">▶</text>
+        </view>
+        <image class="voice-mic" src="{{baseUrl}}/img/home-icon-mic.svg" mode="aspectFit" />
+        <text class="voice-text">语音导览</text>
       </view>
     </view>
 
-    <!-- AI导览卡片 -->
-    <view class="ai-guide" catchtap="onAIGuide">
-      <view class="ai-circle">
-        <text class="ai-triangle">▶</text>
-      </view>
-      <view class="ai-right">
-        <image class="star" src="{{baseUrl}}/img/star-1.svg" mode="aspectFit"></image>
-        <image class="star" src="{{baseUrl}}/img/star-2.svg" mode="aspectFit"></image>
-        <text class="ai-text">AI导览</text>
-      </view>
-    </view>
-
-    <!-- 热门景点 -->
     <view class="section-header">
-      <view class="title-bar"></view>
-      <text class="section-title">热门景点</text>
+      <view class="section-header-left">
+        <view class="title-bar"></view>
+        <text class="section-title">热门景点</text>
+      </view>
+      <view class="section-more">
+        <text class="section-more-text">下滑查看更多</text>
+        <image class="section-more-arrow" src="{{baseUrl}}/img/arrow-down.svg" mode="aspectFit" />
+      </view>
     </view>
 
-    <!-- 景点列表 -->
     <view class="spot-list">
-      <view class="spot-item" catchtap="onSpotDetail">
-        <image class="spot-bg" src="{{baseUrl}}/img/homepage1.png" mode="aspectFill"></image>
+      <view class="spot-item" wx:for="{{spots}}" wx:key="title" catchtap="onSpotDetail" data-title="{{item.title}}">
+        <image class="spot-bg" src="{{baseUrl}}/img/home-hotspot-card-bg.png" mode="aspectFill" />
         <view class="spot-overlay">
-          <text class="spot-name">陈列馆·夜袭镇公所</text>
-          <text class="spot-desc">1930年秋，红军夜袭镇公所，打响了革命第一枪</text>
+          <text class="spot-name">{{item.title}}</text>
+          <text class="spot-desc">{{item.desc}}</text>
         </view>
-      </view>
-      <view class="spot-item" catchtap="onSpotDetail">
-        <image class="spot-bg" src="{{baseUrl}}/img/homepage2.jpg" mode="aspectFill"></image>
-        <view class="spot-overlay">
-          <text class="spot-name">红军路·薪火相传</text>
-          <text class="spot-desc">沿着先辈足迹，感受长征精神的伟大力量</text>
-        </view>
-      </view>
-      <view class="spot-item" catchtap="onSpotDetail">
-        <image class="spot-bg" src="{{baseUrl}}/img/homepage3.png" mode="aspectFill"></image>
-        <view class="spot-overlay">
-          <text class="spot-name">党史馆·淬火成钢</text>
-          <text class="spot-desc">百年党史，铭记奋斗历程与革命先烈</text>
-        </view>
-      </view>
-
-      <!-- 查看更多提示 -->
-      <view class="more-tip">
-        <text class="more-text">下滑查看更多</text>
-        <image class="more-arrow" src="{{baseUrl}}/img/arrow-down.svg" mode="aspectFit"></image>
       </view>
     </view>
 
-    <!-- 底部安全距离 -->
     <view class="safe-bottom"></view>
   </scroll-view>
 </view>

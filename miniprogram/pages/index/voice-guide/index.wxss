@@ -1,0 +1,205 @@
+/* Figma 402×874 → rpx 按 750/402 换算 */
+.page {
+  min-height: 100vh;
+  background: #f8f5f0;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.vg-top {
+  flex-shrink: 0;
+  background: #f8f5f0;
+}
+
+.vg-safe {
+  height: env(safe-area-inset-top);
+  background: #f8f5f0;
+}
+
+.vg-nav {
+  height: 88rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.vg-nav-side {
+  width: 180rpx;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.vg-nav-side--right {
+  justify-content: flex-end;
+}
+
+.vg-back {
+  min-width: 178rpx;
+  height: 76rpx;
+  padding: 0 28rpx;
+  background: #f5e4e1;
+  border-radius: 28rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.vg-back-text {
+  font-size: 30rpx;
+  font-weight: 400;
+  color: #c91f37;
+  line-height: 1;
+}
+
+.vg-title {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 38rpx;
+  font-weight: 700;
+  color: #c91f37;
+  line-height: 1.2;
+  max-width: 420rpx;
+  text-align: center;
+}
+
+.vg-scroll {
+  flex: 1;
+  height: 0;
+  box-sizing: border-box;
+}
+
+.vg-hero-wrap {
+  width: 100%;
+  height: 582rpx;
+  padding: 0 24rpx;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.vg-hero {
+  width: 118%;
+  height: 100%;
+  margin-left: -9%;
+  display: block;
+  border-radius: 38rpx;
+}
+
+/* 与稿中大圆角内容区衔接 */
+.vg-panel {
+  margin-top: -264rpx;
+  padding: 58rpx 38rpx 32rpx;
+  background: #f8f5f0;
+  border-radius: 74rpx 74rpx 0 0;
+  box-sizing: border-box;
+  min-height: 200rpx;
+}
+
+.vg-card {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  min-height: 206rpx;
+  margin-bottom: 32rpx;
+  padding: 18rpx 24rpx 18rpx 18rpx;
+  background: #ffffff;
+  border-radius: 19rpx;
+  box-shadow: 0 4rpx 22rpx rgba(0, 0, 0, 0.25);
+  box-sizing: border-box;
+}
+
+.vg-card:last-child {
+  margin-bottom: 0;
+}
+
+.vg-thumb {
+  width: 150rpx;
+  flex-shrink: 0;
+  align-self: center;
+  height: 142rpx;
+  background: #a80101;
+  border-radius: 12rpx;
+}
+
+.vg-main {
+  flex: 1;
+  margin-left: 22rpx;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12rpx;
+  padding-right: 12rpx;
+}
+
+.vg-name {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #000000;
+  line-height: 1.25;
+}
+
+.vg-desc {
+  font-size: 24rpx;
+  font-weight: 700;
+  color: #bdbdbd;
+  line-height: 1.35;
+}
+
+.vg-divider {
+  width: 2rpx;
+  align-self: stretch;
+  background: #d4cdce;
+  margin: 0 8rpx 0 4rpx;
+  flex-shrink: 0;
+}
+
+.vg-side {
+  width: 72rpx;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8rpx 0 4rpx;
+  box-sizing: border-box;
+}
+
+.vg-play {
+  width: 68rpx;
+  height: 68rpx;
+  border-radius: 50%;
+  background: #a80101;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vg-play--on {
+  background: #c91f37;
+}
+
+.vg-play-tri {
+  color: #ffffff;
+  font-size: 24rpx;
+  margin-left: 4rpx;
+  line-height: 1;
+}
+
+.vg-time {
+  font-size: 22rpx;
+  font-weight: 700;
+  color: #bdbdbd;
+  line-height: 1;
+}
+
+.vg-scroll-pad {
+  height: calc(120rpx + env(safe-area-inset-bottom));
+}

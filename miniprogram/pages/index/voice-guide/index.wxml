@@ -1,0 +1,54 @@
+<!-- AI导览 · Figma 9MYxTcRZCTWlumWzZ3UxS3 node 2:2 -->
+<view class="page">
+  <view class="vg-top">
+    <view class="vg-safe" />
+    <view class="vg-nav">
+      <view class="vg-nav-side">
+        <view class="vg-back" bindtap="onBack">
+          <text class="vg-back-text">返回</text>
+        </view>
+      </view>
+      <text class="vg-title">语音导览</text>
+      <view class="vg-nav-side vg-nav-side--right" />
+    </view>
+  </view>
+
+  <scroll-view class="vg-scroll" scroll-y enhanced show-scrollbar="{{false}}">
+    <view class="vg-hero-wrap">
+      <image
+        class="vg-hero"
+        src="{{baseUrl}}/img/voice-guide-hero.png"
+        mode="aspectFill"
+      />
+    </view>
+
+    <view class="vg-panel">
+      <view
+        class="vg-card"
+        wx:for="{{tracks}}"
+        wx:key="id"
+      >
+        <view class="vg-thumb" />
+        <view class="vg-main">
+          <text class="vg-name">{{item.name}}</text>
+          <text class="vg-desc">{{item.desc}}</text>
+        </view>
+        <view class="vg-divider" />
+        <view class="vg-side">
+          <view
+            class="vg-play {{playingId === item.id ? 'vg-play--on' : ''}}"
+            catchtap="onPlayTap"
+            data-id="{{item.id}}"
+          >
+            <text class="vg-play-tri">▶</text>
+          </view>
+          <text class="vg-time">0:00</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="vg-scroll-pad" />
+  </scroll-view>
+
+  <mall-bottom-tab selected="{{0}}" />
+</view>

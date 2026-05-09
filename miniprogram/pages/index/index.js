@@ -4,12 +4,17 @@ Page({
   data: {
     baseUrl: config.baseUrl,
     swiperCurrent: 0,
-    banners: [
-      config.baseUrl + '/img/turn-1.JPG',
-      config.baseUrl + '/img/turn-2.JPG',
-      config.baseUrl + '/img/turn-3.png',
-      config.baseUrl + '/img/turn-4.png',
-      config.baseUrl + '/img/turn-5.png'
+    bannerList: [
+      { id: 'b0', img: 'turn-1.JPG' },
+      { id: 'b1', img: 'turn-2.JPG' },
+      { id: 'b2', img: 'turn-3.png' },
+      { id: 'b3', img: 'turn-4.png' },
+      { id: 'b4', img: 'turn-5.png' }
+    ],
+    spots: [
+      { title: '两头洞', desc: '华东自然岩壁第一洞' },
+      { title: '白塔洞', desc: '位于灰坪乡杜家田村以西，洞崖滴水，常年不绝' },
+      { title: '中共衢遂寿中心县委第二区委旧址', desc: '光荣革命传统的圣地' }
     ]
   },
 
@@ -21,78 +26,67 @@ Page({
     }
   },
 
-  // 轮播图切换事件
   onSwiperChange(e) {
     this.setData({
       swiperCurrent: e.detail.current
     });
   },
 
-  // 上一张轮播图
   onPrevSlide() {
+    const n = this.data.bannerList.length;
     let current = this.data.swiperCurrent;
-    const len = this.data.banners.length;
-    if (current === 0) {
-      current = len - 1; // 回到最后一个
-    } else {
-      current--;
-    }
+    current = current === 0 ? n - 1 : current - 1;
     this.setData({ swiperCurrent: current });
   },
 
-  // 下一张轮播图
   onNextSlide() {
+    const n = this.data.bannerList.length;
     let current = this.data.swiperCurrent;
-    const len = this.data.length;
-    if (current === len - 1) {
-      current = 0; // 回到第一个
-    } else {
-      current++;
-    }
+    current = current === n - 1 ? 0 : current + 1;
     this.setData({ swiperCurrent: current });
   },
 
-  onUserTap() {
-    wx.switchTab({
-      url: '/pages/profile/index'
-    });
+  onScanTap() {
+    wx.navigateTo({ url: '/pages/cloudar/cloudar' });
   },
 
-  // 功能卡片点击
   onFuncCard(e) {
     const type = e.currentTarget.dataset.type;
-    const titles = { ar: 'AR扫描', badge: '任务徽章' };
-    wx.showToast({ title: titles[type], icon: 'none' });
+    if (type === 'badge') {
+      wx.showToast({ title: '我的徽章', icon: 'none' });
+      return;
+    }
+    wx.showToast({ title: '敬请期待', icon: 'none' });
   },
-  
+
   goToSubmodule(e) {
-    const { url } = e.currentTarget.dataset
-    if (!url) return
-    wx.navigateTo({
-      url
-    })
+    const { url } = e.currentTarget.dataset;
+    if (!url) return;
+    wx.navigateTo({ url });
   },
 
-  // AI导览
-  onAIGuide() {
-    wx.showToast({ title: 'AI导览', icon: 'none' });
+  onVoiceGuide() {
+    wx.navigateTo({ url: '/pages/index/voice-guide/index' });
   },
 
-  // 景点详情
   onSpotDetail(e) {
-    wx.showToast({ title: '景点详情', icon: 'none' });
+    const title = e.currentTarget.dataset.title || '';
+    if (title === '两头洞') {
+      wx.navigateTo({ url: '/pages/index/liangtoudong/index' });
+      return;
+    }
+    if (title === '白塔洞') {
+      wx.navigateTo({ url: '/pages/index/baitadong/index' });
+      return;
+    }
+    if (title === '中共衢遂寿中心县委第二区委旧址') {
+      wx.navigateTo({ url: '/pages/index/dierquweijiuzhi/index' });
+      return;
+    }
+    wx.showToast({ title: title || '景点详情', icon: 'none' });
   },
 
-  // Tab跳转
   goMap() {
     wx.switchTab({ url: '/pages/map/index' });
-  },
-
-  goMall() {
-    wx.switchTab({ url: '/pages/mall/index' });
-  },
-
-  goProfile() {
-    wx.switchTab({ url: '/pages/profile/index' });
   }
 });
