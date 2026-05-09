@@ -1,7 +1,7 @@
 <view class="page">
 
   <!-- 顶部背景图 -->
-  <image class="top-bg" src="{{baseUrl}}/img/station1-top-bg.png" mode="widthFix"></image>
+  <image class="top-bg" src="{{baseUrl}}/img/station1.png" mode="widthFix"></image>
 
   <!-- 返回首页按钮 -->
   <view class="back-home-btn" bindtap="onBackHome">

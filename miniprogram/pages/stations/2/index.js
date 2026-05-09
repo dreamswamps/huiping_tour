@@ -22,7 +22,7 @@ Page({
 
   onBackHome() {
     wx.switchTab({
-      url: '/pages/home/index'
+      url: '/pages/index/index'
     });
   },
 

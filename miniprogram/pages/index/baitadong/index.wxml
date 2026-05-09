@@ -4,7 +4,7 @@
     <view class="hero-wrap">
       <image
         class="hero"
-        src="{{baseUrl}}/img/voice-guide-hero.png"
+        src="{{baseUrl}}/img/homepage2.png"
         mode="aspectFill"
       />
       <view class="hero-safe" />
