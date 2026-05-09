@@ -3,7 +3,14 @@ const config = require('../../config');
 Page({
   data: {
     baseUrl: config.baseUrl,
-    swiperCurrent: 2
+    swiperCurrent: 0,
+    banners: [
+      config.baseUrl + '/img/turn-1.JPG',
+      config.baseUrl + '/img/turn-2.JPG',
+      config.baseUrl + '/img/turn-3.png',
+      config.baseUrl + '/img/turn-4.png',
+      config.baseUrl + '/img/turn-5.png'
+    ]
   },
 
   onLoad() {},
@@ -24,8 +31,9 @@ Page({
   // 上一张轮播图
   onPrevSlide() {
     let current = this.data.swiperCurrent;
+    const len = this.data.banners.length;
     if (current === 0) {
-      current = 4; // 回到最后一个
+      current = len - 1; // 回到最后一个
     } else {
       current--;
     }
@@ -35,7 +43,8 @@ Page({
   // 下一张轮播图
   onNextSlide() {
     let current = this.data.swiperCurrent;
-    if (current === 4) {
+    const len = this.data.length;
+    if (current === len - 1) {
       current = 0; // 回到第一个
     } else {
       current++;

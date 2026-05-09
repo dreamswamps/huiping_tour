@@ -13,15 +13,15 @@
       bindchange="onSwiperChange"
       id="mySwiper"
     >
-      <swiper-item wx:for="{{5}}" wx:key="index">
-        <image class="banner-img" src="{{baseUrl}}/img/banner-main.svg" mode="aspectFill"></image>
+      <swiper-item wx:for="{{banners}}" wx:key="index">
+        <image class="banner-img" src="{{item}}" mode="aspectFill"></image>
       </swiper-item>
     </swiper>
 
     <!-- 自定义指示器：5个点，选中拉成条 -->
     <view class="custom-dots">
       <view 
-        wx:for="{{5}}" 
+        wx:for="{{banners}}" 
         wx:key="index"
         class="dot {{swiperCurrent === index ? 'dot-active' : ''}}"
         style="--dot-index: {{index}};"
@@ -82,21 +82,21 @@
     <!-- 景点列表 -->
     <view class="spot-list">
       <view class="spot-item" catchtap="onSpotDetail">
-        <image class="spot-bg" src="{{baseUrl}}/img/spot-night-raid.svg" mode="aspectFill"></image>
+        <image class="spot-bg" src="{{baseUrl}}/img/homepage1.png" mode="aspectFill"></image>
         <view class="spot-overlay">
           <text class="spot-name">陈列馆·夜袭镇公所</text>
           <text class="spot-desc">1930年秋，红军夜袭镇公所，打响了革命第一枪</text>
         </view>
       </view>
       <view class="spot-item" catchtap="onSpotDetail">
-        <image class="spot-bg" src="{{baseUrl}}/img/spot-red-army.svg" mode="aspectFill"></image>
+        <image class="spot-bg" src="{{baseUrl}}/img/homepage2.jpg" mode="aspectFill"></image>
         <view class="spot-overlay">
           <text class="spot-name">红军路·薪火相传</text>
           <text class="spot-desc">沿着先辈足迹，感受长征精神的伟大力量</text>
         </view>
       </view>
       <view class="spot-item" catchtap="onSpotDetail">
-        <image class="spot-bg" src="{{baseUrl}}/img/spot-party-history.svg" mode="aspectFill"></image>
+        <image class="spot-bg" src="{{baseUrl}}/img/homepage3.png" mode="aspectFill"></image>
         <view class="spot-overlay">
           <text class="spot-name">党史馆·淬火成钢</text>
           <text class="spot-desc">百年党史，铭记奋斗历程与革命先烈</text>
