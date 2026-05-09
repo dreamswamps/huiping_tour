@@ -12,9 +12,9 @@ Page({
       { id: 'b4', img: 'turn-5.png' }
     ],
     spots: [
-      { title: '两头洞', desc: '华东自然岩壁第一洞' },
-      { title: '白塔洞', desc: '位于灰坪乡杜家田村以西，洞崖滴水，常年不绝' },
-      { title: '中共衢遂寿中心县委第二区委旧址', desc: '光荣革命传统的圣地' }
+      { title: '两头洞', desc: '华东自然岩壁第一洞' , img: 'homepage1.png' },
+      { title: '白塔洞', desc: '位于灰坪乡杜家田村以西，洞崖滴水，常年不绝', img: 'homepage2.png' },
+      { title: '中共衢遂寿中心县委第二区委旧址', desc: '光荣革命传统的圣地', img: 'homepage3.png' }
     ]
   },
 
