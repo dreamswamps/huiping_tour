@@ -1,0 +1,94 @@
+<!-- 个人信息页面 -->
+<view class="page">
+
+  <!-- ========== 顶部渐变区 ========== -->
+  <view class="nav-bar">
+    <view class="back-btn" catchtap="onBack">
+      <image class="back-icon" src="{{baseUrl}}/img/benefits-back-arrow.svg" mode="aspectFit"></image>
+      <text class="back-text">返回</text>
+    </view>
+    <text class="nav-title">个人信息</text>
+  </view>
+
+  <!-- ========== 内容区域 ========== -->
+  <view class="content-area">
+
+    <!-- 头像卡片 -->
+    <view class="info-card avatar-card">
+      <view class="card-left">
+        <text class="card-label">头像</text>
+      </view>
+      <view class="card-right">
+        <button class="avatar-btn" open-type="chooseAvatar" bindchooseavatar="onChooseAvatar">
+          <image class="avatar-img" src="{{userInfo.avatar}}" mode="aspectFill" wx:if="{{userInfo.avatar}}"></image>
+          <text class="avatar-placeholder" wx:else>🙍</text>
+        </button>
+        <text class="arrow-icon">›</text>
+      </view>
+    </view>
+
+    <!-- 昵称卡片 -->
+    <view class="info-card" wx:if="{{!isEditing}}">
+      <view class="card-left">
+        <text class="card-label">昵称</text>
+      </view>
+      <view class="card-right" catchtap="onStartEdit">
+        <text class="card-value">{{userInfo.nickname || '未设置'}}</text>
+        <text class="arrow-icon">›</text>
+      </view>
+    </view>
+
+    <!-- 昵称编辑状态 -->
+    <view class="info-card edit-card" wx:if="{{isEditing}}">
+      <view class="card-left">
+        <text class="card-label">昵称</text>
+      </view>
+      <view class="card-right">
+        <input
+          class="nickname-input"
+          type="nickname"
+          placeholder="请输入昵称"
+          value="{{editForm.nickname}}"
+          maxlength="100"
+          bindinput="onNicknameInput"
+          focus="{{true}}"
+        />
+      </view>
+    </view>
+
+    <!-- 积分卡片 -->
+    <view class="info-card">
+      <view class="card-left">
+        <text class="card-label">我的积分</text>
+      </view>
+      <view class="card-right">
+        <text class="card-value score-value">{{userInfo.score}}</text>
+        <text class="score-unit">分</text>
+      </view>
+    </view>
+
+    <!-- 注册时间卡片 -->
+    <view class="info-card">
+      <view class="card-left">
+        <text class="card-label">注册时间</text>
+      </view>
+      <view class="card-right">
+        <text class="card-value time-value">{{userInfo.created_at || '---'}}</text>
+      </view>
+    </view>
+
+    <!-- 保存按钮 -->
+    <view class="save-area">
+      <button class="main-save-btn" bindtap="onSaveProfile">保存</button>
+    </view>
+
+  </view>
+
+  <!-- ========== 编辑模式下的操作按钮 ========== -->
+  <!-- 暂时隐藏，编辑后统一使用保存按钮 -->
+  <!-- <view class="action-area" wx:if="{{isEditing}}">
+    <button class="cancel-btn" bindtap="onCancelEdit">取消</button>
+    <button class="save-btn" bindtap="onSaveEdit">保存</button>
+  </view> -->
+
+</view>

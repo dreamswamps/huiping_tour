@@ -71,7 +71,7 @@ function assertOwnUser(req, res) {
  * @param {import('express').RequestHandler} requireUserAuth
  */
 function register(router, requireUserAuth) {
-  router.get('/user/:userId/addresses/:addressId', requireUserAuth, async (req, res) => {
+  router.get('/:userId/addresses/:addressId', requireUserAuth, async (req, res) => {
     if (!assertOwnUser(req, res)) return;
     const userId = req.auth.userId;
     const addressId = Number(req.params.addressId);
@@ -89,7 +89,7 @@ function register(router, requireUserAuth) {
     }
   });
 
-  router.get('/user/:userId/addresses', requireUserAuth, async (req, res) => {
+  router.get('/:userId/addresses', requireUserAuth, async (req, res) => {
     if (!assertOwnUser(req, res)) return;
     const userId = req.auth.userId;
     try {
@@ -106,7 +106,7 @@ function register(router, requireUserAuth) {
     }
   });
 
-  router.post('/user/:userId/addresses', requireUserAuth, async (req, res) => {
+  router.post('/:userId/addresses', requireUserAuth, async (req, res) => {
     if (!assertOwnUser(req, res)) return;
     const userId = req.auth.userId;
 
@@ -163,7 +163,7 @@ function register(router, requireUserAuth) {
     }
   });
 
-  router.put('/user/:userId/addresses/:addressId', requireUserAuth, async (req, res) => {
+  router.put('/:userId/addresses/:addressId', requireUserAuth, async (req, res) => {
     if (!assertOwnUser(req, res)) return;
     const userId = req.auth.userId;
     const addressId = Number(req.params.addressId);
@@ -248,7 +248,7 @@ function register(router, requireUserAuth) {
     }
   });
 
-  router.delete('/user/:userId/addresses/:addressId', requireUserAuth, async (req, res) => {
+  router.delete('/:userId/addresses/:addressId', requireUserAuth, async (req, res) => {
     if (!assertOwnUser(req, res)) return;
     const userId = req.auth.userId;
     const addressId = Number(req.params.addressId);

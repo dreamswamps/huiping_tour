@@ -1,0 +1,232 @@
+/* ==================== 页面容器 ==================== */
+.page {
+  min-height: 100vh;
+  background: #F8F5F0;
+}
+
+/* ==================== 顶部渐变区 ==================== */
+.header-area {
+  background: linear-gradient(141deg, #B83749 0%, #C41933 24%, #1F0005 73%);
+  padding: 20rpx 26rpx 50rpx;
+}
+
+.nav-bar {
+  padding: 20rpx 22rpx 16rpx;
+}
+
+.back-btn {
+  display: flex;
+  align-items: center;
+  width: 192rpx;
+  height: 82rpx;
+  background: #f5e4e1;
+  border-radius: 30rpx;
+  padding-left: 28rpx;
+}
+
+.back-icon {
+  width: 26rpx;
+  height: 26rpx;
+}
+
+.back-text {
+  margin-left: 18rpx;
+  font-size: 32rpx;
+  color: #c91f37;
+}
+
+.nav-title {
+  display: block;
+  text-align: center;
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #c91f37;
+  margin-top: 8rpx;
+}
+
+/* ==================== 内容区域 ==================== */
+.content-area {
+  margin: -30rpx 26rpx 0;
+  padding-bottom: 120rpx;
+}
+
+/* ==================== 信息卡片 ==================== */
+.info-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #FFFFFF;
+  border-radius: 40rpx;
+  padding: 36rpx 30rpx;
+  margin-bottom: 18rpx;
+}
+
+.card-left {
+  flex-shrink: 0;
+}
+
+.card-label {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #212121;
+}
+
+.card-right {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.card-value {
+  font-size: 28rpx;
+  color: #666666;
+}
+
+.arrow-icon {
+  font-size: 40rpx;
+  color: #CCCCCC;
+  margin-left: 12rpx;
+  line-height: 1;
+}
+
+/* ==================== 头像卡片 ==================== */
+.avatar-card {
+  padding: 26rpx 30rpx;
+}
+
+.avatar-btn {
+  width: 120rpx;
+  height: 120rpx;
+  padding: 0;
+  margin: 0;
+  border-radius: 60rpx;
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.avatar-btn::after {
+  border: none;
+}
+
+.avatar-img {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 60rpx;
+  object-fit: cover;
+}
+
+.avatar-placeholder {
+  font-size: 50rpx;
+}
+
+/* ==================== 积分样式 ==================== */
+.score-value {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #C91933;
+}
+
+.score-unit {
+  font-size: 24rpx;
+  color: #999999;
+  margin-left: 4rpx;
+}
+
+/* ==================== 时间样式 ==================== */
+.time-value {
+  font-size: 26rpx;
+  color: #999999;
+}
+
+/* ==================== 保存按钮区域 ==================== */
+.save-area {
+  padding: 30rpx 0;
+}
+
+.main-save-btn {
+  width: 100%;
+  height: 88rpx;
+  background: linear-gradient(135deg, #C91933 0%, #B83749 100%);
+  border: none;
+  border-radius: 44rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #FFFFFF;
+  line-height: 60rpx;
+  text-align: center;
+}
+
+.main-save-btn::after {
+  border: none;
+}
+
+/* ==================== 编辑模式 ==================== */
+.edit-card {
+  background: #FFF9F0;
+  border: 2rpx solid #E6C288;
+}
+
+.nickname-input {
+  flex: 1;
+  text-align: right;
+  font-size: 28rpx;
+  color: #212121;
+  padding: 0;
+  margin: 0;
+}
+
+.nickname-input::placeholder {
+  color: #CCCCCC;
+}
+
+/* ==================== 操作按钮区域 ==================== */
+.action-area {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  gap: 24rpx;
+  padding: 24rpx 52rpx calc(24rpx + env(safe-area-inset-bottom));
+  background: #FFFFFF;
+  box-shadow: 0 -4rpx 20rpx rgba(0, 0, 0, 0.06);
+}
+
+.cancel-btn {
+  flex: 1;
+  height: 88rpx;
+  background: #F5F5F5;
+  border: 2rpx solid #E0E0E0;
+  border-radius: 44rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #666666;
+  line-height: 88rpx;
+  text-align: center;
+}
+
+.cancel-btn::after {
+  border: none;
+}
+
+.save-btn {
+  flex: 1;
+  height: 88rpx;
+  background: linear-gradient(135deg, #C91933 0%, #B83749 100%);
+  border: none;
+  border-radius: 44rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #FFFFFF;
+  line-height: 88rpx;
+  text-align: center;
+}
+
+.save-btn::after {
+  border: none;
+}

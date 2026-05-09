@@ -8,6 +8,7 @@
     "pages/mall/liaoyuan/index",
     "pages/mall/cart/index",
     "pages/profile/index",
+    "pages/profile/info/index",
     "pages/profile/address/index",
     "pages/profile/address/edit",
     "pages/benefits/index",
