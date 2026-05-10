@@ -15,12 +15,11 @@ Page({
       token: ''
     },
 
-    // 功能卡片（4宫格）
+    // 功能卡片（3宫格）
     funcList: [
       { id: 1, icon: '🗺️', label: '传薪足迹' },
       { id: 2, icon: '🏅', label: '我的徽章' },
       { id: 3, icon: '🎁', label: '我的权益' },
-      { id: 4, icon: '📖', label: '故事收藏' }
     ],
 
     // 菜单列表
@@ -28,7 +27,6 @@ Page({
       {
         id: 1,
         label: '个人信息',
-        badge: '2条未读',
         iconBg: 'profile-menu-1-bg',
         iconFg: 'profile-menu-1-fg'
       },
@@ -40,21 +38,9 @@ Page({
       },
       {
         id: 3,
-        label: '隐私设置',
-        iconBg: 'profile-menu-3-bg',
-        iconFg: 'profile-menu-3-fg'
-      },
-      {
-        id: 4,
-        label: '支付管理',
+        label: '订单管理',
         iconBg: 'profile-menu-4-bg',
         iconFg: 'profile-menu-4-fg'
-      },
-      {
-        id: 5,
-        label: '消息通知',
-        iconBg: 'profile-menu-5-bg',
-        iconFg: 'profile-menu-5-fg'
       }
     ]
   },
@@ -343,7 +329,7 @@ Page({
       wx.navigateTo({ url: '/pages/profile/address/index' });
       return;
     }
-    wx.showToast({ title: `菜单项${id}`, icon: 'none' });
+    wx.showToast({ title: `待开发`, icon: 'none' });
   },
 
   onFuncTap(e) {
@@ -351,7 +337,7 @@ Page({
     if (id === 3) {
       wx.navigateTo({ url: '/pages/benefits/index' });
     } else {
-      wx.showToast({ title: `功能${id}`, icon: 'none' });
+      wx.showToast({ title: `待开发`, icon: 'none' });
     }
   }
 });

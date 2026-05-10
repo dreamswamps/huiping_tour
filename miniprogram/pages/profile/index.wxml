@@ -40,11 +40,19 @@
 
   </view>
 
-  <!-- ========== 功能卡片（白色） ========== -->
+  <!-- ========== 功能卡片（3 宫格） ========== -->
   <view class="func-card">
     <block wx:for="{{funcList}}" wx:key="id">
-      <view class="func-item" catchtap="onFuncTap" data-id="{{item.id}}">
-        <text class="func-icon">{{item.icon}}</text>
+      <view
+        class="func-item"
+        hover-class="func-item--active"
+        hover-stay-time="100"
+        catchtap="onFuncTap"
+        data-id="{{item.id}}"
+      >
+        <view class="func-icon-wrap">
+          <text class="func-icon">{{item.icon}}</text>
+        </view>
         <text class="func-label">{{item.label}}</text>
       </view>
     </block>
@@ -55,8 +63,10 @@
 
     <block wx:for="{{menuList}}" wx:key="id">
       <view class="menu-item" catchtap="onMenuTap" data-id="{{item.id}}">
-        <image class="menu-icon-bg" src="{{baseUrl}}/img/{{item.iconBg}}.svg" mode="aspectFit"></image>
-        <image class="menu-icon-fg" src="{{baseUrl}}/img/{{item.iconFg}}.svg" mode="aspectFit"></image>
+        <view class="menu-icon-wrap">
+          <image class="menu-icon-bg" src="{{baseUrl}}/img/{{item.iconBg}}.svg" mode="aspectFit"></image>
+          <image class="menu-icon-fg" src="{{baseUrl}}/img/{{item.iconFg}}.svg" mode="aspectFit"></image>
+        </view>
         <text class="menu-label">{{item.label}}</text>
         <text class="menu-badge" wx:if="{{item.badge}}">{{item.badge}}</text>
         <image class="menu-arrow" src="{{baseUrl}}/img/profile-arrow.svg" mode="aspectFit"></image>

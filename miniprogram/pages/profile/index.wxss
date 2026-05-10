@@ -145,35 +145,68 @@
   border: none;
 }
 
-/* ==================== 功能卡片（白色） ==================== */
+/* ==================== 功能卡片（3 宫格） ==================== */
 .func-card {
+  position: relative;
+  z-index: 1;
   margin: -30rpx 26rpx 0;
-  padding: 28rpx 14rpx;
+  padding: 24rpx 20rpx 28rpx;
   background: #FFFFFF;
   border-radius: 40rpx;
   display: flex;
-  justify-content: space-between;
+  align-items: stretch;
+  gap: 16rpx;
+  box-shadow: 0 16rpx 48rpx rgba(31, 0, 5, 0.14);
+  border: 2rpx solid rgba(230, 194, 136, 0.35);
+  box-sizing: border-box;
 }
 
 /* 单个功能入口 */
 .func-item {
-  width: 156rpx;
-  height: 176rpx;
-  background: #F9F7F3;
-  border-radius: 40rpx;
+  flex: 1;
+  min-width: 0;
+  padding: 26rpx 10rpx 22rpx;
+  background: linear-gradient(180deg, #FFFCF8 0%, #F3EDE4 100%);
+  border-radius: 32rpx;
+  border: 2rpx solid rgba(230, 194, 136, 0.4);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  box-shadow: inset 0 2rpx 0 rgba(255, 255, 255, 0.75);
+  box-sizing: border-box;
 }
+
+.func-item--active {
+  opacity: 0.9;
+  transform: scale(0.97);
+}
+
+.func-icon-wrap {
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: 50%;
+  background: linear-gradient(160deg, #FFFFFF 0%, #EFE4D4 100%);
+  border: 2rpx solid rgba(201, 25, 51, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14rpx;
+  box-shadow: 0 8rpx 20rpx rgba(74, 13, 20, 0.08);
+}
+
 .func-icon {
-  font-size: 40rpx;
-  margin-bottom: 12rpx;
+  font-size: 44rpx;
+  line-height: 1;
 }
+
 .func-label {
   font-size: 24rpx;
-  font-weight: 700;
-  color: #212121;
+  font-weight: 600;
+  color: #3d2e26;
+  text-align: center;
+  line-height: 1.35;
+  padding: 0 4rpx;
 }
 
 /* ==================== 内容列表区（浅色背景） ==================== */
@@ -197,17 +230,26 @@
 }
 
 /* 左侧图标（背景圆 + 前景图叠加） */
+.menu-icon-wrap {
+  position: relative;
+  width: 54rpx;
+  height: 56rpx;
+  flex-shrink: 0;
+}
 .menu-icon-bg {
   width: 54rpx;
   height: 56rpx;
-  position: relative;
+  position: absolute;
+  left: 0;
+  top: 0;
   z-index: 1;
 }
 .menu-icon-fg {
   width: 38rpx;
   height: 38rpx;
   position: absolute;
-  left: 38rpx;
+  left: 8rpx;
+  top: 9rpx;
   z-index: 2;
 }
 

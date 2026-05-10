@@ -59,26 +59,7 @@ router.post('/', async (req, res) => {
     try {
       const [rows] = await pool.query('SELECT * FROM users WHERE openid = ?', [openid]);
       if (rows.length > 0) {
-        try {
-          await pool.query(
-            `UPDATE users SET
-              nickname = COALESCE(?, nickname),
-              avatar = COALESCE(?, avatar),
-              updated_at = NOW()
-            WHERE openid = ?`,
-            [displayName, avatarUrl, openid]
-          );
-        } catch (e) {
-          await pool.query(
-            `UPDATE users SET
-              nickname = COALESCE(?, nickname),
-              avatar = COALESCE(?, avatar)
-            WHERE openid = ?`,
-            [displayName, avatarUrl, openid]
-          );
-        }
-        const [updated] = await pool.query('SELECT * FROM users WHERE openid = ?', [openid]);
-        user = updated[0];
+        user = rows[0];
         if (user && (!user.uid || String(user.uid).trim() === '')) {
           const fillUid = 'CX' + Date.now().toString().slice(-8);
           try {
