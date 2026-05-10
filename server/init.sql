@@ -89,6 +89,7 @@ INSERT INTO products (name, price, thumb, stock, status) VALUES
 CREATE TABLE IF NOT EXISTS product_details (
   id INT PRIMARY KEY AUTO_INCREMENT,
   product_id INT NOT NULL COMMENT '关联 products.id',
+  product_name VARCHAR(100) NOT NULL COMMENT '商品名称（快照）',
   subtitle VARCHAR(200) DEFAULT NULL COMMENT '副标题',
   description TEXT COMMENT '商品描述',
   images JSON DEFAULT NULL COMMENT '轮播图列表',
@@ -99,6 +100,13 @@ CREATE TABLE IF NOT EXISTS product_details (
   CONSTRAINT fk_product_details_product FOREIGN KEY (product_id)
     REFERENCES products(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='商品详情';
+
+-- 插入商品详情数据
+INSERT INTO product_details (product_id, product_name, subtitle, description, content) VALUES
+(1, '红色主题笔记本', '记录红色足迹', '精选红色主题笔记本，采用优质纸张，适合书写学习心得与感悟。封面设计融合革命元素，内页印有党史金句，是党建学习和日常记录的理想之选。', '<p>商品详情内容...</p>'),
+(2, '薪火相传纪念徽章', '传承红色精神', '精美金属徽章，设计灵感来源于革命时期的勋章，象征着薪火相传的革命精神。做工精细，适合佩戴或收藏，是党员和红色文化爱好者的必备纪念品。', '<p>商品详情内容...</p>'),
+(3, '红色文化帆布袋', '背上红色情怀', '采用优质帆布材质，结实耐用，印有红色文化主题图案。简约大方，适合日常出行或学习使用，背出红色情怀与担当。', '<p>商品详情内容...</p>'),
+(4, '革命历史书签套装', '书香中的红色记忆', '一套四枚书签，分别以井冈山、延安、遵义、西柏坡为设计主题，选用金属材质，精致美观。搭配经典红色书籍使用，增添阅读仪式感。', '<p>商品详情内容...</p>');
 
 -- ========== 购物车 ==========
 CREATE TABLE IF NOT EXISTS carts (
