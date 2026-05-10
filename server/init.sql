@@ -4,6 +4,8 @@
 CREATE DATABASE IF NOT EXISTS hpt DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE hpt;
 
+-- ========== 基础表 ==========
+
 -- ========== 景点 ==========
 CREATE TABLE IF NOT EXISTS spots (
   id INT PRIMARY KEY AUTO_INCREMENT,
@@ -17,19 +19,6 @@ CREATE TABLE IF NOT EXISTS spots (
   status TINYINT DEFAULT 1 COMMENT '状态',
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='景点';
-
--- ========== 商品 ==========
-CREATE TABLE IF NOT EXISTS products (
-  id INT PRIMARY KEY AUTO_INCREMENT,
-  name VARCHAR(100) NOT NULL COMMENT '商品名称',
-  description TEXT COMMENT '商品描述',
-  price DECIMAL(10, 2) NOT NULL COMMENT '价格',
-  original_price DECIMAL(10, 2) COMMENT '原价',
-  image VARCHAR(255) COMMENT '商品图片',
-  stock INT DEFAULT 0 COMMENT '库存',
-  status TINYINT DEFAULT 1 COMMENT '状态',
-  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='商品';
 
 -- ========== 用户（微信 openid 唯一；uid 为业务展示号）==========
 CREATE TABLE IF NOT EXISTS users (
@@ -75,3 +64,94 @@ CREATE TABLE IF NOT EXISTS badges (
   condition_text VARCHAR(100) COMMENT '获取条件说明',
   sort_order INT DEFAULT 0 COMMENT '排序'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='徽章';
+
+-- ========== 商城表 ==========
+
+-- ========== 商品（商城列表页展示）==========
+CREATE TABLE IF NOT EXISTS products (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(100) NOT NULL COMMENT '商品名称',
+  price DECIMAL(10, 2) NOT NULL COMMENT '售价',
+  thumb VARCHAR(255) DEFAULT NULL COMMENT '封面图',
+  stock INT DEFAULT 0 COMMENT '库存',
+  status TINYINT DEFAULT 1 COMMENT '状态：0下架 1上架',
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='商品';
+
+-- 插入商品数据
+INSERT INTO products (name, price, thumb, stock, status) VALUES
+('红色主题笔记本', 28.00, 'http://localhost:3000/img/turn-1.jpg', 200, 1),
+('薪火相传纪念徽章', 15.00, 'http://localhost:3000/img/turn-2.jpg', 500, 1),
+('红色文化帆布袋', 38.00, 'http://localhost:3000/img/turn-3.png', 150, 1),
+('革命历史书签套装', 22.00, 'http://localhost:3000/img/turn-4.png', 300, 1);
+
+-- ========== 商品详情（详情页内容）==========
+CREATE TABLE IF NOT EXISTS product_details (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  product_id INT NOT NULL COMMENT '关联 products.id',
+  subtitle VARCHAR(200) DEFAULT NULL COMMENT '副标题',
+  description TEXT COMMENT '商品描述',
+  images JSON DEFAULT NULL COMMENT '轮播图列表',
+  content TEXT COMMENT '富文本详情',
+  attrs JSON DEFAULT NULL COMMENT '商品属性键值对',
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  UNIQUE KEY uk_product_details_product (product_id),
+  CONSTRAINT fk_product_details_product FOREIGN KEY (product_id)
+    REFERENCES products(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='商品详情';
+
+-- ========== 购物车 ==========
+CREATE TABLE IF NOT EXISTS carts (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  user_id INT NOT NULL COMMENT '关联 users.id',
+  product_id INT NOT NULL COMMENT '关联 products.id',
+  product_name VARCHAR(100) NOT NULL COMMENT '商品名称（快照）',
+  product_price DECIMAL(10, 2) NOT NULL COMMENT '商品单价（快照）',
+  product_thumb VARCHAR(255) DEFAULT NULL COMMENT '商品封面图（快照）',
+  quantity INT NOT NULL DEFAULT 1 COMMENT '购买数量',
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  UNIQUE KEY uk_carts_user_product (user_id, product_id),
+  KEY idx_carts_user (user_id),
+  CONSTRAINT fk_carts_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+  CONSTRAINT fk_carts_product FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='购物车';
+
+-- ========== 订单 ==========
+CREATE TABLE IF NOT EXISTS orders (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  order_no VARCHAR(32) NOT NULL COMMENT '订单号',
+  user_id INT NOT NULL COMMENT '关联 users.id',
+
+  total_amount DECIMAL(10, 2) NOT NULL COMMENT '实付金额',
+
+  address_id INT NOT NULL COMMENT '关联 user_addresses.id',
+  receiver_name VARCHAR(50) NOT NULL COMMENT '收货人',
+  receiver_phone VARCHAR(20) NOT NULL COMMENT '手机号',
+  province VARCHAR(32) NOT NULL COMMENT '省',
+  city VARCHAR(32) NOT NULL COMMENT '市',
+  district VARCHAR(32) NOT NULL COMMENT '区',
+  detail_address VARCHAR(255) NOT NULL COMMENT '详细地址',
+
+  -- 0待付款 1待发货 2已发货 3取消中 4已完成 5已取消
+  status TINYINT DEFAULT 0 COMMENT '订单状态',
+
+  tracking_no VARCHAR(50) DEFAULT NULL COMMENT '快递单号',
+
+  pay_time DATETIME DEFAULT NULL COMMENT '支付时间',
+  deliver_time DATETIME DEFAULT NULL COMMENT '发货时间',
+  receive_time DATETIME DEFAULT NULL COMMENT '收货时间',
+
+  -- 商品快照列表（JSON数组）
+  items JSON DEFAULT NULL COMMENT '商品列表 [{"product_id":1,"name":"xxx","price":128,"quantity":1}]',
+  remark VARCHAR(255) DEFAULT NULL COMMENT '备注',
+
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+  UNIQUE KEY uk_orders_order_no (order_no),
+  KEY idx_orders_user (user_id),
+  KEY idx_orders_status (status),
+  CONSTRAINT fk_orders_user FOREIGN KEY (user_id) REFERENCES users(id),
+  CONSTRAINT fk_orders_address FOREIGN KEY (address_id) REFERENCES user_addresses(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='订单';
