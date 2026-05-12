@@ -2,3 +2,7 @@ assets/
 .codebuddy/
 node_modules/
 server/.env
+server/.env.txt
+
+# 本地微信截图，不入库
+微信图片_*

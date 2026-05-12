@@ -1,0 +1,70 @@
+<view class="page">
+  <view class="header">
+    <view class="header-inner">
+      <view class="header-bar">
+        <image class="header-back" src="{{baseUrl}}/img/mall-cart-back.svg" mode="aspectFit" bindtap="onBack" />
+        <text class="header-title">确认订单</text>
+        <view class="header-placeholder" />
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{loadError}}" class="err-wrap">
+    <text class="err-text">{{loadError}}</text>
+    <view wx:if="{{needLogin}}" class="err-btn" bindtap="onGoProfile">
+      <text>去登录</text>
+    </view>
+    <view wx:elif="{{needAddress}}" class="err-btn" bindtap="onAddAddress">
+      <text>添加收货地址</text>
+    </view>
+  </view>
+
+  <block wx:else>
+    <scroll-view class="scroll" scroll-y enhanced show-scrollbar="{{false}}">
+      <view class="block">
+        <text class="block-title">收货地址</text>
+        <view
+          wx:for="{{addresses}}"
+          wx:key="id"
+          class="addr-row {{selectedAddressId === item.id ? 'addr-row--on' : ''}}"
+          bindtap="onPickAddress"
+          data-id="{{item.id}}"
+        >
+          <view class="addr-radio">
+            <view class="addr-dot" wx:if="{{selectedAddressId === item.id}}" />
+          </view>
+          <view class="addr-body">
+            <text class="addr-line">{{item.receiverName}} {{item.receiverPhone}}</text>
+            <text class="addr-detail">{{item.province}}{{item.city}}{{item.district}}{{item.detailAddress}}</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="block">
+        <text class="block-title">商品清单</text>
+        <view class="goods-row" wx:for="{{lines}}" wx:key="productId">
+          <image class="goods-thumb" src="{{item.thumbUrl}}" mode="aspectFill" />
+          <view class="goods-body">
+            <text class="goods-name">{{item.productName}}</text>
+            <view class="goods-foot">
+              <text class="goods-price">¥{{item.priceText}}</text>
+              <text class="goods-qty">x{{item.quantity}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="scroll-bottom-space" />
+    </scroll-view>
+
+    <view class="bottom-bar">
+      <view class="total-wrap">
+        <text class="total-label">应付：</text>
+        <text class="total-num">¥{{totalText}}</text>
+      </view>
+      <view class="submit-btn {{submitDisabled ? 'submit-btn--off' : ''}}" bindtap="onSubmit">
+        <text>{{submitLoading ? '提交中…' : '提交订单'}}</text>
+      </view>
+    </view>
+  </block>
+</view>

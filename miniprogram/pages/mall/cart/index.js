@@ -1,5 +1,7 @@
 const config = require('../../../config.js');
 const cartStorage = require('../../../utils/cartStorage.js');
+const { resolveMediaUrl } = require('../../../utils/resolveMediaUrl.js');
+const { getAuthHeaders } = require('../../../utils/auth.js');
 
 function sumSelected(items) {
   return items.reduce((s, it) => {
@@ -26,13 +28,18 @@ Page({
   },
 
   refreshCart() {
-    const items = cartStorage.sortByDisplayOrder(cartStorage.load());
+    const { baseUrl } = this.data;
+    const raw = cartStorage.sortByDisplayOrder(cartStorage.load());
+    const items = raw.map((it) => ({
+      ...it,
+      thumbUrl: resolveMediaUrl(it.thumb, baseUrl),
+    }));
     const totalPrice = sumSelected(items);
     this.setData({
       items,
       isEmpty: items.length === 0,
       selectAll: allSelected(items),
-      totalPrice
+      totalPrice,
     });
   },
 
@@ -62,7 +69,7 @@ Page({
   onToggleItem(e) {
     const id = e.currentTarget.dataset.id;
     const updated = this.data.items.map((i) =>
-      i.id === id ? { ...i, selected: !i.selected } : i
+      String(i.id) === String(id) ? { ...i, selected: !i.selected } : i
     );
     this.persist(updated);
   },
@@ -70,7 +77,7 @@ Page({
   onPlus(e) {
     const id = e.currentTarget.dataset.id;
     const updated = this.data.items.map((i) => {
-      if (i.id !== id) return i;
+      if (String(i.id) !== String(id)) return i;
       const q = (i.quantity || 1) + 1;
       return { ...i, quantity: Math.min(q, 99) };
     });
@@ -81,7 +88,7 @@ Page({
     const id = e.currentTarget.dataset.id;
     let updated = this.data.items
       .map((i) => {
-        if (i.id !== id) return i;
+        if (String(i.id) !== String(id)) return i;
         const q = (i.quantity || 1) - 1;
         return { ...i, quantity: q };
       })
@@ -100,14 +107,45 @@ Page({
       wx.showToast({ title: '请选择商品', icon: 'none' });
       return;
     }
-    const tip = this.selectComponent('#mallFigmaTip');
-    if (tip) {
-      tip.show({
-        message: '正在跳转结算页面……',
-        icon: `${baseUrl}/img/mall-prompt-settle.svg`,
-        duration: 1800,
-        onEnd: () => {}
-      });
+    const userInfo = wx.getStorageSync('userInfo') || {};
+    if (!userInfo.token || userInfo.id == null) {
+      wx.showToast({ title: '请先登录后再结算', icon: 'none' });
+      return;
     }
-  }
+
+    const syncPayload = items.map((i) => ({
+      productId: i.id,
+      name: i.name,
+      price: i.price,
+      thumb: i.thumb || '',
+      quantity: i.quantity || 1,
+    }));
+    const selectedIds = items.filter((i) => i.selected).map((i) => i.id);
+
+    wx.showLoading({ title: '同步购物车…', mask: true });
+    wx.request({
+      url: `${baseUrl}/api/mall/cart/sync`,
+      method: 'PUT',
+      header: getAuthHeaders(true),
+      data: { items: syncPayload },
+      success: (res) => {
+        wx.hideLoading();
+        const body = res.data || {};
+        if (res.statusCode !== 200 || body.code !== 200) {
+          wx.showToast({ title: body.message || '同步失败', icon: 'none' });
+          return;
+        }
+        try {
+          wx.setStorageSync('mall_checkout_ids', selectedIds);
+        } catch (e) {
+          wx.removeStorageSync('mall_checkout_ids');
+        }
+        wx.navigateTo({ url: '/pages/mall/order/index' });
+      },
+      fail: () => {
+        wx.hideLoading();
+        wx.showToast({ title: '网络异常', icon: 'none' });
+      },
+    });
+  },
 });

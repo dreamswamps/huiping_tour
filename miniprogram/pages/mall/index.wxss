@@ -275,6 +275,16 @@
   letter-spacing: 0.08em;
 }
 
+.mall-err,
+.mall-loading,
+.mall-empty {
+  padding: 48rpx 28rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #9e9e9e;
+  line-height: 1.6;
+}
+
 .scroll-bottom-space {
   height: calc(200rpx + env(safe-area-inset-bottom));
 }

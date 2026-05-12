@@ -1,7 +1,5 @@
 const KEY = 'mall_cart';
 
-const DISPLAY_ORDER = ['huozhong', 'xinghuo', 'liaoyuan'];
-
 function load() {
   try {
     const raw = wx.getStorageSync(KEY);
@@ -16,14 +14,12 @@ function save(list) {
 }
 
 function sortByDisplayOrder(list) {
-  return [...list].sort(
-    (a, b) => DISPLAY_ORDER.indexOf(a.id) - DISPLAY_ORDER.indexOf(b.id)
-  );
+  return [...list];
 }
 
 function addOrIncrement(product) {
   const list = load();
-  const idx = list.findIndex((i) => i.id === product.id);
+  const idx = list.findIndex((i) => String(i.id) === String(product.id));
   if (idx >= 0) {
     list[idx].quantity = (list[idx].quantity || 1) + 1;
   } else {
@@ -40,10 +36,19 @@ function addOrIncrement(product) {
   save(list);
 }
 
+/** 按商品 id 从本地购物车移除（下单成功后同步） */
+function removeByProductIds(productIds) {
+  const set = new Set((productIds || []).map((x) => String(x)));
+  if (set.size === 0) return;
+  const list = load().filter((i) => !set.has(String(i.id)));
+  save(list);
+}
+
 module.exports = {
   KEY,
   load,
   save,
   sortByDisplayOrder,
-  addOrIncrement
+  addOrIncrement,
+  removeByProductIds,
 };

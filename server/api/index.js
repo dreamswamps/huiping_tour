@@ -6,7 +6,7 @@ router.use('/login', require('./login'));
 router.use('/user', require('./user'));
 router.use(require('./images'));
 router.use(require('./spots'));
-router.use(require('./products'));
+router.use('/mall', require('./mall'));
 router.use(require('./system'));
 
 module.exports = router;

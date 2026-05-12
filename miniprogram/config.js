@@ -3,7 +3,7 @@
  * baseUrl: 后端服务地址，部署后改为实际服务器IP或域名
  */
 module.exports = {
-  // 开发环境 - 本地调试时使用本机局域网IP（手机需能访问到）
-  // 部署到云服务器后改为实际公网IP或域名
-  baseUrl: 'http://localhost:3000'
+  // 须与后端监听端口一致（server/app.js：process.env.PORT || 3000）
+  // 若你在 .env 里写了 PORT=5000，这里要改成 http://localhost:5000
+  baseUrl: 'http://localhost:3000',
 };

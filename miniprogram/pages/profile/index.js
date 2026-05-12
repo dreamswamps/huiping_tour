@@ -329,6 +329,18 @@ Page({
       wx.navigateTo({ url: '/pages/profile/address/index' });
       return;
     }
+    if (id === 3) {
+      if (!this.data.isLogin || !this.data.userInfo.id) {
+        wx.showToast({ title: '请先登录', icon: 'none' });
+        return;
+      }
+      if (!this.data.userInfo.token) {
+        wx.showToast({ title: '请重新登录以更新授权', icon: 'none' });
+        return;
+      }
+      wx.navigateTo({ url: '/pages/profile/orders/index' });
+      return;
+    }
     wx.showToast({ title: `待开发`, icon: 'none' });
   },
 

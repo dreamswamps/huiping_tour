@@ -1,0 +1,47 @@
+<view class="page">
+  <view class="nav-bar">
+    <view class="back-btn" catchtap="onBack">
+      <image class="back-icon" src="{{baseUrl}}/img/benefits-back-arrow.svg" mode="aspectFit" />
+      <text class="back-text">返回</text>
+    </view>
+    <text class="nav-title">订单管理</text>
+  </view>
+
+  <scroll-view class="list-wrap" scroll-y enhanced show-scrollbar="{{false}}" wx:if="{{!loading}}">
+    <view wx:if="{{loadError}}" class="empty">
+      <text class="empty-text">{{loadError}}</text>
+    </view>
+
+    <block wx:elif="{{list.length === 0}}">
+      <view class="empty">
+        <text class="empty-icon">📦</text>
+        <text class="empty-text">暂无订单</text>
+        <text class="empty-hint">在商城下单后会显示在这里</text>
+      </view>
+    </block>
+
+    <block wx:else>
+      <view class="order-card" wx:for="{{list}}" wx:key="id">
+        <view class="order-top">
+          <text class="order-no">订单号 {{item.orderNo}}</text>
+          <text class="order-status {{item.statusClass}}">{{item.statusText}}</text>
+        </view>
+        <text class="order-preview">{{item.itemsPreview}}</text>
+        <view class="order-mid">
+          <text class="order-time">{{item.timeText}}</text>
+          <text class="order-amount">¥{{item.totalText}}</text>
+        </view>
+        <view class="order-actions" wx:if="{{item.canCancel}}">
+          <view class="btn-cancel" catchtap="onCancel" data-id="{{item.id}}">
+            <text>取消订单</text>
+          </view>
+        </view>
+      </view>
+    </block>
+    <view class="list-bottom" />
+  </scroll-view>
+
+  <view class="loading-mask" wx:if="{{loading}}">
+    <text>加载中…</text>
+  </view>
+</view>

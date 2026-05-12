@@ -27,7 +27,7 @@
             <view wx:if="{{item.selected}}" class="check-dot" />
           </view>
         </view>
-        <image class="row-thumb" src="{{baseUrl}}/img/{{item.thumb}}" mode="aspectFill" />
+        <image class="row-thumb" src="{{item.thumbUrl}}" mode="aspectFill" />
         <view class="row-body">
           <text class="row-name">{{item.name}}</text>
           <text class="row-spec">规格：{{item.spec}}</text>

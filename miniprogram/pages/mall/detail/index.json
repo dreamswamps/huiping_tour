@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "mall-figma-tip": "../components/mall-figma-tip/mall-figma-tip"
+  },
+  "navigationStyle": "custom",
+  "navigationBarTitleText": ""
+}

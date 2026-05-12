@@ -24,25 +24,40 @@
         <view class="section-line" />
       </view>
 
-      <view class="product-list">
+      <view wx:if="{{loadError}}" class="mall-err">
+        <text>{{loadError}}</text>
+      </view>
+
+      <view wx:elif="{{loading}}" class="mall-loading">
+        <text>商品加载中…</text>
+      </view>
+
+      <view wx:elif="{{products.length === 0}}" class="mall-empty">
+        <text>暂无在售商品</text>
+      </view>
+
+      <view wx:else class="product-list">
         <view
-          class="product-card {{item.id === 'huozhong' || item.id === 'xinghuo' || item.id === 'liaoyuan' ? 'product-card--hot' : ''}}"
           wx:for="{{products}}"
+          wx:for-index="idx"
           wx:key="id"
+          class="product-card {{idx < 3 ? 'product-card--hot' : ''}}"
           bindtap="onProductCardTap"
           data-id="{{item.id}}"
+          data-price="{{item.price}}"
+          data-thumb="{{item.thumb}}"
         >
-          <image class="product-thumb" src="{{baseUrl}}/img/{{item.thumb}}" mode="aspectFill" />
+          <image class="product-thumb" src="{{item.thumbUrl}}" mode="aspectFill" />
           <view class="product-body">
             <text class="product-name">{{item.name}}</text>
-            <text class="product-desc">{{item.desc}}</text>
+            <text class="product-desc">库存 {{item.stock}}</text>
             <view class="product-foot">
-              <text class="product-price">¥{{item.price}}</text>
+              <text class="product-price">¥{{item.priceDisplay}}</text>
               <view class="product-actions">
-                <view class="btn-cart" data-id="{{item.id}}" catchtap="onAddCart">
+                <view class="btn-cart" catchtap="onAddCart" data-id="{{item.id}}">
                   <text>加入购物车</text>
                 </view>
-                <view class="btn-buy" data-id="{{item.id}}" catchtap="onBuyNow">
+                <view class="btn-buy" catchtap="onBuyNow" data-id="{{item.id}}">
                   <text>立即购买</text>
                 </view>
               </view>
