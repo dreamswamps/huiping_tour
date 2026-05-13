@@ -1,7 +1,7 @@
 const config = require('../../../config.js');
 const cartStorage = require('../../../utils/cartStorage.js');
 const { resolveMediaUrl } = require('../../../utils/resolveMediaUrl.js');
-const { getAuthHeaders } = require('../../../utils/auth.js');
+const { getAuthHeaders, isUserLoggedIn } = require('../../../utils/auth.js');
 
 function readCheckoutIds() {
   try {
@@ -69,9 +69,8 @@ Page({
   bootstrap() {
     const userInfo = wx.getStorageSync('userInfo') || {};
     const userId = userInfo.id != null ? Number(userInfo.id) : null;
-    const hasToken = !!userInfo.token;
 
-    if (!hasToken || !userId) {
+    if (!isUserLoggedIn() || !userId) {
       this.setData({
         loading: false,
         loadError: '请先登录后再结算',

@@ -1,6 +1,19 @@
 const config = require('../../config.js');
 const cartStorage = require('../../utils/cartStorage.js');
 const { resolveMediaUrl } = require('../../utils/resolveMediaUrl.js');
+const { isUserLoggedIn } = require('../../utils/auth.js');
+
+function promptLoginThenProfile() {
+  wx.showModal({
+    title: '需要登录',
+    content: '请先登录后再使用购物车与购买功能',
+    confirmText: '去登录',
+    cancelText: '取消',
+    success(res) {
+      if (res.confirm) wx.switchTab({ url: '/pages/profile/index' });
+    },
+  });
+}
 
 Page({
   data: {
@@ -66,6 +79,10 @@ Page({
   },
 
   onAddCart(e) {
+    if (!isUserLoggedIn()) {
+      promptLoginThenProfile();
+      return;
+    }
     const id = e.currentTarget.dataset.id;
     const item = this.data.products.find((p) => String(p.id) === String(id));
     if (!item) return;
@@ -85,6 +102,10 @@ Page({
   },
 
   onBuyNow(e) {
+    if (!isUserLoggedIn()) {
+      promptLoginThenProfile();
+      return;
+    }
     const id = e.currentTarget.dataset.id;
     const item = this.data.products.find((p) => String(p.id) === String(id));
     if (!item) return;

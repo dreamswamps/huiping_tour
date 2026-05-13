@@ -1,6 +1,19 @@
 const config = require('../../../config.js');
 const cartStorage = require('../../../utils/cartStorage.js');
 const { resolveMediaUrl } = require('../../../utils/resolveMediaUrl.js');
+const { isUserLoggedIn } = require('../../../utils/auth.js');
+
+function promptLoginThenProfile() {
+  wx.showModal({
+    title: '需要登录',
+    content: '请先登录后再使用购物车与购买功能',
+    confirmText: '去登录',
+    cancelText: '取消',
+    success(res) {
+      if (res.confirm) wx.switchTab({ url: '/pages/profile/index' });
+    },
+  });
+}
 
 function attrsToList(attrs) {
   if (!attrs || typeof attrs !== 'object') return [];
@@ -99,6 +112,10 @@ Page({
   },
 
   onAddCart() {
+    if (!isUserLoggedIn()) {
+      promptLoginThenProfile();
+      return;
+    }
     const { productId, detail, listPrice, listThumb, baseUrl } = this.data;
     if (!productId || !detail) return;
     const thumbForCart =
@@ -118,6 +135,10 @@ Page({
   },
 
   onBuyNow() {
+    if (!isUserLoggedIn()) {
+      promptLoginThenProfile();
+      return;
+    }
     this.onAddCart();
     const { baseUrl } = this.data;
     this.showMallTip({

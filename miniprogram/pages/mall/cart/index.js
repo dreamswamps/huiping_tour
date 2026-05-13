@@ -1,7 +1,7 @@
 const config = require('../../../config.js');
 const cartStorage = require('../../../utils/cartStorage.js');
 const { resolveMediaUrl } = require('../../../utils/resolveMediaUrl.js');
-const { getAuthHeaders } = require('../../../utils/auth.js');
+const { getAuthHeaders, isUserLoggedIn } = require('../../../utils/auth.js');
 
 function sumSelected(items) {
   return items.reduce((s, it) => {
@@ -107,8 +107,7 @@ Page({
       wx.showToast({ title: '请选择商品', icon: 'none' });
       return;
     }
-    const userInfo = wx.getStorageSync('userInfo') || {};
-    if (!userInfo.token || userInfo.id == null) {
+    if (!isUserLoggedIn()) {
       wx.showToast({ title: '请先登录后再结算', icon: 'none' });
       return;
     }
