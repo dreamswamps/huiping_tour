@@ -1,72 +1,49 @@
-<!-- 传薪地图 - 站点路线图 -->
+<!-- 传薪地图 · Figma「手绘地图」GTd0dnRsWjR6WycqT789NG node 1:2 -->
 <view class="page">
-
-  <!-- ========== 顶部导航 ========== -->
   <view class="map-header">
-    <!-- 标题 -->
+    <view class="header-row">
+      <view class="back-home" bindtap="onBackHome">
+        <image class="back-home-icon" src="{{baseUrl}}/img/map-back.svg" mode="aspectFit" />
+        <text class="back-home-text">返回首页</text>
+      </view>
+    </view>
     <text class="header-title">传薪地图</text>
-    <!-- 副标题 -->
-    <text class="header-sub">🔥 重走传薪路 · 点亮五站火种 · 获取传薪人认证</text>
+    <view class="header-sub-wrap">
+      <text class="header-sub">🔥 重走传薪路 · 点亮五站火种 · 获取传薪人认证</text>
+    </view>
   </view>
 
-  <!-- ========== 地图内容区 ========== -->
-  <scroll-view class="map-body" scroll-y enhanced show-scrollbar="{{false}}">
-
-    <!-- 站点卡片列表 -->
-    <view class="station-list">
+  <scroll-view class="map-scroll" scroll-y enhanced show-scrollbar="{{false}}">
+    <view class="map-canvas" style="height: {{canvasHeightRpx}}rpx;">
+      <image
+        class="map-routes"
+        src="{{baseUrl}}/img/map-shouxie-routes.svg"
+        mode="aspectFill"
+      />
 
       <block wx:for="{{stations}}" wx:key="id">
-
-        <!-- 站点行：左/右交错 -->
-        <view class="station-row {{item.position === 'left' ? 'row-left' : 'row-right'}}">
-
-          <!-- ===== 左侧站点卡片 ===== -->
-          <view wx:if="{{item.position === 'left'}}" class="station-card-wrap card-left">
-            <!-- 白色卡片 + 红色边框 -->
-            <view class="station-card"></view>
-            <!-- 文字信息（绝对定位覆盖在卡片上） -->
-            <view class="station-info">
-              <view class="info-row-num">
-                <text class="info-num">{{item.num}}</text>
-                <text class="info-dot">·</text>
-                <text class="info-name">{{item.name}}</text>
-              </view>
-              <text class="status-tag {{item.status === '进行中' ? 'status-active' : ''}}">{{item.status}}</text>
-              <text class="info-title">{{item.title}}</text>
-              <text class="info-desc">{{item.desc}}</text>
-              <view class="enter-link" catchtap="onEnterStation" data-id="{{item.id}}">
-                <text>进入站点</text>
-                <image class="enter-arrow" src="{{baseUrl}}/img/map-enter-arrow-{{item.id}}.svg" mode="aspectFit"></image>
-              </view>
+        <view
+          class="station-card"
+          style="left: {{item.left}}rpx; top: {{item.top}}rpx; width: {{item.w}}rpx; height: {{item.h}}rpx;"
+        >
+          <image
+            class="card-thumb {{item.thumbShift ? 'card-thumb--shift-down' : ''}}"
+            src="{{baseUrl}}/img/{{item.thumb}}"
+            mode="aspectFit"
+          />
+          <text class="badge {{item.status === '进行中' ? 'badge--active' : ''}}">{{item.status}}</text>
+          <view class="card-body">
+            <text class="station-line1">{{item.num}} {{item.name}}</text>
+            <text class="station-title">{{item.title}}</text>
+            <view class="enter-row" catchtap="onEnterStation" data-id="{{item.id}}">
+              <text class="enter-text">进入站点</text>
+              <image class="enter-arrow" src="{{baseUrl}}/img/map-enter-arrow-{{item.id}}.svg" mode="aspectFit" />
             </view>
           </view>
-
-          <!-- ===== 右侧站点卡片 ===== -->
-          <view wx:if="{{item.position === 'right'}}" class="station-card-wrap card-right">
-            <view class="station-card"></view>
-            <view class="station-info info-right">
-              <view class="info-row-num">
-                <text class="info-num">{{item.num}}</text>
-                <text class="info-dot">·</text>
-                <text class="info-name">{{item.name}}</text>
-              </view>
-              <text class="status-tag {{item.status === '进行中' ? 'status-active' : ''}}">{{item.status}}</text>
-              <text class="info-title">{{item.title}}</text>
-              <text class="info-desc">{{item.desc}}</text>
-              <view class="enter-link" catchtap="onEnterStation" data-id="{{item.id}}" wx:if="{{index < stations.length - 1 || item.position === 'right'}}">
-                <text>进入站点</text>
-                <image class="enter-arrow" src="{{baseUrl}}/img/map-enter-arrow-{{item.id}}.svg" mode="aspectFit"></image>
-              </view>
-            </view>
-          </view>
-
         </view>
-
       </block>
-
     </view>
 
-    <view class="safe-bottom-lg"></view>
+    <view class="safe-bottom-lg" />
   </scroll-view>
-
 </view>
