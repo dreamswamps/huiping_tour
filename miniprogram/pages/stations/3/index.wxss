@@ -262,6 +262,45 @@
   font-weight: 700;
 }
 
+/* ==================== 打卡按钮 ==================== */
+.checkin-btn {
+  width: 636rpx;
+  height: 100rpx;
+  background: linear-gradient(135deg, #D4A017, #F5D78E);
+  border-radius: 50rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 28rpx;
+  box-shadow: 0 8rpx 20rpx rgba(212, 160, 23, 0.3);
+}
+.checkin-btn.checked {
+  background: linear-gradient(135deg, #4CAF50, #81C784);
+  box-shadow: 0 8rpx 20rpx rgba(76, 175, 80, 0.3);
+}
+.checkin-icon-wrap {
+  width: 44rpx;
+  height: 44rpx;
+  position: relative;
+  margin-right: 12rpx;
+}
+.checkin-icon {
+  width: 44rpx;
+  height: 44rpx;
+}
+.checkin-checked-icon {
+  width: 24rpx;
+  height: 24rpx;
+  position: absolute;
+  right: -6rpx;
+  bottom: -6rpx;
+}
+.checkin-btn text {
+  font-size: 32rpx;
+  color: white;
+  font-weight: 700;
+}
+
 /* ==================== 去这里导航按钮 ==================== */
 .nav-btn {
   width: 636rpx;
