@@ -22,4 +22,25 @@ function requireUserAuth(req, res, next) {
   }
 }
 
-module.exports = { requireUserAuth };
+/** 有合法 token 时写入 req.auth，否则继续（不强制登录） */
+function optionalUserAuth(req, res, next) {
+  const raw = req.headers.authorization || '';
+  const m = /^Bearer\s+(\S+)$/i.exec(raw);
+  if (!m) {
+    return next();
+  }
+  try {
+    const payload = jwt.verify(m[1], jwtConfig.secret);
+    if (payload.userId && payload.openid) {
+      req.auth = {
+        userId: Number(payload.userId),
+        openid: String(payload.openid),
+      };
+    }
+  } catch (e) {
+    // 列表接口忽略无效 token，按未登录处理
+  }
+  next();
+}
+
+module.exports = { requireUserAuth, optionalUserAuth };

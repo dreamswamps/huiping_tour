@@ -58,12 +58,34 @@
         <text class="wall-icon">📜</text>
         <text class="wall-title">传薪宣言墙·实时滚动</text>
       </view>
-      <scroll-view class="wall-list" scroll-y enhanced show-scrollbar="{{false}}">
-        <view class="wall-item" wx:for="{{declarations}}" wx:key="index">
-          <text class="wall-content">{{item.content}}</text>
-          <text class="wall-time">{{item.time}}</text>
+
+      <view class="wall-viewport">
+        <view wx:if="{{wallLoading}}" class="wall-state">
+          <text>加载中…</text>
         </view>
-      </scroll-view>
+        <view wx:elif="{{wallEmpty}}" class="wall-state">
+          <text>暂无传薪宣言，快来发布第一条吧</text>
+        </view>
+        <view wx:else class="wall-scroll-wrap">
+          <view
+            class="wall-scroll-inner {{wallScrollEnabled ? 'wall-scroll-animate' : ''}}"
+            style="{{wallScrollEnabled ? 'animation-duration: ' + scrollDuration + 's;' : ''}}"
+          >
+            <view class="wall-list">
+              <view class="wall-item" wx:for="{{scrollPrimary}}" wx:key="loopKey">
+                <text class="wall-content">{{item.content}}</text>
+                <text class="wall-time">{{item.time}}</text>
+              </view>
+            </view>
+            <view class="wall-list" wx:if="{{wallScrollEnabled}}">
+              <view class="wall-item" wx:for="{{scrollSecondary}}" wx:key="loopKey">
+                <text class="wall-content">{{item.content}}</text>
+                <text class="wall-time">{{item.time}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
     </view>
 
     <!-- 返回地图 -->

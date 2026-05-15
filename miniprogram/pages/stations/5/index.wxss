@@ -196,8 +196,46 @@
   color: #C91F37;
   font-weight: 700;
 }
-.wall-list {
+.wall-viewport {
   height: 300rpx;
+  overflow: hidden;
+  position: relative;
+}
+.wall-state {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 40rpx;
+  box-sizing: border-box;
+}
+.wall-state text {
+  font-size: 26rpx;
+  color: #999;
+  text-align: center;
+  line-height: 1.5;
+}
+.wall-scroll-wrap {
+  height: 100%;
+  overflow: hidden;
+}
+.wall-scroll-inner {
+  will-change: transform;
+}
+.wall-scroll-animate {
+  animation-name: wallScrollUp;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+@keyframes wallScrollUp {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+.wall-list {
   padding: 20rpx 24rpx;
 }
 .wall-item {
