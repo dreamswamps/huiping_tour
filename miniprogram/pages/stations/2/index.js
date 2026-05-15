@@ -46,7 +46,7 @@ Page({
       longitude: 120.039
     });
     wx.navigateTo({
-      url: `plugin://route-plan/index?key=${key}&referer=${referer}&endPoint=${endPoint}&navigation=1`
+      url: `plugin://route-plan/index?key=${key}&referer=${referer}&endPoint=${endPoint}&mode=walking`
     });
   }
 });
