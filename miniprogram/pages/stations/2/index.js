@@ -34,5 +34,19 @@ Page({
   // 观看人物动画
   onAnimationPlay() {
     wx.showToast({ title: '正在播放《雪妹与雪泉》', icon: 'none' });
+  },
+
+  // 去这里 - 路线规划
+  onNavigate() {
+    const key = config.qqMapKey;
+    const referer = 'HPT传薪地图';
+    const endPoint = JSON.stringify({
+      name: '红军路',
+      latitude: 30.221,
+      longitude: 120.039
+    });
+    wx.navigateTo({
+      url: `plugin://route-plan/index?key=${key}&referer=${referer}&endPoint=${endPoint}&navigation=1`
+    });
   }
 });

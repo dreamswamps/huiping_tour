@@ -35,5 +35,19 @@ Page({
   // 传递薪火
   onPassTorch() {
     wx.showToast({ title: '举起手机感应传递…', icon: 'none' });
+  },
+
+  // 去这里 - 路线规划
+  onNavigate() {
+    const key = config.qqMapKey;
+    const referer = 'HPT传薪地图';
+    const endPoint = JSON.stringify({
+      name: '纪念碑',
+      latitude: 30.223,
+      longitude: 120.041
+    });
+    wx.navigateTo({
+      url: `plugin://route-plan/index?key=${key}&referer=${referer}&endPoint=${endPoint}&navigation=1`
+    });
   }
 });

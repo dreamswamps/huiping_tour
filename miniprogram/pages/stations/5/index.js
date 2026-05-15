@@ -81,6 +81,19 @@ Page({
     });
   },
 
+  onNavigate() {
+    const key = config.qqMapKey;
+    const referer = 'HPT传薪地图';
+    const endPoint = JSON.stringify({
+      name: '红军村',
+      latitude: 30.224,
+      longitude: 120.042
+    });
+    wx.navigateTo({
+      url: `plugin://route-plan/index?key=${key}&referer=${referer}&endPoint=${endPoint}&navigation=1`
+    });
+  },
+
   onInputDecl(e) {
     this.setData({ declarationText: e.detail.value });
   },

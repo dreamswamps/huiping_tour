@@ -56,10 +56,19 @@
   "style": "v2",
   "sitemapLocation": "sitemap.json",
   "lazyCodeLoading": "requiredComponents",
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于导航路线规划"
+    }
+  },
   "plugins": {
     "kivicube": {
       "version": "2.16.2",
       "provider": "wx3bbab3920eabccb2"
+    },
+    "route-plan": {
+      "version": "2.2.2",
+      "provider": "wx50b5593e81dd937a"
     }
   }
 }

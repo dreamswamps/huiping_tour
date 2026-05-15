@@ -38,5 +38,22 @@ Page({
   onPlayRadio() {
     // TODO: 跳转播放页面
     wx.showToast({ title: '正在播放《夜袭镇公所》', icon: 'none' });
+  },
+
+  // 去这里 - 路线规划到浙江外国语学院
+  onNavigate() {
+    const key = config.qqMapKey;
+    const referer = 'HPT传薪地图';
+
+    // 浙江外国语学院（小和山校区）坐标
+    const endPoint = JSON.stringify({
+      name: '浙江外国语学院',
+      latitude: 30.22075,
+      longitude: 120.038711
+    });
+
+    wx.navigateTo({
+      url: `plugin://route-plan/index?key=${key}&referer=${referer}&endPoint=${endPoint}&navigation=1`
+    });
   }
 });

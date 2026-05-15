@@ -214,6 +214,23 @@
   height: 44rpx;
 }
 
+/* ==================== 去这里导航按钮 ==================== */
+.nav-btn {
+  width: 636rpx;
+  height: 88rpx;
+  background: linear-gradient(274deg, #CE3B45 3%, #E4B983 46%, #CD3542 76%);
+  border-radius: 44rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 28rpx;
+}
+.nav-btn text {
+  font-size: 32rpx;
+  color: white;
+  font-weight: 700;
+}
+
 /* ==================== 返回地图按钮 ==================== */
 .back-map-btn {
   width: 636rpx;

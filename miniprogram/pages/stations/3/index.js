@@ -46,5 +46,19 @@ Page({
       title: '签署成功！',
       icon: 'success'
     });
+  },
+
+  // 去这里 - 路线规划
+  onNavigate() {
+    const key = config.qqMapKey;
+    const referer = 'HPT传薪地图';
+    const endPoint = JSON.stringify({
+      name: '党史馆',
+      latitude: 30.222,
+      longitude: 120.040
+    });
+    wx.navigateTo({
+      url: `plugin://route-plan/index?key=${key}&referer=${referer}&endPoint=${endPoint}&navigation=1`
+    });
   }
 });

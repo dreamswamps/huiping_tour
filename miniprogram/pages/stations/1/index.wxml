@@ -55,6 +55,11 @@
       <image class="play-icon" src="{{baseUrl}}/img/station1-play-arrow.svg" mode="aspectFit"></image>
     </view>
 
+    <!-- 去这里导航按钮 -->
+    <view class="nav-btn" bindtap="onNavigate">
+      <text>去这里</text>
+    </view>
+
     <!-- 返回地图 -->
     <view class="back-map-btn" bindtap="onBackToMap">
       <text>返回地图</text>
