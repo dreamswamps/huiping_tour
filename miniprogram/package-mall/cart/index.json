@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "mall-figma-tip": "../../pages/mall/components/mall-figma-tip/mall-figma-tip",
+    "mall-bottom-tab": "../../pages/mall/components/mall-bottom-tab/mall-bottom-tab"
+  },
+  "navigationStyle": "custom",
+  "navigationBarTitleText": ""
+}

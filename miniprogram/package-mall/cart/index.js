@@ -1,7 +1,7 @@
-const config = require('../../../config.js');
-const cartStorage = require('../../../utils/cartStorage.js');
-const { resolveMediaUrl } = require('../../../utils/resolveMediaUrl.js');
-const { getAuthHeaders, isUserLoggedIn } = require('../../../utils/auth.js');
+const config = require('../../config.js');
+const cartStorage = require('../../utils/cartStorage.js');
+const { resolveMediaUrl } = require('../../utils/resolveMediaUrl.js');
+const { getAuthHeaders, isUserLoggedIn } = require('../../utils/auth.js');
 
 function sumSelected(items) {
   return items.reduce((s, it) => {
@@ -139,7 +139,7 @@ Page({
         } catch (e) {
           wx.removeStorageSync('mall_checkout_ids');
         }
-        wx.navigateTo({ url: '/pages/mall/order/index' });
+        wx.navigateTo({ url: '/package-mall/order/index' });
       },
       fail: () => {
         wx.hideLoading();

@@ -1,5 +1,5 @@
-const config = require('../../../config');
-const { getAuthHeaders } = require('../../../utils/auth');
+const config = require('../../config');
+const { getAuthHeaders } = require('../../utils/auth');
 
 const STATUS_MAP = {
   0: { text: '待付款', cls: 'order-status--warn' },

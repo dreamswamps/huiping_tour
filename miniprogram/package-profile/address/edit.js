@@ -1,5 +1,5 @@
-const config = require('../../../config');
-const { getAuthHeaders } = require('../../../utils/auth');
+const config = require('../../config');
+const { getAuthHeaders } = require('../../utils/auth');
 
 Page({
   data: {

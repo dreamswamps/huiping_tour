@@ -68,7 +68,7 @@ Page({
     const price = e.currentTarget.dataset.price;
     const thumb = e.currentTarget.dataset.thumb || '';
     if (!id) return;
-    let url = `/pages/mall/detail/index?productId=${encodeURIComponent(id)}&price=${encodeURIComponent(price)}`;
+    let url = `/package-mall/detail/index?productId=${encodeURIComponent(id)}&price=${encodeURIComponent(price)}`;
     if (thumb) url += `&thumb=${encodeURIComponent(thumb)}`;
     wx.navigateTo({ url });
   },
@@ -122,12 +122,12 @@ Page({
       icon: `${baseUrl}/img/mall-prompt-settle.svg`,
       duration: 1600,
       onEnd: () => {
-        wx.navigateTo({ url: '/pages/mall/cart/index' });
+        wx.navigateTo({ url: '/package-mall/cart/index' });
       },
     });
   },
 
   onFabCart() {
-    wx.navigateTo({ url: '/pages/mall/cart/index' });
+    wx.navigateTo({ url: '/package-mall/cart/index' });
   },
 });

@@ -1,7 +1,7 @@
-const config = require('../../../config.js');
-const cartStorage = require('../../../utils/cartStorage.js');
-const { resolveMediaUrl } = require('../../../utils/resolveMediaUrl.js');
-const { getAuthHeaders, isUserLoggedIn } = require('../../../utils/auth.js');
+const config = require('../../config.js');
+const cartStorage = require('../../utils/cartStorage.js');
+const { resolveMediaUrl } = require('../../utils/resolveMediaUrl.js');
+const { getAuthHeaders, isUserLoggedIn } = require('../../utils/auth.js');
 
 function readCheckoutIds() {
   try {
@@ -50,7 +50,7 @@ Page({
   onAddAddress() {
     const { userId } = this.data;
     if (!userId) return;
-    wx.navigateTo({ url: '/pages/profile/address/edit' });
+    wx.navigateTo({ url: '/package-profile/address/edit' });
   },
 
   onPickAddress(e) {

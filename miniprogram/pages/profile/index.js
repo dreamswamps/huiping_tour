@@ -314,7 +314,7 @@ Page({
         wx.showToast({ title: '请先登录', icon: 'none' });
         return;
       }
-      wx.navigateTo({ url: '/pages/profile/info/index' });
+      wx.navigateTo({ url: '/package-profile/info/index' });
       return;
     }
     if (id === 2) {
@@ -326,7 +326,7 @@ Page({
         wx.showToast({ title: '请重新登录以更新授权', icon: 'none' });
         return;
       }
-      wx.navigateTo({ url: '/pages/profile/address/index' });
+      wx.navigateTo({ url: '/package-profile/address/index' });
       return;
     }
     if (id === 3) {
@@ -338,7 +338,7 @@ Page({
         wx.showToast({ title: '请重新登录以更新授权', icon: 'none' });
         return;
       }
-      wx.navigateTo({ url: '/pages/profile/orders/index' });
+      wx.navigateTo({ url: '/package-profile/orders/index' });
       return;
     }
     wx.showToast({ title: `待开发`, icon: 'none' });
@@ -347,7 +347,7 @@ Page({
   onFuncTap(e) {
     const { id } = e.currentTarget.dataset;
     if (id === 3) {
-      wx.navigateTo({ url: '/pages/benefits/index' });
+      wx.navigateTo({ url: '/package-other/benefits/index' });
     } else {
       wx.showToast({ title: `待开发`, icon: 'none' });
     }

@@ -1,27 +1,53 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/index/voice-guide/index",
-    "pages/index/liangtoudong/index",
-    "pages/index/baitadong/index",
-    "pages/index/dierquweijiuzhi/index",
     "pages/map/index",
     "pages/mall/index",
-    "pages/mall/detail/index",
-    "pages/mall/cart/index",
-    "pages/mall/order/index",
-    "pages/profile/index",
-    "pages/profile/info/index",
-    "pages/profile/address/index",
-    "pages/profile/address/edit",
-    "pages/profile/orders/index",
-    "pages/benefits/index",
-    "pages/stations/1/index",
-    "pages/stations/2/index",
-    "pages/stations/3/index",
-    "pages/stations/4/index",
-    "pages/stations/5/index",
-    "pages/cloudar/cloudar"
+    "pages/profile/index"
+  ],
+  "subpackages": [
+    {
+      "root": "package-guide",
+      "name": "guide",
+      "pages": [
+        "voice-guide/index",
+        "liangtoudong/index",
+        "baitadong/index",
+        "dierquweijiuzhi/index"
+      ]
+    },
+    {
+      "root": "package-mall",
+      "name": "mallSub",
+      "pages": [
+        "detail/index",
+        "cart/index",
+        "order/index"
+      ]
+    },
+    {
+      "root": "package-profile",
+      "name": "profileSub",
+      "pages": [
+        "info/index",
+        "address/index",
+        "address/edit",
+        "orders/index"
+      ]
+    },
+    {
+      "root": "package-other",
+      "name": "other",
+      "pages": [
+        "benefits/index",
+        "stations/1/index",
+        "stations/2/index",
+        "stations/3/index",
+        "stations/4/index",
+        "stations/5/index",
+        "cloudar/cloudar"
+      ]
+    }
   ],
   "window": {
     "backgroundTextStyle": "light",

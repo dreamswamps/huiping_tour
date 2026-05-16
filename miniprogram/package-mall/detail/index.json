@@ -1,6 +1,6 @@
 {
   "usingComponents": {
-    "mall-figma-tip": "../components/mall-figma-tip/mall-figma-tip"
+    "mall-figma-tip": "../../pages/mall/components/mall-figma-tip/mall-figma-tip"
   },
   "navigationStyle": "custom",
   "navigationBarTitleText": ""

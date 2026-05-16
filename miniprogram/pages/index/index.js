@@ -47,7 +47,7 @@ Page({
   },
 
   onScanTap() {
-    wx.navigateTo({ url: '/pages/cloudar/cloudar' });
+    wx.navigateTo({ url: '/package-other/cloudar/cloudar' });
   },
 
   onFuncCard(e) {
@@ -66,21 +66,21 @@ Page({
   },
 
   onVoiceGuide() {
-    wx.navigateTo({ url: '/pages/index/voice-guide/index' });
+    wx.navigateTo({ url: '/package-guide/voice-guide/index' });
   },
 
   onSpotDetail(e) {
     const title = e.currentTarget.dataset.title || '';
     if (title === '两头洞') {
-      wx.navigateTo({ url: '/pages/index/liangtoudong/index' });
+      wx.navigateTo({ url: '/package-guide/liangtoudong/index' });
       return;
     }
     if (title === '白塔洞') {
-      wx.navigateTo({ url: '/pages/index/baitadong/index' });
+      wx.navigateTo({ url: '/package-guide/baitadong/index' });
       return;
     }
     if (title === '中共衢遂寿中心县委第二区委旧址') {
-      wx.navigateTo({ url: '/pages/index/dierquweijiuzhi/index' });
+      wx.navigateTo({ url: '/package-guide/dierquweijiuzhi/index' });
       return;
     }
     wx.showToast({ title: title || '景点详情', icon: 'none' });

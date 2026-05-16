@@ -98,7 +98,7 @@ Page({
   onEnterStation(e) {
     const { id } = e.currentTarget.dataset;
     wx.navigateTo({
-      url: `/pages/stations/${id}/index?id=${id}`
+      url: `/package-other/stations/${id}/index?id=${id}`
     });
   }
 });

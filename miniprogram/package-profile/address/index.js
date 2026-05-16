@@ -1,5 +1,5 @@
-const config = require('../../../config');
-const { getAuthHeaders } = require('../../../utils/auth');
+const config = require('../../config');
+const { getAuthHeaders } = require('../../utils/auth');
 
 Page({
   data: {
@@ -58,13 +58,13 @@ Page({
       wx.showToast({ title: '请先登录', icon: 'none' });
       return;
     }
-    wx.navigateTo({ url: '/pages/profile/address/edit' });
+    wx.navigateTo({ url: '/package-profile/address/edit' });
   },
 
   onEdit(e) {
     const id = e.currentTarget.dataset.id;
     if (!id) return;
-    wx.navigateTo({ url: `/pages/profile/address/edit?id=${id}` });
+    wx.navigateTo({ url: `/package-profile/address/edit?id=${id}` });
   },
 
   onSetDefault(e) {

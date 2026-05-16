@@ -1,7 +1,7 @@
-const config = require('../../../config.js');
-const cartStorage = require('../../../utils/cartStorage.js');
-const { resolveMediaUrl } = require('../../../utils/resolveMediaUrl.js');
-const { isUserLoggedIn } = require('../../../utils/auth.js');
+const config = require('../../config.js');
+const cartStorage = require('../../utils/cartStorage.js');
+const { resolveMediaUrl } = require('../../utils/resolveMediaUrl.js');
+const { isUserLoggedIn } = require('../../utils/auth.js');
 
 function promptLoginThenProfile() {
   wx.showModal({
@@ -103,7 +103,7 @@ Page({
   },
 
   onFabCart() {
-    wx.navigateTo({ url: '/pages/mall/cart/index' });
+    wx.navigateTo({ url: '/package-mall/cart/index' });
   },
 
   showMallTip(opts) {
@@ -146,7 +146,7 @@ Page({
       icon: `${baseUrl}/img/mall-prompt-settle.svg`,
       duration: 1600,
       onEnd: () => {
-        wx.navigateTo({ url: '/pages/mall/cart/index' });
+        wx.navigateTo({ url: '/package-mall/cart/index' });
       },
     });
   },
@@ -154,7 +154,7 @@ Page({
   onShareAppMessage() {
     const { productId, detail } = this.data;
     const title = detail && detail.productName ? detail.productName : '商品详情';
-    let path = '/pages/mall/detail/index';
+    let path = '/package-mall/detail/index';
     if (productId) path += `?productId=${productId}`;
     return { title, path };
   },
