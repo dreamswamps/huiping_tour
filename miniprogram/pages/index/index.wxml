@@ -12,7 +12,7 @@
     >
       <swiper-item wx:for="{{bannerList}}" wx:key="id">
         <view class="banner-slide">
-          <image class="banner-hero-img" src="{{baseUrl}}/img/{{item.img}}" mode="aspectFill" />
+          <image class="banner-hero-img" src="{{item.img}}" mode="aspectFill" />
         </view>
       </swiper-item>
     </swiper>

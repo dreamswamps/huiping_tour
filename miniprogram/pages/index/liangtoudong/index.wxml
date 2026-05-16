@@ -4,7 +4,7 @@
     <view class="hero-wrap">
       <image
         class="hero"
-        src="{{baseUrl}}/img/homepage1.png"
+        src="https://free.picui.cn/free/2026/05/16/6a086d2561ca0.png"
         mode="aspectFill"
       />
       <view class="hero-safe" />

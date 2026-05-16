@@ -15,9 +15,14 @@
 
   <scroll-view class="vg-scroll" scroll-y enhanced show-scrollbar="{{false}}">
     <view class="vg-hero-wrap">
-      <image
+      <!-- <image
         class="vg-hero"
         src="{{baseUrl}}/img/voice-guide-hero.png"
+        mode="aspectFill"
+      /> -->
+        <image
+        class="vg-hero"
+        src="https://free.picui.cn/free/2026/05/16/6a086d33e44a7.png"
         mode="aspectFill"
       />
     </view>

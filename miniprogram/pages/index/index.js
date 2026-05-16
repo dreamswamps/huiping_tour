@@ -5,11 +5,11 @@ Page({
     baseUrl: config.baseUrl,
     swiperCurrent: 0,
     bannerList: [
-      { id: 'b0', img: 'turn-1.JPG' },
-      { id: 'b1', img: 'turn-2.JPG' },
-      { id: 'b2', img: 'turn-3.png' },
-      { id: 'b3', img: 'turn-4.png' },
-      { id: 'b4', img: 'turn-5.png' }
+      { id: 'b0', img: 'https://free.picui.cn/free/2026/05/16/6a086d31ce3fb.jpg' },
+      { id: 'b1', img: 'https://free.picui.cn/free/2026/05/16/6a086d3220a37.jpg' },
+      { id: 'b2', img: 'https://free.picui.cn/free/2026/05/16/6a086d327a2eb.png' },
+      { id: 'b3', img: 'https://free.picui.cn/free/2026/05/16/6a086d3270d2e.png' },
+      { id: 'b4', img: 'https://free.picui.cn/free/2026/05/16/6a086d333fd60.png' }
     ],
     spots: [
       { title: '两头洞', desc: '华东自然岩壁第一洞' , img: 'homepage1.png' },
