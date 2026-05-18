@@ -76,7 +76,7 @@
 
     <view class="spot-list">
       <view class="spot-item" wx:for="{{spots}}" wx:key="title" catchtap="onSpotDetail" data-title="{{item.title}}">
-        <image class="spot-bg" src="{{baseUrl}}/img/{{item.img}}" mode="aspectFill" />
+        <image class="spot-bg" src="{{item.img}}" mode="aspectFill" />
         <view class="spot-overlay">
           <text class="spot-name">{{item.title}}</text>
           <text class="spot-desc">{{item.desc}}</text>

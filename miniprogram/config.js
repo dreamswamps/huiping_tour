@@ -7,6 +7,7 @@ module.exports = {
   // 若你在 .env 里写了 PORT=5000，这里要改成 http://localhost:5000
   // baseUrl: 'http://www.weir123456.cloud:3000',
   baseUrl: 'https://weir123456.cloud',
+  // baseUrl: 'https://1b54b328.r31.cpolar.top',
 
   // 腾讯地图插件 Key（lbs 服务）
   qqMapKey: '37OBZ-T3YKC-ZOQ24-AQEFG-QJ3ST-ADFAU',
