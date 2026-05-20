@@ -5,7 +5,7 @@
 
   <!-- 返回首页按钮 -->
   <view class="back-home-btn" bindtap="onBackHome">
-    <image class="home-icon" src="{{baseUrl}}/img/station5-btn-home.svg" mode="aspectFit"></image>
+    <image class="home-icon" src="{{baseUrl}}/img/svgs/station5-btn-home.svg" mode="aspectFit"></image>
     <text>返回首页</text>
   </view>
 
@@ -46,7 +46,7 @@
         </view>
 
         <view class="publish-btn {{declarationText.length > 0 ? 'active' : ''}}" bindtap="onPublish">
-          <image wx:if="{{declarationText.length > 0}}" class="pub-btn-icon" src="{{baseUrl}}/img/station5-publish-icon.svg" mode="aspectFit"></image>
+          <image wx:if="{{declarationText.length > 0}}" class="pub-btn-icon" src="{{baseUrl}}/img/svgs/station5-publish-icon.svg" mode="aspectFit"></image>
           <text>发布传薪宣言</text>
         </view>
       </view>
@@ -91,8 +91,8 @@
     <!-- 打卡按钮 -->
     <view class="checkin-btn {{isCheckedIn ? 'checked' : ''}}" bindtap="onCheckIn">
       <view class="checkin-icon-wrap">
-        <image class="checkin-icon" src="{{baseUrl}}/img/checkin-icon.svg" mode="aspectFit"></image>
-        <image wx:if="{{isCheckedIn}}" class="checkin-checked-icon" src="{{baseUrl}}/img/checkin-checked.svg" mode="aspectFit"></image>
+        <image class="checkin-icon" src="{{baseUrl}}/img/svgs/checkin-icon.svg" mode="aspectFit"></image>
+        <image wx:if="{{isCheckedIn}}" class="checkin-checked-icon" src="{{baseUrl}}/img/svgs/checkin-checked.svg" mode="aspectFit"></image>
       </view>
       <text>{{isCheckedIn ? '已打卡' : '打卡'}}</text>
     </view>

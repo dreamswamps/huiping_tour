@@ -3,7 +3,7 @@
   <view class="map-header">
     <view class="header-row">
       <view class="back-home" bindtap="onBackHome">
-        <image class="back-home-icon" src="{{baseUrl}}/img/map-back.svg" mode="aspectFit" />
+        <image class="back-home-icon" src="{{baseUrl}}/img/svgs/map-back.svg" mode="aspectFit" />
         <text class="back-home-text">返回首页</text>
       </view>
     </view>
@@ -17,7 +17,7 @@
     <view class="map-canvas" style="height: {{canvasHeightRpx}}rpx;">
       <image
         class="map-routes"
-        src="{{baseUrl}}/img/map-shouxie-routes.svg"
+        src="{{baseUrl}}/img/svgs/map-shouxie-routes.svg"
         mode="aspectFill"
       />
 
@@ -28,7 +28,7 @@
         >
           <image
             class="card-thumb {{item.thumbShift ? 'card-thumb--shift-down' : ''}}"
-            src="{{baseUrl}}/img/{{item.thumb}}"
+            src="{{baseUrl}}/img/svgs/{{item.thumb}}"
             mode="aspectFit"
           />
           <text class="badge {{item.status === '进行中' ? 'badge--active' : ''}}">{{item.status}}</text>
@@ -37,7 +37,7 @@
             <text class="station-title">{{item.title}}</text>
             <view class="enter-row" catchtap="onEnterStation" data-id="{{item.id}}">
               <text class="enter-text">进入站点</text>
-              <image class="enter-arrow" src="{{baseUrl}}/img/map-enter-arrow-{{item.id}}.svg" mode="aspectFit" />
+              <image class="enter-arrow" src="{{baseUrl}}/img/svgs/map-enter-arrow-{{item.id}}.svg" mode="aspectFit" />
             </view>
           </view>
         </view>

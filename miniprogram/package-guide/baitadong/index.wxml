@@ -10,7 +10,7 @@
       <view class="hero-safe" />
       <image
         class="btn-back"
-        src="{{baseUrl}}/img/baitadong-back.svg"
+        src="{{baseUrl}}/img/svgs/baitadong-back.svg"
         mode="aspectFit"
         bindtap="onBack"
       />

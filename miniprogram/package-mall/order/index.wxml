@@ -2,7 +2,7 @@
   <view class="header">
     <view class="header-inner">
       <view class="header-bar">
-        <image class="header-back" src="{{baseUrl}}/img/mall-cart-back.svg" mode="aspectFit" bindtap="onBack" />
+        <image class="header-back" src="{{baseUrl}}/img/svgs/mall-cart-back.svg" mode="aspectFit" bindtap="onBack" />
         <text class="header-title">确认订单</text>
         <view class="header-placeholder" />
       </view>

@@ -3,7 +3,7 @@
   <view class="header">
     <view class="header-inner">
       <view class="header-bar">
-        <image class="header-back" src="{{baseUrl}}/img/mall-cart-back.svg" mode="aspectFit" bindtap="onBack" />
+        <image class="header-back" src="{{baseUrl}}/img/svgs/mall-cart-back.svg" mode="aspectFit" bindtap="onBack" />
         <text class="header-title">购物车</text>
         <view class="header-placeholder" />
       </view>
@@ -13,7 +13,7 @@
   <view wx:if="{{isEmpty}}" class="main main--empty">
     <view class="empty-visual">
       <view class="empty-circle">
-        <image class="empty-circle-icon" src="{{baseUrl}}/img/mall-fab-cart-icon.svg" mode="aspectFit" />
+        <image class="empty-circle-icon" src="{{baseUrl}}/img/svgs/mall-fab-cart-icon.svg" mode="aspectFit" />
       </view>
       <text class="empty-text">购物车是空的</text>
     </view>
@@ -36,7 +36,7 @@
             <view class="row-qty">
               <image
                 class="qty-btn"
-                src="{{baseUrl}}/img/mall-cart-minus.svg"
+                src="{{baseUrl}}/img/svgs/mall-cart-minus.svg"
                 mode="aspectFit"
                 catchtap="onMinus"
                 data-id="{{item.id}}"
@@ -44,7 +44,7 @@
               <text class="qty-num">{{item.quantity}}</text>
               <image
                 class="qty-btn"
-                src="{{baseUrl}}/img/mall-cart-plus.svg"
+                src="{{baseUrl}}/img/svgs/mall-cart-plus.svg"
                 mode="aspectFit"
                 catchtap="onPlus"
                 data-id="{{item.id}}"

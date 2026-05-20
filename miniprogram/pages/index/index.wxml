@@ -23,7 +23,7 @@
       <view class="arrow-hit arrow-hit-right" catchtap="onNextSlide" />
       <view class="banner-scan-wrap">
         <view class="banner-scan" catchtap="onScanTap">
-          <image class="banner-scan-icon" src="{{baseUrl}}/img/home-icon-scan.svg" mode="aspectFit" />
+          <image class="banner-scan-icon" src="{{baseUrl}}/img/svgs/home-icon-scan.svg" mode="aspectFit" />
         </view>
       </view>
     </view>
@@ -41,15 +41,15 @@
     <view class="func-cards-wrap">
       <view class="func-cards">
         <view class="func-card" catchtap="goMap">
-          <image class="card-img" src="{{baseUrl}}/img/card-map.svg" mode="aspectFit" />
+          <image class="card-img" src="{{baseUrl}}/img/svgs/card-map.svg" mode="aspectFit" />
           <text class="card-text">传薪地图</text>
         </view>
         <view class="func-card" catchtap="goToSubmodule" data-url="/package-other/cloudar/cloudar">
-          <image class="card-img" src="{{baseUrl}}/img/card-ar.svg" mode="aspectFit" />
+          <image class="card-img" src="{{baseUrl}}/img/svgs/card-ar.svg" mode="aspectFit" />
           <text class="card-text">AR扫描</text>
         </view>
         <view class="func-card" catchtap="onFuncCard" data-type="badge">
-          <image class="card-img" src="{{baseUrl}}/img/card-badge.svg" mode="aspectFit" />
+          <image class="card-img" src="{{baseUrl}}/img/svgs/card-badge.svg" mode="aspectFit" />
           <text class="card-text">我的徽章</text>
         </view>
       </view>
@@ -58,7 +58,7 @@
         <view class="voice-play">
           <text class="voice-tri">▶</text>
         </view>
-        <image class="voice-mic" src="{{baseUrl}}/img/home-icon-mic.svg" mode="aspectFit" />
+        <image class="voice-mic" src="{{baseUrl}}/img/svgs/home-icon-mic.svg" mode="aspectFit" />
         <text class="voice-text">语音导览</text>
       </view>
     </view>
@@ -70,7 +70,7 @@
       </view>
       <view class="section-more">
         <text class="section-more-text">下滑查看更多</text>
-        <image class="section-more-arrow" src="{{baseUrl}}/img/arrow-down.svg" mode="aspectFit" />
+        <image class="section-more-arrow" src="{{baseUrl}}/img/svgs/arrow-down.svg" mode="aspectFit" />
       </view>
     </view>
 
