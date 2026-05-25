@@ -31,7 +31,7 @@ function subtitleTags(subtitle) {
 
 Page({
   data: {
-    baseUrl: config.baseUrl,
+    baseUrl: config.baseUrl,svgsUrl: config.svgsUrl,
     loading: true,
     loadError: '',
     productId: null,

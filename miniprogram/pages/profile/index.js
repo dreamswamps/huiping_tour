@@ -2,7 +2,7 @@ const config = require('../../config');
 
 Page({
   data: {
-    baseUrl: config.baseUrl,
+    baseUrl: config.baseUrl,svgsUrl: config.svgsUrl,
 
     // 登录状态
     isLogin: false,

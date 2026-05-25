@@ -17,7 +17,7 @@ function promptLoginThenProfile() {
 
 Page({
   data: {
-    baseUrl: config.baseUrl,
+    baseUrl: config.baseUrl,svgsUrl: config.svgsUrl,
     products: [],
     loading: true,
     loadError: '',

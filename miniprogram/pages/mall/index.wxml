@@ -5,7 +5,7 @@
         <text class="hero-title">传薪茶社</text>
         <text class="hero-sub">品传薪茶，续红色魂</text>
         <view class="hero-deco">
-          <image class="hero-flame" src="{{baseUrl}}/img/svgs/mall-hero-spark.svg" mode="aspectFit" />
+          <image class="hero-flame" src="{{svgsUrl}}/svgs/svgs/mall-hero-spark.svg" mode="aspectFit" />
         </view>
       </view>
     </view>
@@ -18,9 +18,9 @@
 
       <view class="section-head">
         <view class="section-line" />
-        <image class="section-flame" src="{{baseUrl}}/img/svgs/mall-hero-spark.svg" mode="aspectFit" />
+        <image class="section-flame" src="{{svgsUrl}}/svgs/svgs/mall-hero-spark.svg" mode="aspectFit" />
         <text class="section-title">产品系列</text>
-        <image class="section-flame section-flame--flip" src="{{baseUrl}}/img/svgs/mall-hero-spark.svg" mode="aspectFit" />
+        <image class="section-flame section-flame--flip" src="{{svgsUrl}}/svgs/svgs/mall-hero-spark.svg" mode="aspectFit" />
         <view class="section-line" />
       </view>
 
@@ -67,7 +67,7 @@
       </view>
 
       <view class="page-footer">
-        <image class="footer-deco" src="{{baseUrl}}/img/svgs/mall-footer-deco.svg" mode="widthFix" />
+        <image class="footer-deco" src="{{svgsUrl}}/svgs/svgs/mall-footer-deco.svg" mode="widthFix" />
         <text class="footer-text">传薪茶社 · 品传薪茶，续红色魂</text>
       </view>
 
@@ -77,7 +77,7 @@
 
   <view class="fab-cart" bindtap="onFabCart">
     <view class="fab-inner">
-      <image class="fab-icon" src="{{baseUrl}}/img/svgs/mall-fab-cart-icon.svg" mode="aspectFit" />
+      <image class="fab-icon" src="{{svgsUrl}}/svgs/svgs/mall-fab-cart-icon.svg" mode="aspectFit" />
       <text class="fab-label">购物车</text>
     </view>
   </view>

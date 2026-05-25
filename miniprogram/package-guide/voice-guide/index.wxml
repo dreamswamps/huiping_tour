@@ -17,7 +17,7 @@
     <view class="vg-hero-wrap">
       <!-- <image
         class="vg-hero"
-        src="{{baseUrl}}/img/svgs/voice-guide-hero.png"
+        src="{{svgsUrl}}/svgs/svgs/voice-guide-hero.png"
         mode="aspectFill"
       /> -->
         <image

@@ -10,7 +10,7 @@
       <view class="hero-safe" />
       <image
         class="btn-back"
-        src="{{baseUrl}}/img/svgs/dierquweijiuzhi-back.svg"
+        src="{{svgsUrl}}/svgs/svgs/dierquweijiuzhi-back.svg"
         mode="aspectFit"
         bindtap="onBack"
       />

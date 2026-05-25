@@ -3,7 +3,7 @@ const { getAuthHeaders } = require('../../utils/auth');
 
 Page({
   data: {
-    baseUrl: config.baseUrl,
+    baseUrl: config.baseUrl,svgsUrl: config.svgsUrl,
     userId: null,
     list: [],
     loading: true,

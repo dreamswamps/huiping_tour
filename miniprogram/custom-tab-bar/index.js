@@ -3,7 +3,7 @@ const config = require('../config');
 
 Component({
   data: {
-    baseUrl: config.baseUrl,
+    baseUrl: config.baseUrl,svgsUrl: config.svgsUrl,
     selected: 0,
     list: [
       { pagePath: '/pages/index/index', text: '首页', icon: 'tab-home.svg' },

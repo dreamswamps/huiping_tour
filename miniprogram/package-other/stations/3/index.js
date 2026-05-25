@@ -48,7 +48,7 @@ function getCurrentLocation() {
 
 Page({
   data: {
-    baseUrl: config.baseUrl,
+    baseUrl: config.baseUrl,svgsUrl: config.svgsUrl,
     stationId: 3,
     stationNum: 'STATION 03',
     stationTitle: '淬火成钢',

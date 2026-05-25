@@ -5,7 +5,7 @@
 
   <!-- 返回首页按钮 -->
   <view class="back-home-btn" bindtap="onBackHome">
-    <image class="home-icon" src="{{baseUrl}}/img/svgs/station4-btn-home.svg" mode="aspectFit"></image>
+    <image class="home-icon" src="{{svgsUrl}}/svgs/svgs/station4-btn-home.svg" mode="aspectFit"></image>
     <text>返回首页</text>
   </view>
 
@@ -35,7 +35,7 @@
       </view>
       <text class="ar-desc">用手机扫描现场指定AR标识，在虚拟空间献上一束花，完成第四站打卡。</text>
       <view class="ar-btn" bindtap="onArFlower">
-        <image class="ar-btn-icon" src="{{baseUrl}}/img/svgs/station4-ar-flowericon.svg" mode="aspectFit"></image>
+        <image class="ar-btn-icon" src="{{svgsUrl}}/svgs/svgs/station4-ar-flowericon.svg" mode="aspectFit"></image>
         <text>献上虚拟花束·AR扫描</text>
       </view>
     </view>
@@ -43,7 +43,7 @@
     <!-- 薪火传递卡片 -->
     <view class="torch-card">
       <view class="torch-header">
-        <image class="torch-icon" src="{{baseUrl}}/img/svgs/station4-torch-icon.svg" mode="aspectFit"></image>
+        <image class="torch-icon" src="{{svgsUrl}}/svgs/svgs/station4-torch-icon.svg" mode="aspectFit"></image>
         <view class="torch-text-wrap">
           <text class="torch-title">传递薪火·点燃火炬</text>
           <text class="torch-hint">手机晃动感应，完成火炬传递</text>
@@ -51,7 +51,7 @@
       </view>
       <text class="torch-desc">举起手机，感应传递薪火火炬。当屏幕火焰从暗淡到明亮，意味着精神的传承已完成。</text>
       <view class="torch-btn" bindtap="onPassTorch">
-        <image class="torch-btn-icon" src="{{baseUrl}}/img/svgs/station4-torch-btnicon.svg" mode="aspectFit"></image>
+        <image class="torch-btn-icon" src="{{svgsUrl}}/svgs/svgs/station4-torch-btnicon.svg" mode="aspectFit"></image>
         <text>传递薪火</text>
       </view>
     </view>
@@ -60,8 +60,8 @@
     <view class="cert-card {{certUnlocked ? 'unlocked' : ''}}">
       <view class="cert-left">
         <view class="cert-icons">
-          <image class="cert-main-icon" src="{{baseUrl}}/img/svgs/station4-cert-main.svg" mode="aspectFit"></image>
-          <image class="cert-sub-icon" src="{{baseUrl}}/img/svgs/station4-cert-sub.svg" mode="aspectFit"></image>
+          <image class="cert-main-icon" src="{{svgsUrl}}/svgs/svgs/station4-cert-main.svg" mode="aspectFit"></image>
+          <image class="cert-sub-icon" src="{{svgsUrl}}/svgs/svgs/station4-cert-sub.svg" mode="aspectFit"></image>
         </view>
         <view class="cert-text-wrap">
           <text class="cert-title">传薪人证书</text>
@@ -69,7 +69,7 @@
         </view>
       </view>
       <view class="cert-status">
-        <image class="cert-lock-icon" src="{{baseUrl}}/img/svgs/station4-cert-lock.svg" mode="aspectFit"></image>
+        <image class="cert-lock-icon" src="{{svgsUrl}}/svgs/svgs/station4-cert-lock.svg" mode="aspectFit"></image>
         <text>{{certUnlocked ? '已解锁' : '待解锁'}}</text>
       </view>
     </view>
@@ -77,8 +77,8 @@
     <!-- 打卡按钮 -->
     <view class="checkin-btn {{isCheckedIn ? 'checked' : ''}}" bindtap="onCheckIn">
       <view class="checkin-icon-wrap">
-        <image class="checkin-icon" src="{{baseUrl}}/img/svgs/checkin-icon.svg" mode="aspectFit"></image>
-        <image wx:if="{{isCheckedIn}}" class="checkin-checked-icon" src="{{baseUrl}}/img/svgs/checkin-checked.svg" mode="aspectFit"></image>
+        <image class="checkin-icon" src="{{svgsUrl}}/svgs/svgs/checkin-icon.svg" mode="aspectFit"></image>
+        <image wx:if="{{isCheckedIn}}" class="checkin-checked-icon" src="{{svgsUrl}}/svgs/svgs/checkin-checked.svg" mode="aspectFit"></image>
       </view>
       <text>{{isCheckedIn ? '已打卡' : '打卡'}}</text>
     </view>

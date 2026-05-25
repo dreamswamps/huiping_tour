@@ -48,7 +48,7 @@ function getCurrentLocation() {
 
 Page({
   data: {
-    baseUrl: config.baseUrl,
+    baseUrl: config.baseUrl,svgsUrl: config.svgsUrl,
     stationId: 4,
     stationNum: 'STATION 04',
     stationTitle: '丰碑永铸',

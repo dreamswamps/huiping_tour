@@ -50,7 +50,7 @@ function mapOrderRow(o) {
 
 Page({
   data: {
-    baseUrl: config.baseUrl,
+    baseUrl: config.baseUrl,svgsUrl: config.svgsUrl,
     list: [],
     loading: true,
     loadError: '',

@@ -14,7 +14,7 @@ function readCheckoutIds() {
 
 Page({
   data: {
-    baseUrl: config.baseUrl,
+    baseUrl: config.baseUrl,svgsUrl: config.svgsUrl,
     userId: null,
     checkoutIds: [],
     lines: [],

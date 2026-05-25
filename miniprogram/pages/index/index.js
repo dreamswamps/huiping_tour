@@ -2,7 +2,7 @@ const config = require('../../config');
 
 Page({
   data: {
-    baseUrl: config.baseUrl,
+    baseUrl: config.baseUrl,svgsUrl: config.svgsUrl,
     swiperCurrent: 0,
     bannerList: [
       { id: 'b0', img: 'https://free.picui.cn/free/2026/05/16/6a086d31ce3fb.jpg' },

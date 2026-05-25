@@ -18,9 +18,9 @@
 
   <view class="nav-bar">
     <view class="nav-row">
-      <image class="nav-icon" src="{{baseUrl}}/img/svgs/mall-detail-back.svg" mode="aspectFit" bindtap="onBack" />
+      <image class="nav-icon" src="{{svgsUrl}}/svgs/svgs/mall-detail-back.svg" mode="aspectFit" bindtap="onBack" />
       <button class="nav-share-wrap" open-type="share" hover-class="none">
-        <image class="nav-icon" src="{{baseUrl}}/img/svgs/mall-detail-share.svg" mode="aspectFit" />
+        <image class="nav-icon" src="{{svgsUrl}}/svgs/svgs/mall-detail-share.svg" mode="aspectFit" />
       </button>
     </view>
   </view>
@@ -65,7 +65,7 @@
       </view>
 
       <view class="page-footer">
-        <image class="footer-deco" src="{{baseUrl}}/img/svgs/mall-footer-deco.svg" mode="widthFix" />
+        <image class="footer-deco" src="{{svgsUrl}}/svgs/svgs/mall-footer-deco.svg" mode="widthFix" />
         <text class="footer-text">传薪茶社 · 品传薪茶，续红色魂</text>
       </view>
 
@@ -80,7 +80,7 @@
   <view wx:if="{{detail && !loadError}}" class="detail-actions">
     <view class="detail-actions-inner">
       <view class="fab-cart fab-cart--inline" bindtap="onFabCart">
-        <image class="fab-icon" src="{{baseUrl}}/img/svgs/mall-fab-cart-icon.svg" mode="aspectFit" />
+        <image class="fab-icon" src="{{svgsUrl}}/svgs/svgs/mall-fab-cart-icon.svg" mode="aspectFit" />
         <text class="fab-label">购物车</text>
       </view>
       <view class="action-btn action-btn--cart" bindtap="onAddCart">

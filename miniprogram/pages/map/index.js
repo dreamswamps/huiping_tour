@@ -9,7 +9,7 @@ const CARD_H = (150 + 42) * S;
 
 Page({
   data: {
-    baseUrl: config.baseUrl,
+    baseUrl: config.baseUrl,svgsUrl: config.svgsUrl,
 
     /**
      * 手绘地图稿 GTd0dnRsWjR6WycqT789NG node 1:2

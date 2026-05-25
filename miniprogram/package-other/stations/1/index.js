@@ -48,7 +48,7 @@ function getCurrentLocation() {
 
 Page({
   data: {
-    baseUrl: config.baseUrl,
+    baseUrl: config.baseUrl,svgsUrl: config.svgsUrl,
     stationId: 1,
     stationNum: 'STATION 01',
     stationTitle: '星火初燃',

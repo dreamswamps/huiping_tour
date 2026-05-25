@@ -16,7 +16,7 @@ function allSelected(items) {
 
 Page({
   data: {
-    baseUrl: config.baseUrl,
+    baseUrl: config.baseUrl,svgsUrl: config.svgsUrl,
     items: [],
     selectAll: false,
     totalPrice: 0,

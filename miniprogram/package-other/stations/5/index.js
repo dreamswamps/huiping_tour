@@ -92,7 +92,7 @@ function calcScrollDuration(count) {
 
 Page({
   data: {
-    baseUrl: config.baseUrl,
+    baseUrl: config.baseUrl,svgsUrl: config.svgsUrl,
     stationId: 5,
     stationNum: 'STATION 05',
     stationTitle: '薪火续燃',

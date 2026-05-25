@@ -9,7 +9,7 @@ Component({
   },
 
   data: {
-    baseUrl: config.baseUrl,
+    baseUrl: config.baseUrl,svgsUrl: config.svgsUrl,
     list: [
       { pagePath: '/pages/index/index', text: '首页', icon: 'tab-home.svg' },
       { pagePath: '/pages/map/index', text: '传薪地图', icon: 'icon-map.svg' },
