@@ -346,10 +346,13 @@ Page({
 
   onFuncTap(e) {
     const { id } = e.currentTarget.dataset;
-    if (id === 3) {
+    if (id === 2) {
+      wx.navigateTo({ url: '/package-profile/badges/index' });
+    } else if (id === 3) {
       wx.navigateTo({ url: '/package-other/benefits/index' });
     } else {
-      wx.showToast({ title: `待开发`, icon: 'none' });
+      // wx.showToast({ title: `待开发`, icon: 'none' });
+      wx.switchTab({ url: '/pages/map/index' });
     }
   }
 });

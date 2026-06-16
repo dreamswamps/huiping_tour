@@ -1,18 +1,18 @@
-/* ==================== 页面容器 ==================== */
+/* ==================== 椤甸潰瀹瑰櫒 ==================== */
 .page {
   min-height: 100vh;
   background: #F8F5F0;
   position: relative;
 }
 
-/* ==================== 顶部背景 ==================== */
+/* ==================== 椤堕儴鑳屾櫙 ==================== */
 .top-bg {
   width: 100%;
   height: auto;
   display: block;
 }
 
-/* ==================== 返回首页按钮 ==================== */
+/* ==================== 杩斿洖棣栭〉鎸夐挳 ==================== */
 .back-home-btn {
   position: fixed;
   top: 44rpx;
@@ -36,7 +36,7 @@
   color: #C91F37;
 }
 
-/* ==================== 圆角内容面板 ==================== */
+/* ==================== 鍦嗚鍐呭闈㈡澘 ==================== */
 .content-panel {
   margin-top: -40rpx;
   background: #F8F5F0;
@@ -47,7 +47,7 @@
   z-index: 1;
 }
 
-/* ==================== 站点信息 ==================== */
+/* ==================== 绔欑偣淇℃伅 ==================== */
 .station-info {
   text-align: center;
   margin-bottom: 36rpx;
@@ -98,7 +98,7 @@
   font-family: 'Noto Sans SC', sans-serif;
 }
 
-/* ==================== AR扫描卡片 ==================== */
+/* ==================== AR鎵弿鍗＄墖 ==================== */
 .ar-card {
   background: white;
   border-radius: 40rpx;
@@ -157,8 +157,8 @@
   font-weight: 700;
 }
 
-/* ==================== 红色故事卡片 ==================== */
-.red-card {
+/* ==================== 绾㈣壊鏁呬簨鍗＄墖 ==================== */
+.radio-card {
   width: 100%;
   height: 184rpx;
   background: #A80101;
@@ -171,39 +171,39 @@
   margin-bottom: 28rpx;
   box-sizing: border-box;
 }
-.red-left {
+.radio-left {
   display: flex;
   align-items: center;
 }
-.red-icon-wrap {
+.radio-icon-wrap {
   width: 60rpx;
   height: 60rpx;
   position: relative;
   flex-shrink: 0;
 }
-.red-main-icon {
+.radio-main-icon {
   width: 56rpx;
   height: 56rpx;
 }
-.red-sub-icon {
+.radio-sub-icon {
   width: 54rpx;
   height: 54rpx;
   position: absolute;
   left: 6rpx;
   top: 6rpx;
 }
-.red-text-wrap {
+.radio-text-wrap {
   display: flex;
   flex-direction: column;
   margin-left: 24rpx;
 }
-.red-title {
+.radio-title {
   font-size: 30rpx;
   color: #F5E6C8;
   font-weight: 700;
   font-family: 'Noto Sans SC', sans-serif;
 }
-.red-sub {
+.radio-sub {
   font-size: 22rpx;
   color: #C8A87A;
   margin-top: 8rpx;
@@ -214,7 +214,7 @@
   height: 44rpx;
 }
 
-/* ==================== 打卡按钮 ==================== */
+/* ==================== 鎵撳崱鎸夐挳 ==================== */
 .checkin-btn {
   width: 636rpx;
   height: 100rpx;
@@ -253,7 +253,7 @@
   font-weight: 700;
 }
 
-/* ==================== 去这里导航按钮 ==================== */
+/* ==================== 鍘昏繖閲屽鑸寜閽?==================== */
 .nav-btn {
   width: 636rpx;
   height: 88rpx;
@@ -270,7 +270,7 @@
   font-weight: 700;
 }
 
-/* ==================== 返回地图按钮 ==================== */
+/* ==================== 杩斿洖鍦板浘鎸夐挳 ==================== */
 .back-map-btn {
   width: 636rpx;
   height: 88rpx;
@@ -285,4 +285,75 @@
 .back-map-btn text {
   font-size: 32rpx;
   color: #C91F37;
+}
+
+
+/* Playing state animation */
+.radio-card.playing {
+  box-shadow: 0 0 24rpx 8rpx rgba(168, 1, 1, 0.4), 0 8rpx 13rpx rgba(0, 0, 0, 0.25);
+  animation: radioPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes radioPulse {
+  0%, 100% { box-shadow: 0 0 20rpx 6rpx rgba(168, 1, 1, 0.3), 0 8rpx 13rpx rgba(0, 0, 0, 0.25); }
+  50% { box-shadow: 0 0 36rpx 12rpx rgba(168, 1, 1, 0.6), 0 8rpx 13rpx rgba(0, 0, 0, 0.25); }
+}
+
+/* Video card */
+.video-card {
+  width: 100%;
+  height: 160rpx;
+  background: #8B4513;
+  border-radius: 40rpx;
+  box-shadow: 0 8rpx 13rpx rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32rpx;
+  margin-bottom: 28rpx;
+  box-sizing: border-box;
+}
+.video-left {
+  display: flex;
+  align-items: center;
+}
+.video-icon-wrap {
+  width: 56rpx;
+  height: 56rpx;
+  background: rgba(255,255,255,0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.video-icon-wrap .video-play-icon {
+  width: 28rpx;
+  height: 28rpx;
+  margin-left: 4rpx;
+}
+.video-text-wrap {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20rpx;
+}
+.video-title {
+  font-size: 28rpx;
+  color: #F5E6C8;
+  font-weight: 700;
+  font-family: 'Noto Sans SC', sans-serif;
+}
+.video-sub {
+  font-size: 22rpx;
+  color: #C8A87A;
+  margin-top: 6rpx;
+  font-family: 'Noto Sans SC', sans-serif;
+}
+.video-arrow {
+  width: 44rpx;
+  height: 44rpx;
+}
+.video-arrow-icon {
+  width: 100%;
+  height: 100%;
 }

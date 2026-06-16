@@ -1,6 +1,13 @@
 <!-- 中共衢遂寿中心县委第二区委旧址 · Figma 9MYxTcRZCTWlumWzZ3UxS3 node 2:100 -->
 <view class="page">
-  <scroll-view class="scroll" scroll-y enhanced show-scrollbar="{{false}}">
+  <view class="nav-bar">
+    <view class="back-btn" catchtap="onBack">
+      <image class="back-icon" src="{{svgsUrl}}/svgs/svgs/benefits-back-arrow.svg" mode="aspectFit"></image>
+      <text class="back-text">返回</text>
+    </view>
+  </view>
+
+    <scroll-view class="scroll" scroll-y enhanced show-scrollbar="{{false}}">
     <view class="hero-wrap">
       <image
         class="hero"
@@ -8,13 +15,7 @@
         mode="aspectFill"
       />
       <view class="hero-safe" />
-      <image
-        class="btn-back"
-        src="{{svgsUrl}}/svgs/svgs/dierquweijiuzhi-back.svg"
-        mode="aspectFit"
-        bindtap="onBack"
-      />
-    </view>
+          </view>
 
     <view class="panel">
       <view class="content">

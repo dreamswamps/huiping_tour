@@ -62,7 +62,8 @@
 
       <!-- 署名提示 -->
       <view class="pledge-hint {{hasSigned ? 'signed' : ''}}">
-        <text>{{hasSigned ? '✅ 已完成署名 · 感谢您的守护' : '点击"签署承诺书"填写您的署名'}}</text>
+        <text wx:if="{{!hasSigned}}">点击"签署承诺书"填写您的署名</text>
+        <text wx:else>✍ 已签署 · 感谢您 {{signedName}} 的守护</text>
       </view>
 
       <!-- 签署按钮 -->

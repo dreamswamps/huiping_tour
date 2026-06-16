@@ -102,3 +102,32 @@
 .bottom-pad {
   height: calc(230rpx + env(safe-area-inset-bottom));
 }
+
+.nav-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 20rpx 22rpx 16rpx;
+  padding-top: calc(20rpx + env(safe-area-inset-top));
+  z-index: 100;
+}
+.back-btn {
+  display: flex;
+  align-items: center;
+  width: 192rpx;
+  height: 82rpx;
+  background: rgba(255,255,255,0.9);
+  border-radius: 30rpx;
+  padding-left: 28rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.1);
+}
+.back-icon {
+  width: 26rpx;
+  height: 26rpx;
+}
+.back-text {
+  margin-left: 18rpx;
+  font-size: 32rpx;
+  color: #333;
+}

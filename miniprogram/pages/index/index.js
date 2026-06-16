@@ -56,12 +56,13 @@ Page({
   },
 
   onFuncCard(e) {
-    const type = e.currentTarget.dataset.type;
-    if (type === 'badge') {
-      wx.showToast({ title: '我的徽章', icon: 'none' });
-      return;
-    }
-    wx.showToast({ title: '敬请期待', icon: 'none' });
+    // const type = e.currentTarget.dataset.type;
+    // if (type === 'badge') {
+    //   wx.showToast({ title: '我的徽章', icon: 'none' });
+    //   return;
+    // }
+    // wx.showToast({ title: '敬请期待', icon: 'none' });
+    wx.navigateTo({ url: '/package-profile/badges/index' });
   },
 
   goToSubmodule(e) {

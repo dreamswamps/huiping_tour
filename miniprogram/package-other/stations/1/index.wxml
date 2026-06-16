@@ -27,13 +27,13 @@
     <!-- 点亮初心火种卡片 -->
     <view class="ar-card">
       <view class="ar-header">
-        <text class="ar-icon">✨</text>
+        <text class="ar-icon">✦</text>
         <view class="ar-title-wrap">
           <text class="ar-title">点亮初心火种</text>
           <text class="ar-sub">AR扫描体验·互动点亮</text>
         </view>
       </view>
-      <text class="ar-desc">用手机扫描现场指定AR标识，手指触碰屏幕中的金色火种，将它点亮，完成第一站打卡。</text>
+      <text class="ar-desc">用手机扫描现场指定AR标识，手指触摸屏幕中的金色火种，将它点亮，完成第一站打卡。</text>
       <view class="ar-btn" bindtap="onArScan">
         <image class="ar-btn-icon" src="{{svgsUrl}}/svgs/svgs/station1-ar-flame.svg" mode="aspectFit"></image>
         <text>点亮初心火种·AR扫描</text>
@@ -41,7 +41,7 @@
     </view>
 
     <!-- 收听广播剧卡片 -->
-    <view class="radio-card" bindtap="onPlayRadio">
+    <view class="radio-card {{isPlaying ? 'playing' : ''}}" bindtap="onPlayRadio">
       <view class="radio-left">
         <view class="radio-icon-wrap">
           <image class="radio-main-icon" src="{{svgsUrl}}/svgs/svgs/station1-card-radio.svg" mode="aspectFit"></image>
@@ -52,7 +52,7 @@
           <text class="radio-sub">《夜袭镇公所》· 革命故事</text>
         </view>
       </view>
-      <image class="play-icon" src="{{svgsUrl}}/svgs/svgs/station1-play-arrow.svg" mode="aspectFit"></image>
+      <image class="play-icon" src="{{isPlaying ? svgsUrl + '/svgs/svgs/station1-pause.svg' : svgsUrl + '/svgs/svgs/station1-play-arrow.svg'}}" mode="aspectFit"></image>
     </view>
 
     <!-- 打卡按钮 -->

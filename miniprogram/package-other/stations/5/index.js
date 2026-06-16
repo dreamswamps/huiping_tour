@@ -98,6 +98,8 @@ Page({
     stationTitle: '薪火续燃',
     stationName: '红军村',
     stationDesc: '红军村是传薪之旅的终点，也是新的起点。在这里发布您的传薪宣言，让革命精神在您手中继续燃烧，让新的火焰照亮未来的征程。',
+    isPlaying: false,
+    audioSrc: "",
     declarationText: '',
     maxLen: 50,
     declarations: [],
@@ -116,6 +118,14 @@ Page({
       this.setData({ stationId: options.id });
     }
     this.loadDeclarations();
+    this.setData({ audioSrc: config.svgsUrl + "/media/5.MP3" });
+    this.innerAudioContext = wx.createInnerAudioContext();
+    this.innerAudioContext.onError(() => { this.setData({ isPlaying: false }); });
+    this.innerAudioContext.onEnded(() => { this.setData({ isPlaying: false }); });
+  },
+
+  onUnload() {
+    if (this.innerAudioContext) { this.innerAudioContext.stop(); this.innerAudioContext.destroy(); this.innerAudioContext = null; }
   },
 
   onBackToMap() {
@@ -126,6 +136,17 @@ Page({
     wx.switchTab({
       url: '/pages/index/index',
     });
+  },
+
+  onPlayRadio() {
+    if (this.data.isPlaying) {
+      this.innerAudioContext.pause();
+      this.setData({ isPlaying: false });
+    } else {
+      this.innerAudioContext.src = this.data.audioSrc;
+      this.innerAudioContext.play();
+      this.setData({ isPlaying: true });
+    }
   },
 
   onNavigate() {

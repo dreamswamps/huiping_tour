@@ -54,6 +54,8 @@ Page({
     stationTitle: '丰碑永铸',
     stationName: '纪念碑',
     stationDesc: '这座巍峨的纪念碑，承载着无数先烈的英魂。他们用生命铸就了民族的丰碑，用鲜血染红了共和国的旗帜。在此献花致敬，传递革命火把，让精神永续长燃。',
+    isPlaying: false,
+    audioSrc: "",
     certUnlocked: false,
     isCheckedIn: false
   },
@@ -62,6 +64,14 @@ Page({
     if (options && options.id) {
       this.setData({ stationId: options.id });
     }
+    this.setData({ audioSrc: config.svgsUrl + "/media/4.MP3" });
+    this.innerAudioContext = wx.createInnerAudioContext();
+    this.innerAudioContext.onError(() => { this.setData({ isPlaying: false }); });
+    this.innerAudioContext.onEnded(() => { this.setData({ isPlaying: false }); });
+  },
+
+  onUnload() {
+    if (this.innerAudioContext) { this.innerAudioContext.stop(); this.innerAudioContext.destroy(); this.innerAudioContext = null; }
   },
 
   onBackToMap() {
@@ -85,6 +95,17 @@ Page({
   },
 
   // 去这里 - 路线规划
+  onPlayRadio() {
+    if (this.data.isPlaying) {
+      this.innerAudioContext.pause();
+      this.setData({ isPlaying: false });
+    } else {
+      this.innerAudioContext.src = this.data.audioSrc;
+      this.innerAudioContext.play();
+      this.setData({ isPlaying: true });
+    }
+  },
+
   onNavigate() {
     const key = config.qqMapKey;
     const referer = 'HPT传薪地图';

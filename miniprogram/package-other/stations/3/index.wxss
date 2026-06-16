@@ -333,3 +333,72 @@
   font-size: 32rpx;
   color: #C91F37;
 }
+
+
+/* Radio card styles */
+.radio-card {
+  width: 100%;
+  height: 184rpx;
+  background: #A80101;
+  border-radius: 40rpx;
+  box-shadow: 0 8rpx 13rpx rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32rpx;
+  margin-bottom: 28rpx;
+  box-sizing: border-box;
+}
+.radio-left {
+  display: flex;
+  align-items: center;
+}
+.radio-icon-wrap {
+  width: 60rpx;
+  height: 60rpx;
+  position: relative;
+  flex-shrink: 0;
+}
+.radio-main-icon {
+  width: 56rpx;
+  height: 56rpx;
+}
+.radio-sub-icon {
+  width: 54rpx;
+  height: 54rpx;
+  position: absolute;
+  left: 6rpx;
+  top: 6rpx;
+}
+.radio-text-wrap {
+  display: flex;
+  flex-direction: column;
+  margin-left: 24rpx;
+}
+.radio-title {
+  font-size: 30rpx;
+  color: #F5E6C8;
+  font-weight: 700;
+  font-family: 'Noto Sans SC', sans-serif;
+}
+.radio-sub {
+  font-size: 22rpx;
+  color: #C8A87A;
+  margin-top: 8rpx;
+  font-family: 'Noto Sans SC', sans-serif;
+}
+.play-icon {
+  width: 44rpx;
+  height: 44rpx;
+}
+
+/* Playing state animation */
+.radio-card.playing {
+  box-shadow: 0 0 24rpx 8rpx rgba(168, 1, 1, 0.4), 0 8rpx 13rpx rgba(0, 0, 0, 0.25);
+  animation: radioPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes radioPulse {
+  0%, 100% { box-shadow: 0 0 20rpx 6rpx rgba(168, 1, 1, 0.3), 0 8rpx 13rpx rgba(0, 0, 0, 0.25); }
+  50% { box-shadow: 0 0 36rpx 12rpx rgba(168, 1, 1, 0.6), 0 8rpx 13rpx rgba(0, 0, 0, 0.25); }
+}
