@@ -1,14 +1,7 @@
-<kivicube-scene
-  class="kivicube"
-  scene-id="9tOfn9Ugj0ShnB60oR47jSG3236pOI2j"
-  bindready="ready"
-  binderror="error"
-  binddownloadAssetStart="downloadStart"
-  binddownloadAssetProgress="downloadProgress"
-  binddownloadAssetEnd="downloadEnd"
-  bindloadSceneStart="loadStart"
-  bindloadSceneEnd="loadEnd"
-  bindsceneStart="sceneStart"
-  bindopenUrl="openUrl"
-  bindphoto="photo"
-/>
+<!-- AR扫描页 — 需要 kivicube 插件 -->
+<view class="page" style="display:flex;align-items:center;justify-content:center;height:100vh;background:#F8F5F0;">
+  <view style="text-align:center;padding:40px;">
+    <text style="font-size:36rpx;color:#333;display:block;margin-bottom:20rpx;">📷 AR 扫描</text>
+    <text style="font-size:26rpx;color:#999;">请在微信公众平台配置 kivicube 插件后使用</text>
+  </view>
+</view>

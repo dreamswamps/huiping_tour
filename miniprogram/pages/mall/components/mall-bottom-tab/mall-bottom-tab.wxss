@@ -28,11 +28,13 @@
 }
 
 .tab-item:not(.active) .tab-icon {
-  filter: brightness(0) saturate(100%) invert(84%) sepia(6%) saturate(416%) hue-rotate(3deg) brightness(92%) contrast(88%);
+  filter: brightness(0) saturate(100%) invert(84%) sepia(6%) saturate(416%)
+    hue-rotate(3deg) brightness(92%) contrast(88%);
 }
 
 .tab-item.active .tab-icon {
-  filter: brightness(0) saturate(100%) invert(27%) sepia(95%) saturate(6000%) hue-rotate(355deg) brightness(85%) contrast(112%);
+  filter: brightness(0) saturate(100%) invert(27%) sepia(95%) saturate(6000%)
+    hue-rotate(355deg) brightness(85%) contrast(112%);
 }
 
 .tab-text {

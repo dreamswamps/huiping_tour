@@ -1,15 +1,14 @@
-const { downloadSceneAsset, clearSceneCache } = requirePlugin("kivicube");
+// kivicube 插件需要在 app.json plugins 中配置，并在微信公众平台添加插件
+// 当前插件未配置，AR 功能暂不可用
+// 如需启用：1) 微信公众平台添加 kivicube 插件 2) app.json plugins 中声明
 
 Page({
   onLoad() {
-    /*
-    如果需要提前下载好场景素材，则可自行调用downloadSceneAsset方法。
-    downloadSceneAsset("9vR08tpLesfKVWs2XbbnNKSsX3JqpaAp", (progress) => {
-      console.log("progress", progress);
-    }).then(() => {
-      // 使kivicube-scene组件attached进入页面节点树。比如wx:if为真
+    wx.showModal({
+      title: "AR扫描",
+      content: "AR 功能需要配置 kivicube 插件后才能使用",
+      showCancel: false,
     });
-  */
   },
   ready({ detail: { sceneInfo } }) {
     console.log("当前场景基础信息", sceneInfo);

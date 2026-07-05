@@ -1,11 +1,11 @@
-const config = require('../../config');
+const config = require("../../config");
 
 Page({
   data: {
-    baseUrl: config.baseUrl
+    baseUrl: config.baseUrl,
   },
 
   onBack() {
     wx.navigateBack({ delta: 1 });
-  }
+  },
 });

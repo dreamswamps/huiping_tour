@@ -118,10 +118,10 @@
   align-items: center;
   width: 192rpx;
   height: 82rpx;
-  background: rgba(255,255,255,0.9);
+  background: rgba(255, 255, 255, 0.9);
   border-radius: 30rpx;
   padding-left: 28rpx;
-  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.1);
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
 }
 .back-icon {
   width: 26rpx;

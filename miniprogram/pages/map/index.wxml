@@ -13,6 +13,25 @@
     </view>
   </view>
 
+  <view class="map-illustration">
+    <swiper
+      class="map-swiper"
+      autoplay
+      interval="{{6000}}"
+      circular
+      indicator-dots
+      indicator-color="rgba(255,255,255,0.5)"
+      indicator-active-color="#c91f37"
+    >
+      <swiper-item>
+        <image class="map-illustration-img" src="/images/map1.png" mode="aspectFit" />
+      </swiper-item>
+      <swiper-item>
+        <image class="map-illustration-img" src="/images/map2.png" mode="aspectFit" />
+      </swiper-item>
+    </swiper>
+  </view>
+
   <scroll-view class="map-scroll" scroll-y enhanced show-scrollbar="{{false}}">
     <view class="map-canvas" style="height: {{canvasHeightRpx}}rpx;">
       <image

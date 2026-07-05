@@ -67,6 +67,25 @@
   color: #5c3a21;
 }
 
+.map-illustration {
+  flex-shrink: 0;
+  padding: 32rpx 28rpx 24rpx;
+  box-sizing: border-box;
+}
+
+.map-swiper {
+  width: 100%;
+  height: 420rpx;
+  border-radius: 24rpx;
+  box-shadow: 0 6rpx 24rpx rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.map-illustration-img {
+  width: 100%;
+  height: 100%;
+}
+
 .map-scroll {
   flex: 1;
   height: 0;

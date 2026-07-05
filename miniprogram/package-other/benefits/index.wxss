@@ -1,7 +1,7 @@
 /* ==================== 页面容器 ==================== */
 .page {
   min-height: 100vh;
-  background: #F8F5F0;
+  background: #f8f5f0;
   overflow: hidden;
 }
 
@@ -17,7 +17,7 @@
   align-items: center;
   width: 192rpx;
   height: 82rpx;
-  background: #F5E4E1;
+  background: #f5e4e1;
   border-radius: 30rpx;
   padding-left: 28rpx;
 }
@@ -28,7 +28,7 @@
 .back-text {
   margin-left: 18rpx;
   font-size: 32rpx;
-  color: #C91F37;
+  color: #c91f37;
   font-weight: 400;
 }
 
@@ -38,7 +38,7 @@
   text-align: center;
   font-size: 40rpx;
   font-weight: 700;
-  color: #C91F37;
+  color: #c91f37;
   margin-top: 8rpx;
 }
 
@@ -46,7 +46,7 @@
 .benefit-card {
   margin: 0 22rpx;
   height: 450rpx;
-  background: linear-gradient(149deg, #C21E35 0%, #881728 50%, #59301F 100%);
+  background: linear-gradient(149deg, #c21e35 0%, #881728 50%, #59301f 100%);
   border-radius: 40rpx;
   box-shadow: 0rpx 8rpx 31rpx rgba(7D1818, 0.59);
   padding: 52rpx 24rpx 24rpx;
@@ -70,9 +70,9 @@
 .card-name {
   font-size: 40rpx;
   font-weight: 900;
-  color: #FFFFFF;
+  color: #ffffff;
   margin-top: 8rpx;
-  font-family: 'Noto Sans SC', sans-serif;
+  font-family: "Noto Sans SC", sans-serif;
 }
 .card-holder {
   font-size: 24rpx;
@@ -106,7 +106,7 @@
 .coupon-title {
   font-size: 32rpx;
   font-weight: 700;
-  color: #5C3A21;
+  color: #5c3a21;
   margin-left: 10rpx;
 }
 
@@ -124,7 +124,7 @@
   align-items: stretch;
   width: 100%;
   box-sizing: border-box;
-  background: #FFFFFF;
+  background: #ffffff;
   border-radius: 40rpx;
   border: 2rpx solid rgba(201, 31, 55, 0.5);
   margin-bottom: 22rpx;
@@ -137,7 +137,7 @@
   width: 28%;
   min-width: 168rpx;
   max-width: 220rpx;
-  background: linear-gradient(136deg, #A80101 0%, #420000 100%);
+  background: linear-gradient(136deg, #a80101 0%, #420000 100%);
   border-top-left-radius: 40rpx;
   border-bottom-left-radius: 40rpx;
   display: flex;
@@ -150,12 +150,12 @@
 .tag-value {
   font-size: 40rpx;
   font-weight: 900;
-  color: #E6C288;
-  font-family: 'Noto Sans SC', sans-serif;
+  color: #e6c288;
+  font-family: "Noto Sans SC", sans-serif;
 }
 .tag-type {
   font-size: 24rpx;
-  color: #FFFFFF;
+  color: #ffffff;
   margin-top: 6rpx;
 }
 
@@ -185,13 +185,13 @@
 .detail-desc {
   display: block;
   font-size: 26rpx;
-  color: #9E9E9E;
+  color: #9e9e9e;
   margin-top: 5rpx;
 }
 .detail-expiry {
   display: block;
   font-size: 26rpx;
-  color: #BDBDBD;
+  color: #bdbdbd;
   margin-top: 5rpx;
 }
 
@@ -200,7 +200,7 @@
   width: 132rpx;
   height: 60rpx;
   margin-left: 16rpx;
-  background: #C91F37;
+  background: #c91f37;
   border-radius: 20rpx;
   display: flex;
   align-items: center;
@@ -210,7 +210,7 @@
 .claim-btn text {
   font-size: 24rpx;
   font-weight: 700;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 /* ==================== 底部安全距离 ==================== */

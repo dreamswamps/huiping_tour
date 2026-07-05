@@ -5,8 +5,9 @@
 module.exports = {
   // 须与后端监听端口一致（server/app.js：process.env.PORT || 3000）
   // 若你在 .env 里写了 PORT=5000，这里要改成 http://localhost:5000
-  baseUrl: 'http://8.145.56.49',
-  svgsUrl: 'https://svgs1.oss-cn-beijing.aliyuncs.com',
+  // 云服务器（外网可访问）
+  baseUrl: "http://110.40.187.34:3000",
+  svgsUrl: "https://svgs1.oss-cn-beijing.aliyuncs.com",
   // 腾讯地图插件 Key（lbs 服务）
-  qqMapKey: '37OBZ-T3YKC-ZOQ24-AQEFG-QJ3ST-ADFAU',
+  qqMapKey: "37OBZ-T3YKC-ZOQ24-AQEFG-QJ3ST-ADFAU",
 };

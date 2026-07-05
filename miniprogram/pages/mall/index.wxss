@@ -14,12 +14,7 @@
 .hero {
   padding-top: calc(env(safe-area-inset-top) + 48rpx);
   padding-bottom: 72rpx;
-  background: linear-gradient(
-    180deg,
-    #3d0a14 0%,
-    #6b1a1f 45%,
-    #8b3828 100%
-  );
+  background: linear-gradient(180deg, #3d0a14 0%, #6b1a1f 45%, #8b3828 100%);
 }
 
 .hero-inner {
@@ -35,7 +30,9 @@
   color: #c8161d;
   letter-spacing: 0.12em;
   line-height: 1.45;
-  text-shadow: 0 4rpx 24rpx rgba(0, 0, 0, 0.45), 0 0 48rpx rgba(200, 22, 29, 0.35);
+  text-shadow:
+    0 4rpx 24rpx rgba(0, 0, 0, 0.45),
+    0 0 48rpx rgba(200, 22, 29, 0.35);
 }
 
 .hero-sub {

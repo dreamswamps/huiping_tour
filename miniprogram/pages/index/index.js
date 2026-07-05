@@ -1,15 +1,31 @@
-const config = require('../../config');
+const config = require("../../config");
 
 Page({
   data: {
-    baseUrl: config.baseUrl,svgsUrl: config.svgsUrl,
+    baseUrl: config.baseUrl,
+    svgsUrl: config.svgsUrl,
     swiperCurrent: 0,
     bannerList: [
-      { id: 'b0', img: 'https://free.picui.cn/free/2026/05/16/6a086d31ce3fb.jpg' },
-      { id: 'b1', img: 'https://free.picui.cn/free/2026/05/16/6a086d3220a37.jpg' },
-      { id: 'b2', img: 'https://free.picui.cn/free/2026/05/16/6a086d327a2eb.png' },
-      { id: 'b3', img: 'https://free.picui.cn/free/2026/05/16/6a086d3270d2e.png' },
-      { id: 'b4', img: 'https://free.picui.cn/free/2026/05/16/6a086d333fd60.png' }
+      {
+        id: "b0",
+        img: "https://free.picui.cn/free/2026/05/16/6a086d31ce3fb.jpg",
+      },
+      {
+        id: "b1",
+        img: "https://free.picui.cn/free/2026/05/16/6a086d3220a37.jpg",
+      },
+      {
+        id: "b2",
+        img: "https://free.picui.cn/free/2026/05/16/6a086d327a2eb.png",
+      },
+      {
+        id: "b3",
+        img: "https://free.picui.cn/free/2026/05/16/6a086d3270d2e.png",
+      },
+      {
+        id: "b4",
+        img: "https://free.picui.cn/free/2026/05/16/6a086d333fd60.png",
+      },
     ],
     // spots: [
     //   { title: '两头洞', desc: '华东自然岩壁第一洞' , img: 'homepage1.png' },
@@ -17,23 +33,35 @@ Page({
     //   { title: '中共衢遂寿中心县委第二区委旧址', desc: '光荣革命传统的圣地', img: 'homepage3.png' }
     // ]
     spots: [
-      { title: '两头洞', desc: '华东自然岩壁第一洞' , img: 'https://free.picui.cn/free/2026/05/16/6a086d2561ca0.png' },
-      { title: '白塔洞', desc: '位于灰坪乡杜家田村以西，洞崖滴水，常年不绝', img: 'https://free.picui.cn/free/2026/05/16/6a086d2564bd3.png' },
-      { title: '中共衢遂寿中心县委第二区委旧址', desc: '光荣革命传统的圣地', img: 'https://free.picui.cn/free/2026/05/16/6a086d27176a5.png' }
-    ]
+      {
+        title: "两头洞",
+        desc: "华东自然岩壁第一洞",
+        img: "https://free.picui.cn/free/2026/05/16/6a086d2561ca0.png",
+      },
+      {
+        title: "白塔洞",
+        desc: "位于灰坪乡杜家田村以西，洞崖滴水，常年不绝",
+        img: "https://free.picui.cn/free/2026/05/16/6a086d2564bd3.png",
+      },
+      {
+        title: "中共衢遂寿中心县委第二区委旧址",
+        desc: "光荣革命传统的圣地",
+        img: "https://free.picui.cn/free/2026/05/16/6a086d27176a5.png",
+      },
+    ],
   },
 
   onLoad() {},
 
   onShow() {
-    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
+    if (typeof this.getTabBar === "function" && this.getTabBar()) {
       this.getTabBar().setData({ selected: 0 });
     }
   },
 
   onSwiperChange(e) {
     this.setData({
-      swiperCurrent: e.detail.current
+      swiperCurrent: e.detail.current,
     });
   },
 
@@ -52,7 +80,7 @@ Page({
   },
 
   onScanTap() {
-    wx.navigateTo({ url: '/package-other/cloudar/cloudar' });
+    wx.showToast({ title: "AR功能需授权后使用", icon: "none" });
   },
 
   onFuncCard(e) {
@@ -62,7 +90,7 @@ Page({
     //   return;
     // }
     // wx.showToast({ title: '敬请期待', icon: 'none' });
-    wx.navigateTo({ url: '/package-profile/badges/index' });
+    wx.navigateTo({ url: "/package-profile/badges/index" });
   },
 
   goToSubmodule(e) {
@@ -72,27 +100,27 @@ Page({
   },
 
   onVoiceGuide() {
-    wx.navigateTo({ url: '/package-guide/voice-guide/index' });
+    wx.navigateTo({ url: "/package-guide/voice-guide/index" });
   },
 
   onSpotDetail(e) {
-    const title = e.currentTarget.dataset.title || '';
-    if (title === '两头洞') {
-      wx.navigateTo({ url: '/package-guide/liangtoudong/index' });
+    const title = e.currentTarget.dataset.title || "";
+    if (title === "两头洞") {
+      wx.navigateTo({ url: "/package-guide/liangtoudong/index" });
       return;
     }
-    if (title === '白塔洞') {
-      wx.navigateTo({ url: '/package-guide/baitadong/index' });
+    if (title === "白塔洞") {
+      wx.navigateTo({ url: "/package-guide/baitadong/index" });
       return;
     }
-    if (title === '中共衢遂寿中心县委第二区委旧址') {
-      wx.navigateTo({ url: '/package-guide/dierquweijiuzhi/index' });
+    if (title === "中共衢遂寿中心县委第二区委旧址") {
+      wx.navigateTo({ url: "/package-guide/dierquweijiuzhi/index" });
       return;
     }
-    wx.showToast({ title: title || '景点详情', icon: 'none' });
+    wx.showToast({ title: title || "景点详情", icon: "none" });
   },
 
   goMap() {
-    wx.switchTab({ url: '/pages/map/index' });
-  }
+    wx.switchTab({ url: "/pages/map/index" });
+  },
 });

@@ -1,4 +1,4 @@
-const KEY = 'mall_cart';
+const KEY = "mall_cart";
 
 function load() {
   try {
@@ -28,9 +28,9 @@ function addOrIncrement(product) {
       name: product.name,
       price: Number(product.price),
       thumb: product.thumb,
-      spec: product.spec || '250g',
+      spec: product.spec || "250g",
       quantity: 1,
-      selected: true
+      selected: true,
     });
   }
   save(list);

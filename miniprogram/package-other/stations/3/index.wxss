@@ -1,7 +1,7 @@
 /* ==================== 页面容器 ==================== */
 .page {
   min-height: 100vh;
-  background: #F8F5F0;
+  background: #f8f5f0;
   position: relative;
 }
 
@@ -33,13 +33,13 @@
 }
 .back-home-btn text {
   font-size: 24rpx;
-  color: #C91F37;
+  color: #c91f37;
 }
 
 /* ==================== 圆角内容面板 ==================== */
 .content-panel {
   margin-top: -40rpx;
-  background: #F8F5F0;
+  background: #f8f5f0;
   border-top-left-radius: 80rpx;
   border-top-right-radius: 80rpx;
   padding: 60rpx 56rpx 80rpx;
@@ -61,38 +61,38 @@
 .num-line {
   width: 112rpx;
   height: 2rpx;
-  background: #D4A017;
+  background: #d4a017;
 }
 .station-num {
   font-size: 28rpx;
-  color: #D4A017;
+  color: #d4a017;
   letter-spacing: 4rpx;
   margin: 0 16rpx;
-  font-family: 'Noto Sans SC', sans-serif;
+  font-family: "Noto Sans SC", sans-serif;
 }
 .station-title {
   display: block;
   font-size: 64rpx;
   font-weight: 700;
-  color: #D4A017;
+  color: #d4a017;
   letter-spacing: 5rpx;
-  font-family: 'Noto Sans SC', sans-serif;
+  font-family: "Noto Sans SC", sans-serif;
 }
 .station-name {
   display: block;
   font-size: 32rpx;
-  color: #C8A87A;
+  color: #c8a87a;
   margin-top: 14rpx;
-  font-family: 'Noto Sans SC', sans-serif;
+  font-family: "Noto Sans SC", sans-serif;
 }
 .station-desc {
   display: block;
   font-size: 28rpx;
-  color: #C8A87A;
+  color: #c8a87a;
   line-height: 1.6;
   margin-top: 24rpx;
   padding: 0 10rpx;
-  font-family: 'Noto Sans SC', sans-serif;
+  font-family: "Noto Sans SC", sans-serif;
 }
 
 /* ==================== AR卡片（获得历史物品） ==================== */
@@ -120,25 +120,25 @@
 }
 .ar-title {
   font-size: 28rpx;
-  color: #C91F37;
+  color: #c91f37;
   font-weight: 700;
 }
 .ar-sub {
   font-size: 24rpx;
-  color: #5C3A21;
+  color: #5c3a21;
   margin-top: 4rpx;
 }
 .ar-desc {
   display: block;
   font-size: 24rpx;
-  color: #5C3A21;
+  color: #5c3a21;
   line-height: 1.6;
   margin-bottom: 22rpx;
 }
 .ar-btn {
   width: 100%;
   height: 76rpx;
-  background: linear-gradient(274deg, #CE3B45 3%, #E4B983 46%, #CD3542 76%);
+  background: linear-gradient(274deg, #ce3b45 3%, #e4b983 46%, #cd3542 76%);
   border-radius: 40rpx;
   display: flex;
   align-items: center;
@@ -180,27 +180,27 @@
 }
 .pledge-title {
   font-size: 28rpx;
-  color: #C91F37;
+  color: #c91f37;
   font-weight: 700;
 }
 .pledge-sub {
   font-size: 24rpx;
-  color: #5C3A21;
+  color: #5c3a21;
   margin-top: 4rpx;
 }
 
 /* 承诺正文区域 */
 .pledge-body {
-  background: #F8F5F0;
+  background: #f8f5f0;
   border-radius: 40rpx;
-  border: 2rpx solid #F2DCCE;
+  border: 2rpx solid #f2dcce;
   padding: 26rpx 28rpx;
   margin-bottom: 20rpx;
 }
 .pledge-label {
   display: block;
   font-size: 24rpx;
-  color: #C91F37;
+  color: #c91f37;
   font-weight: 700;
   margin-bottom: 12rpx;
 }
@@ -210,15 +210,15 @@
 .pledge-line4 {
   display: block;
   font-size: 24rpx;
-  color: #5C3A21;
+  color: #5c3a21;
   line-height: 1.7;
 }
 
 /* 署名提示条 */
 .pledge-hint {
-  background: #F8F5F0;
+  background: #f8f5f0;
   border-radius: 40rpx;
-  border: 2rpx solid #F2DCCE;
+  border: 2rpx solid #f2dcce;
   height: 118rpx;
   display: flex;
   align-items: center;
@@ -226,15 +226,15 @@
   margin-bottom: 20rpx;
 }
 .pledge-hint.signed {
-  border-color: #D4A017;
-  background: #FFF9E6;
+  border-color: #d4a017;
+  background: #fff9e6;
 }
 .pledge-hint text {
   font-size: 24rpx;
-  color: #BDBDBD;
+  color: #bdbdbd;
 }
 .pledge-hint.signed text {
-  color: #5C3A21;
+  color: #5c3a21;
   font-weight: 500;
 }
 
@@ -242,14 +242,14 @@
 .pledge-btn {
   width: 100%;
   height: 114rpx;
-  background: linear-gradient(323deg, #E3B17F 0%, #CC3140 100%);
+  background: linear-gradient(323deg, #e3b17f 0%, #cc3140 100%);
   border-radius: 40rpx;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .pledge-btn.signed {
-  background: linear-gradient(323deg, #C8A87A 0%, #A88A68 100%);
+  background: linear-gradient(323deg, #c8a87a 0%, #a88a68 100%);
 }
 .pledge-sign-icon {
   width: 28rpx;
@@ -266,7 +266,7 @@
 .checkin-btn {
   width: 636rpx;
   height: 100rpx;
-  background: linear-gradient(135deg, #D4A017, #F5D78E);
+  background: linear-gradient(135deg, #d4a017, #f5d78e);
   border-radius: 50rpx;
   display: flex;
   align-items: center;
@@ -275,7 +275,7 @@
   box-shadow: 0 8rpx 20rpx rgba(212, 160, 23, 0.3);
 }
 .checkin-btn.checked {
-  background: linear-gradient(135deg, #4CAF50, #81C784);
+  background: linear-gradient(135deg, #4caf50, #81c784);
   box-shadow: 0 8rpx 20rpx rgba(76, 175, 80, 0.3);
 }
 .checkin-icon-wrap {
@@ -305,7 +305,7 @@
 .nav-btn {
   width: 636rpx;
   height: 88rpx;
-  background: linear-gradient(274deg, #CE3B45 3%, #E4B983 46%, #CD3542 76%);
+  background: linear-gradient(274deg, #ce3b45 3%, #e4b983 46%, #cd3542 76%);
   border-radius: 44rpx;
   display: flex;
   align-items: center;
@@ -322,7 +322,7 @@
 .back-map-btn {
   width: 100%;
   height: 88rpx;
-  background: #F3E1D6;
+  background: #f3e1d6;
   border-radius: 40rpx;
   border: 1rpx solid rgba(168, 1, 1, 0.6);
   display: flex;
@@ -331,15 +331,14 @@
 }
 .back-map-btn text {
   font-size: 32rpx;
-  color: #C91F37;
+  color: #c91f37;
 }
-
 
 /* Radio card styles */
 .radio-card {
   width: 100%;
   height: 184rpx;
-  background: #A80101;
+  background: #a80101;
   border-radius: 40rpx;
   box-shadow: 0 8rpx 13rpx rgba(0, 0, 0, 0.25);
   display: flex;
@@ -377,15 +376,15 @@
 }
 .radio-title {
   font-size: 30rpx;
-  color: #F5E6C8;
+  color: #f5e6c8;
   font-weight: 700;
-  font-family: 'Noto Sans SC', sans-serif;
+  font-family: "Noto Sans SC", sans-serif;
 }
 .radio-sub {
   font-size: 22rpx;
-  color: #C8A87A;
+  color: #c8a87a;
   margin-top: 8rpx;
-  font-family: 'Noto Sans SC', sans-serif;
+  font-family: "Noto Sans SC", sans-serif;
 }
 .play-icon {
   width: 44rpx;
@@ -394,11 +393,22 @@
 
 /* Playing state animation */
 .radio-card.playing {
-  box-shadow: 0 0 24rpx 8rpx rgba(168, 1, 1, 0.4), 0 8rpx 13rpx rgba(0, 0, 0, 0.25);
+  box-shadow:
+    0 0 24rpx 8rpx rgba(168, 1, 1, 0.4),
+    0 8rpx 13rpx rgba(0, 0, 0, 0.25);
   animation: radioPulse 1.5s ease-in-out infinite;
 }
 
 @keyframes radioPulse {
-  0%, 100% { box-shadow: 0 0 20rpx 6rpx rgba(168, 1, 1, 0.3), 0 8rpx 13rpx rgba(0, 0, 0, 0.25); }
-  50% { box-shadow: 0 0 36rpx 12rpx rgba(168, 1, 1, 0.6), 0 8rpx 13rpx rgba(0, 0, 0, 0.25); }
+  0%,
+  100% {
+    box-shadow:
+      0 0 20rpx 6rpx rgba(168, 1, 1, 0.3),
+      0 8rpx 13rpx rgba(0, 0, 0, 0.25);
+  }
+  50% {
+    box-shadow:
+      0 0 36rpx 12rpx rgba(168, 1, 1, 0.6),
+      0 8rpx 13rpx rgba(0, 0, 0, 0.25);
+  }
 }
