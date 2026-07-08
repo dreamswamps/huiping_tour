@@ -5,7 +5,7 @@ class ProductDetail {
   constructor(data = {}) {
     this.id = data.id ?? null;
     this.productId = data.productId ?? null;
-    this.productName = data.productName ?? '';
+    this.productName = data.productName ?? "";
     this.subtitle = data.subtitle ?? null;
     this.description = data.description ?? null;
     this.images = data.images ?? null;
@@ -16,8 +16,8 @@ class ProductDetail {
 
   static parseJsonField(val) {
     if (val == null) return val;
-    if (typeof val === 'object') return val;
-    if (typeof val === 'string') {
+    if (typeof val === "object") return val;
+    if (typeof val === "string") {
       try {
         return JSON.parse(val);
       } catch {

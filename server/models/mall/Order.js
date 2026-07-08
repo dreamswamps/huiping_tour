@@ -8,12 +8,12 @@ class Order {
     this.userId = data.userId ?? null;
     this.totalAmount = data.totalAmount != null ? Number(data.totalAmount) : 0;
     this.addressId = data.addressId ?? null;
-    this.receiverName = data.receiverName ?? '';
-    this.receiverPhone = data.receiverPhone ?? '';
-    this.province = data.province ?? '';
-    this.city = data.city ?? '';
-    this.district = data.district ?? '';
-    this.detailAddress = data.detailAddress ?? '';
+    this.receiverName = data.receiverName ?? "";
+    this.receiverPhone = data.receiverPhone ?? "";
+    this.province = data.province ?? "";
+    this.city = data.city ?? "";
+    this.district = data.district ?? "";
+    this.detailAddress = data.detailAddress ?? "";
     this.status = data.status != null ? Number(data.status) : 0;
     this.trackingNo = data.trackingNo ?? null;
     this.payTime = data.payTime ?? null;
@@ -27,8 +27,8 @@ class Order {
 
   static parseItems(val) {
     if (val == null) return val;
-    if (typeof val === 'object') return val;
-    if (typeof val === 'string') {
+    if (typeof val === "object") return val;
+    if (typeof val === "string") {
       try {
         return JSON.parse(val);
       } catch {

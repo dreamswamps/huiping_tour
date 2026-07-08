@@ -1,6 +1,6 @@
-const express = require('express');
-const pool = require('../../config/db');
-const { requireUserAuth, optionalUserAuth } = require('../../middleware/auth');
+const express = require("express");
+const pool = require("../../config/db");
+const { requireUserAuth, optionalUserAuth } = require("../../middleware/auth");
 
 const router = express.Router();
 const MAX_CONTENT_LEN = 50;
@@ -23,17 +23,25 @@ function byCreatedDesc(a, b) {
 }
 
 function stripUserId(rows) {
-  return rows.map((r) => ({ id: r.id, content: r.content, created_at: r.created_at }));
+  return rows.map((r) => ({
+    id: r.id,
+    content: r.content,
+    created_at: r.created_at,
+  }));
 }
 
 async function queryMessages(userId) {
   if (userId) {
     const [raw] = await pool.query(
-      'SELECT id, content, created_at, user_id FROM messages ORDER BY created_at DESC LIMIT ?',
-      [FETCH_CAP]
+      "SELECT id, content, created_at, user_id FROM messages ORDER BY created_at DESC LIMIT ?",
+      [FETCH_CAP],
     );
-    const mine = raw.filter((r) => Number(r.user_id) === Number(userId)).sort(byCreatedDesc);
-    const others = raw.filter((r) => Number(r.user_id) !== Number(userId)).sort(byCreatedDesc);
+    const mine = raw
+      .filter((r) => Number(r.user_id) === Number(userId))
+      .sort(byCreatedDesc);
+    const others = raw
+      .filter((r) => Number(r.user_id) !== Number(userId))
+      .sort(byCreatedDesc);
 
     let merged;
     if (others.length === 0) {
@@ -46,13 +54,13 @@ async function queryMessages(userId) {
   }
 
   const [rows] = await pool.query(
-    'SELECT id, content, created_at FROM messages ORDER BY created_at DESC LIMIT ?',
-    [LIST_LIMIT]
+    "SELECT id, content, created_at FROM messages ORDER BY created_at DESC LIMIT ?",
+    [LIST_LIMIT],
   );
   return rows;
 }
 
-router.get('/', optionalUserAuth, async (req, res) => {
+router.get("/", optionalUserAuth, async (req, res) => {
   try {
     const userId = req.auth && req.auth.userId;
     const rows = await queryMessages(userId);
@@ -62,30 +70,33 @@ router.get('/', optionalUserAuth, async (req, res) => {
   }
 });
 
-router.post('/', requireUserAuth, async (req, res) => {
+router.post("/", requireUserAuth, async (req, res) => {
   try {
-    const content = typeof req.body.content === 'string' ? req.body.content.trim() : '';
+    const content =
+      typeof req.body.content === "string" ? req.body.content.trim() : "";
     if (!content) {
-      return res.status(400).json({ code: 400, message: '留言内容不能为空' });
+      return res.status(400).json({ code: 400, message: "留言内容不能为空" });
     }
     if (content.length > MAX_CONTENT_LEN) {
-      return res.status(400).json({ code: 400, message: `留言最多${MAX_CONTENT_LEN}字` });
+      return res
+        .status(400)
+        .json({ code: 400, message: `留言最多${MAX_CONTENT_LEN}字` });
     }
 
     const userId = req.auth.userId;
     const [result] = await pool.query(
-      'INSERT INTO messages (user_id, content) VALUES (?, ?)',
-      [userId, content]
+      "INSERT INTO messages (user_id, content) VALUES (?, ?)",
+      [userId, content],
     );
 
     const [rows] = await pool.query(
-      'SELECT id, content, created_at FROM messages WHERE id = ?',
-      [result.insertId]
+      "SELECT id, content, created_at FROM messages WHERE id = ?",
+      [result.insertId],
     );
 
     res.json({
       code: 200,
-      message: '发布成功',
+      message: "发布成功",
       data: mapRow(rows[0]),
     });
   } catch (error) {

@@ -4,7 +4,7 @@
 class Product {
   constructor(data = {}) {
     this.id = data.id ?? null;
-    this.name = data.name ?? '';
+    this.name = data.name ?? "";
     this.price = data.price != null ? Number(data.price) : 0;
     this.thumb = data.thumb ?? null;
     this.stock = data.stock != null ? Number(data.stock) : 0;
