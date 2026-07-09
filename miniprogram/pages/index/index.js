@@ -6,25 +6,25 @@ Page({
     svgsUrl: config.svgsUrl,
     swiperCurrent: 0,
     bannerList: [
-      {
+      {  //图床是从 1开始标号的。。。。
         id: "b0",
-        img: "https://free.picui.cn/free/2026/05/16/6a086d31ce3fb.jpg",
+        img: "https://svgs1.oss-cn-beijing.aliyuncs.com/B1.jpg",
       },
       {
         id: "b1",
-        img: "https://free.picui.cn/free/2026/05/16/6a086d3220a37.jpg",
+        img: "https://svgs1.oss-cn-beijing.aliyuncs.com/B2.jpg",
       },
       {
         id: "b2",
-        img: "https://free.picui.cn/free/2026/05/16/6a086d327a2eb.png",
+        img: "https://svgs1.oss-cn-beijing.aliyuncs.com/B3.png",
       },
       {
         id: "b3",
-        img: "https://free.picui.cn/free/2026/05/16/6a086d3270d2e.png",
+        img: "https://svgs1.oss-cn-beijing.aliyuncs.com/B4.png",
       },
       {
         id: "b4",
-        img: "https://free.picui.cn/free/2026/05/16/6a086d333fd60.png",
+        img: "https://svgs1.oss-cn-beijing.aliyuncs.com/B5.png",
       },
     ],
     // spots: [
@@ -36,17 +36,17 @@ Page({
       {
         title: "两头洞",
         desc: "华东自然岩壁第一洞",
-        img: "https://free.picui.cn/free/2026/05/16/6a086d2561ca0.png",
+        img: "https://svgs1.oss-cn-beijing.aliyuncs.com/S1.png",
       },
       {
         title: "白塔洞",
         desc: "位于灰坪乡杜家田村以西，洞崖滴水，常年不绝",
-        img: "https://free.picui.cn/free/2026/05/16/6a086d2564bd3.png",
+        img: "https://svgs1.oss-cn-beijing.aliyuncs.com/S2.png",
       },
       {
         title: "中共衢遂寿中心县委第二区委旧址",
         desc: "光荣革命传统的圣地",
-        img: "https://free.picui.cn/free/2026/05/16/6a086d27176a5.png",
+        img: "https://svgs1.oss-cn-beijing.aliyuncs.com/S3.png",
       },
     ],
   },
