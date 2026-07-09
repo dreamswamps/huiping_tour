@@ -11,7 +11,7 @@
     <view class="hero-wrap">
       <image
         class="hero"
-        src="https://free.picui.cn/free/2026/05/16/6a086d27176a5.png"
+        src="https://svgs1.oss-cn-beijing.aliyuncs.com/homepage3.png"
         mode="aspectFill"
       />
       <view class="hero-safe" />

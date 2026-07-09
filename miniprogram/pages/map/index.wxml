@@ -1,68 +1,19 @@
-<!-- 传薪地图 · Figma「手绘地图」GTd0dnRsWjR6WycqT789NG node 1:2 -->
 <view class="page">
-  <view class="map-header">
-    <view class="header-row">
-      <view class="back-home" bindtap="onBackHome">
-        <image class="back-home-icon" src="{{svgsUrl}}/svgs/svgs/map-back.svg" mode="aspectFit" />
-        <text class="back-home-text">返回首页</text>
-      </view>
-    </view>
-    <text class="header-title">传薪地图</text>
-    <view class="header-sub-wrap">
-      <text class="header-sub">🔥 重走传薪路 · 点亮五站火种 · 获取传薪人认证</text>
-    </view>
-  </view>
-
-  <view class="map-illustration">
-    <swiper
-      class="map-swiper"
-      autoplay
-      interval="{{6000}}"
-      circular
-      indicator-dots
-      indicator-color="rgba(255,255,255,0.5)"
-      indicator-active-color="#c91f37"
-    >
-      <swiper-item>
-        <image class="map-illustration-img" src="/images/map1.png" mode="aspectFit" />
-      </swiper-item>
-      <swiper-item>
-        <image class="map-illustration-img" src="/images/map2.png" mode="aspectFit" />
-      </swiper-item>
-    </swiper>
-  </view>
-
-  <scroll-view class="map-scroll" scroll-y enhanced show-scrollbar="{{false}}">
-    <view class="map-canvas" style="height: {{canvasHeightRpx}}rpx;">
-      <image
-        class="map-routes"
-        src="{{svgsUrl}}/svgs/svgs/map-shouxie-routes.svg"
-        mode="aspectFill"
-      />
-
-      <block wx:for="{{stations}}" wx:key="id">
-        <view
-          class="station-card"
-          style="left: {{item.left}}rpx; top: {{item.top}}rpx; width: {{item.w}}rpx; height: {{item.h}}rpx;"
-        >
-          <image
-            class="card-thumb {{item.thumbShift ? 'card-thumb--shift-down' : ''}}"
-            src="{{svgsUrl}}/{{item.thumb}}"
-            mode="aspectFit"
-          />
-          <text class="badge {{item.status === '进行中' ? 'badge--active' : ''}}">{{item.status}}</text>
-          <view class="card-body">
-            <text class="station-line1">{{item.num}} {{item.name}}</text>
-            <text class="station-title">{{item.title}}</text>
-            <view class="enter-row" catchtap="onEnterStation" data-id="{{item.id}}">
-              <text class="enter-text">进入站点</text>
-              <image class="enter-arrow" src="{{svgsUrl}}/svgs/svgs/map-enter-arrow-{{item.id}}.svg" mode="aspectFit" />
-            </view>
-          </view>
-        </view>
-      </block>
-    </view>
-
-    <view class="safe-bottom-lg" />
-  </scroll-view>
+  <map
+    id="satelliteMap"
+    class="map"
+    latitude="{{centerLat}}"
+    longitude="{{centerLng}}"
+    scale="{{scale}}"
+    markers="{{markers}}"
+    bindmarkertap="onMarkerTap"
+    layer-style="1"
+    bindregionchange="onRegionChange"
+    enable-scroll="{{true}}"
+    enable-zoom="{{true}}"
+    enable-rotate="{{true}}"
+    enable-3D="{{true}}"
+    show-compass="{{true}}"
+    show-scale="{{true}}"
+  />
 </view>

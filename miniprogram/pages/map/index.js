@@ -1,105 +1,90 @@
-const config = require("../../config");
+// 灰坪乡边界
+const BOUNDS = {
+  minLat: 29.20,
+  maxLat: 29.28,
+  minLng: 118.80,
+  maxLng: 118.90,
+};
 
-/** 设计稿 402 宽 → rpx（750 基准） */
-const S = 750 / 402;
+// 14 级是最大视野，不能缩得更小
+const MIN_SCALE = 14;
 
-/** 卡片宽 150 设计 px；加高便于缩略图 aspectFit 完整露出 */
-const CARD_W = 150 * S;
-const CARD_H = (150 + 42) * S;
+function clamp(val, min, max) {
+  return Math.max(min, Math.min(max, val));
+}
+
+// 站点数据
+const STATIONS = [
+  { id: 1, num: "第1站", name: "陈列馆", title: "星火初燃", latitude: 29.258957, longitude: 118.810398 },
+];
 
 Page({
   data: {
-    baseUrl: config.baseUrl,
-    svgsUrl: config.svgsUrl,
+    centerLat: 29.24099,
+    centerLng: 118.85542,
+    markers: STATIONS.map((s) => ({
+      id: s.id,
+      latitude: s.latitude,
+      longitude: s.longitude,
+      title: s.name,
+      callout: {
+        content: s.num + " " + s.name + "\n" + s.title,
+        color: "#c91f37",
+        fontSize: 13,
+        borderRadius: 8,
+        padding: 8,
+        display: "ALWAYS",
+      },
+      width: 36,
+      height: 36,
+    })),
+    scale: MIN_SCALE,
+  },
 
-    /**
-     * 手绘地图稿 GTd0dnRsWjR6WycqT789NG node 1:2
-     * thumb：Figma 矩形节点 1:152 陈列馆、1:151 红军路、1:153 党史馆、1:155 纪念碑、1:154 红军村
-     * 已用 Framelink MCP 导出至 server/img/map-shouxie-thumb-*.png
-     * 单框卡片：宽 150 设计 px，高度略加（CARD_H）便于缩略图完整展示
-     */
-    stations: [
-      {
-        id: 1,
-        num: "第1站",
-        name: "陈列馆",
-        title: "星火初燃",
-        status: "已打卡",
-        thumb: "map-shouxie-thumb-1-chenlie.png",
-        thumbShift: true,
-        left: 233 * S,
-        top: 6 * S,
-        w: CARD_W,
-        h: CARD_H,
-      },
-      {
-        id: 2,
-        num: "第2站",
-        name: "红军路",
-        title: "薪火相传",
-        status: "已打卡",
-        thumb: "map-shouxie-thumb-2-hongjunlu.png",
-        left: 25 * S,
-        top: 117 * S,
-        w: CARD_W,
-        h: CARD_H,
-      },
-      {
-        id: 3,
-        num: "第3站",
-        name: "党史馆",
-        title: "淬火成钢",
-        status: "可打卡",
-        thumb: "map-shouxie-thumb-3-dangshiguan.png",
-        left: 233 * S,
-        top: 260 * S,
-        w: CARD_W,
-        h: CARD_H,
-      },
-      {
-        id: 4,
-        num: "第4站",
-        name: "纪念碑",
-        title: "丰碑永铸",
-        status: "可打卡",
-        thumb: "map-shouxie-thumb-4-jinianbei.png",
-        left: 25 * S,
-        top: 388 * S,
-        w: CARD_W,
-        h: CARD_H,
-      },
-      {
-        id: 5,
-        num: "第5站",
-        name: "红军村",
-        title: "薪火延续",
-        status: "进行中",
-        thumb: "map-shouxie-thumb-5-hongjuncun.png",
-        thumbShift: true,
-        left: 233 * S,
-        top: 543 * S,
-        w: CARD_W,
-        h: CARD_H,
-      },
-    ],
+  onReady() {
+    this.mapCtx = wx.createMapContext("satelliteMap", this);
+  },
 
-    canvasHeightRpx: (874 + 48 - 112) * S,
+  onRegionChange(e) {
+    if (e.type !== "end") return;
+
+    // 拖拽结束 — 限制中心点不超出灰坪乡
+    if (e.causedBy === "drag") {
+      const center = e.detail.centerLocation;
+      if (center) {
+        const clampedLat = clamp(center.latitude, BOUNDS.minLat, BOUNDS.maxLat);
+        const clampedLng = clamp(center.longitude, BOUNDS.minLng, BOUNDS.maxLng);
+        if (clampedLat !== center.latitude || clampedLng !== center.longitude) {
+          this.setData({
+            centerLat: clampedLat,
+            centerLng: clampedLng,
+          });
+        }
+      }
+    }
+
+    // 缩放结束 — 限制不小于 14 级
+    if (e.causedBy === "scale" || e.causedBy === "drag") {
+      this.mapCtx.getScale({
+        success: (res) => {
+          if (res.scale < MIN_SCALE) {
+            this.setData({ scale: MIN_SCALE });
+          }
+        },
+      });
+    }
+  },
+
+  onMarkerTap(e) {
+    const markerId = e.detail.markerId;
+    wx.navigateTo({
+      url: `/package-other/stations/${markerId}/index?id=${markerId}`,
+    });
   },
 
   onShow() {
     if (typeof this.getTabBar === "function" && this.getTabBar()) {
       this.getTabBar().setData({ selected: 1 });
     }
-  },
-
-  onBackHome() {
-    wx.switchTab({ url: "/pages/index/index" });
-  },
-
-  onEnterStation(e) {
-    const { id } = e.currentTarget.dataset;
-    wx.navigateTo({
-      url: `/package-other/stations/${id}/index?id=${id}`,
-    });
   },
 });

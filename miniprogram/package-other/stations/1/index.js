@@ -1,7 +1,7 @@
 const config = require("../../../config");
 
 const STATION_COORDS = {
-  station1: { latitude: 30.22075, longitude: 120.038711 },
+  station1: { latitude: 29.258957, longitude: 118.810398 },
   station2: { latitude: 30.221, longitude: 120.039 },
   station3: { latitude: 30.222, longitude: 120.04 },
   station4: { latitude: 30.223, longitude: 120.041 },
