@@ -1,12 +1,12 @@
 /* ==================== 页面容器 ==================== */
 .page {
   min-height: 100vh;
-  background: #F8F5F0;
+  background: #f8f5f0;
 }
 
 /* ==================== 顶部渐变区 ==================== */
 .header-area {
-  background: linear-gradient(141deg, #B83749 0%, #C41933 24%, #1F0005 73%);
+  background: linear-gradient(141deg, #b83749 0%, #c41933 24%, #1f0005 73%);
   padding: 20rpx 26rpx 0;
 }
 
@@ -15,8 +15,8 @@
   display: block;
   font-size: 40rpx;
   font-weight: 900;
-  color: #FFFFFF;
-  font-family: 'Noto Sans SC', sans-serif;
+  color: #ffffff;
+  font-family: "Noto Sans SC", sans-serif;
 }
 
 /* 未登录：顶部提示（无头像） */
@@ -39,8 +39,8 @@
   width: 140rpx;
   height: 140rpx;
   border-radius: 50%;
-  background: #F6E4C8;
-  border: 4rpx solid #E6C288;
+  background: #f6e4c8;
+  border: 4rpx solid #e6c288;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -62,7 +62,7 @@
   display: block;
   font-size: 32rpx;
   font-weight: 700;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 .user-uid {
   display: block;
@@ -94,8 +94,10 @@
   margin: 0;
   border-radius: 46rpx;
   border: 2rpx solid rgba(230, 194, 136, 0.65);
-  background: linear-gradient(180deg, #FFF9F0 0%, #F0DFC4 55%, #E6C288 100%);
-  box-shadow: 0 10rpx 28rpx rgba(0, 0, 0, 0.22), inset 0 2rpx 0 rgba(255, 255, 255, 0.45);
+  background: linear-gradient(180deg, #fff9f0 0%, #f0dfc4 55%, #e6c288 100%);
+  box-shadow:
+    0 10rpx 28rpx rgba(0, 0, 0, 0.22),
+    inset 0 2rpx 0 rgba(255, 255, 255, 0.45);
 }
 
 .wx-login-btn::after {
@@ -117,7 +119,7 @@
   font-size: 30rpx;
   font-weight: 700;
   letter-spacing: 1rpx;
-  color: #4A0D14;
+  color: #4a0d14;
 }
 
 .login-hint {
@@ -151,7 +153,7 @@
   z-index: 1;
   margin: -30rpx 26rpx 0;
   padding: 24rpx 20rpx 28rpx;
-  background: #FFFFFF;
+  background: #ffffff;
   border-radius: 40rpx;
   display: flex;
   align-items: stretch;
@@ -166,7 +168,7 @@
   flex: 1;
   min-width: 0;
   padding: 26rpx 10rpx 22rpx;
-  background: linear-gradient(180deg, #FFFCF8 0%, #F3EDE4 100%);
+  background: linear-gradient(180deg, #fffcf8 0%, #f3ede4 100%);
   border-radius: 32rpx;
   border: 2rpx solid rgba(230, 194, 136, 0.4);
   display: flex;
@@ -186,7 +188,7 @@
   width: 88rpx;
   height: 88rpx;
   border-radius: 50%;
-  background: linear-gradient(160deg, #FFFFFF 0%, #EFE4D4 100%);
+  background: linear-gradient(160deg, #ffffff 0%, #efe4d4 100%);
   border: 2rpx solid rgba(201, 25, 51, 0.1);
   display: flex;
   align-items: center;
@@ -221,9 +223,9 @@
   display: flex;
   align-items: center;
   height: 110rpx;
-  background: #FFFFFF;
+  background: #ffffff;
   border-radius: 40rpx;
-  border: 2rpx solid #E3E3E3;
+  border: 2rpx solid #e3e3e3;
   box-sizing: border-box;
   padding: 0 26rpx;
   margin-bottom: 18rpx;
@@ -264,8 +266,8 @@
 /* 未读徽标 */
 .menu-badge {
   font-size: 24rpx;
-  color: #FFFFFF;
-  background: #C91F37;
+  color: #ffffff;
+  background: #c91f37;
   padding: 2rpx 12rpx;
   border-radius: 20rpx;
   margin-right: 10rpx;
@@ -291,8 +293,8 @@
 .logout-btn {
   width: 400rpx;
   height: 80rpx;
-  background: #FFFFFF;
-  border: 2rpx solid #E0E0E0;
+  background: #ffffff;
+  border: 2rpx solid #e0e0e0;
   border-radius: 40rpx;
   font-size: 28rpx;
   color: #666666;

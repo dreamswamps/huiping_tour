@@ -1,11 +1,11 @@
-const config = require('../../config.js');
-const cartStorage = require('../../utils/cartStorage.js');
-const { resolveMediaUrl } = require('../../utils/resolveMediaUrl.js');
-const { getAuthHeaders, isUserLoggedIn } = require('../../utils/auth.js');
+const config = require("../../config.js");
+const cartStorage = require("../../utils/cartStorage.js");
+const { resolveMediaUrl } = require("../../utils/resolveMediaUrl.js");
+const { getAuthHeaders, isUserLoggedIn } = require("../../utils/auth.js");
 
 function readCheckoutIds() {
   try {
-    const raw = wx.getStorageSync('mall_checkout_ids');
+    const raw = wx.getStorageSync("mall_checkout_ids");
     return Array.isArray(raw) ? raw : [];
   } catch (e) {
     return [];
@@ -14,17 +14,18 @@ function readCheckoutIds() {
 
 Page({
   data: {
-    baseUrl: config.baseUrl,svgsUrl: config.svgsUrl,
+    baseUrl: config.baseUrl,
+    svgsUrl: config.svgsUrl,
     userId: null,
     checkoutIds: [],
     lines: [],
     addresses: [],
     selectedAddressId: null,
     totalAmount: 0,
-    totalText: '0.00',
+    totalText: "0.00",
     loading: true,
     submitLoading: false,
-    loadError: '',
+    loadError: "",
     needLogin: false,
     needAddress: false,
     submitDisabled: true,
@@ -44,13 +45,13 @@ Page({
   },
 
   onGoProfile() {
-    wx.switchTab({ url: '/pages/profile/index' });
+    wx.switchTab({ url: "/pages/profile/index" });
   },
 
   onAddAddress() {
     const { userId } = this.data;
     if (!userId) return;
-    wx.navigateTo({ url: '/package-profile/address/edit' });
+    wx.navigateTo({ url: "/package-profile/address/edit" });
   },
 
   onPickAddress(e) {
@@ -67,13 +68,13 @@ Page({
   },
 
   bootstrap() {
-    const userInfo = wx.getStorageSync('userInfo') || {};
+    const userInfo = wx.getStorageSync("userInfo") || {};
     const userId = userInfo.id != null ? Number(userInfo.id) : null;
 
     if (!isUserLoggedIn() || !userId) {
       this.setData({
         loading: false,
-        loadError: '请先登录后再结算',
+        loadError: "请先登录后再结算",
         needLogin: true,
         needAddress: false,
         lines: [],
@@ -88,7 +89,7 @@ Page({
       userId,
       needLogin: false,
       loading: true,
-      loadError: '',
+      loadError: "",
     });
 
     const { baseUrl } = this.data;
@@ -96,24 +97,28 @@ Page({
 
     wx.request({
       url: `${baseUrl}/api/mall/cart`,
-      method: 'GET',
+      method: "GET",
       header: getAuthHeaders(false),
       success: (res) => {
         const body = res.data || {};
         if (res.statusCode === 401 || body.code === 401) {
           this.setData({
             loading: false,
-            loadError: '登录已过期，请重新登录',
+            loadError: "登录已过期，请重新登录",
             needLogin: true,
             lines: [],
           });
           this.updateSubmitState();
           return;
         }
-        if (res.statusCode !== 200 || body.code !== 200 || !Array.isArray(body.data)) {
+        if (
+          res.statusCode !== 200 ||
+          body.code !== 200 ||
+          !Array.isArray(body.data)
+        ) {
           this.setData({
             loading: false,
-            loadError: body.message || '加载购物车失败',
+            loadError: body.message || "加载购物车失败",
             lines: [],
           });
           this.updateSubmitState();
@@ -140,16 +145,19 @@ Page({
 
         const totalAmount =
           Math.round(
-            lines.reduce((s, it) => s + Number(it.productPrice) * Number(it.quantity), 0) * 100
+            lines.reduce(
+              (s, it) => s + Number(it.productPrice) * Number(it.quantity),
+              0,
+            ) * 100,
           ) / 100;
 
         if (lines.length === 0) {
           this.setData({
             loading: false,
-            loadError: '没有可结算的商品，请返回购物车重试',
+            loadError: "没有可结算的商品，请返回购物车重试",
             lines: [],
             totalAmount: 0,
-            totalText: '0.00',
+            totalText: "0.00",
           });
           this.updateSubmitState();
           return;
@@ -166,7 +174,7 @@ Page({
       fail: () => {
         this.setData({
           loading: false,
-          loadError: '网络异常，请稍后重试',
+          loadError: "网络异常，请稍后重试",
           lines: [],
         });
         this.updateSubmitState();
@@ -177,11 +185,16 @@ Page({
   fetchAddresses(userId, baseUrl) {
     wx.request({
       url: `${baseUrl}/api/user/${userId}/addresses`,
-      method: 'GET',
+      method: "GET",
       header: getAuthHeaders(false),
       success: (res) => {
         const body = res.data || {};
-        const list = res.statusCode === 200 && body.code === 200 && Array.isArray(body.data) ? body.data : [];
+        const list =
+          res.statusCode === 200 &&
+          body.code === 200 &&
+          Array.isArray(body.data)
+            ? body.data
+            : [];
         let selectedAddressId = this.data.selectedAddressId;
         const def = list.find((a) => a.isDefault);
         if (def) selectedAddressId = def.id;
@@ -194,14 +207,14 @@ Page({
           addresses: list,
           selectedAddressId,
           needAddress,
-          loadError: needAddress ? '请先添加收货地址' : '',
+          loadError: needAddress ? "请先添加收货地址" : "",
         });
         this.updateSubmitState();
       },
       fail: () => {
         this.setData({
           loading: false,
-          loadError: '加载地址失败',
+          loadError: "加载地址失败",
           addresses: [],
           selectedAddressId: null,
         });
@@ -211,10 +224,11 @@ Page({
   },
 
   onSubmit() {
-    const { submitDisabled, submitLoading, selectedAddressId, lines, baseUrl } = this.data;
+    const { submitDisabled, submitLoading, selectedAddressId, lines, baseUrl } =
+      this.data;
     if (submitDisabled || submitLoading) return;
     if (!selectedAddressId || lines.length === 0) {
-      wx.showToast({ title: '请选择收货地址', icon: 'none' });
+      wx.showToast({ title: "请选择收货地址", icon: "none" });
       return;
     }
 
@@ -224,30 +238,30 @@ Page({
 
     wx.request({
       url: `${baseUrl}/api/mall/orders`,
-      method: 'POST',
+      method: "POST",
       header: getAuthHeaders(true),
       data: {
         addressId: selectedAddressId,
         productIds,
-        remark: '',
+        remark: "",
       },
       success: (res) => {
         const body = res.data || {};
         if (res.statusCode === 200 && body.code === 200) {
           cartStorage.removeByProductIds(productIds);
           try {
-            wx.removeStorageSync('mall_checkout_ids');
+            wx.removeStorageSync("mall_checkout_ids");
           } catch (e) {}
-          wx.showToast({ title: '下单成功', icon: 'success' });
+          wx.showToast({ title: "下单成功", icon: "success" });
           setTimeout(() => {
             wx.navigateBack({ delta: 1 });
           }, 1200);
         } else {
-          wx.showToast({ title: body.message || '下单失败', icon: 'none' });
+          wx.showToast({ title: body.message || "下单失败", icon: "none" });
         }
       },
       fail: () => {
-        wx.showToast({ title: '网络异常', icon: 'none' });
+        wx.showToast({ title: "网络异常", icon: "none" });
       },
       complete: () => {
         this.setData({ submitLoading: false });

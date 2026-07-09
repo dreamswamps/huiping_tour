@@ -33,7 +33,9 @@
         wx:for="{{tracks}}"
         wx:key="id"
       >
-        <view class="vg-thumb" />
+        <view class="vg-thumb">
+          <image class="vg-thumb-img" src="{{item.imgUrl}}" mode="aspectFill"></image>
+        </view>
         <view class="vg-main">
           <text class="vg-name">{{item.name}}</text>
           <text class="vg-desc">{{item.desc}}</text>
@@ -47,7 +49,7 @@
           >
             <text class="vg-play-tri">▶</text>
           </view>
-          <text class="vg-time">0:00</text>
+          <text class="vg-time">{{playingId === item.id ? trackTimes[item.id] : (trackDurations[item.id] || '0:00')}}</text>
         </view>
       </view>
     </view>

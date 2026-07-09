@@ -19,11 +19,7 @@
     {
       "root": "package-mall",
       "name": "mallSub",
-      "pages": [
-        "detail/index",
-        "cart/index",
-        "order/index"
-      ]
+      "pages": ["detail/index", "cart/index", "order/index"]
     },
     {
       "root": "package-profile",
@@ -32,7 +28,8 @@
         "info/index",
         "address/index",
         "address/edit",
-        "orders/index"
+        "orders/index",
+        "badges/index"
       ]
     },
     {
@@ -40,12 +37,12 @@
       "name": "other",
       "pages": [
         "benefits/index",
+        "cloudar/cloudar",
         "stations/1/index",
         "stations/2/index",
         "stations/3/index",
         "stations/4/index",
-        "stations/5/index",
-        "cloudar/cloudar"
+        "stations/5/index"
       ]
     }
   ],
@@ -81,16 +78,10 @@
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json",
-  "lazyCodeLoading": "requiredComponents",
   "permission": {
     "scope.userLocation": {
       "desc": "你的位置信息将用于导航路线规划"
     }
   },
-  "plugins": {
-    "route-plan": {
-      "version": "2.2.2",
-      "provider": "wx50b5593e81dd937a"
-    }
-  }
+  "plugins": {}
 }

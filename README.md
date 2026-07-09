@@ -4,13 +4,13 @@
 
 ## 项目概览
 
-| 项目 | 说明 |
-|------|------|
-| 项目名称 | HPT (红旅薪传) |
-| 类型 | 微信小程序 + Express 后端 + MySQL |
-| 小程序 AppID | `wx71269755a3711ceb` |
-| 后端端口 | `3000` |
-| 数据库 | MySQL @ `110.40.187.34:3306` / 库名 `hpt` |
+| 项目         | 说明                                      |
+| ------------ | ----------------------------------------- |
+| 项目名称     | HPT (红旅薪传)                            |
+| 类型         | 微信小程序 + Express 后端 + MySQL         |
+| 小程序 AppID | `wx71269755a3711ceb`                      |
+| 后端端口     | `3000`                                    |
+| 数据库       | MySQL @ `110.40.187.34:3306` / 库名 `hpt` |
 
 ---
 
@@ -114,58 +114,59 @@ HPT/
 
 ### spots — 景点信息表
 
-| 字段 | 类型 | 说明 |
-|------|------|------|
-| id | INT PK AUTO_INCREMENT | 主键 |
-| title | VARCHAR(100) NOT NULL | 景点名称 |
-| description | TEXT | 景点描述 |
-| image | VARCHAR(255) | 封面图片路径 |
-| category | VARCHAR(50) | 分类 |
-| location | VARCHAR(100) | 地址 |
-| latitude | DECIMAL(10,6) | 纬度 |
-| longitude | DECIMAL(10,6) | 经度 |
-| status | TINYINT DEFAULT 1 | 状态：1启用 / 0禁用 |
-| created_at | DATETIME DEFAULT NOW() | 创建时间 |
+| 字段        | 类型                   | 说明                |
+| ----------- | ---------------------- | ------------------- |
+| id          | INT PK AUTO_INCREMENT  | 主键                |
+| title       | VARCHAR(100) NOT NULL  | 景点名称            |
+| description | TEXT                   | 景点描述            |
+| image       | VARCHAR(255)           | 封面图片路径        |
+| category    | VARCHAR(50)            | 分类                |
+| location    | VARCHAR(100)           | 地址                |
+| latitude    | DECIMAL(10,6)          | 纬度                |
+| longitude   | DECIMAL(10,6)          | 经度                |
+| status      | TINYINT DEFAULT 1      | 状态：1启用 / 0禁用 |
+| created_at  | DATETIME DEFAULT NOW() | 创建时间            |
 
 ### products — 商城商品表
 
-| 字段 | 类型 | 说明 |
-|------|------|------|
-| id | INT PK AUTO_INCREMENT | 主键 |
-| name | VARCHAR(100) NOT NULL | 商品名称 |
-| description | TEXT | 商品描述 |
-| price | DECIMAL(10,2) NOT NULL | 售价 |
-| original_price | DECIMAL(10,2) | 原价 |
-| image | VARCHAR(255) | 商品图片 |
-| stock | INT DEFAULT 0 | 库存 |
-| status | TINYINT DEFAULT 1 | 状态：1上架 / 0下架 |
-| created_at | DATETIME DEFAULT NOW() | 创建时间 |
+| 字段           | 类型                   | 说明                |
+| -------------- | ---------------------- | ------------------- |
+| id             | INT PK AUTO_INCREMENT  | 主键                |
+| name           | VARCHAR(100) NOT NULL  | 商品名称            |
+| description    | TEXT                   | 商品描述            |
+| price          | DECIMAL(10,2) NOT NULL | 售价                |
+| original_price | DECIMAL(10,2)          | 原价                |
+| image          | VARCHAR(255)           | 商品图片            |
+| stock          | INT DEFAULT 0          | 库存                |
+| status         | TINYINT DEFAULT 1      | 状态：1上架 / 0下架 |
+| created_at     | DATETIME DEFAULT NOW() | 创建时间            |
 
 ### users — 用户表
 
-| 字段 | 类型 | 说明 |
-|------|------|------|
-| id | INT PK AUTO_INCREMENT | 主键 |
-| openid | VARCHAR(64) UNIQUE NOT NULL | 微信 openid |
-| nickname | VARCHAR(50) | 昵称 |
-| avatar | VARCHAR(255) | 头像 URL |
-| score | INT DEFAULT 0 | 积分 |
-| created_at | DATETIME DEFAULT NOW() | 注册时间 |
+| 字段       | 类型                        | 说明        |
+| ---------- | --------------------------- | ----------- |
+| id         | INT PK AUTO_INCREMENT       | 主键        |
+| openid     | VARCHAR(64) UNIQUE NOT NULL | 微信 openid |
+| nickname   | VARCHAR(50)                 | 昵称        |
+| avatar     | VARCHAR(255)                | 头像 URL    |
+| score      | INT DEFAULT 0               | 积分        |
+| created_at | DATETIME DEFAULT NOW()      | 注册时间    |
 
 ### badges — 任务徽章表
 
-| 字段 | 类型 | 说明 |
-|------|------|------|
-| id | INT PK AUTO_INCREMENT | 主键 |
-| name | VARCHAR(50) NOT NULL | 徽章名称 |
-| icon | VARCHAR(255) | 徽章图标路径 |
-| description | VARCHAR(200) | 描述 |
-| condition_text | VARCHAR(100) | 获取条件说明 |
-| sort_order | INT DEFAULT 0 | 排序权重 |
+| 字段           | 类型                  | 说明         |
+| -------------- | --------------------- | ------------ |
+| id             | INT PK AUTO_INCREMENT | 主键         |
+| name           | VARCHAR(50) NOT NULL  | 徽章名称     |
+| icon           | VARCHAR(255)          | 徽章图标路径 |
+| description    | VARCHAR(200)          | 描述         |
+| condition_text | VARCHAR(100)          | 获取条件说明 |
+| sort_order     | INT DEFAULT 0         | 排序权重     |
 
 ### 初始示例数据
 
 已预置：
+
 - **景点** ×2：井冈山革命博物馆、南昌起义纪念馆
 - **商品** ×2：红色记忆纪念册(¥39.90)、井冈山文创书签(¥19.90)
 - **徽章** ×2：红色先锋、薪火传人
@@ -178,25 +179,25 @@ HPT/
 
 ### 公共接口
 
-| 方法 | 路径 | 说明 | 返回示例 |
-|------|------|------|----------|
-| GET | `/` | 健康检查 | `{ code:200, message:"..." }` |
-| GET | `/api/test-db` | 测试数据库连接 | `{ code:200, data:[...] }` |
-| GET | `/api/images` | 获取图片资源列表 | `{ code:200, data:[{name,url}] }` |
+| 方法 | 路径           | 说明             | 返回示例                          |
+| ---- | -------------- | ---------------- | --------------------------------- |
+| GET  | `/`            | 健康检查         | `{ code:200, message:"..." }`     |
+| GET  | `/api/test-db` | 测试数据库连接   | `{ code:200, data:[...] }`        |
+| GET  | `/api/images`  | 获取图片资源列表 | `{ code:200, data:[{name,url}] }` |
 
 ### 业务接口
 
-| 方法 | 路径 | 说明 | 返回示例 |
-|------|------|------|----------|
-| GET | `/api/spots` | 获取景点列表 | `{ code:200, data:[spots] }` |
-| GET | `/api/products` | 获取商品列表 | `{ code:200, data:[products] }` |
-| GET | `/api/user/:id` | 获取用户信息 | `{ code:200, data:{id,nickname,...} }` |
+| 方法 | 路径            | 说明         | 返回示例                               |
+| ---- | --------------- | ------------ | -------------------------------------- |
+| GET  | `/api/spots`    | 获取景点列表 | `{ code:200, data:[spots] }`           |
+| GET  | `/api/products` | 获取商品列表 | `{ code:200, data:[products] }`        |
+| GET  | `/api/user/:id` | 获取用户信息 | `{ code:200, data:{id,nickname,...} }` |
 
 ### 静态资源
 
-| 方法 | 路径 | 说明 |
-|------|------|------|
-| GET | `/img/:filename` | 返回 server/img/ 下的图片文件 |
+| 方法 | 路径             | 说明                          |
+| ---- | ---------------- | ----------------------------- |
+| GET  | `/img/:filename` | 返回 server/img/ 下的图片文件 |
 
 > 所有接口统一返回格式：`{ code: number, message?: string, data?: any }`
 
@@ -230,7 +231,7 @@ npm run dev
 ```javascript
 module.exports = {
   // 本地开发用 localhost；真机调试改为本机局域网IP或部署后的公网地址
-  baseUrl: 'http://localhost:3000'
+  baseUrl: "http://localhost:3000",
 };
 ```
 
@@ -248,14 +249,14 @@ module.exports = {
 
 ## 各模块开发状态
 
-| 模块 | 完成度 | 当前状态 | 待办事项 |
-|------|--------|----------|----------|
-| **首页** | 90% | UI 完整，数据硬编码 | 对接后端 API 动态渲染轮播图/景点列表 |
-| **地图页** | 5% | 占位文字 | 集成腾讯地图 SDK，展示景点标记 |
-| **商城页** | 5% | 占位文字 | 商品列表展示，商品详情页 |
-| **个人中心** | 5% | 占位文字 | 微信登录，用户信息展示，徽章墙 |
-| **后端 API** | 60% | 只读接口就绪 | 补充写操作(CRUD)，微信登录鉴权 |
-| **数据库** | 80% | 表结构+示例数据 | 按业务扩展字段 |
+| 模块         | 完成度 | 当前状态            | 待办事项                             |
+| ------------ | ------ | ------------------- | ------------------------------------ |
+| **首页**     | 90%    | UI 完整，数据硬编码 | 对接后端 API 动态渲染轮播图/景点列表 |
+| **地图页**   | 5%     | 占位文字            | 集成腾讯地图 SDK，展示景点标记       |
+| **商城页**   | 5%     | 占位文字            | 商品列表展示，商品详情页             |
+| **个人中心** | 5%     | 占位文字            | 微信登录，用户信息展示，徽章墙       |
+| **后端 API** | 60%    | 只读接口就绪        | 补充写操作(CRUD)，微信登录鉴权       |
+| **数据库**   | 80%    | 表结构+示例数据     | 按业务扩展字段                       |
 
 ---
 
@@ -266,26 +267,32 @@ module.exports = {
 ```javascript
 // 小程序页面标准结构
 Page({
-  data: { /* ... */ },
-  onLoad() { /* ... */ },
+  data: {/* ... */},
+  onLoad() {
+    /* ... */
+  },
 
   // 事件方法：on + 元素功能名
-  onFuncCard(e) { /* ... */ },
+  onFuncCard(e) {
+    /* ... */
+  },
 
   // 跳转方法：go + 目标名
-  goMap() { /* ... */ }
+  goMap() {
+    /* ... */
+  },
 });
 ```
 
 ### 配色方案
 
-| 用途 | 色值 | 说明 |
-|------|------|------|
-| 主题红 | `#A80101` | 导航栏背景、AI 圆形、选中态 |
-| 背景米黄 | `#F8F5F0` | 页面整体底色 |
-| TabBar 背景 | `#FEF6F1` | 底部导航浅暖色 |
-| 文字主色 | `#333333` | 正文深灰 |
-| 文字辅色 | `#999999` | 描述浅灰 |
+| 用途        | 色值      | 说明                        |
+| ----------- | --------- | --------------------------- |
+| 主题红      | `#A80101` | 导航栏背景、AI 圆形、选中态 |
+| 背景米黄    | `#F8F5F0` | 页面整体底色                |
+| TabBar 背景 | `#FEF6F1` | 底部导航浅暖色              |
+| 文字主色    | `#333333` | 正文深灰                    |
+| 文字辅色    | `#999999` | 描述浅灰                    |
 
 ### 关键技术决策
 

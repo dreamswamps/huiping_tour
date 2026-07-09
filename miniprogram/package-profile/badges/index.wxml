@@ -1,0 +1,30 @@
+<view class="page">
+
+  <view class="bg-layer"></view>
+
+  <view class="header">
+    <view class="header-back" bindtap="onBack">
+      <text class="back-text">‹</text>
+    </view>
+    <text class="header-title">我的徽章</text>
+    <text class="header-sub">收集 · 传承 · 铭记</text>
+  </view>
+
+  <view class="badge-list">
+    <view class="badge-card {{item.obtained ? 'obtained' : ''}}" wx:for="{{badges}}" wx:key="id">
+            <view class="badge-image-wrap">
+        <image class="badge-image" src="{{item.imgUrl}}" mode="aspectFill"></image>
+        <view class="badge-overlay {{item.obtained ? 'obtained' : ''}}">
+          <text class="badge-status {{item.obtained ? 'obtained' : ''}}">{{item.obtained ? '已获得' : '未获得'}}</text>
+        </view>
+      </view>
+      <view class="badge-info">
+        <text class="badge-num">{{item.station}}</text>
+        <text class="badge-title">{{item.title}}</text>
+        <text class="badge-name">{{item.name}}</text>
+        <text class="badge-desc">{{item.desc}}</text>
+      </view>
+    </view>
+  </view>
+
+</view>

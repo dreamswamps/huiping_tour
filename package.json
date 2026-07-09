@@ -1,0 +1,20 @@
+{
+  "name": "huiping_tour",
+  "version": "1.0.0",
+  "description": "> 红色文化旅游微信小程序 —— 传承红色基因，弘扬革命精神",
+  "main": "do_st45.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitee.com/redteaball/huiping_tour.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "docx": "^9.7.1"
+  }
+}

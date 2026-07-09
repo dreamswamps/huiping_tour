@@ -1,11 +1,11 @@
-const express = require('express');
-const pool = require('../../config/db');
+const express = require("express");
+const pool = require("../../config/db");
 
 const router = express.Router();
 
-router.get('/spots', async (req, res) => {
+router.get("/spots", async (req, res) => {
   try {
-    const [rows] = await pool.query('SELECT * FROM spots ORDER BY id DESC');
+    const [rows] = await pool.query("SELECT * FROM spots ORDER BY id DESC");
     res.json({ code: 200, data: rows });
   } catch (error) {
     res.status(500).json({ code: 500, message: error.message });

@@ -53,7 +53,22 @@
     </view>
 
     <!-- 传薪宣言墙·实时滚动 -->
-    <view class="wall-card">
+    
+    <!-- 收听广播剧卡片 -->
+    <view class="radio-card {{isPlaying ? 'playing' : ''}}" bindtap="onPlayRadio">
+      <view class="radio-left">
+        <view class="radio-icon-wrap">
+          <image class="radio-main-icon" src="{{svgsUrl}}/svgs/svgs/station1-card-radio.svg" mode="aspectFit"></image>
+          <image class="radio-sub-icon" src="{{svgsUrl}}/svgs/svgs/station1-card-radiolabel.svg" mode="aspectFit"></image>
+        </view>
+        <view class="radio-text-wrap">
+          <text class="radio-title">收听广播剧</text>
+          <text class="radio-sub">《薪火延续》· 革命故事</text>
+        </view>
+      </view>
+      <image class="play-icon" src="{{isPlaying ? svgsUrl + '/svgs/svgs/station1-pause.svg' : svgsUrl + '/svgs/svgs/station1-play-arrow.svg'}}" mode="aspectFit"></image>
+    </view>
+<view class="wall-card">
       <view class="wall-header">
         <text class="wall-icon">📜</text>
         <text class="wall-title">传薪宣言墙·实时滚动</text>

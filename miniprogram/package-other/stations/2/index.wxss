@@ -1,18 +1,18 @@
-/* ==================== 页面容器 ==================== */
+/* ==================== 椤甸潰瀹瑰櫒 ==================== */
 .page {
   min-height: 100vh;
-  background: #F8F5F0;
+  background: #f8f5f0;
   position: relative;
 }
 
-/* ==================== 顶部背景 ==================== */
+/* ==================== 椤堕儴鑳屾櫙 ==================== */
 .top-bg {
   width: 100%;
   height: auto;
   display: block;
 }
 
-/* ==================== 返回首页按钮 ==================== */
+/* ==================== 杩斿洖棣栭〉鎸夐挳 ==================== */
 .back-home-btn {
   position: fixed;
   top: 44rpx;
@@ -33,13 +33,13 @@
 }
 .back-home-btn text {
   font-size: 24rpx;
-  color: #C91F37;
+  color: #c91f37;
 }
 
-/* ==================== 圆角内容面板 ==================== */
+/* ==================== 鍦嗚鍐呭闈㈡澘 ==================== */
 .content-panel {
   margin-top: -40rpx;
-  background: #F8F5F0;
+  background: #f8f5f0;
   border-top-left-radius: 80rpx;
   border-top-right-radius: 80rpx;
   padding: 60rpx 56rpx 80rpx;
@@ -47,7 +47,7 @@
   z-index: 1;
 }
 
-/* ==================== 站点信息 ==================== */
+/* ==================== 绔欑偣淇℃伅 ==================== */
 .station-info {
   text-align: center;
   margin-bottom: 36rpx;
@@ -61,44 +61,44 @@
 .num-line {
   width: 112rpx;
   height: 2rpx;
-  background: #D4A017;
+  background: #d4a017;
 }
 .station-num {
   font-size: 28rpx;
-  color: #D4A017;
+  color: #d4a017;
   letter-spacing: 4rpx;
   margin: 0 20rpx;
-  font-family: 'Noto Sans SC', sans-serif;
+  font-family: "Noto Sans SC", sans-serif;
 }
 .station-title {
   display: block;
   text-align: center;
   font-size: 64rpx;
   font-weight: 700;
-  color: #D4A017;
+  color: #d4a017;
   letter-spacing: 5rpx;
-  font-family: 'Noto Sans SC', sans-serif;
+  font-family: "Noto Sans SC", sans-serif;
 }
 .station-name {
   display: block;
   text-align: center;
   font-size: 32rpx;
-  color: #C8A87A;
+  color: #c8a87a;
   margin-top: 18rpx;
-  font-family: 'Noto Sans SC', sans-serif;
+  font-family: "Noto Sans SC", sans-serif;
 }
 .station-desc {
   display: block;
   text-align: left;
   font-size: 30rpx;
-  color: #C8A87A;
+  color: #c8a87a;
   line-height: 1.5;
   letter-spacing: 0.72rpx;
   margin-top: 30rpx;
-  font-family: 'Noto Sans SC', sans-serif;
+  font-family: "Noto Sans SC", sans-serif;
 }
 
-/* ==================== AR扫描卡片 ==================== */
+/* ==================== AR鎵弿鍗＄墖 ==================== */
 .ar-card {
   background: white;
   border-radius: 40rpx;
@@ -122,25 +122,25 @@
 }
 .ar-title {
   font-size: 28rpx;
-  color: #C91F37;
+  color: #c91f37;
   font-weight: 700;
 }
 .ar-sub {
   font-size: 24rpx;
-  color: #5C3A21;
+  color: #5c3a21;
   margin-top: 10rpx;
 }
 .ar-desc {
   display: block;
   font-size: 24rpx;
-  color: #5C3A21;
+  color: #5c3a21;
   line-height: 1.5;
   margin-bottom: 22rpx;
 }
 .ar-btn {
   width: 100%;
   height: 76rpx;
-  background: linear-gradient(274deg, #CE3B45 3%, #E4B983 46%, #CD3542 76%);
+  background: linear-gradient(274deg, #ce3b45 3%, #e4b983 46%, #cd3542 76%);
   border-radius: 40rpx;
   display: flex;
   align-items: center;
@@ -157,11 +157,11 @@
   font-weight: 700;
 }
 
-/* ==================== 红色故事卡片 ==================== */
-.red-card {
+/* ==================== 绾㈣壊鏁呬簨鍗＄墖 ==================== */
+.radio-card {
   width: 100%;
   height: 184rpx;
-  background: #A80101;
+  background: #a80101;
   border-radius: 40rpx;
   box-shadow: 0 8rpx 13rpx rgba(0, 0, 0, 0.25);
   display: flex;
@@ -171,54 +171,54 @@
   margin-bottom: 28rpx;
   box-sizing: border-box;
 }
-.red-left {
+.radio-left {
   display: flex;
   align-items: center;
 }
-.red-icon-wrap {
+.radio-icon-wrap {
   width: 60rpx;
   height: 60rpx;
   position: relative;
   flex-shrink: 0;
 }
-.red-main-icon {
+.radio-main-icon {
   width: 56rpx;
   height: 56rpx;
 }
-.red-sub-icon {
+.radio-sub-icon {
   width: 54rpx;
   height: 54rpx;
   position: absolute;
   left: 6rpx;
   top: 6rpx;
 }
-.red-text-wrap {
+.radio-text-wrap {
   display: flex;
   flex-direction: column;
   margin-left: 24rpx;
 }
-.red-title {
+.radio-title {
   font-size: 30rpx;
-  color: #F5E6C8;
+  color: #f5e6c8;
   font-weight: 700;
-  font-family: 'Noto Sans SC', sans-serif;
+  font-family: "Noto Sans SC", sans-serif;
 }
-.red-sub {
+.radio-sub {
   font-size: 22rpx;
-  color: #C8A87A;
+  color: #c8a87a;
   margin-top: 8rpx;
-  font-family: 'Noto Sans SC', sans-serif;
+  font-family: "Noto Sans SC", sans-serif;
 }
 .play-icon {
   width: 44rpx;
   height: 44rpx;
 }
 
-/* ==================== 打卡按钮 ==================== */
+/* ==================== 鎵撳崱鎸夐挳 ==================== */
 .checkin-btn {
   width: 636rpx;
   height: 100rpx;
-  background: linear-gradient(135deg, #D4A017, #F5D78E);
+  background: linear-gradient(135deg, #d4a017, #f5d78e);
   border-radius: 50rpx;
   display: flex;
   align-items: center;
@@ -227,7 +227,7 @@
   box-shadow: 0 8rpx 20rpx rgba(212, 160, 23, 0.3);
 }
 .checkin-btn.checked {
-  background: linear-gradient(135deg, #4CAF50, #81C784);
+  background: linear-gradient(135deg, #4caf50, #81c784);
   box-shadow: 0 8rpx 20rpx rgba(76, 175, 80, 0.3);
 }
 .checkin-icon-wrap {
@@ -253,11 +253,11 @@
   font-weight: 700;
 }
 
-/* ==================== 去这里导航按钮 ==================== */
+/* ==================== 鍘昏繖閲屽鑸寜閽?==================== */
 .nav-btn {
   width: 636rpx;
   height: 88rpx;
-  background: linear-gradient(274deg, #CE3B45 3%, #E4B983 46%, #CD3542 76%);
+  background: linear-gradient(274deg, #ce3b45 3%, #e4b983 46%, #cd3542 76%);
   border-radius: 44rpx;
   display: flex;
   align-items: center;
@@ -270,11 +270,11 @@
   font-weight: 700;
 }
 
-/* ==================== 返回地图按钮 ==================== */
+/* ==================== 杩斿洖鍦板浘鎸夐挳 ==================== */
 .back-map-btn {
   width: 636rpx;
   height: 88rpx;
-  background: #F3E1D6;
+  background: #f3e1d6;
   border-radius: 40rpx;
   border: 1rpx solid rgba(168, 1, 1, 0.6);
   display: flex;
@@ -284,5 +284,86 @@
 }
 .back-map-btn text {
   font-size: 32rpx;
-  color: #C91F37;
+  color: #c91f37;
+}
+
+/* Playing state animation */
+.radio-card.playing {
+  box-shadow:
+    0 0 24rpx 8rpx rgba(168, 1, 1, 0.4),
+    0 8rpx 13rpx rgba(0, 0, 0, 0.25);
+  animation: radioPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes radioPulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 20rpx 6rpx rgba(168, 1, 1, 0.3),
+      0 8rpx 13rpx rgba(0, 0, 0, 0.25);
+  }
+  50% {
+    box-shadow:
+      0 0 36rpx 12rpx rgba(168, 1, 1, 0.6),
+      0 8rpx 13rpx rgba(0, 0, 0, 0.25);
+  }
+}
+
+/* Video card */
+.video-card {
+  width: 100%;
+  height: 160rpx;
+  background: #8b4513;
+  border-radius: 40rpx;
+  box-shadow: 0 8rpx 13rpx rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32rpx;
+  margin-bottom: 28rpx;
+  box-sizing: border-box;
+}
+.video-left {
+  display: flex;
+  align-items: center;
+}
+.video-icon-wrap {
+  width: 56rpx;
+  height: 56rpx;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.video-icon-wrap .video-play-icon {
+  width: 28rpx;
+  height: 28rpx;
+  margin-left: 4rpx;
+}
+.video-text-wrap {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20rpx;
+}
+.video-title {
+  font-size: 28rpx;
+  color: #f5e6c8;
+  font-weight: 700;
+  font-family: "Noto Sans SC", sans-serif;
+}
+.video-sub {
+  font-size: 22rpx;
+  color: #c8a87a;
+  margin-top: 6rpx;
+  font-family: "Noto Sans SC", sans-serif;
+}
+.video-arrow {
+  width: 44rpx;
+  height: 44rpx;
+}
+.video-arrow-icon {
+  width: 100%;
+  height: 100%;
 }

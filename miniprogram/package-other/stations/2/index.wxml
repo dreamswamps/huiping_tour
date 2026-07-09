@@ -41,18 +41,36 @@
     </view>
 
     <!-- 观看人物动画卡片 -->
-    <view class="red-card" bindtap="onAnimationPlay">
-      <view class="red-left">
-        <view class="red-icon-wrap">
-          <image class="red-main-icon" src="{{svgsUrl}}/svgs/svgs/station2-redcard-main.svg" mode="aspectFit"></image>
-          <image class="red-sub-icon" src="{{svgsUrl}}/svgs/svgs/station2-redcard-sub.svg" mode="aspectFit"></image>
+    <!-- 收听广播剧卡片 -->
+    <view class="radio-card {{isPlaying ? 'playing' : ''}}" bindtap="onPlayRadio">
+      <view class="radio-left">
+        <view class="radio-icon-wrap">
+          <image class="radio-main-icon" src="{{svgsUrl}}/svgs/svgs/station1-card-radio.svg" mode="aspectFit"></image>
+          <image class="radio-sub-icon" src="{{svgsUrl}}/svgs/svgs/station1-card-radiolabel.svg" mode="aspectFit"></image>
         </view>
-        <view class="red-text-wrap">
-          <text class="red-title">观看人物动画</text>
-          <text class="red-sub">《雪妹与雪泉》· 革命故事</text>
+        <view class="radio-text-wrap">
+          <text class="radio-title">收听广播剧</text>
+          <text class="radio-sub">《雪妹与雪泉》· 革命故事</text>
         </view>
       </view>
-      <image class="play-icon" src="{{svgsUrl}}/svgs/svgs/station2-play-arrow.svg" mode="aspectFit"></image>
+      <image class="play-icon" src="{{isPlaying ? svgsUrl + '/svgs/svgs/station1-pause.svg' : svgsUrl + '/svgs/svgs/station2-play-arrow.svg'}}" mode="aspectFit"></image>
+    </view>
+
+
+    <!-- 观看历史视频 -->
+    <view class="video-card" bindtap="onPlayVideo">
+      <view class="video-left">
+        <view class="video-icon-wrap">
+          <image class="video-play-icon" src="{{svgsUrl}}/svgs/svgs/station2-play-arrow.svg" mode="aspectFit"></image>
+        </view>
+        <view class="video-text-wrap">
+          <text class="video-title">观看动画--《雪妹的红豆杉》</text>
+          <text class="video-sub">《雪妹的红豆杉》</text>
+        </view>
+      </view>
+      <view class="video-arrow">
+        <image class="video-arrow-icon" src="{{svgsUrl}}/svgs/svgs/station2-play-arrow.svg" mode="aspectFit"></image>
+      </view>
     </view>
 
     <!-- 打卡按钮 -->

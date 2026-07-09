@@ -1,4 +1,4 @@
-const config = require('../../config');
+const config = require("../../config");
 
 /** 设计稿 402 宽 → rpx（750 基准） */
 const S = 750 / 402;
@@ -9,7 +9,8 @@ const CARD_H = (150 + 42) * S;
 
 Page({
   data: {
-    baseUrl: config.baseUrl,svgsUrl: config.svgsUrl,
+    baseUrl: config.baseUrl,
+    svgsUrl: config.svgsUrl,
 
     /**
      * 手绘地图稿 GTd0dnRsWjR6WycqT789NG node 1:2
@@ -20,85 +21,85 @@ Page({
     stations: [
       {
         id: 1,
-        num: '第1站',
-        name: '陈列馆',
-        title: '星火初燃',
-        status: '可打卡',
-        thumb: 'map-shouxie-thumb-1-chenlie.png',
+        num: "第1站",
+        name: "陈列馆",
+        title: "星火初燃",
+        status: "已打卡",
+        thumb: "map-shouxie-thumb-1-chenlie.png",
         thumbShift: true,
         left: 233 * S,
-        top: 118 * S,
+        top: 6 * S,
         w: CARD_W,
-        h: CARD_H
+        h: CARD_H,
       },
       {
         id: 2,
-        num: '第2站',
-        name: '红军路',
-        title: '薪火相传',
-        status: '可打卡',
-        thumb: 'map-shouxie-thumb-2-hongjunlu.png',
+        num: "第2站",
+        name: "红军路",
+        title: "薪火相传",
+        status: "已打卡",
+        thumb: "map-shouxie-thumb-2-hongjunlu.png",
         left: 25 * S,
-        top: 229 * S,
+        top: 117 * S,
         w: CARD_W,
-        h: CARD_H
+        h: CARD_H,
       },
       {
         id: 3,
-        num: '第3站',
-        name: '党史馆',
-        title: '淬火成钢',
-        status: '可打卡',
-        thumb: 'map-shouxie-thumb-3-dangshiguan.png',
+        num: "第3站",
+        name: "党史馆",
+        title: "淬火成钢",
+        status: "可打卡",
+        thumb: "map-shouxie-thumb-3-dangshiguan.png",
         left: 233 * S,
-        top: 372 * S,
+        top: 260 * S,
         w: CARD_W,
-        h: CARD_H
+        h: CARD_H,
       },
       {
         id: 4,
-        num: '第4站',
-        name: '纪念碑',
-        title: '丰碑永铸',
-        status: '可打卡',
-        thumb: 'map-shouxie-thumb-4-jinianbei.png',
+        num: "第4站",
+        name: "纪念碑",
+        title: "丰碑永铸",
+        status: "可打卡",
+        thumb: "map-shouxie-thumb-4-jinianbei.png",
         left: 25 * S,
-        top: 500 * S,
+        top: 388 * S,
         w: CARD_W,
-        h: CARD_H
+        h: CARD_H,
       },
       {
         id: 5,
-        num: '第5站',
-        name: '红军村',
-        title: '薪火延续',
-        status: '进行中',
-        thumb: 'map-shouxie-thumb-5-hongjuncun.png',
+        num: "第5站",
+        name: "红军村",
+        title: "薪火延续",
+        status: "进行中",
+        thumb: "map-shouxie-thumb-5-hongjuncun.png",
         thumbShift: true,
         left: 233 * S,
-        top: 655 * S,
+        top: 543 * S,
         w: CARD_W,
-        h: CARD_H
-      }
+        h: CARD_H,
+      },
     ],
 
-    canvasHeightRpx: (874 + 48) * S
+    canvasHeightRpx: (874 + 48 - 112) * S,
   },
 
   onShow() {
-    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
+    if (typeof this.getTabBar === "function" && this.getTabBar()) {
       this.getTabBar().setData({ selected: 1 });
     }
   },
 
   onBackHome() {
-    wx.switchTab({ url: '/pages/index/index' });
+    wx.switchTab({ url: "/pages/index/index" });
   },
 
   onEnterStation(e) {
     const { id } = e.currentTarget.dataset;
     wx.navigateTo({
-      url: `/package-other/stations/${id}/index?id=${id}`
+      url: `/package-other/stations/${id}/index?id=${id}`,
     });
-  }
+  },
 });

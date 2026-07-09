@@ -6,8 +6,9 @@ class MallCart {
     this.id = data.id ?? null;
     this.userId = data.userId ?? null;
     this.productId = data.productId ?? null;
-    this.productName = data.productName ?? '';
-    this.productPrice = data.productPrice != null ? Number(data.productPrice) : 0;
+    this.productName = data.productName ?? "";
+    this.productPrice =
+      data.productPrice != null ? Number(data.productPrice) : 0;
     this.productThumb = data.productThumb ?? null;
     this.quantity = data.quantity != null ? Number(data.quantity) : 1;
     this.createdAt = data.createdAt ?? null;
