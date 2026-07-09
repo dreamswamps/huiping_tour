@@ -1,5 +1,8 @@
 App({
-  onLaunch() {},
+  onLaunch() {
+    // iOS 全局：忽略物理静音键，确保音频能播放
+    wx.setInnerAudioOption({ obeyMuteSwitch: false });
+  },
 
   globalData: {
     config: {

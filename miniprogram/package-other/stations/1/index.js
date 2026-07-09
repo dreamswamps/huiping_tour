@@ -51,13 +51,32 @@ Page({
 
   onLoad(options) {
     if (options && options.id) this.setData({ stationId: options.id });
-    // 构建音频地址
-    this.setData({ audioSrc: config.svgsUrl + "/media/1.mp3" });
-    // 创建音频实例
+    const remoteUrl = config.svgsUrl + "/media/1.mp3";
+    this.setData({ audioSrc: remoteUrl, audioRemote: remoteUrl });
     this.innerAudioContext = wx.createInnerAudioContext();
     this.innerAudioContext.onError((err) => {
-      wx.showToast({ title: "播放失败", icon: "none" });
-      this.setData({ isPlaying: false });
+      // 远程播放失败，尝试下载到本地
+      const remote = this.data.audioRemote;
+      if (remote && this.data.audioSrc === remote) {
+        // wx.showLoading({ title: "加载中…" });
+        wx.downloadFile({
+          url: remote,
+          success: (res) => {
+            wx.hideLoading();
+            this.setData({ audioSrc: res.tempFilePath });
+            this.innerAudioContext.src = res.tempFilePath;
+            this.innerAudioContext.play();
+          },
+          fail: () => {
+            wx.hideLoading();
+            wx.showToast({ title: "播放失败", icon: "none" });
+            this.setData({ isPlaying: false });
+          }
+        });
+      } else {
+        wx.showToast({ title: "播放失败", icon: "none" });
+        this.setData({ isPlaying: false });
+      }
     });
     this.innerAudioContext.onEnded(() => {
       this.setData({ isPlaying: false });

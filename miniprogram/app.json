@@ -84,5 +84,10 @@
       "desc": "你的位置信息将用于导航路线规划"
     }
   },
-  "plugins": {}
+  "plugins": {
+    "route-plan": {
+      "version": "latest",
+      "provider": "wx50b5593e81dd937a"
+    }
+  }
 }
