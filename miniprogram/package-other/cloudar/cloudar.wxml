@@ -1,7 +1,8 @@
 <!-- AR扫描页 — 需要 kivicube 插件 -->
-<view class="page" style="display:flex;align-items:center;justify-content:center;height:100vh;background:#F8F5F0;">
+<view class="page" style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;background:#F8F5F0;">
   <view style="text-align:center;padding:40px;">
     <text style="font-size:36rpx;color:#333;display:block;margin-bottom:20rpx;">📷 AR 扫描</text>
     <text style="font-size:26rpx;color:#999;">请在微信公众平台配置 kivicube 插件后使用</text>
   </view>
+  <view class="back-home-btn" bindtap="goHome">返回主页</view>
 </view>

@@ -7,3 +7,12 @@ page {
   width: 100vw;
   height: 100vh;
 }
+.back-home-btn {
+  margin-top: 40rpx;
+  padding: 20rpx 60rpx;
+  font-size: 30rpx;
+  color: #fff;
+  background: #8B6F47;
+  border-radius: 40rpx;
+  text-align: center;
+}

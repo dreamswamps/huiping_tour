@@ -3,6 +3,9 @@
 // 如需启用：1) 微信公众平台添加 kivicube 插件 2) app.json plugins 中声明
 
 Page({
+  goHome() {
+    wx.switchTab({ url: '/pages/index/index' });
+  },
   onLoad() {
     wx.showModal({
       title: "AR扫描",
