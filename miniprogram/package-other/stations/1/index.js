@@ -52,7 +52,7 @@ Page({
   onLoad(options) {
     if (options && options.id) this.setData({ stationId: options.id });
     // 构建音频地址
-    this.setData({ audioSrc: config.svgsUrl + "/media/1.MP3" });
+    this.setData({ audioSrc: config.svgsUrl + "/media/1.mp3" });
     // 创建音频实例
     this.innerAudioContext = wx.createInnerAudioContext();
     this.innerAudioContext.onError((err) => {

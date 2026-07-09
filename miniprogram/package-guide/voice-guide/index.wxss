@@ -1,10 +1,11 @@
 /* Figma 402鑴?74 閳?rpx 閹?750/402 閹广垻鐣?*/
 .page {
-  min-height: 100vh;
+  height: 100vh;
   background: #f8f5f0;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 .vg-top {
@@ -135,8 +136,10 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 12rpx;
   padding-right: 12rpx;
+}
+.vg-main > text:first-child {
+  margin-bottom: 12rpx;
 }
 
 .vg-name {

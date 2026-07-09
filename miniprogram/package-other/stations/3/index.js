@@ -55,7 +55,7 @@ Page({
     if (options && options.id) {
       this.setData({ stationId: options.id });
     }
-    this.setData({ audioSrc: config.svgsUrl + "/media/3.MP3" });
+    this.setData({ audioSrc: config.svgsUrl + "/media/3.mp3" });
     this.innerAudioContext = wx.createInnerAudioContext();
     this.innerAudioContext.onError(() => {
       this.setData({ isPlaying: false });

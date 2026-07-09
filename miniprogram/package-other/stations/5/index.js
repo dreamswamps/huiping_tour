@@ -112,7 +112,7 @@ Page({
       this.setData({ stationId: options.id });
     }
     this.loadDeclarations();
-    this.setData({ audioSrc: config.svgsUrl + "/media/5.MP3" });
+    this.setData({ audioSrc: config.svgsUrl + "/media/5.mp3" });
     this.innerAudioContext = wx.createInnerAudioContext();
     this.innerAudioContext.onError(() => {
       this.setData({ isPlaying: false });

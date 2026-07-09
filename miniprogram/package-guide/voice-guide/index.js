@@ -23,6 +23,7 @@ Page({
 
   onLoad() {
     this.innerAudioContext = wx.createInnerAudioContext();
+    this.innerAudioContext.obeyMuteSwitch = false;
 
     const tracks = this.data.tracks.map((t) => ({
       ...t,
@@ -41,7 +42,7 @@ Page({
       if (idx >= ids.length) return;
       const id = ids[idx];
       const temp = wx.createInnerAudioContext();
-      temp.src = config.svgsUrl + "/media/" + id + ".MP3";
+      temp.src = config.svgsUrl + "/media/" + id + ".mp3";
       let resolved = false;
       temp.onCanplay(() => {
         if (!resolved) {
@@ -75,6 +76,9 @@ Page({
     };
     probeNext();
 
+    this.innerAudioContext.onError((err) => {
+      console.error("[voice-guide] audio error:", err);
+    });
     this.innerAudioContext.onEnded(() => {
       const id = this.data.playingId;
       if (id) {
@@ -108,12 +112,18 @@ Page({
   onPlayTap(e) {
     const id = e.currentTarget.dataset.id;
     const { playingId } = this.data;
+
+    // 暂停当前播放
+    if (playingId) {
+      try { this.innerAudioContext.stop(); } catch (_) {}
+    }
     if (playingId === id) {
-      this.innerAudioContext.pause();
       this.setData({ playingId: "" });
       return;
     }
-    const src = config.svgsUrl + "/media/" + id + ".MP3";
+
+    // 切换音频源（iOS 用小写扩展名）
+    const src = config.svgsUrl + "/media/" + id + ".mp3";
     this.innerAudioContext.src = src;
     this.innerAudioContext.play();
     this.data.trackTimes[id] = "0:00";
