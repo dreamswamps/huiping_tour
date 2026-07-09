@@ -2,10 +2,10 @@ const config = require("../../../config");
 
 const STATION_COORDS = {
   station1: { latitude: 30.22075, longitude: 120.038711 },
-  station2: { latitude: 30.221, longitude: 120.039 },
-  station3: { latitude: 30.222, longitude: 120.04 },
-  station4: { latitude: 30.223, longitude: 120.041 },
-  station5: { latitude: 30.224, longitude: 120.042 },
+  station2: { latitude: 29.252, longitude: 118.845 },
+  station3: { latitude: 29.240, longitude: 118.860 },
+  station4: { latitude: 29.232, longitude: 118.848 },
+  station5: { latitude: 29.244, longitude: 118.870 },
 };
 
 const CHECKIN_DISTANCE = 200; // 打卡距离范围（米）
@@ -128,8 +128,8 @@ Page({
     const referer = "HPT传薪地图";
     const endPoint = JSON.stringify({
       name: "纪念碑",
-      latitude: 30.223,
-      longitude: 120.041,
+      latitude: 29.232,
+      longitude: 118.848,
     });
     wx.navigateTo({
       url: `plugin://route-plan/index?key=${key}&referer=${referer}&endPoint=${endPoint}&mode=walking`,
