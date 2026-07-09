@@ -1,0 +1,24 @@
+<view class="page">
+  <view class="nav-bar">
+    <view class="back-btn" catchtap="onBack">
+      <text class="back-text">返回</text>
+    </view>
+  </view>
+
+  <scroll-view class="scroll" scroll-y enhanced show-scrollbar="{{false}}">
+    <view class="hero-wrap">
+      <image class="hero" src="{{img}}" mode="aspectFill" />
+      <view class="hero-safe" />
+    </view>
+
+    <view class="panel">
+      <view class="content">
+        <text class="name">{{name}}</text>
+        <view class="divider" />
+        <text class="body">{{body}}</text>
+      </view>
+    </view>
+
+    <view class="bottom-pad" />
+  </scroll-view>
+</view>

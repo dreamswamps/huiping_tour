@@ -48,6 +48,41 @@ Page({
         desc: "光荣革命传统的圣地",
         img: "https://svgs1.oss-cn-beijing.aliyuncs.com/S3.png",
       },
+      {
+        title: "上坪田村红军墓",
+        desc: "紧邻红色千里岗革命烈士纪念碑，形成「一碑多墓」红色祭扫组团，现存完整红军烈士墓葬5座",
+        img: "https://svgs1.oss-cn-beijing.aliyuncs.com/sptchjm.JPG",
+      },
+      {
+        title: "老红军故居",
+        desc: "村内保留多处红军指战员长期居住的夯土老民居，完整复原游击时期红军生活原貌",
+        img: "https://svgs1.oss-cn-beijing.aliyuncs.com/lhjgj.JPG",
+      },
+      {
+        title: "朱法祠",
+        desc: "上坪田村百年古宗族祠堂，革命年代成为红军游击队临时集会议事点及后勤落脚点",
+        img: "https://svgs1.oss-cn-beijing.aliyuncs.com/zfc.JPG",
+      },
+      {
+        title: "千年古树群",
+        desc: "上坪田村后山连片千年原生古木林，曾是红军游击队天然的隐蔽屏障",
+        img: "https://svgs1.oss-cn-beijing.aliyuncs.com/qngsq.png",
+      },
+      {
+        title: "云上千里民宿（西坞村）",
+        desc: "坐落于灰坪乡西坞深山村落，四面环绕千里岗连绵青山，视野开阔、空气清新",
+        img: "https://svgs1.oss-cn-beijing.aliyuncs.com/ysqlms.JPG",
+      },
+      {
+        title: "华东第一天坑景区",
+        desc: "灰坪乡标志性大型喀斯特巨型天坑地质景观，亿万年地质运动造就巨型坑体",
+        img: "https://svgs1.oss-cn-beijing.aliyuncs.com/hddytkjq.png",
+      },
+      {
+        title: "金鸡洞",
+        desc: "与两头洞紧密相邻，主洞全长近千米，洞内完整保留200万年原始岩溶地貌",
+        img: "https://svgs1.oss-cn-beijing.aliyuncs.com/jjd.png",
+      },
     ],
   },
 
@@ -117,7 +152,10 @@ Page({
       wx.navigateTo({ url: "/package-guide/dierquweijiuzhi/index" });
       return;
     }
-    wx.showToast({ title: title || "景点详情", icon: "none" });
+    // 其余景点走通用详情页
+    wx.navigateTo({
+      url: "/package-guide/spot-detail/index?name=" + encodeURIComponent(title),
+    });
   },
 
   goMap() {

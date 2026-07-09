@@ -28,28 +28,10 @@ function calcDistance(lat1, lon1, lat2, lon2) {
 // 使用腾讯地图API获取当前位置
 function getCurrentLocation() {
   return new Promise((resolve, reject) => {
-    wx.request({
-      url: "https://apis.map.qq.com/ws/location/v1/ip",
-      data: {
-        key: config.qqMapKey,
-      },
-      success: (res) => {
-        if (
-          res.data.status === 0 &&
-          res.data.result &&
-          res.data.result.location
-        ) {
-          resolve({
-            latitude: res.data.result.location.lat,
-            longitude: res.data.result.location.lng,
-          });
-        } else {
-          reject(new Error("获取位置失败"));
-        }
-      },
-      fail: () => {
-        reject(new Error("网络请求失败"));
-      },
+    wx.getLocation({
+      type: "gcj02",
+      success: (res) => resolve({ latitude: res.latitude, longitude: res.longitude }),
+      fail: () => reject(new Error("请授权位置权限")),
     });
   });
 }

@@ -1,7 +1,7 @@
-/* Figma 402 宽画板 node 2:89，样式与两头洞详情对齐 → 750/402 */
+/* Figma 402 宽画�?node 2:89，样式与两头洞详情对�?�?750/402 */
 .page {
   min-height: 100vh;
-  background: #ffffff;
+  background: #f8f5f0;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;

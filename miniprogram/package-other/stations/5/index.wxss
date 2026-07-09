@@ -275,23 +275,6 @@
   background: linear-gradient(135deg, #4caf50, #81c784);
   box-shadow: 0 8rpx 20rpx rgba(76, 175, 80, 0.3);
 }
-.checkin-icon-wrap {
-  width: 44rpx;
-  height: 44rpx;
-  position: relative;
-  margin-right: 12rpx;
-}
-.checkin-icon {
-  width: 44rpx;
-  height: 44rpx;
-}
-.checkin-checked-icon {
-  width: 24rpx;
-  height: 24rpx;
-  position: absolute;
-  right: -6rpx;
-  bottom: -6rpx;
-}
 .checkin-btn text {
   font-size: 32rpx;
   color: white;

@@ -5,7 +5,7 @@
   <view class="nav-bar">
     <!-- 返回按钮 -->
     <view class="back-btn" catchtap="onBack">
-      <image class="back-icon" src="{{svgsUrl}}/svgs/svgs/benefits-back-arrow.svg" mode="aspectFit"></image>
+      <image class="back-icon" src="https://svgs1.oss-cn-beijing.aliyuncs.com/svgs/svgs/benefits-back-arrow.svg" mode="aspectFit"></image>
       <text class="back-text">返回</text>
     </view>
     <!-- 页面标题 -->

@@ -1,6 +1,4 @@
 {
   "navigationStyle": "custom",
-  "usingComponents": {
-    "mall-bottom-tab": "../../pages/mall/components/mall-bottom-tab/mall-bottom-tab"
-  }
+  "usingComponents": {}
 }

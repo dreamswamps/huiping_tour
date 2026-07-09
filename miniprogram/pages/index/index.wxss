@@ -248,6 +248,11 @@
   opacity: 0.75;
 }
 
+.spot-scroll {
+  height: 680rpx;
+  margin-bottom: 20rpx;
+}
+
 .spot-list {
   display: flex;
   flex-direction: column;

@@ -76,10 +76,6 @@
 
     <!-- 打卡按钮 -->
     <view class="checkin-btn {{isCheckedIn ? 'checked' : ''}}" bindtap="onCheckIn">
-      <view class="checkin-icon-wrap">
-        <image class="checkin-icon" src="{{svgsUrl}}/svgs/svgs/checkin-icon.svg" mode="aspectFit"></image>
-        <image wx:if="{{isCheckedIn}}" class="checkin-checked-icon" src="{{svgsUrl}}/svgs/svgs/checkin-checked.svg" mode="aspectFit"></image>
-      </view>
       <text>{{isCheckedIn ? '已打卡' : '打卡'}}</text>
     </view>
 

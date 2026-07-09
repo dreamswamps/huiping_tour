@@ -69,20 +69,22 @@
         <text class="section-title">热门景点</text>
       </view>
       <view class="section-more">
-        <text class="section-more-text">下滑查看更多</text>
+        <text class="section-more-text">上下滑动查看更多</text>
         <image class="section-more-arrow" src="{{svgsUrl}}/svgs/svgs/arrow-down.svg" mode="aspectFit" />
       </view>
     </view>
 
-    <view class="spot-list">
-      <view class="spot-item" wx:for="{{spots}}" wx:key="title" catchtap="onSpotDetail" data-title="{{item.title}}">
-        <image class="spot-bg" src="{{item.img}}" mode="aspectFill" />
-        <view class="spot-overlay">
-          <text class="spot-name">{{item.title}}</text>
-          <text class="spot-desc">{{item.desc}}</text>
+    <scroll-view class="spot-scroll" scroll-y enhanced show-scrollbar="{{true}}">
+      <view class="spot-list">
+        <view class="spot-item" wx:for="{{spots}}" wx:key="title" catchtap="onSpotDetail" data-title="{{item.title}}">
+          <image class="spot-bg" src="{{item.img}}" mode="aspectFill" />
+          <view class="spot-overlay">
+            <text class="spot-name">{{item.title}}</text>
+            <text class="spot-desc">{{item.desc}}</text>
+          </view>
         </view>
       </view>
-    </view>
+    </scroll-view>
 
     <view class="safe-bottom"></view>
   </scroll-view>

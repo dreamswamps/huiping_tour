@@ -2,10 +2,10 @@ const config = require("../../../config");
 
 const STATION_COORDS = {
   station1: { latitude: 30.22075, longitude: 120.038711 },
-  station2: { latitude: 29.252, longitude: 118.845 },
-  station3: { latitude: 29.240, longitude: 118.860 },
-  station4: { latitude: 29.232, longitude: 118.848 },
-  station5: { latitude: 29.244, longitude: 118.870 },
+  station2: { latitude: 30.221, longitude: 120.039 },
+  station3: { latitude: 30.222, longitude: 120.04 },
+  station4: { latitude: 30.223, longitude: 120.041 },
+  station5: { latitude: 30.224, longitude: 120.042 },
 };
 
 const CHECKIN_DISTANCE = 200;
@@ -26,24 +26,10 @@ function calcDistance(lat1, lon1, lat2, lon2) {
 
 function getCurrentLocation() {
   return new Promise((resolve, reject) => {
-    wx.request({
-      url: "https://apis.map.qq.com/ws/location/v1/ip",
-      data: { key: config.qqMapKey },
-      success: (res) => {
-        if (
-          res.data.status === 0 &&
-          res.data.result &&
-          res.data.result.location
-        ) {
-          resolve({
-            latitude: res.data.result.location.lat,
-            longitude: res.data.result.location.lng,
-          });
-        } else {
-          reject(new Error("获取位置失败"));
-        }
-      },
-      fail: () => reject(new Error("网络请求失败")),
+    wx.getLocation({
+      type: "gcj02",
+      success: (res) => resolve({ latitude: res.latitude, longitude: res.longitude }),
+      fail: () => reject(new Error("请授权位置权限")),
     });
   });
 }
@@ -113,9 +99,7 @@ Page({
       sources: [
         {
           url:
-            "" +
-            "https://svgs1.oss-cn-beijing.aliyuncs.com/media/Video1.mp4" +
-            "",
+            "https://svgs1.oss-cn-beijing.aliyuncs.com/media/%E9%9B%AA%E5%A6%B9%E7%9A%84%E7%BA%A2%E8%B1%86%E6%9D%89_metool.mp4",
           type: "video",
         },
       ],
@@ -128,8 +112,8 @@ Page({
     const referer = "HPT传薪地图";
     const endPoint = JSON.stringify({
       name: "红军路",
-      latitude: 29.252,
-      longitude: 118.845,
+      latitude: 30.221,
+      longitude: 120.039,
     });
     wx.navigateTo({
       url:
