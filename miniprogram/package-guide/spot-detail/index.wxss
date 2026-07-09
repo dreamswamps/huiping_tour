@@ -38,29 +38,29 @@
 }
 
 .nav-bar {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   padding: 20rpx 22rpx 16rpx;
-  padding-top: calc(20rpx + env(safe-area-inset-top));
+  padding-top: calc(60rpx + env(safe-area-inset-top));
   z-index: 100;
+  background: linear-gradient(180deg, rgba(0,0,0,0.35) 0%, transparent 100%);
 }
-
 .back-btn {
   display: flex;
   align-items: center;
-  width: 160rpx;
-  height: 72rpx;
-  background: rgba(255,255,255,0.9);
-  border-radius: 30rpx;
-  padding-left: 28rpx;
-  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.1);
+  justify-content: center;
+  width: 130rpx;
+  height: 64rpx;
+  background: rgba(255,255,255,0.95);
+  border-radius: 32rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.15);
 }
-
 .back-text {
-  font-size: 28rpx;
+  font-size: 26rpx;
   color: #333;
+  font-weight: 500;
 }
 
 .panel {
@@ -72,6 +72,13 @@
   box-shadow: 0 -18rpx 30rpx rgba(0,0,0,0.25);
   box-sizing: border-box;
   min-height: 400rpx;
+}
+
+.panel--no-hero {
+  margin-top: 0;
+  border-radius: 0;
+  box-shadow: none;
+  padding-top: 80rpx;
 }
 
 .divider {

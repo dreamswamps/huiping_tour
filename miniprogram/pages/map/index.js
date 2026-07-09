@@ -6,14 +6,14 @@ const BOUNDS = {
   maxLng: 118.90,
 };
 
-// 13 级是最大视野（比 14 级大 10%），不能缩得更小
+// 13 级是最大视野，不能缩得更小
 const MIN_SCALE = 13;
 
 function clamp(val, min, max) {
   return Math.max(min, Math.min(max, val));
 }
 
-// 站点数据（坐标暂用估算值，需替换为实际经纬度）
+// 5 个传薪站点
 const STATIONS = [
   { id: 1, num: "第1站", name: "陈列馆", title: "星火初燃", latitude: 29.258957, longitude: 118.810398 },
   { id: 2, num: "第2站", name: "红军路", title: "薪火相传", latitude: 29.252, longitude: 118.845 },
@@ -22,36 +22,66 @@ const STATIONS = [
   { id: 5, num: "第5站", name: "红军村", title: "薪火延续", latitude: 29.244, longitude: 118.870 },
 ];
 
+// 10 个景点点位（坐标暂估算，后续替换）
+const SPOTS = [
+  { id: 101, name: "上坪田村红军墓",      latitude: 29.258, longitude: 118.813 },
+  { id: 102, name: "红军秘密联络处旧址",    latitude: 29.257, longitude: 118.811 },
+  { id: 103, name: "老红军故居",           latitude: 29.259, longitude: 118.812 },
+  { id: 104, name: "朱法祠",              latitude: 29.256, longitude: 118.814 },
+  { id: 105, name: "千年古树群",           latitude: 29.253, longitude: 118.812 },
+  { id: 106, name: "上坪田乡愁文化长廊",    latitude: 29.257, longitude: 118.810 },
+  { id: 107, name: "红色千里岗景区",        latitude: 29.242, longitude: 118.850 },
+  { id: 108, name: "云上千里民宿（西坞村）", latitude: 29.238, longitude: 118.860 },
+  { id: 109, name: "华东第一天坑景区",      latitude: 29.232, longitude: 118.865 },
+  { id: 110, name: "金鸡洞",              latitude: 29.248, longitude: 118.868 },
+];
+
+function buildStationMarkers() {
+  return STATIONS.map((s) => ({
+    id: s.id,
+    latitude: s.latitude,
+    longitude: s.longitude,
+    title: s.name,
+    callout: {
+      content: s.num + " " + s.name + "\n" + s.title,
+      color: "#c91f37",
+      fontSize: 13,
+      borderRadius: 8,
+      padding: 8,
+      display: "ALWAYS",
+    },
+    width: 36,
+    height: 36,
+  }));
+}
+
+function buildSpotMarkers() {
+  return SPOTS.map((s) => ({
+    id: s.id,
+    latitude: s.latitude,
+    longitude: s.longitude,
+    title: s.name,
+    callout: {
+      content: s.name,
+      color: "#5c3a21",
+      fontSize: 12,
+      borderRadius: 8,
+      padding: 6,
+      display: "ALWAYS",
+    },
+    width: 28,
+    height: 28,
+  }));
+}
+
 Page({
   data: {
     centerLat: 29.24099,
     centerLng: 118.85542,
-    markers: STATIONS.map((s) => ({
-      id: s.id,
-      latitude: s.latitude,
-      longitude: s.longitude,
-      title: s.name,
-      callout: {
-        content: s.num + " " + s.name + "\n" + s.title,
-        color: "#c91f37",
-        fontSize: 13,
-        borderRadius: 8,
-        padding: 8,
-        display: "ALWAYS",
-      },
-      width: 36,
-      height: 36,
-    })),
+    markers: [...buildStationMarkers(), ...buildSpotMarkers()],
     scale: MIN_SCALE,
     rotate: 90,
-    polylines: [{
-      points: STATIONS.map((s) => ({ latitude: s.latitude, longitude: s.longitude })),
-      color: "#c91f37",
-      width: 4,
-      borderColor: "#fff",
-      borderWidth: 2,
-      arrowLine: true,
-    }],
+    polylines: [],
   },
 
   onReady() {
@@ -61,7 +91,6 @@ Page({
   onRegionChange(e) {
     if (e.type !== "end") return;
 
-    // 拖拽结束 — 限制中心点不超出灰坪乡
     if (e.causedBy === "drag") {
       const center = e.detail.centerLocation;
       if (center) {
@@ -76,7 +105,6 @@ Page({
       }
     }
 
-    // 缩放结束 — 限制不小于 13 级
     if (e.causedBy === "scale" || e.causedBy === "drag") {
       this.mapCtx.getScale({
         success: (res) => {
@@ -90,9 +118,20 @@ Page({
 
   onMarkerTap(e) {
     const markerId = e.detail.markerId;
-    wx.navigateTo({
-      url: `/package-other/stations/${markerId}/index?id=${markerId}`,
-    });
+    if (markerId <= 100) {
+      // 5 个站点
+      wx.navigateTo({
+        url: `/package-other/stations/${markerId}/index?id=${markerId}`,
+      });
+    } else {
+      // 10 个景点
+      const spot = SPOTS.find((s) => s.id === markerId);
+      if (spot) {
+        wx.navigateTo({
+          url: "/package-guide/spot-detail/index?name=" + encodeURIComponent(spot.name),
+        });
+      }
+    }
   },
 
   onShow() {

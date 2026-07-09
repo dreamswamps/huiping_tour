@@ -6,12 +6,12 @@
   </view>
 
   <scroll-view class="scroll" scroll-y enhanced show-scrollbar="{{false}}">
-    <view class="hero-wrap">
+    <view class="hero-wrap" wx:if="{{img}}">
       <image class="hero" src="{{img}}" mode="aspectFill" />
       <view class="hero-safe" />
     </view>
 
-    <view class="panel">
+    <view class="panel {{img ? '' : 'panel--no-hero'}}">
       <view class="content">
         <text class="name">{{name}}</text>
         <view class="divider" />
