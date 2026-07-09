@@ -6,8 +6,9 @@ const BOUNDS = {
   maxLng: 118.90,
 };
 
-// 13 级是最大视野，不能缩得更小
+// 默认 17 级，可缩小到 13 级
 const MIN_SCALE = 13;
+const DEFAULT_SCALE = 17;
 
 function clamp(val, min, max) {
   return Math.max(min, Math.min(max, val));
@@ -76,12 +77,19 @@ function buildSpotMarkers() {
 
 Page({
   data: {
-    centerLat: 29.24099,
-    centerLng: 118.85542,
+    centerLat: 29.258957,
+    centerLng: 118.810398,
     markers: [...buildStationMarkers(), ...buildSpotMarkers()],
-    scale: MIN_SCALE,
+    scale: DEFAULT_SCALE,
     rotate: 90,
-    polylines: [],
+    polylines: [{
+      points: STATIONS.map((s) => ({ latitude: s.latitude, longitude: s.longitude })),
+      color: "#c91f37",
+      width: 4,
+      borderColor: "#fff",
+      borderWidth: 2,
+      arrowLine: true,
+    }],
   },
 
   onReady() {
@@ -119,12 +127,10 @@ Page({
   onMarkerTap(e) {
     const markerId = e.detail.markerId;
     if (markerId <= 100) {
-      // 5 个站点
       wx.navigateTo({
         url: `/package-other/stations/${markerId}/index?id=${markerId}`,
       });
     } else {
-      // 10 个景点
       const spot = SPOTS.find((s) => s.id === markerId);
       if (spot) {
         wx.navigateTo({
