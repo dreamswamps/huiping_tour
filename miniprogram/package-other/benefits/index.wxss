@@ -9,6 +9,7 @@
 .nav-bar {
   position: relative;
   padding: 20rpx 22rpx 16rpx;
+  padding-top: calc(80rpx + env(safe-area-inset-top));
 }
 
 /* 返回按钮 */

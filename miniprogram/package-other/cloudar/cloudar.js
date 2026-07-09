@@ -3,16 +3,7 @@
 // 如需启用：1) 微信公众平台添加 kivicube 插件 2) app.json plugins 中声明
 
 Page({
-  goHome() {
-    wx.switchTab({ url: '/pages/index/index' });
-  },
-  onLoad() {
-    wx.showModal({
-      title: "AR扫描",
-      content: "AR 功能需要配置 kivicube 插件后才能使用",
-      showCancel: false,
-    });
-  },
+  onLoad() {},
   ready({ detail: { sceneInfo } }) {
     console.log("当前场景基础信息", sceneInfo);
     wx.showToast({ title: "场景加载中...", icon: "none" });
