@@ -13,4 +13,7 @@
     bindphoto="photo"
     binderror="error"
   />
+  <view class="back-btn" catchtap="onBack">
+    <text class="back-text">← 返回</text>
+  </view>
 </view>

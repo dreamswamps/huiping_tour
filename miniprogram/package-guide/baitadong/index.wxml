@@ -10,7 +10,7 @@
     <view class="hero-wrap">
       <image
         class="hero"
-        src="https://svgs1.oss-cn-beijing.aliyuncs.com/station1.png"
+        src="https://svgs1.oss-cn-beijing.aliyuncs.com/S2.png"
         mode="aspectFill"
       />
       <view class="hero-safe" />

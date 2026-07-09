@@ -7,6 +7,21 @@ page {
   width: 100vw;
   height: 100vh;
 }
+.back-btn {
+  position: fixed;
+  top: calc(60rpx + env(safe-area-inset-top));
+  left: 30rpx;
+  z-index: 999;
+  padding: 16rpx 32rpx;
+  background: rgba(255,255,255,0.95);
+  border-radius: 32rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.15);
+}
+.back-text {
+  font-size: 26rpx;
+  color: #333;
+  font-weight: 500;
+}
 .back-home-btn {
   margin-top: 40rpx;
   padding: 20rpx 60rpx;

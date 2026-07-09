@@ -4,6 +4,9 @@
 
 Page({
   onLoad() {},
+  onBack() {
+    wx.navigateBack();
+  },
   ready({ detail: { sceneInfo } }) {
     console.log("当前场景基础信息", sceneInfo);
     wx.showToast({ title: "场景加载中...", icon: "none" });

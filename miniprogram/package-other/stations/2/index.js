@@ -80,7 +80,7 @@ Page({
   },
 
   onArScan() {
-    wx.showToast({ title: "正在启动AR扫描…", icon: "none" });
+    wx.navigateTo({ url: "/package-other/cloudar/cloudar" });
   },
 
   onPlayRadio() {
