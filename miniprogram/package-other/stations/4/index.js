@@ -67,7 +67,7 @@ Page({
 
   onUnload() {
     if (this.innerAudioContext) {
-      this.innerAudioContext.stop();
+      try { this.innerAudioContext.stop(); } catch (_) {}
       this.innerAudioContext.destroy();
       this.innerAudioContext = null;
     }

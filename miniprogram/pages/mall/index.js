@@ -97,7 +97,7 @@ Page({
     const { baseUrl } = this.data;
     this.showMallTip({
       message: `${item.name} 已加入购物车`,
-      icon: `${baseUrl}/img/mall-prompt-xinghuo.svg`,
+      icon: `${baseUrl}/img/svgs/mall-prompt-xinghuo.svg`,
       duration: 2000,
     });
   },
@@ -120,7 +120,7 @@ Page({
     const { baseUrl } = this.data;
     this.showMallTip({
       message: "正在跳转结算页面……",
-      icon: `${baseUrl}/img/mall-prompt-settle.svg`,
+      icon: `${baseUrl}/img/svgs/mall-prompt-settle.svg`,
       duration: 1600,
       onEnd: () => {
         wx.navigateTo({ url: "/package-mall/cart/index" });
