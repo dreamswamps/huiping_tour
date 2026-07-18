@@ -3,9 +3,9 @@ const config = require("../../../config");
 const STATION_COORDS = {
   station1: { latitude: 30.22075, longitude: 120.038711 },
   station2: { latitude: 29.252, longitude: 118.845 },
-  station3: { latitude: 29.240, longitude: 118.860 },
+  station3: { latitude: 29.24, longitude: 118.86 },
   station4: { latitude: 29.232, longitude: 118.848 },
-  station5: { latitude: 29.244, longitude: 118.870 },
+  station5: { latitude: 29.244, longitude: 118.87 },
 };
 
 const CHECKIN_DISTANCE = 200;
@@ -28,7 +28,8 @@ function getCurrentLocation() {
   return new Promise((resolve, reject) => {
     wx.getLocation({
       type: "gcj02",
-      success: (res) => resolve({ latitude: res.latitude, longitude: res.longitude }),
+      success: (res) =>
+        resolve({ latitude: res.latitude, longitude: res.longitude }),
       fail: () => reject(new Error("请授权位置权限")),
     });
   });
@@ -55,7 +56,7 @@ Page({
     if (options && options.id) {
       this.setData({ stationId: options.id });
     }
-    this.setData({ audioSrc: config.svgsUrl + "/media/3.mp3" });
+    this.setData({ audioSrc: config.svgsUrl + "/media/3.MP3" });
     this.innerAudioContext = wx.createInnerAudioContext();
     this.innerAudioContext.onError(() => {
       this.setData({ isPlaying: false });
@@ -67,7 +68,9 @@ Page({
 
   onUnload() {
     if (this.innerAudioContext) {
-      try { this.innerAudioContext.stop(); } catch (_) {}
+      try {
+        this.innerAudioContext.stop();
+      } catch (_) {}
       this.innerAudioContext.destroy();
       this.innerAudioContext = null;
     }
@@ -126,8 +129,8 @@ Page({
     const referer = "HPT传薪地图";
     const endPoint = JSON.stringify({
       name: "党史馆",
-      latitude: 29.240,
-      longitude: 118.860,
+      latitude: 29.24,
+      longitude: 118.86,
     });
     wx.navigateTo({
       url:

@@ -6,7 +6,8 @@ Page({
     svgsUrl: config.svgsUrl,
     swiperCurrent: 0,
     bannerList: [
-      {  //图床是从 1开始标号的。。。。
+      {
+        //图床是从 1开始标号的。。。。
         id: "b0",
         img: "https://svgs1.oss-cn-beijing.aliyuncs.com/B1.jpg",
       },

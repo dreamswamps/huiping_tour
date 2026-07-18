@@ -94,10 +94,10 @@ Page({
       thumb: item.thumb || "",
       spec: "默认",
     });
-    const { baseUrl } = this.data;
+    const { svgsUrl } = this.data;
     this.showMallTip({
       message: `${item.name} 已加入购物车`,
-      icon: `${baseUrl}/img/svgs/mall-prompt-xinghuo.svg`,
+      icon: `${svgsUrl}/svgs/svgs/mall-prompt-xinghuo.svg`,
       duration: 2000,
     });
   },
@@ -117,10 +117,10 @@ Page({
       thumb: item.thumb || "",
       spec: "默认",
     });
-    const { baseUrl } = this.data;
+    const { svgsUrl } = this.data;
     this.showMallTip({
       message: "正在跳转结算页面……",
-      icon: `${baseUrl}/img/svgs/mall-prompt-settle.svg`,
+      icon: `${svgsUrl}/svgs/svgs/mall-prompt-settle.svg`,
       duration: 1600,
       onEnd: () => {
         wx.navigateTo({ url: "/package-mall/cart/index" });

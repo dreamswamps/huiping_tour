@@ -13,9 +13,9 @@ page {
   left: 30rpx;
   z-index: 999;
   padding: 16rpx 32rpx;
-  background: rgba(255,255,255,0.95);
+  background: rgba(255, 255, 255, 0.95);
   border-radius: 32rpx;
-  box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.15);
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.15);
 }
 .back-text {
   font-size: 26rpx;
@@ -27,7 +27,7 @@ page {
   padding: 20rpx 60rpx;
   font-size: 30rpx;
   color: #fff;
-  background: #8B6F47;
+  background: #8b6f47;
   border-radius: 40rpx;
   text-align: center;
 }

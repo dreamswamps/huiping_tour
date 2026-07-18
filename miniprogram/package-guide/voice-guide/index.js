@@ -6,7 +6,8 @@ Page({
     svgsUrl: config.svgsUrl,
     playingId: "",
     trackTimes: { 1: "0:00", 2: "0:00", 3: "0:00", 4: "0:00" },
-    trackDurations: { 1: "0:00", 2: "0:00", 3: "0:00", 4: "0:00" },
+    // 预估值（128kbps CBR MP3），探测/播放成功后会覆盖为精确值
+    trackDurations: { 1: "1:03", 2: "0:54", 3: "0:55", 4: "0:58" },
     tracks: [
       { id: "1", name: "陈列馆", desc: "红色千里岗革命历史陈列馆" },
       { id: "2", name: "红军路", desc: "蛤蟆岭红军路" },
@@ -35,14 +36,14 @@ Page({
     }));
     this.setData({ tracks });
 
-    // Probe each audio independently to get actual durations
+    // 尝试探测时长（模拟器有效，真机可能失败但不影响使用）
     const ids = ["1", "2", "3", "4"];
     let idx = 0;
     const probeNext = () => {
       if (idx >= ids.length) return;
       const id = ids[idx];
       const temp = wx.createInnerAudioContext();
-      temp.src = config.svgsUrl + "/media/" + id + ".mp3";
+      temp.src = config.svgsUrl + "/media/" + id + ".MP3";
       let resolved = false;
       temp.onCanplay(() => {
         if (!resolved) {
@@ -89,10 +90,16 @@ Page({
     this.innerAudioContext.onTimeUpdate(() => {
       const id = this.data.playingId;
       if (id) {
-        const remaining = Math.max(
-          0,
-          this.innerAudioContext.duration - this.innerAudioContext.currentTime,
-        );
+        const dur = this.innerAudioContext.duration;
+        // 播放时用真实时长覆盖预估值
+        if (dur && dur > 0) {
+          const formatted = this.formatTime(dur);
+          if (this.data.trackDurations[id] !== formatted) {
+            this.data.trackDurations[id] = formatted;
+            this.setData({ trackDurations: this.data.trackDurations });
+          }
+        }
+        const remaining = Math.max(0, dur - this.innerAudioContext.currentTime);
         this.data.trackTimes[id] = this.formatTime(remaining);
         this.setData({ trackTimes: this.data.trackTimes });
       }
@@ -115,7 +122,9 @@ Page({
 
     // 暂停当前播放
     if (playingId) {
-      try { this.innerAudioContext.stop(); } catch (_) {}
+      try {
+        this.innerAudioContext.stop();
+      } catch (_) {}
     }
     if (playingId === id) {
       this.setData({ playingId: "" });
@@ -123,7 +132,7 @@ Page({
     }
 
     // 切换音频源（iOS 用小写扩展名）
-    const src = config.svgsUrl + "/media/" + id + ".mp3";
+    const src = config.svgsUrl + "/media/" + id + ".MP3";
     this.innerAudioContext.src = src;
     this.innerAudioContext.play();
     this.data.trackTimes[id] = "0:00";

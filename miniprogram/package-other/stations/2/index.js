@@ -28,7 +28,8 @@ function getCurrentLocation() {
   return new Promise((resolve, reject) => {
     wx.getLocation({
       type: "gcj02",
-      success: (res) => resolve({ latitude: res.latitude, longitude: res.longitude }),
+      success: (res) =>
+        resolve({ latitude: res.latitude, longitude: res.longitude }),
       fail: () => reject(new Error("请授权位置权限")),
     });
   });
@@ -53,7 +54,7 @@ Page({
     if (options && options.id) {
       this.setData({ stationId: options.id });
     }
-    this.setData({ audioSrc: config.svgsUrl + "/media/2.mp3" });
+    this.setData({ audioSrc: config.svgsUrl + "/media/2.MP3" });
     this.innerAudioContext = wx.createInnerAudioContext();
     this.innerAudioContext.onError(() => {
       this.setData({ isPlaying: false });
@@ -65,7 +66,9 @@ Page({
 
   onUnload() {
     if (this.innerAudioContext) {
-      try { this.innerAudioContext.stop(); } catch (_) {}
+      try {
+        this.innerAudioContext.stop();
+      } catch (_) {}
       this.innerAudioContext.destroy();
       this.innerAudioContext = null;
     }
@@ -98,8 +101,7 @@ Page({
     wx.previewMedia({
       sources: [
         {
-          url:
-            "https://svgs1.oss-cn-beijing.aliyuncs.com/media/%E9%9B%AA%E5%A6%B9%E7%9A%84%E7%BA%A2%E8%B1%86%E6%9D%89_metool.mp4",
+          url: "https://svgs1.oss-cn-beijing.aliyuncs.com/media/%E9%9B%AA%E5%A6%B9%E7%9A%84%E7%BA%A2%E8%B1%86%E6%9D%89_metool.mp4",
           type: "video",
         },
       ],

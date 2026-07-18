@@ -121,7 +121,7 @@ Page({
       promptLoginThenProfile();
       return;
     }
-    const { productId, detail, listPrice, listThumb, baseUrl } = this.data;
+    const { productId, detail, listPrice, listThumb, svgsUrl } = this.data;
     if (!productId || !detail) return;
     const thumbForCart =
       listThumb || (Array.isArray(detail.images) && detail.images[0]) || "";
@@ -134,7 +134,7 @@ Page({
     });
     this.showMallTip({
       message: `${detail.productName} 已加入购物车`,
-      icon: `${baseUrl}/img/svgs/mall-prompt-xinghuo.svg`,
+      icon: `${svgsUrl}/svgs/svgs/mall-prompt-xinghuo.svg`,
       duration: 2000,
     });
   },
@@ -145,10 +145,10 @@ Page({
       return;
     }
     this.onAddCart();
-    const { baseUrl } = this.data;
+    const { svgsUrl } = this.data;
     this.showMallTip({
       message: "正在跳转结算页面……",
-      icon: `${baseUrl}/img/svgs/mall-prompt-settle.svg`,
+      icon: `${svgsUrl}/svgs/svgs/mall-prompt-settle.svg`,
       duration: 1600,
       onEnd: () => {
         wx.navigateTo({ url: "/package-mall/cart/index" });

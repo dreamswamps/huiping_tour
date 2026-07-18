@@ -3,9 +3,9 @@ const config = require("../../../config");
 const STATION_COORDS = {
   station1: { latitude: 29.258957, longitude: 118.810398 },
   station2: { latitude: 29.252, longitude: 118.845 },
-  station3: { latitude: 29.240, longitude: 118.860 },
+  station3: { latitude: 29.24, longitude: 118.86 },
   station4: { latitude: 29.232, longitude: 118.848 },
-  station5: { latitude: 29.244, longitude: 118.870 },
+  station5: { latitude: 29.244, longitude: 118.87 },
 };
 
 const CHECKIN_DISTANCE = 200;
@@ -28,7 +28,8 @@ function getCurrentLocation() {
   return new Promise((resolve, reject) => {
     wx.getLocation({
       type: "gcj02",
-      success: (res) => resolve({ latitude: res.latitude, longitude: res.longitude }),
+      success: (res) =>
+        resolve({ latitude: res.latitude, longitude: res.longitude }),
       fail: () => reject(new Error("请授权位置权限")),
     });
   });
@@ -51,7 +52,7 @@ Page({
 
   onLoad(options) {
     if (options && options.id) this.setData({ stationId: options.id });
-    const remoteUrl = config.svgsUrl + "/media/1.mp3";
+    const remoteUrl = config.svgsUrl + "/media/1.MP3";
     this.setData({ audioSrc: remoteUrl, audioRemote: remoteUrl });
     this.innerAudioContext = wx.createInnerAudioContext();
     this.innerAudioContext.onError((err) => {
@@ -71,7 +72,7 @@ Page({
             wx.hideLoading();
             wx.showToast({ title: "播放失败", icon: "none" });
             this.setData({ isPlaying: false });
-          }
+          },
         });
       } else {
         wx.showToast({ title: "播放失败", icon: "none" });
@@ -85,7 +86,9 @@ Page({
 
   onUnload() {
     if (this.innerAudioContext) {
-      try { this.innerAudioContext.stop(); } catch (_) {}
+      try {
+        this.innerAudioContext.stop();
+      } catch (_) {}
       this.innerAudioContext.destroy();
       this.innerAudioContext = null;
     }

@@ -9,6 +9,7 @@ module.exports = {
   baseUrl: "http://110.40.187.34:3000",
   // 本地开发（模拟器）
   // baseUrl: "http://192.168.110.9:3456",
+  // OSS bucket 已设为私有，本地开发时使用本地服务器
   svgsUrl: "https://svgs1.oss-cn-beijing.aliyuncs.com",
   // 腾讯地图插件 Key（lbs 服务）
   qqMapKey: "37OBZ-T3YKC-ZOQ24-AQEFG-QJ3ST-ADFAU",

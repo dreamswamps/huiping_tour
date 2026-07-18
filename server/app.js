@@ -19,6 +19,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/img", express.static(path.join(__dirname, "img")));
+// OSS bucket 私有化后的兼容映射：/img/svgs/svgs/ → /img/svgs/
+app.use("/img/svgs/svgs", express.static(path.join(__dirname, "img", "svgs")));
+// 兼容 OSS 根目录图片：/img/station1.png 等也可通过 /station1.png 访问
+app.use(express.static(path.join(__dirname, "img")));
 
 app.get("/", (req, res) => {
   res.json({

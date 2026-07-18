@@ -88,8 +88,7 @@
     "route-plan": {
       "version": "latest",
       "provider": "wx50b5593e81dd937a"
-    }
-    ,
+    },
     "kivicube": {
       "version": "2.16.2",
       "provider": "wx3bbab3920eabccb2"
