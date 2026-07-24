@@ -30,7 +30,8 @@
         "address/index",
         "address/edit",
         "orders/index",
-        "badges/index"
+        "badges/index",
+        "venue/index"
       ]
     },
     {

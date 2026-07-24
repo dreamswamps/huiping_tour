@@ -43,6 +43,12 @@ Page({
         iconBg: "profile-menu-4-bg",
         iconFg: "profile-menu-4-fg",
       },
+      {
+        id: 4,
+        label: "场馆预约",
+        iconBg: "profile-menu-5-bg",
+        iconFg: "profile-menu-5-fg",
+      },
     ],
   },
 
@@ -356,6 +362,20 @@ Page({
         return;
       }
       wx.navigateTo({ url: "/package-profile/orders/index" });
+      return;
+    }
+    if (id === 4) {
+      wx.showModal({
+        title: "场馆预约",
+        content: "联系电话：13615700306",
+        confirmText: "拨打",
+        cancelText: "取消",
+        success(res) {
+          if (res.confirm) {
+            wx.makePhoneCall({ phoneNumber: "13615700306" });
+          }
+        },
+      });
       return;
     }
     wx.showToast({ title: `待开发`, icon: "none" });
