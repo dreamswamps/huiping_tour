@@ -17,10 +17,20 @@ require("dotenv").config();
     const [cols] = await conn.query("SHOW COLUMNS FROM `" + tbl + "`");
     for (const c of cols) {
       const type = c.Type.toLowerCase();
-      if (type.includes("varchar") || type.includes("text") || type.includes("char")) {
+      if (
+        type.includes("varchar") ||
+        type.includes("text") ||
+        type.includes("char")
+      ) {
         try {
           const [rows] = await conn.query(
-            "SELECT `" + c.Field + "` FROM `" + tbl + "` WHERE `" + c.Field + "` LIKE '%http%' LIMIT 3"
+            "SELECT `" +
+              c.Field +
+              "` FROM `" +
+              tbl +
+              "` WHERE `" +
+              c.Field +
+              "` LIKE '%http%' LIMIT 3",
           );
           for (const r of rows) {
             const val = String(r[c.Field]);
