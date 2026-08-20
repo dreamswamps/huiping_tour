@@ -197,7 +197,7 @@ const doc = new Document({
             ["OSS", "svgs1.oss-cn-beijing.aliyuncs.com"],
             ["代码仓库", "https://gitee.com/redteaball/huiping_tour"],
             ["分支", "616dome"],
-            ["AppID", "wx71269755a3711ceb"],
+            ["AppID", "wx3f0567dc86f7ca12"],
             ["当前 baseUrl", "http://110.40.187.34:3000"],
           ],
           true,

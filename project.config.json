@@ -1,5 +1,7 @@
 {
+  "miniprogramRoot": "miniprogram/",
   "setting": {
+    "urlCheck": false,
     "es6": true,
     "postcss": true,
     "minified": true,
@@ -29,7 +31,7 @@
     "ignore": [],
     "include": []
   },
-  "appid": "wx71269755a3711ceb",
+  "appid": "wx3f0567dc86f7ca12",
   "editorSetting": {},
   "libVersion": "3.16.0"
 }
