@@ -1,7 +1,5 @@
 App({
   onLaunch() {
-    // 开启 vConsole 调试面板（上线前删掉）
-    wx.setEnableDebug({ enableDebug: true });
     // iOS 全局：忽略物理静音键，确保音频能播放
     wx.setInnerAudioOption({ obeyMuteSwitch: false });
   },
