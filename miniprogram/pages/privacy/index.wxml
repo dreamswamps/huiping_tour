@@ -1,0 +1,28 @@
+<!-- 隐私政策 -->
+<view class="page">
+
+  <!-- ========== 顶部导航栏 ========== -->
+  <view class="nav-bar">
+    <view class="back-btn" catchtap="onBack">
+      <text class="back-text">‹ 返回</text>
+    </view>
+    <text class="page-title">隐私政策</text>
+  </view>
+
+  <!-- ========== 政策正文 ========== -->
+  <scroll-view class="doc-body" scroll-y enhanced show-scrollbar="{{false}}">
+    <view class="doc-inner">
+      <text class="doc-updated">更新日期：2026年8月23日</text>
+
+      <block wx:for="{{sections}}" wx:key="title">
+        <view class="section">
+          <text class="sec-title">{{item.title}}</text>
+          <text class="sec-body">{{item.body}}</text>
+        </view>
+      </block>
+
+      <view class="safe-bottom"></view>
+    </view>
+  </scroll-view>
+
+</view>

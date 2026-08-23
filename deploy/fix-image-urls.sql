@@ -9,7 +9,7 @@
 
 -- 1) 把老地址批量替换为正式域名（域名改成你自己的）
 UPDATE `products`
-SET `thumb` = REPLACE(`thumb`, 'http://localhost:3000', 'https://huipingzhiyou.cn')
+SET `thumb` = REPLACE(`thumb`, 'http://localhost:3000', 'https://yaoqihuiping.com')
 WHERE `thumb` LIKE '%localhost%';
 
 -- 2) 文件名大小写修正：turn-1.JPG / turn-2.JPG（其余 turn-3~5 已是小写）

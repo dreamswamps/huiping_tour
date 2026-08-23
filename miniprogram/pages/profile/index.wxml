@@ -24,7 +24,7 @@
       </view>
     </view>
 
-    <!-- 登录按钮区域 -->
+    <!-- 登录按钮区域（合规：未勾选时点登录弹提示，不执行登录） -->
     <view class="login-btn-area" wx:if="{{!isLogin}}">
       <button
         class="wx-login-btn"
@@ -35,7 +35,19 @@
         <text class="wx-icon">💬</text>
         <text class="wx-login-text">微信一键登录</text>
       </button>
-      <text class="login-hint">登录即表示同意《用户协议》和《隐私政策》</text>
+
+      <!-- 默认不勾选；点击整行切换勾选态（自定义勾选框，避免原生checkbox受控不同步） -->
+      <view class="agree-row">
+        <view class="agree-label" catchtap="onAgreeTap">
+          <view class="agree-checkbox {{isAgree ? 'agree-checkbox--checked' : ''}}">
+            <text class="agree-check-mark" wx:if="{{isAgree}}">✓</text>
+          </view>
+          <text class="agree-text">我已阅读并同意</text>
+        </view>
+        <text class="agree-link" bindtap="openUserAgree">《用户协议》</text>
+        <text class="agree-text">和</text>
+        <text class="agree-link" bindtap="openPrivacy">《隐私政策》</text>
+      </view>
     </view>
 
   </view>

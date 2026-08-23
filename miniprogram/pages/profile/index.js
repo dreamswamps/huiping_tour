@@ -7,6 +7,9 @@ Page({
 
     // 登录状态
     isLogin: false,
+
+    // 是否已勾选《用户协议》《隐私政策》（默认不勾选）
+    isAgree: false,
     userInfo: {
       id: null,
       nickname: "",
@@ -71,8 +74,35 @@ Page({
     }
   },
 
+  // 协议勾选状态切换（自定义勾选框，点击直接翻转）
+  onAgreeTap() {
+    this.setData({ isAgree: !this.data.isAgree });
+  },
+
+  // 打开《用户协议》页面
+  openUserAgree() {
+    wx.navigateTo({ url: "/pages/userAgree/index" });
+  },
+
+  // 打开《隐私政策》页面
+  openPrivacy() {
+    wx.navigateTo({ url: "/pages/privacy/index" });
+  },
+
   // 微信一键登录 - 获取用户信息
   onLogin() {
+    console.log("[登录] onLogin 触发, isAgree =", this.data.isAgree);
+
+    // 合规校验：未勾选协议时弹窗提示，不执行登录
+    if (!this.data.isAgree) {
+      wx.showModal({
+        title: "提示",
+        content: "请阅读并同意《用户协议》和《隐私政策》后再进行登录",
+        showCancel: false,
+      });
+      return;
+    }
+
     // 检查是否有缓存的头像和昵称
     const loginCache = wx.getStorageSync("loginCache") || {};
     const hasCache = loginCache.avatar || loginCache.nickname;
@@ -182,11 +212,13 @@ Page({
 
   // 微信授权登录（弹窗）
   doLoginWithWxAuth() {
+    console.log("[登录] 进入 doLoginWithWxAuth，开始请求头像昵称");
     wx.showLoading({ title: "登录中..." });
 
     wx.getUserProfile({
       desc: "用于展示您的头像和昵称",
       success: (userRes) => {
+        console.log("[登录] getUserProfile 成功", userRes.userInfo);
         const { avatarUrl, nickName } = userRes.userInfo;
 
         // 获取登录凭证
@@ -314,6 +346,7 @@ Page({
           // 重置页面状态
           this.setData({
             isLogin: false,
+            isAgree: false,
             userInfo: {
               id: null,
               nickname: "",
