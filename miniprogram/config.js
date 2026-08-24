@@ -11,5 +11,5 @@ module.exports = {
   // OSS bucket 已设为私有，本地开发时使用本地服务器
   svgsUrl: "https://svgs1.oss-cn-beijing.aliyuncs.com",
   // 腾讯地图插件 Key（lbs 服务）
-  qqMapKey: "37OBZ-T3YKC-ZOQ24-AQEFG-QJ3ST-ADFAU",
+  qqMapKey: "AUVBZ-7SPCT-K5UXN-LIJU6-M6PQ2-JCBST",
 };
