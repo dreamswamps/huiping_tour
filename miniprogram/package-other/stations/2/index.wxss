@@ -15,17 +15,18 @@
 /* ==================== 杩斿洖棣栭〉鎸夐挳 ==================== */
 .back-home-btn {
   position: fixed;
-  top: 44rpx;
+  top: calc(env(safe-area-inset-top) + 24rpx);
   left: 34rpx;
-  width: 192rpx;
-  height: 68rpx;
+  width: 224rpx;
+  height: 84rpx;
+  padding: 0 8rpx;
   background: white;
-  border-radius: 20rpx;
+  border-radius: 24rpx;
   box-shadow: 0 0 5rpx rgba(88, 5, 5, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 10;
+  z-index: 30;
 }
 .home-icon {
   width: 30rpx;
