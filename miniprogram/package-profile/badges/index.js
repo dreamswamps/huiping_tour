@@ -8,7 +8,7 @@ const badgeList = [
     title: "星火初燃",
     name: "陈列馆",
     desc: "点亮初心火种",
-    obtained: true,
+    obtained: false,
   },
   {
     id: 2,
@@ -17,7 +17,7 @@ const badgeList = [
     title: "薪火相传",
     name: "红军路",
     desc: "解锁历史故事",
-    obtained: true,
+    obtained: false,
   },
   {
     id: 3,
