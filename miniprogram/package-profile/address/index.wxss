@@ -6,10 +6,16 @@
 }
 
 .nav-bar {
-  padding: 20rpx 22rpx 16rpx;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100rpx 22rpx 16rpx;
 }
 
 .back-btn {
+  position: absolute;
+  left: 22rpx;
   display: flex;
   align-items: center;
   width: 192rpx;

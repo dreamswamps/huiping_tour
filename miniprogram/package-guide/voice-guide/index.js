@@ -5,6 +5,7 @@ Page({
     baseUrl: config.baseUrl,
     svgsUrl: config.svgsUrl,
     playingId: "",
+    isPlaying: false,
     trackTimes: { 1: "0:00", 2: "0:00", 3: "0:00", 4: "0:00" },
     // 预估值（128kbps CBR MP3），探测/播放成功后会覆盖为精确值
     trackDurations: { 1: "1:03", 2: "0:54", 3: "0:55", 4: "0:58" },
@@ -84,7 +85,8 @@ Page({
       const id = this.data.playingId;
       if (id) {
         this.data.trackTimes[id] = this.data.trackDurations[id] || "0:00";
-        this.setData({ trackTimes: this.data.trackTimes, playingId: "" });
+        this.setData({ trackTimes: this.data.trackTimes, playingId: "",
+        isPlaying: false, });
       }
     });
     this.innerAudioContext.onTimeUpdate(() => {
@@ -121,14 +123,22 @@ Page({
     const { playingId } = this.data;
 
     // 暂停当前播放
+    // 逻辑是判断正在播放的是否为目标音频，若为目标音频则暂停播放
+    // 否则停止播放且播放目标音频
+    if (playingId === id) {
+      if (this.innerAudioContext.paused) {
+        this.innerAudioContext.play();
+        this.setData({ isPlaying: true });
+      } else {
+        this.innerAudioContext.pause();
+        this.setData({ isPlaying: false });
+      }
+      return;
+    }
     if (playingId) {
       try {
         this.innerAudioContext.stop();
       } catch (_) {}
-    }
-    if (playingId === id) {
-      this.setData({ playingId: "" });
-      return;
     }
 
     // 切换音频源（iOS 用小写扩展名）
@@ -136,6 +146,10 @@ Page({
     this.innerAudioContext.src = src;
     this.innerAudioContext.play();
     this.data.trackTimes[id] = "0:00";
-    this.setData({ playingId: id, trackTimes: this.data.trackTimes });
+    this.setData({ 
+      playingId: id, 
+      trackTimes: this.data.trackTimes,
+      isPlaying: true,
+    });
   },
 });

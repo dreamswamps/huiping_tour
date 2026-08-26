@@ -8,12 +8,17 @@
 /* ==================== 顶部导航栏 ==================== */
 .nav-bar {
   position: relative;
-  padding: 20rpx 22rpx 16rpx;
-  padding-top: calc(80rpx + env(safe-area-inset-top));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100rpx 22rpx 16rpx;
+  margin-bottom: 10rpx;
 }
 
 /* 返回按钮 */
 .back-btn {
+  position: absolute;
+  left: 22rpx;
   display: flex;
   align-items: center;
   width: 192rpx;
@@ -40,7 +45,7 @@
   font-size: 40rpx;
   font-weight: 700;
   color: #c91f37;
-  margin-top: 8rpx;
+  /* margin-top: 8rpx; */
 }
 
 /* ==================== 茶园权益卡（渐变卡片）==================== */

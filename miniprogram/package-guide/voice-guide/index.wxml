@@ -1,15 +1,12 @@
 <!-- AI导览 · Figma 9MYxTcRZCTWlumWzZ3UxS3 node 2:2 -->
 <view class="page">
   <view class="vg-top">
-    <view class="vg-safe" />
-    <view class="vg-nav">
-      <view class="vg-nav-side">
-        <view class="vg-back" bindtap="onBack">
-          <text class="vg-back-text">返回</text>
-        </view>
+    <view class="nav-bar">
+      <view class="back-btn" catchtap="onBack">
+        <image class="back-icon" src="https://svgs1.oss-cn-beijing.aliyuncs.com/svgs/svgs/benefits-back-arrow.svg" mode="aspectFit"></image>
+        <text class="back-text">返回</text>
       </view>
-      <text class="vg-title">语音导览</text>
-      <view class="vg-nav-side vg-nav-side--right" />
+      <text class="nav-title">语音导览</text>
     </view>
   </view>
 
@@ -44,10 +41,10 @@
         <view class="vg-side">
           <view
             class="vg-play {{playingId === item.id ? 'vg-play--on' : ''}}"
-            catchtap="onPlayTap"
+            bindtap="onPlayTap"
             data-id="{{item.id}}"
           >
-            <text class="vg-play-tri">▶</text>
+            <text class="vg-play-tri">{{playingId === item.id && isPlaying ? '⏸' : '▶'}}</text>
           </view>
           <text class="vg-time">{{playingId === item.id ? trackTimes[item.id] : (trackDurations[item.id] || '0:00')}}</text>
         </view>

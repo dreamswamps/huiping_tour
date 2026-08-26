@@ -15,7 +15,7 @@
 /* ==================== 返回首页按钮（fixed） ==================== */
 .back-home-btn {
   position: fixed;
-  top: calc(env(safe-area-inset-top) + 24rpx);
+  top: calc(env(safe-area-inset-top) + 80rpx);
   left: 34rpx;
   width: 224rpx;
   height: 84rpx;

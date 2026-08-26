@@ -64,6 +64,14 @@ Page({
     });
   },
 
+  onHide() {
+    if (this.innerAudioContext) {
+      this.innerAudioContext.stop();
+      this.innerAudioContext.destroy();
+      this.innerAudioContext = null;
+    }
+  },
+  
   onUnload() {
     if (this.innerAudioContext) {
       try {

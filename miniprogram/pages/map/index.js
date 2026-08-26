@@ -92,7 +92,7 @@ function buildStationMarkers() {
       display: "ALWAYS",
     },
     width: 36,
-    height: 36,
+    height: 48,
   }));
 }
 
@@ -110,8 +110,8 @@ function buildSpotMarkers() {
       padding: 6,
       display: "ALWAYS",
     },
-    width: 28,
-    height: 28,
+    width: 27,
+    height: 36,
   }));
 }
 
@@ -121,7 +121,7 @@ Page({
     centerLng: 118.810398,
     markers: [...buildStationMarkers(), ...buildSpotMarkers()],
     scale: DEFAULT_SCALE,
-    rotate: 90,
+    rotate: 0,
     polylines: [
       {
         points: STATIONS.map((s) => ({
