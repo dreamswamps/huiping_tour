@@ -60,6 +60,61 @@ Page({
 
   onShow() {
     this.loadOrders();
+    const userInfo = wx.getStorageSync("userInfo") || {};
+    if (userInfo.token) {
+      wx.request({
+        url: `${config.baseUrl}/api/payment/pay`,
+        method: "POST",
+        header: getAuthHeaders(true),
+        data: { orderId: 6 },
+        success: (res) => {
+          if (res.data.code !== 200) {
+            wx.showToast({ title: res.data.message || "支付下单失败", icon: "none" });
+            return;
+          }
+    
+          const payData = res.data.data;
+    
+          // Mock模式：模拟支付成功
+          if (payData.mock) {
+            wx.showToast({ title: "支付成功（模拟）", icon: "success" });
+            // 延迟刷新订单列表，让后端异步处理
+            setTimeout(() => {
+              wx.redirectTo({ url: "/pages/orders/orders" });
+            }, 1500);
+            return;
+          }
+    
+          // 真实支付：调起微信支付
+          wx.requestPayment({
+            timeStamp: payData.timeStamp,
+            nonceStr: payData.nonceStr,
+            package: payData.package,
+            signType: payData.signType || "RSA",
+            paySign: payData.paySign,
+            success: () => {
+              wx.showToast({ title: "支付成功", icon: "success" });
+              // 跳转订单列表，等待回调更新状态
+              setTimeout(() => {
+                wx.redirectTo({ url: "/pages/orders/orders" });
+              }, 1500);
+            },
+            fail: (err) => {
+              // 用户取消支付或支付失败
+              console.log(err);
+              wx.showToast({ 
+                title: err.errMsg.includes("cancel") ? "已取消支付" : "支付失败，请重试", 
+                icon: "none" 
+              });
+            }
+          });
+        },
+        fail: (err) => {
+          wx.showToast({ title: "网络请求失败", icon: "none" });
+          console.error("[支付请求失败]", err);
+        }
+      });
+    }
   },
 
   onBack() {

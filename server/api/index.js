@@ -9,5 +9,6 @@ router.use(require("./spots"));
 router.use("/mall", require("./mall"));
 router.use("/messages", require("./messages"));
 router.use(require("./system"));
+router.use("/payment", require("./payment"));
 
 module.exports = router;
