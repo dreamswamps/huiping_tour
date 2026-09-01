@@ -241,7 +241,7 @@ Page({
     // 进入加载状态
     const productIds = lines.map((l) => l.productId);
     this.setData({ submitLoading: true });
-    this.updateSubmitState();
+    // this.updateSubmitState();
 
     // 生成订单
     wx.request({
@@ -274,11 +274,6 @@ Page({
         // 调用支付请求
         const orderId = body.data?.id
         this.requestPayment(orderId);
-
-        // wx.showToast({ title: "下单成功", icon: "success" });
-        // setTimeout(() => {
-        //   wx.navigateBack({ delta: 1 });
-        // }, 1200);
       },
       fail: () => {
         wx.showToast({ title: "网络异常", icon: "none" });
