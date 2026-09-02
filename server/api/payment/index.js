@@ -2,6 +2,7 @@ const crypto = require("crypto");
 const express = require("express");
 const pool = require("../../config/db");
 const { requireUserAuth } = require("../../middleware/auth");
+const { getPrivateKey } = require("../../utils/certHelper");
 const axios = require("axios");
 const fs = require("fs");
 const path = require("path");
@@ -103,11 +104,7 @@ router.post("/pay", requireUserAuth, async (req, res) => {
                 [(totalFee / 100).toFixed(2), order.id]
             );
             console.log('检测到异常的订单价格');
-        }
-
-        totalFee = 100;
-        console.log('金额已设置为0.01');
-        
+        }        
 
         const [users] = await conn.query(
             `SELECT openid FROM users WHERE id = ?`,
@@ -243,14 +240,12 @@ router.post("/callback", async (req, res) => {
 async function wxUnifiedOrder({ openid, outTradeNo, totalFee, description }) {
     const { appid, mchid, serialNo, notifyUrl } = WEIXIN_CONFIG;
 
-    // 直接从文件读取私钥
+    // 从文件读取证书
     let privateKey;
     try {
-        const privateKeyPath = path.join(__dirname, '../../certs/apiclient_key.pem');
-        privateKey = fs.readFileSync(privateKeyPath, 'utf8');
-        console.log('✅ 证书读取成功');
+        privateKey = getPrivateKey();
     } catch (error) {
-        console.error('❌ 读取证书失败:', error.message);
+        console.error('读取证书失败:', error.message);
         throw new Error('证书文件不存在或无法读取');
     }
 
@@ -287,15 +282,6 @@ async function wxUnifiedOrder({ openid, outTradeNo, totalFee, description }) {
     const signature = sign.sign(privateKey, "base64");
 
     const authHeader = `WECHATPAY2-SHA256-RSA2048 mchid="${mchid}",nonce_str="${nonceStr}",timestamp="${timestamp}",serial_no="${serialNo}",signature="${signature}"`;
-
-    console.log('=== 调试信息 ===');
-    console.log('timestamp:', timestamp);
-    console.log('nonceStr:', nonceStr);
-    console.log('serialNo:', serialNo);
-    console.log('body length:', body.length);
-    console.log('signature length:', signature.length);
-    console.log('===============');
-
     let response;
     try {
         response = await axios.post(url, body, {
@@ -307,11 +293,7 @@ async function wxUnifiedOrder({ openid, outTradeNo, totalFee, description }) {
         });
     } catch (error) {
         if (error.response) {
-            console.error('=== 微信支付错误详情 ===');
-            console.error('HTTP状态码:', error.response.status);
-            console.error('错误响应体:', JSON.stringify(error.response.data, null, 2));
-            console.error('请求头:', JSON.stringify(error.response.config.headers, null, 2));
-            console.error('=====================');
+            console.error('微信支付请求失败:', error.response.status, error.response.data);
             throw new Error(`微信支付错误: ${JSON.stringify(error.response.data)}`);
         }
         throw error;
