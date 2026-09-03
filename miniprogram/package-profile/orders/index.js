@@ -36,7 +36,8 @@ function itemsPreview(items) {
 function mapOrderRow(o) {
   const st = Number(o.status);
   const meta = statusMeta(st);
-  const canCancel = st === 0 || st === 1;
+  // 只允许待付款取消（待发货走发货流程）
+  const canCancel = st === 0;
   const amt = Number(o.totalAmount);
   return {
     ...o,
@@ -56,6 +57,9 @@ Page({
     list: [],
     loading: true,
     loadError: "",
+    // 支付中状态，用于防重复点击
+    payingOrderId: null,
+    shippingOrderId: null,  // 正在发货的订单ID
   },
 
   onShow() {
@@ -117,6 +121,92 @@ Page({
     });
   },
 
+  // ========== 新增：支付相关 ==========
+  onPayOrder(e) {
+    const id = Number(e.currentTarget.dataset.id);
+    if (!Number.isInteger(id) || id < 1) return;
+    // 防重复点击
+    if (this.data.payingOrderId === id) return;
+
+    // 确认支付弹窗（可选）
+    wx.showModal({
+      title: "确认支付",
+      content: "即将发起微信支付，请确认订单信息无误",
+      confirmColor: "#c91f37",
+      success: (r) => {
+        if (!r.confirm) return;
+        this.requestPayment(id);
+      },
+    });
+  },
+
+  requestPayment(orderId) {
+    // 设置支付中状态
+    this.setData({ payingOrderId: orderId });
+
+    wx.showLoading({ title: "支付准备中", mask: true });
+
+    const { baseUrl } = this.data;
+    wx.request({
+      url: `${baseUrl}/api/payment/pay`,
+      method: "POST",
+      header: getAuthHeaders(true),
+      data: { orderId: orderId },
+      success: (payRes) => {
+        wx.hideLoading();
+        const payBody = payRes.data || {};
+        // 支付接口调用失败
+        if (payRes.statusCode !== 200 || payBody.code !== 200) {
+          wx.showToast({ title: payBody.message || "支付发起失败", icon: "none" });
+          this.setData({ payingOrderId: null });
+          // 刷新列表，状态可能已变更
+          this.loadOrders();
+          return;
+        }
+
+        const payData = payBody.data;
+        // 【模拟模式】
+        if (payData.mock) {
+          wx.showToast({ title: "支付成功（模拟）", icon: "success" });
+          this.setData({ payingOrderId: null });
+          this.loadOrders();
+          return;
+        }
+
+        // 【真实支付】唤起微信支付
+        wx.requestPayment({
+          timeStamp: payData.timeStamp,
+          nonceStr: payData.nonceStr,
+          package: payData.package,
+          signType: payData.signType || "RSA",
+          paySign: payData.paySign,
+          success: () => {
+            wx.showToast({ title: "支付成功", icon: "success" });
+            this.setData({ payingOrderId: null });
+            this.loadOrders();
+          },
+          fail: (err) => {
+            if (err.errMsg && err.errMsg.includes("cancel")) {
+              wx.showToast({ title: "支付取消，订单已保留", icon: "none" });
+            } else {
+              wx.showToast({ title: "支付失败，请稍后重试", icon: "none" });
+            }
+            this.setData({ payingOrderId: null });
+            // 刷新列表，可能订单状态已变（如过期）
+            this.loadOrders();
+          },
+        });
+      },
+      fail: () => {
+        wx.hideLoading();
+        wx.showToast({ title: "支付请求网络异常", icon: "none" });
+        this.setData({ payingOrderId: null });
+        this.loadOrders();
+      },
+    });
+  },
+
+  // ========== 原有取消订单逻辑 ==========
   onCancel(e) {
     const id = Number(e.currentTarget.dataset.id);
     if (!Number.isInteger(id) || id < 1) return;
@@ -149,6 +239,58 @@ Page({
           },
         });
       },
+    });
+  },
+  
+  // 发货操作（AI演示）
+  onShipOrder(e) {
+    const id = Number(e.currentTarget.dataset.id);
+    if (!Number.isInteger(id) || id < 1) return;
+    if (this.data.shippingOrderId === id) return; // 防连点
+
+    wx.showModal({
+      title: "确认发货",
+      content: "确认包裹已打包，为该订单发货？",
+      confirmColor: "#c91f37",
+      success: (res) => {
+        if (!res.confirm) return;
+
+        this.setData({ shippingOrderId: id });
+        wx.showLoading({ title: "发货中", mask: true });
+
+        wx.request({
+          url: `${this.data.baseUrl}/api/mall/orders/${id}/ship`,
+          method: "POST",
+          header: getAuthHeaders(true),
+          success: (res) => {
+            wx.hideLoading();
+            const body = res.data || {};
+            if (res.statusCode === 200 && body.code === 200) {
+              wx.showToast({ title: "🚚 已发往物流中心", icon: "success" });
+            } else {
+              wx.showToast({ title: body.message || "发货失败", icon: "none" });
+            }
+            this.setData({ shippingOrderId: null });
+            this.loadOrders(); // 刷新列表
+          },
+          fail: () => {
+            wx.hideLoading();
+            wx.showToast({ title: "网络异常", icon: "none" });
+            this.setData({ shippingOrderId: null });
+          },
+        });
+      },
+    });
+  },
+
+  // 查看物流（AI演示占位）
+  onViewLogistics(e) {
+    const id = Number(e.currentTarget.dataset.id);
+    if (!Number.isInteger(id) || id < 1) return;
+    wx.showToast({
+      title: '物流功能开发中，敬请期待',
+      icon: 'none',
+      duration: 2000,
     });
   },
 });

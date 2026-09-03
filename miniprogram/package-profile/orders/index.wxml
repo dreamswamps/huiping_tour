@@ -31,9 +31,22 @@
           <text class="order-time">{{item.timeText}}</text>
           <text class="order-amount">¥{{item.totalText}}</text>
         </view>
-        <view class="order-actions" wx:if="{{item.canCancel}}">
-          <view class="btn-cancel" catchtap="onCancel" data-id="{{item.id}}">
+        <view class="order-actions" wx:if="{{item.canCancel || item.status === 0 || item.status === 1 || item.status === 2}}">
+          <!-- 取消订单按钮（仅待付款、待发货可取消） -->
+          <view wx:if="{{item.canCancel}}" class="btn-cancel" catchtap="onCancel" data-id="{{item.id}}">
             <text>取消订单</text>
+          </view>
+            <!-- AI 待发货（status=1）显示发货按钮（演示） -->
+          <view wx:if="{{item.status === 1}}" class="btn-pay" catchtap="onShipOrder" data-id="{{item.id}}">
+            <text>{{ shippingOrderId === item.id ? '发货中...' : '发货' }}</text>
+          </view>
+          <!-- 去支付按钮（仅待付款） -->
+          <view wx:if="{{item.status === 0}}" class="btn-pay" catchtap="onPayOrder" data-id="{{item.id}}">
+            <text>{{ payingOrderId === item.id ? '支付中...' : '去支付' }}</text>
+          </view>
+          <!-- AI 新增：已发货（status=2）显示查看物流 -->
+          <view wx:if="{{item.status === 2}}" class="btn-logistics" catchtap="onViewLogistics" data-id="{{item.id}}">
+            <text>查看物流</text>
           </view>
         </view>
       </view>

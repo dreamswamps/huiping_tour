@@ -155,17 +155,22 @@
   color: #c91f37;
 }
 
+/* ---------- 操作按钮区域（支持多个按钮） ---------- */
 .order-actions {
   margin-top: 20rpx;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+  align-items: center;
+  gap: 16rpx;               /* 按钮间距（微信小程序支持 gap） */
 }
 
+/* 取消按钮（灰色边框） */
 .btn-cancel {
   padding: 14rpx 32rpx;
   border-radius: 999rpx;
   border: 2rpx solid #c91f37;
+  background: transparent;
 }
 
 .btn-cancel text {
@@ -173,6 +178,44 @@
   color: #c91f37;
 }
 
+/* 支付按钮（红色填充，更醒目） */
+.btn-pay {
+  padding: 14rpx 32rpx;
+  border-radius: 999rpx;
+  border: 2rpx solid #c91f37;
+  background: #c91f37;
+  transition: opacity 0.2s;
+}
+
+.btn-pay text {
+  font-size: 26rpx;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.btn-pay:active {
+  opacity: 0.7;
+}
+
+.btn-cancel:active {
+  opacity: 0.7;
+}
+
 .list-bottom {
   height: 40rpx;
+}
+
+/* 查看物流按钮（中性灰） */
+.btn-logistics {
+  padding: 14rpx 32rpx;
+  border-radius: 999rpx;
+  border: 2rpx solid #ccc;
+  background: transparent;
+}
+.btn-logistics text {
+  font-size: 26rpx;
+  color: #666;
+}
+.btn-logistics:active {
+  opacity: 0.7;
 }
