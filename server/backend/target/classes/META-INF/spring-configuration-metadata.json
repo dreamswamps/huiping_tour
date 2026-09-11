@@ -1,0 +1,55 @@
+{
+  "groups": [
+    {
+      "name": "apply.strategy",
+      "type": "com.example.Service.Strategy.ApplyStrategyMap",
+      "sourceType": "com.example.Service.Strategy.ApplyStrategyMap"
+    },
+    {
+      "name": "email.handler",
+      "type": "com.example.Util.ValidateCode.EmailHandlerConfig",
+      "sourceType": "com.example.Util.ValidateCode.EmailHandlerConfig"
+    }
+  ],
+  "properties": [
+    {
+      "name": "apply.strategy.map",
+      "type": "java.util.Map<java.lang.String,java.lang.String>",
+      "sourceType": "com.example.Service.Strategy.ApplyStrategyMap"
+    },
+    {
+      "name": "email.handler.content",
+      "type": "java.lang.String",
+      "sourceType": "com.example.Util.ValidateCode.EmailHandlerConfig"
+    },
+    {
+      "name": "email.handler.form",
+      "type": "java.lang.String",
+      "sourceType": "com.example.Util.ValidateCode.EmailHandlerConfig"
+    },
+    {
+      "name": "email.handler.html",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.example.Util.ValidateCode.EmailHandlerConfig"
+    },
+    {
+      "name": "email.handler.name",
+      "type": "java.lang.String",
+      "sourceType": "com.example.Util.ValidateCode.EmailHandlerConfig"
+    },
+    {
+      "name": "email.handler.subject",
+      "type": "java.lang.String",
+      "sourceType": "com.example.Util.ValidateCode.EmailHandlerConfig"
+    },
+    {
+      "name": "email.handler.to",
+      "type": "java.lang.String",
+      "sourceType": "com.example.Util.ValidateCode.EmailHandlerConfig"
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.Mapper.AdminAuthMapper">
+    <insert id="insert">
+        INSERT IGNORE INTO admin_auth ( username, pwd, role, admin_id, is_deleted, email)
+        VALUES (#{username}, #{pwd}, #{role}, #{admin_id}, #{is_deleted}, #{email})
+    </insert>
+
+    <select id="SelectByAdminId" resultType="com.example.POJO.AdminAuth">
+        SELECT * FROM admin_auth WHERE admin_id = #{admin_id}
+    </select>
+
+    <update id="SoftDeleteByAdminId">
+        UPDATE admin_auth SET is_deleted = 1
+        WHERE admin_id = #{admin_id}
+    </update>
+
+    <update id="UndoByAdminIds">
+        UPDATE admin_auth SET is_deleted = 0
+        WHERE admin_id IN
+        <foreach collection="admin_ids" item="admin_id" open="(" separator="," close=")">
+            #{admin_id}
+        </foreach>
+    </update>
+
+    <update id="SoftDeleteByAdminIds">
+        UPDATE admin_auth SET is_deleted = 1
+        WHERE admin_id IN
+        <foreach collection="admin_ids" item="admin_id" open="(" separator="," close=")">
+            #{admin_id}
+        </foreach>
+    </update>
+
+    <delete id="DeleteByAdminId">
+        DELETE FROM admin_auth WHERE admin_id = #{admin_id}
+    </delete>
+
+    <select id="SelectByUsername" resultType="com.example.POJO.AdminAuth">
+        SELECT * FROM admin_auth WHERE username = #{username}
+    </select>
+
+    <update id="ChangePWD">
+        UPDATE admin_auth
+        SET username = #{username},pwd = #{pwd}
+        WHERE admin_id = #{admin_id}
+    </update>
+
+    <update id="emailResetPwd">
+        UPDATE admin_auth
+        SET pwd = #{pwd}
+        WHERE username = #{username} and is_deleted = 0
+    </update>
+
+    <update id="ResetPwdByAccount">
+        UPDATE admin_auth
+        SET pwd = #{pwd}
+        WHERE username = #{apply_account}
+    </update>
+
+</mapper>

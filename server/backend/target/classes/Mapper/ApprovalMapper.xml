@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.Mapper.Application.ApprovalMapper">
+
+    <select id="pendingApplication" resultType="com.example.POJO.Application">
+        SELECT
+            ap.*,
+            admin.name as user_name,
+            admin_auth.email as user_email
+        FROM application ap
+        LEFT JOIN admin_auth ON ap.apply_account = admin_auth.username
+        LEFT JOIN admin ON admin_auth.admin_id = admin.id
+        <where>
+            ap.working = 0
+             <if test="is_All == 0">
+                AND ap.has_completed = 0
+             </if>
+            <if test="type != null and type != '' ">
+                AND ap.type = #{type}
+            </if>
+            <if test="apply_account != null and apply_account != '' ">
+                AND ap.apply_account like concat('%',#{apply_account},'%')
+            </if>
+             <if test="aid != null and aid != '' ">
+                AND ap.aid like concat('%',#{aid},'%')
+             </if>
+        </where>
+        ORDER BY ap.apply_time
+        <choose>
+            <when test="is_DESC == true">
+                DESC
+            </when>
+            <otherwise>
+                ASC
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="selectByAid" resultType="com.example.POJO.Application">
+        SELECT * FROM application
+        WHERE aid = #{aid}
+    </select>
+
+    <select id="checkWorkerId" resultType="com.example.POJO.Application">
+        SELECT
+            ap.*,
+            admin.name as user_name,
+            admin_auth.email as user_email
+        FROM application as ap
+        LEFT JOIN admin_auth ON ap.apply_account = admin_auth.username
+        LEFT JOIN admin ON admin_auth.admin_id = admin.id
+        WHERE aid = #{aid} and has_completed = 0
+    </select>
+
+
+    <update id="lockApplication">
+        UPDATE application SET working = 1, worker = #{currentUserId}, approved_time = #{now}
+        WHERE aid = #{aid} and has_completed = 0 and working = 0
+    </update>
+
+    <update id="unlockApplication">
+        UPDATE application SET working = 0, worker = null, worker_name = null
+        WHERE aid = #{aid} and has_completed = 0 and worker = #{currentUserId}
+    </update>
+
+    <update id="resultApplication">
+        UPDATE application SET approval = #{approval}, approved_time = #{approved_time},
+                               has_completed = 1, working = 0, worker = #{worker}, worker_name = #{worker_name}, reason = #{reason}
+        WHERE aid = #{aid}
+    </update>
+
+    <update id="clearApplication">
+        UPDATE application SET working = 0
+        WHERE working = 1 AND approved_time &lt; #{deadline}
+    </update>
+
+</mapper>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.Mapper.TodoListMapper">
+
+    <select id="selectTodoListById" resultType="com.example.POJO.TodoList">
+        SELECT * FROM todolist WHERE uid = #{uid}
+    </select>
+
+    <insert id="insertTodoList">
+        INSERT INTO todolist (uid, title, content, start_time, end_time, rate, modify_time, `index`)
+        VALUES (#{uid}, #{title}, #{content}, #{start_time}, #{end_time}, #{rate}, #{modify_time}, #{index})
+    </insert>
+
+    <update id="updateTodoList">
+        UPDATE todolist SET title=#{title}, content=#{content}, start_time=#{start_time}, end_time=#{end_time},
+                            rate=#{rate}, modify_time=#{modify_time}
+        WHERE id = #{id}
+    </update>
+
+    <update id="saveIndex">
+        UPDATE todolist
+        SET `index` =
+        <foreach collection="list" item="item" separator=" " open="CASE id" close="END">
+            WHEN #{item.id} THEN #{item.index}
+        </foreach>
+        WHERE id IN
+        <foreach collection="list" item="item" separator="," open="(" close=")">
+            #{item.id}
+        </foreach>
+    </update>
+
+    <update id="tagToggle">
+        UPDATE todolist SET modify_time = #{modify_time},
+            tag_done = CASE
+            WHEN #{tag} IN ('Done','done') THEN
+                CASE
+                    WHEN tag_done = 0 THEN 1
+                    ELSE 0
+                END
+                ELSE tag_done
+            END,
+            tag_like = CASE
+            WHEN #{tag} IN ('Like','like') THEN
+                CASE
+                    WHEN tag_like = 0 THEN 1
+                    ELSE 0
+                END
+                ELSE tag_like
+            END
+        WHERE id = #{id};
+    </update>
+
+
+    <delete id="hardDeleteTodoList">
+        DELETE FROM todolist WHERE id = #{id} and uid = #{uid}
+    </delete>
+
+</mapper>

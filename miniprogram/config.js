@@ -7,7 +7,8 @@ module.exports = {
   // 若你在 .env 里写了 PORT=5000，这里要改成 http://localhost:5000
   // 正式环境（HTTPS + 备案域名）
   // 本地开发（模拟器）：后端服务端口（server/app.js 默认 3000）
-  baseUrl: "https://yaoqihuiping.com",
+  // baseUrl: "https://yaoqihuiping.com",
+  baseUrl: "http://localhost:3000",
   // OSS bucket 已设为私有，本地开发时使用本地服务器
   svgsUrl: "https://svgs1.oss-cn-beijing.aliyuncs.com",
   // 腾讯地图插件 Key（lbs 服务）
