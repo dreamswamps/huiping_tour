@@ -7,6 +7,11 @@
     <text class="nav-title">订单管理</text>
   </view>
 
+  <view class="delivery-mode">
+    <text class="delivery-mode-text">启用真实发货</text>
+    <switch checked="{{!useMockDelivery}}" color="#c91f37" bindchange="onToggleMockDelivery" />
+  </view>
+
   <scroll-view class="list-wrap" scroll-y enhanced show-scrollbar="{{false}}" wx:if="{{!loading}}">
     <view wx:if="{{loadError}}" class="empty">
       <text class="empty-text">{{loadError}}</text>
@@ -36,7 +41,7 @@
           <view wx:if="{{item.canCancel}}" class="btn-cancel" catchtap="onCancel" data-id="{{item.id}}">
             <text>取消订单</text>
           </view>
-            <!-- AI 待发货（status=1）显示发货按钮（演示） -->
+            <!-- 待发货订单 -->
           <view wx:if="{{item.status === 1}}" class="btn-pay" catchtap="onShipOrder" data-id="{{item.id}}">
             <text>{{ shippingOrderId === item.id ? '发货中...' : '发货' }}</text>
           </view>

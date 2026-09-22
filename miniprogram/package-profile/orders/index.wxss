@@ -45,6 +45,19 @@
   /* margin-top: 8rpx; */
 }
 
+.delivery-mode {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 30rpx 16rpx;
+}
+
+.delivery-mode-text {
+  margin-right: 12rpx;
+  font-size: 24rpx;
+  color: #777;
+}
+
 .list-wrap {
   height: calc(100vh - 280rpx);
   padding: 0 26rpx;

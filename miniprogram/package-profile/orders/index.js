@@ -60,6 +60,7 @@ Page({
     // 支付中状态，用于防重复点击
     payingOrderId: null,
     shippingOrderId: null,  // 正在发货的订单ID
+    useMockDelivery: true,
   },
 
   onShow() {
@@ -68,6 +69,10 @@ Page({
 
   onBack() {
     wx.navigateBack();
+  },
+
+  onToggleMockDelivery(e) {
+    this.setData({ useMockDelivery: !e.detail.value });
   },
 
   loadOrders() {
@@ -242,7 +247,7 @@ Page({
     });
   },
   
-  // 发货操作（AI演示）
+  // 发货操作
   onShipOrder(e) {
     const id = Number(e.currentTarget.dataset.id);
     if (!Number.isInteger(id) || id < 1) return;
@@ -262,6 +267,7 @@ Page({
           url: `${this.data.baseUrl}/api/mall/orders/${id}/ship`,
           method: "POST",
           header: getAuthHeaders(true),
+          data: { mock: this.data.useMockDelivery },
           success: (res) => {
             wx.hideLoading();
             const body = res.data || {};

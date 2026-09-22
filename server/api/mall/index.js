@@ -8,6 +8,7 @@ const {
   MallCart,
   Order,
 } = require("../../models/mall");
+const { deliverOrder } = require("../../utils/deliveryService");
 
 const router = express.Router();
 
@@ -345,8 +346,7 @@ router.post("/orders/:id/cancel", requireUserAuth, async (req, res) => {
   }
 });
 
-// AI生成
-// 发货（演示模式，允许用户自己发货）
+// 发货：mock 未传时由后端 MOCK_DELIVERY 配置决定
 router.post("/orders/:id/ship", requireUserAuth, async (req, res) => {
   const userId = req.auth.userId;
   const orderId = Number(req.params.id);
@@ -355,55 +355,20 @@ router.post("/orders/:id/ship", requireUserAuth, async (req, res) => {
     return res.status(400).json({ code: 400, message: "订单ID无效" });
   }
 
-  let conn = null;
   try {
-    conn = await pool.getConnection();
-    // 1. 查询订单归属及当前状态
-    const [rows] = await conn.query(
-      "SELECT user_id, status FROM orders WHERE id = ?",
-      [orderId]
-    );
-    if (rows.length === 0) {
-      return res.status(404).json({ code: 404, message: "订单不存在" });
-    }
-    const order = rows[0];
-
-    // 2. 归属校验（安全底线）
-    if (order.user_id !== userId) {
-      return res.status(403).json({ code: 403, message: "无权操作此订单" });
-    }
-
-    // 3. 状态机校验（幂等）
-    if (order.status === 2) {
-      // 已发货，直接返回成功（不报错，防连点）
-      return res.status(200).json({ code: 200, message: "订单已发货，无需重复操作" });
-    }
-    if (order.status !== 1) {
-      return res.status(400).json({ code: 400, message: "当前订单状态不可发货" });
-    }
-
-    // 4. 生成模拟物流单号
-    const trackingNo = `DEMO-${orderId}-${Date.now()}`;
-
-    // 5. 更新状态、发货时间、物流单号（加 status=1 乐观锁）
-    const [result] = await conn.query(
-      `UPDATE orders 
-       SET status = 2, deliver_time = NOW(), tracking_no = ? 
-       WHERE id = ? AND status = 1`,
-      [trackingNo, orderId]
-    );
-
-    if (result.affectedRows === 0) {
-      // 并发下可能已被其他请求更新，视为成功（幂等）
-      return res.status(200).json({ code: 200, message: "订单已发货" });
-    }
-
-    res.status(200).json({ code: 200, message: "发货成功", data: { trackingNo } });
+    const mock = typeof req.body?.mock === "boolean" ? req.body.mock : undefined;
+    const result = await deliverOrder(orderId, mock, userId);
+    res.status(200).json({
+      code: 200,
+      message: result.alreadyDelivered ? "订单已发货，无需重复操作" : "发货成功",
+      data: { trackingNo: result.trackingNo },
+    });
   } catch (error) {
     console.error("发货接口错误:", error.message);
-    res.status(500).json({ code: 500, message: "服务器错误" });
-  } finally {
-    if (conn) conn.release();
+    res.status(error.statusCode || 500).json({
+      code: error.statusCode || 500,
+      message: error.message || "发货失败",
+    });
   }
 });
 

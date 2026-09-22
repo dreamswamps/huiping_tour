@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.Mapper.Application.ApplyMapper">
+
+    <insert id="submitApplication">
+        INSERT INTO application (type, apply_account, apply_time)
+        VALUES (#{type}, #{apply_account}, #{apply_time})
+    </insert>
+
+    <insert id="submitApplicationStrategy">
+        INSERT INTO application (type, apply_account, apply_time, apply_data)
+        VALUES (#{type}, #{apply_account}, #{apply_time}, #{json})
+    </insert>
+
+    <select id="checkApplication" resultType="com.example.POJO.Application">
+        SELECT * FROM application
+        <where>
+            apply_account = #{apply_account}
+            <if test="type != null and type != '' ">
+                AND type like concat('%',#{type},'%')
+            </if>
+        </where>
+    </select>
+</mapper>

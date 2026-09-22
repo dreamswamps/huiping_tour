@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.Mapper.Application.UnifiedApplyMapper">
+
+    <select id="filterTemplate" resultType="com.example.POJO.UnifiedApply">
+        SELECT * FROM unified_apply_template
+        <where>
+            permission &lt;= #{permission}
+            <if test="type != null and type != '' ">
+                AND type = #{type}
+            </if>
+            <if test="disabled != null and disabled != '' ">
+                AND disabled = #{disabled}
+            </if>
+        </where>
+    </select>
+
+    <select id="getNewTemplateId" resultType="java.lang.Integer">
+        SELECT tid FROM unified_apply_template
+        ORDER BY tid DESC
+            LIMIT 1
+    </select>
+
+    <update id="changeTemplateDisabledByName">
+        UPDATE unified_apply_template SET disabled = #{disabled}
+        WHERE templateName = #{templateName}
+    </update>
+
+    <insert id="createCustomRenderTemplate">
+        INSERT INTO template_approval (name, base_keys, relation_keys, tid)
+        VALUES ("CustomTemplate", #{base_keys}, #{relation_keys}, #{tid})
+    </insert>
+
+    <insert id="createCustomApplyTemplate">
+        INSERT INTO unified_apply_template (type, templateName, templateDesc, permission)
+        VALUES ("custom-template", #{templateName}, #{templateDesc}, 1)
+    </insert>
+
+</mapper>

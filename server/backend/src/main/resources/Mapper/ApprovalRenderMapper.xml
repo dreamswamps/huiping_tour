@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.Mapper.Application.ApprovalRenderMapper">
+
+    <select id="renderSearch" resultType="map">
+        SELECT * FROM approval_render_search
+        WHERE `key` in 
+        <foreach collection="keyList" item="key" open="(" separator="," close=")">
+            #{key}
+        </foreach>
+    </select>
+
+    <select id="renderTypeList" resultType="java.lang.String">
+        SELECT DISTINCT type FROM application
+        ORDER BY type
+    </select>
+
+<!--    根据模板名称返回模板行数据   -->
+    <select id="renderTemplateByName" resultType="java.util.Map">
+        SELECT base_keys as baseKeys,
+               relation_keys as relationKeys
+        FROM template_approval
+        WHERE name = #{templateName}
+    </select>
+
+<!--    从baseKeys返回所有对应的基础表渲染数据    -->
+    <select id="getBaseFields" resultType="java.util.Map">
+        SELECT *
+        FROM approval_render_dialogform
+        WHERE field_key IN
+        <foreach collection="baseKeys" item="fieldKey" open="(" separator="," close=")">
+            #{fieldKey}
+        </foreach>
+    </select>
+
+<!--    从relationKeys返回所有对应的关联表数据-->
+    <select id="getRelationFields" resultType="java.util.Map">
+        SELECT
+            FR.field_key as fieldKey,
+            FR.relation_type as type,
+            FR.relation_key as relationKey,
+            CASE
+                WHEN FR.relation_type = 'rate' THEN (
+                    SELECT JSON_OBJECT(
+                        'showText', RA.showText,
+                        'texts', RA.texts,
+                        'colors', RA.colors
+                    )
+                    FROM field_rate_config RA
+                    WHERE RA.field_key = FR.relation_key
+                )
+                WHEN FR.relation_type IN ('select', 'radio', 'checkbox') THEN (
+                    SELECT JSON_OBJECT(
+                        'option', SE.option
+                    )
+                    FROM field_select_config SE
+                    WHERE SE.field_key = FR.relation_key
+                )
+                WHEN FR.relation_type = 'upload' THEN (
+                    SELECT JSON_OBJECT(
+                        'actionURL', UP.actionURL,
+                        'limit', UP.limit,
+                        'texts', UP.texts
+                    )
+                    FROM field_upload_config UP
+                    WHERE UP.field_key = FR.relation_key
+                )
+            END as config
+        FROM field_relations FR
+        WHERE FR.field_key IN
+        <foreach collection="relationKeys" item="fieldKey" open="(" separator="," close=")">
+            CAST(#{fieldKey} AS CHAR)
+        </foreach>
+    </select>
+
+    <select id="renderTemplateByTid" resultType="java.util.Map">
+        SELECT base_keys as baseKeys,
+               relation_keys as relationKeys
+        FROM template_approval
+        WHERE tid = #{templateName}
+    </select>
+
+
+</mapper>
