@@ -16,7 +16,6 @@
     "compileHotReLoad": true,
     "checkInvalidKey": true,
     "ignoreDevUnusedFiles": true,
-    "bigPackageSizeSupport": true,
-    "useGlassEaselForWxml": false
+    "bigPackageSizeSupport": true
   }
 }
