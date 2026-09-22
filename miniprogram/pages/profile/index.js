@@ -15,7 +15,6 @@ Page({
       nickname: "",
       avatar: "",
       uid: "",
-      openid: "",
       token: "",
     },
 
@@ -160,7 +159,7 @@ Page({
               }
 
               const payload = body.data;
-              if (body.code === 200 && payload && payload.openid) {
+              if (body.code === 200 && payload) {
                 if (payload.id != null && !payload.token) {
                   wx.showToast({
                     title: "登录异常：未返回 token",
@@ -173,7 +172,6 @@ Page({
                   nickname: payload.nickname || cache.nickname || "旅行者",
                   avatar: payload.avatar || cache.avatar || "",
                   uid: payload.uid || "",
-                  openid: payload.openid,
                   token: payload.token || "",
                 };
 
@@ -225,7 +223,7 @@ Page({
         wx.login({
           success: (loginRes) => {
             if (loginRes.code) {
-              // 调用后端接口换取 openid
+              // 调用后端接口换取 用户数据
               wx.request({
                 url: `${config.baseUrl}/api/login`,
                 method: "POST",
@@ -263,7 +261,7 @@ Page({
                   }
 
                   const payload = body.data;
-                  if (body.code === 200 && payload && payload.openid) {
+                  if (body.code === 200 && payload) {
                     if (payload.id != null && !payload.token) {
                       wx.showToast({
                         title: "登录异常：未返回 token",
@@ -276,7 +274,6 @@ Page({
                       nickname: payload.nickname || nickName || "旅行者",
                       avatar: payload.avatar || avatarUrl || "",
                       uid: payload.uid || "",
-                      openid: payload.openid,
                       token: payload.token || "",
                     };
 
@@ -352,7 +349,6 @@ Page({
               nickname: "",
               avatar: "",
               uid: "",
-              openid: "",
               token: "",
             },
           });
