@@ -1,0 +1,63 @@
+spring:
+  application:
+    name: server
+
+  datasource:
+    url: 'jdbc:mysql://${DB_HOST:127.0.0.1}:${DB_PORT:3306}/${DB_NAME:hpt}?serverTimezone=Asia/Shanghai'
+    username: ${DB_USER:root}
+    password: ${DB_PASSWORD:}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 10
+
+  # Redis 预留配置（当前未引入 spring-boot-starter-data-redis，请勿取消注释）
+  # data:
+  #   redis:
+  #     host: ${REDIS_HOST:127.0.0.1}
+  #     port: ${REDIS_PORT:6379}
+  #     password: ${REDIS_PASSWORD:}
+
+server:
+  port: ${PORT:3000}
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:}
+    expires-in: ${JWT_EXPIRES_IN:30d}
+
+  # 微信小程序（jscode2session）
+  # AppID 须与 miniprogram/project.config.json 一致；AppSecret 建议用环境变量，勿提交到仓库。
+  wechat:
+    appid: ${WX_MINI_APPID:}
+    secret: ${WX_MINI_SECRET:}
+    # 微信支付（V3）商户配置
+    pay:
+      mchid: ${WECHAT_MCHID:}
+      serial-no: ${WECHAT_SERIAL_NO:}
+      notify-url: ${WECHAT_PAY_NOTIFY_URL:}
+      private-key-path: ${WECHAT_PRIVATE_KEY_PATH:certs/apiclient_key.enc}
+      certs-secret: ${CERTS_SECRET:}
+      # 是否跳过微信支付功能（对应 Node 端 WEIXIN_CONFIG.isMock）
+      mock: ${WECHAT_PAY_MOCK:false}
+
+  # 顺丰开放平台（EXP_RECE_CREATE_ORDER）配置
+  delivery:
+    mock: ${MOCK_DELIVERY:true}
+    sf-url: '${SF_URL:https://sfapi.sf-express.com/std/service}'
+    sf-partner-id: ${SF_PARTNER_ID:}
+    sf-checkword: ${SF_CHECKWORD:}
+    sf-service-name: ${SF_SERVICE_NAME:EXP_RECE_CREATE_ORDER}
+    sf-sender-name: ${SF_SENDER_NAME:红旅薪传}
+    sf-sender-phone: ${SF_SENDER_PHONE:}
+    sf-sender-province: ${SF_SENDER_PROVINCE:}
+    sf-sender-city: ${SF_SENDER_CITY:}
+    sf-sender-district: ${SF_SENDER_DISTRICT:}
+    sf-sender-address: ${SF_SENDER_ADDRESS:}
+    sf-default-weight: ${SF_DEFAULT_WEIGHT:1000}
+
+  image-directory: ${IMAGE_DIRECTORY:img}
+
+mybatis:
+  mapper-locations: classpath:/mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: false

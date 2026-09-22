@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mvn -q test)",
+      "Bash(mvn -q test -Dapp.jwt.secret=0123456789abcdef0123456789abcdef)",
+      "Bash(git -C \"F:/Project Code/huiping_tour/server\" rev-parse --show-toplevel)",
+      "Bash(ls -la \"F:/Project Code/huiping_tour\" 2>&1)",
+      "Read(//f/Project Code/huiping_tour/**)",
+      "Bash(git -C \"F:/Project Code/huiping_tour\" ls-files)"
+    ]
+  }
+}
