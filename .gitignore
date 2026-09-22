@@ -1,8 +1,46 @@
-assets/
-.codebuddy/
-node_modules/
-server/.env
-server/.env.txt
+# === OS ===
+.DS_Store
+Thumbs.db
 
-# 本地微信截图，不入库
-微信图片_*
+# === IDE ===
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+# === Java / Maven ===
+HELP.md
+target/
+build/
+!**/src/main/**/target/
+!**/src/test/**/target/
+!**/src/main/**/build/
+!**/src/test/**/build/
+.mvn/wrapper/maven-wrapper.jar
+
+# === 日志 / 编译产物 ===
+*.class
+*.log
+logs/
+*.exec
+
+# === 敏感证书 / 密钥（注意：enc 不 ignore，业务需要保留） ===
+certs/*.pem
+certs/*.p12
+certs/*.key
+
+# === 本地配置 / 环境变量 ===
+.env
+application-local.yml
+application-*.local.yml
+
+# === 工具 ===
+.claude/
