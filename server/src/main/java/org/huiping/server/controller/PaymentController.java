@@ -17,10 +17,10 @@ public class PaymentController{
      * 校验订单商品并创建微信支付参数
      */
     @PostMapping("/pay")
-    public Result<Map<String, Object>> createWXPayment(@CurrentUserId Long userId,
-                                                       @RequestBody Map<String, Object> body) {
+    public Result<Map<String, Object>> createWechatPayment(@CurrentUserId Long userId,
+                                                           @RequestBody Map<String, Object> body) {
         Long orderId = body.get("orderId") instanceof Number value ? value.longValue() : null;
-        return Result.success(paymentService.createWXPayment(userId, orderId));
+        return Result.success(paymentService.createWechatPayment(userId, orderId));
     }
 
     /**
@@ -30,12 +30,12 @@ public class PaymentController{
      * 即使出现业务失败，也要回参success
      */
     @PostMapping("/callback")
-    public Map<String, Object> handleWXPaymentNotify(@RequestBody Map<String, Object> body) {
+    public Map<String, Object> receiveWechatPaymentNotify(@RequestBody Map<String, Object> body) {
         String orderNo = body.get("out_trade_no") instanceof String value ? value : null;
         if (orderNo == null || orderNo.isBlank()) {
             return Map.of("code", "FAIL", "message", "订单号缺失");
         }
 //        微信支付需要200的状态码，默认的状态码是200
-        return paymentService.handleWXPaymentNotify(orderNo);
+        return paymentService.receiveWechatPaymentNotify(orderNo);
     }
 }

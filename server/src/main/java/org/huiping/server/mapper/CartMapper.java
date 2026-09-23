@@ -7,8 +7,8 @@ import org.huiping.server.entity.dto.CartItem;
 import java.util.List;
 
 public interface CartMapper {
-    List<Cart> findByUserId(@Param("userId") Long userId);
+    List<Cart> selectByUserId(@Param("userId") Long userId);
     int deleteByUserId(@Param("userId") Long userId);
-    int deleteByProductIds(@Param("userId") Long userId, @Param("productIds") List<Long> productIds);
+    int deleteByUserIdAndProductIds(@Param("userId") Long userId, @Param("productIds") List<Long> productIds);
     int insertBatch(@Param("userId") Long userId, @Param("items") List<CartItem> items);
 }

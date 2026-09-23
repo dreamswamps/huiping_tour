@@ -20,11 +20,11 @@ public class ProductService {
         this.productDetailMapper = productDetailMapper;
     }
 
-    public List<Product> findPublished() { return productMapper.findPublished(); }
+    public List<Product> listProducts() { return productMapper.selectAll(); }
 
-    public ProductDetail findDetail(Long productId) {
+    public ProductDetail getProductDetail(Long productId) {
         if (productId == null || productId < 1) throw new ApiException(HttpStatus.BAD_REQUEST, "无效或缺少 productId");
-        ProductDetail detail = productDetailMapper.findDetail(productId);
+        ProductDetail detail = productDetailMapper.selectByProductId(productId);
         if (detail == null) throw new ApiException(HttpStatus.NOT_FOUND, "未找到商品详情");
         return detail;
     }

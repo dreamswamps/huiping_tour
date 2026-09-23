@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Map;
+
 import org.huiping.server.service.SpotService;
 
 @RestController
@@ -18,7 +18,7 @@ public class SpotController{
     public SpotController(SpotService spotService) { this.spotService = spotService; }
 
     @GetMapping("/spots")
-    public Result<List<Spot>> spots() {
-        return Result.success(spotService.list());
+    public Result<List<Spot>> listSpots() {
+        return Result.success(spotService.listSpots());
     }
 }

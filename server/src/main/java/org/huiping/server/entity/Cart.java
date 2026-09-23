@@ -2,6 +2,8 @@ package org.huiping.server.entity;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,21 +15,15 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class Cart {
     private Long id;
-    @JsonProperty("userId")
-    private Long user_id;
-    @JsonProperty("productId")
-    private Long product_id;
-    @JsonProperty("productName")
-    private String product_name;
-    @JsonProperty("productPrice")
-    private BigDecimal product_price;
-    @JsonProperty("productThumb")
-    private String product_thumb;
+    private Long userId;
+    private Long productId;
+    private String productName;
+    private BigDecimal productPrice;
+    private String productThumb;
     private Integer quantity;
-    @JsonProperty("createdAt")
-    private LocalDateTime created_at;
-    @JsonProperty("updatedAt")
-    private LocalDateTime updated_at;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 }

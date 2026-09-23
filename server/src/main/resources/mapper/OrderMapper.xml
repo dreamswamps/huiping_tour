@@ -1,50 +1,59 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.huiping.server.mapper.OrderMapper">
-    <select id="findByUserId" resultType="org.huiping.server.entity.Order">SELECT * FROM orders WHERE user_id=#{userId}
+    <select id="selectByUserId" resultType="org.huiping.server.entity.Order">
+        SELECT * FROM orders
+        WHERE user_id=#{userId}
         ORDER BY id DESC LIMIT 100
     </select>
 
-    <select id="findOrderCancelable" resultType="org.huiping.server.entity.Order">
+    <select id="selectCancelableById" resultType="org.huiping.server.entity.Order">
         SELECT * FROM orders
         WHERE id=#{orderId}
         AND status IN (0,1)
     </select>
-    <insert id="insert">INSERT INTO
-        orders(order_no,user_id,total_amount,address_id,receiver_name,receiver_phone,province,city,district,detail_address,status,items,remark)
-        VALUES(#{orderNo},#{userId},#{total},#{addressId},#{address.receiver_name},#{address.receiver_phone},#{address.province},#{address.city},#{address.district},#{address.detail_address},0,#{items},#{remark})
+
+    <insert id="insert" parameterType="org.huiping.server.entity.Order">
+        INSERT INTO orders ( order_no, user_id, total_amount, address_id, receiver_name,
+        receiver_phone, province, city, district, detail_address, status, items, remark
+        )
+        VALUES ( #{orderNo}, #{userId}, #{totalAmount}, #{addressId}, #{receiverName},
+        #{receiverPhone}, #{province}, #{city}, #{district}, #{detailAddress}, 0, #{items}, #{remark} )
     </insert>
-    <select id="findByOrderNo" resultType="org.huiping.server.entity.Order">
-        SELECT * FROM orders WHERE
-        order_no=#{orderNo}
+
+    <select id="selectByOrderNo" resultType="org.huiping.server.entity.Order">
+        SELECT * FROM orders
+        WHERE order_no=#{orderNo}
     </select>
-    <update id="updateCancel">
-        UPDATE orders SET status=5,updated_at=CURRENT_TIMESTAMP
-        WHERE id=#{orderId} AND
-        user_id=#{userId}
+
+    <update id="updateStatusToCancelledByIdAndUserId">
+        UPDATE orders
+        SET status=5,updated_at=CURRENT_TIMESTAMP
+        WHERE id=#{orderId}
+        AND user_id=#{userId}
     </update>
 
-    <select id="findPendingOrder" resultType="org.huiping.server.entity.Order">
+    <select id="selectPendingPaymentByIdAndUserId" resultType="org.huiping.server.entity.Order">
         SELECT * FROM orders
         WHERE id=#{orderId}
         AND user_id=#{userId}
         AND status=0
     </select>
 
-    <update id="updateOrderTotal">
+    <update id="updateTotal">
         UPDATE orders
         SET total_amount=#{total}
         WHERE id=#{orderId}
     </update>
 
-    <update id="markPaid">
+    <update id="updateStatusToPaidByOrderNo">
         UPDATE orders
         SET status=1, pay_time=NOW()
         WHERE order_no=#{orderNo}
         AND status=0
     </update>
 
-    <update id="markFailure">
+    <update id="updateStatusByOrderNo">
         UPDATE orders
         SET status=#{status}
         WHERE order_no=#{orderNo}

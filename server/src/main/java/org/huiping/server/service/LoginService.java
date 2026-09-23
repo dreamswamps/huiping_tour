@@ -86,13 +86,13 @@ public class LoginService {
 //        result.put("openid", openid);
 
         try {
-            User user = userMapper.findByOpenid(openid);
+            User user = userMapper.selectByOpenid(openid);
             if (user != null) {
 //                uid缺失的老用户，更新uid
                 if (user.getUid() == null || user.getUid().trim().isEmpty()) {
                     // 旧表无 uid 或 uid 为空时补一个
                     String fillUid = createNewUid();
-                    userMapper.updateUid(openid, fillUid);
+                    userMapper.updateUidByOpenId(openid, fillUid);
                     user.setUid(fillUid);
                 }
                 return fillLoginResult(result, user, displayName, avatarUrl);
@@ -103,7 +103,7 @@ public class LoginService {
             String uid = createNewUid();
 //            TODO 先新增后查询获得完整的新增用户记录，有优化空间，优先级低。如果你闲到没事干，再考虑
             userMapper.insert(openid, uid, newNickname, avatarUrl);
-            User inserted = userMapper.findByOpenid(openid);
+            User inserted = userMapper.selectByOpenid(openid);
             return fillLoginResult(result, inserted, displayName, avatarUrl);
         } catch (Exception dbError) {
             // 数据库操作失败：微信已通过，但用户数据未写入

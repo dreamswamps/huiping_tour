@@ -24,9 +24,9 @@ public class AddressTxService {
         addressMapper.insert(address);
         Long newId = address.getId();
         if (isDefault) {
-            addressMapper.clearDefault(userId);
-            addressMapper.setDefault(userId, newId);
-        } else if (addressMapper.countDefault(userId) == 0) {
+            addressMapper.clearDefaultByUserId(userId);
+            addressMapper.setDefaultByIdAndUserId(userId, newId);
+        } else if (addressMapper.countDefaultByUserId(userId) == 0) {
             addressMapper.promoteFirst(userId);
         }
         return newId;
@@ -44,22 +44,22 @@ public class AddressTxService {
 
         if (isDefault) {
             // 显式设为默认
-            addressMapper.clearDefault(userId);
-            addressMapper.setDefault(userId, addressId);
+            addressMapper.clearDefaultByUserId(userId);
+            addressMapper.setDefaultByIdAndUserId(userId, addressId);
             return;
         }
 
         // 显式取消默认：只有原本是默认时才需要补选
-        UserAddress old = addressMapper.findById(userId, addressId);
-        boolean wasDefault = old != null && Integer.valueOf(1).equals(old.getIs_default());
+        UserAddress old = addressMapper.selectByIdAndUserId(userId, addressId);
+        boolean wasDefault = old != null && Integer.valueOf(1).equals(old.getIsDefault());
         if (!wasDefault) {
             return;
         }
 
-        addressMapper.clearDefault(userId);
+        addressMapper.clearDefaultByUserId(userId);
         Long pick = addressMapper.findEarliestExcept(userId, addressId);
         if (pick != null) {
-            addressMapper.setDefault(userId, pick);
+            addressMapper.setDefaultByIdAndUserId(userId, pick);
         }
     }
 
@@ -67,7 +67,7 @@ public class AddressTxService {
     @Transactional
     public void deleteAndPromote(Long userId, Long addressId, boolean wasDefault) {
         addressMapper.delete(userId, addressId);
-        if (wasDefault && addressMapper.countDefault(userId) == 0) {
+        if (wasDefault && addressMapper.countDefaultByUserId(userId) == 0) {
             addressMapper.promoteFirst(userId);
         }
     }

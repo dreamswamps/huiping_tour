@@ -34,6 +34,7 @@ public class LoginController{
         Map<String, Object> user = loginService.login(req.getCode(), req.getNickname(), req.getAvatar());
         String openid = (String) user.get("openid");
         Long id = ((Number) user.get("id")).longValue();
+//        TODO 理论上JWT归Service层管，想改就改
         String token = jwtUtil.generateToken(id, openid);
 
         user.put("token", token);

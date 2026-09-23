@@ -2,9 +2,7 @@ package org.huiping.server.service;
 
 import org.huiping.server.entity.Cart;
 import org.huiping.server.entity.dto.CartItem;
-import org.huiping.server.exception.ApiException;
 import org.huiping.server.mapper.CartMapper;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,8 +19,8 @@ public class CartService {
     /**
      * 当前用户购物车（读 carts 表）。
      */
-    public List<Cart> list(Long userId) {
-        return cartMapper.findByUserId(userId);
+    public List<Cart> listCartItems(Long userId) {
+        return cartMapper.selectByUserId(userId);
     }
 
     /**
@@ -32,7 +30,7 @@ public class CartService {
 //    CartItem属于DTO，不建议在Service层大量使用DTO，若仅被单一接口调用则可接受
 //    已经是很原子化的事务操作，不需要分离至TxService里
     @Transactional
-    public void sync(Long userId, List<CartItem> items) {
+    public void overwriteCart(Long userId, List<CartItem> items) {
         cartMapper.deleteByUserId(userId);
 //        空购物车理论上属于正常业务，但也会导致数据库操作失败
         if (!items.isEmpty()) {

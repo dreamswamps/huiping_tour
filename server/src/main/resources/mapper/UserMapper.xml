@@ -2,23 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.huiping.server.mapper.UserMapper">
 
-  <select id="findByOpenid" resultType="org.huiping.server.entity.User">
+  <select id="selectByOpenid" resultType="org.huiping.server.entity.User">
     SELECT * FROM users WHERE openid=#{openid}
   </select>
 
-  <select id="findProfile" resultType="org.huiping.server.entity.User">
+  <select id="selectByUserId" resultType="org.huiping.server.entity.User">
     SELECT * FROM users WHERE id=#{userId}
   </select>
 
-  <select id="findOpenidByUserId" resultType="string">
+  <select id="selectOpenidByUserId" resultType="string">
     SELECT openid FROM users WHERE id=#{userId}
   </select>
 
-  <update id="updateProfile">
+  <update id="updateProfileByUserId">
     UPDATE users SET nickname=#{nickname},avatar=#{avatar} WHERE id=#{userId}
   </update>
 
-  <update id="updateUid">
+  <update id="updateUidByOpenId">
     UPDATE users SET uid=#{uid} WHERE openid=#{openid}
   </update>
 

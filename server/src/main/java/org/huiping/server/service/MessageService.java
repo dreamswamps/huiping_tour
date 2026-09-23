@@ -26,13 +26,13 @@ public class MessageService {
      * 留言列表：未登录直接按时间倒序；已登录把「他人最新一条」顶到最前，
      * 之后接自己的全部（新→旧），再接其余他人，最后截取 100 条。
      */
-    public List<Message> list(Long userId) {
+    public List<Message> listMessage(Long userId) {
         if (userId != null) {
-            List<Message> raw = messageMapper.findLatest(FETCH_CAP);
+            List<Message> raw = messageMapper.selectLatest(FETCH_CAP);
             List<Message> mine = new ArrayList<>();
             List<Message> others = new ArrayList<>();
             for (Message row : raw) {
-                boolean isMine = Objects.equals(row.getUser_id(), userId);
+                boolean isMine = Objects.equals(row.getUserId(), userId);
                 (isMine ? mine : others).add(row);
             }
             List<Message> merged = new ArrayList<>();
@@ -46,11 +46,11 @@ public class MessageService {
             }
             return merged.subList(0, Math.min(LIST_LIMIT, merged.size()));
         }
-        return messageMapper.findLatest(LIST_LIMIT);
+        return messageMapper.selectLatest(LIST_LIMIT);
     }
 
     /** 发布留言并返回新留言数据。 */
-    public Message add(Long userId, String content) {
+    public Message addMessage(Long userId, String content) {
         if (content == null || content.isBlank()) {
             throw new ApiException(HttpStatus.BAD_REQUEST, "留言内容不能为空");
         }
@@ -59,9 +59,9 @@ public class MessageService {
             throw new ApiException(HttpStatus.BAD_REQUEST, "留言最多" + MAX_CONTENT_LEN + "字");
         }
         Message message = new Message();
-        message.setUser_id(userId);
+        message.setUserId(userId);
         message.setContent(content);
         messageMapper.insert(message);
-        return messageMapper.findById(message.getId());
+        return messageMapper.selectById(message.getId());
     }
 }

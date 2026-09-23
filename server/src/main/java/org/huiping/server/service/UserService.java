@@ -17,8 +17,8 @@ public class UserService {
     }
 
     /** 查询当前用户资料。 */
-    public User profile(Long userId) {
-        User user = userMapper.findProfile(userId);
+    public User getProfile(Long userId) {
+        User user = userMapper.selectByUserId(userId);
         if (user == null) {
             throw new ApiException(HttpStatus.NOT_FOUND, "用户不存在");
         }
@@ -34,11 +34,11 @@ public class UserService {
         if (nickname == null && avatar == null) {
             throw new ApiException(HttpStatus.BAD_REQUEST, "没有需要更新的字段");
         }
-        User current = profile(userId);
+        User current = getProfile(userId);
         if (nickname == null) nickname = current.getNickname();
         if (avatar == null) avatar = current.getAvatar();
-        userMapper.updateProfile(userId, nickname, avatar);
-        return profile(userId);
+        userMapper.updateProfileByUserId(userId, nickname, avatar);
+        return getProfile(userId);
     }
 
     private String truncate(String s, int max) {

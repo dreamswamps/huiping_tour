@@ -2,18 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.huiping.server.mapper.ProductMapper">
 
-  <select id="findPublished" resultType="org.huiping.server.entity.Product">
-    SELECT * FROM products WHERE status=1 ORDER BY id ASC
+  <select id="selectAll" resultType="org.huiping.server.entity.Product">
+    SELECT * FROM products
+    WHERE status=1
+    ORDER BY id ASC
   </select>
 
-  <select id="findPublishedByIds" resultType="org.huiping.server.entity.Product">
-    SELECT * FROM products WHERE id IN
+  <select id="selectByProductIds" resultType="org.huiping.server.entity.Product">
+    SELECT * FROM products
+    WHERE id IN
     <foreach collection="productIds" item="id" open="(" separator="," close=")">#{id}</foreach>
     AND status=1
   </select>
 
-  <select id="findProductById" resultType="org.huiping.server.entity.Product">
-    SELECT name, price FROM products WHERE id=#{productId} AND stock>=#{quantity} AND status=1
+  <select id="selectNameAndPriceByProductId" resultType="org.huiping.server.entity.Product">
+    SELECT name, price
+    FROM products
+    WHERE id=#{productId}
+    AND stock>=#{quantity}
+    AND status=1
   </select>
 
   <update id="decreaseStock">

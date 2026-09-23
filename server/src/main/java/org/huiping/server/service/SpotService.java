@@ -10,5 +10,5 @@ import java.util.List;
 public class SpotService {
     private final SpotMapper spotMapper;
     public SpotService(SpotMapper spotMapper) { this.spotMapper = spotMapper; }
-    public List<Spot> list() { return spotMapper.findAll(); }
+    public List<Spot> listSpots() { return spotMapper.selectAll(); }
 }

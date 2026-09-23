@@ -72,11 +72,11 @@ public class PaymentService {
     /**
      * 用户发起支付：校验待支付订单与商品价格/库存，再调用微信统一下单（或返回模拟参数）。
      */
-    public Map<String, Object> createWXPayment(Long userId, Long orderId) {
+    public Map<String, Object> createWechatPayment(Long userId, Long orderId) {
         if (orderId == null || orderId < 1) {
             throw badRequest("订单ID无效");
         }
-        Order order = orderMapper.findPendingOrder(orderId, userId);
+        Order order = orderMapper.selectPendingPaymentByIdAndUserId(orderId, userId);
         if (order == null) {
             throw new ApiException(HttpStatus.NOT_FOUND, "订单不存在或已支付");
         }
@@ -109,7 +109,7 @@ public class PaymentService {
 
         // 读取商品当前价格与库存
         Map<Long, Product> priceMap = new HashMap<>();
-        for (Product p : productMapper.findPublishedByIds(ids)) {
+        for (Product p : productMapper.selectByProductIds(ids)) {
             priceMap.put(p.getId(), p);
         }
 
@@ -133,13 +133,13 @@ public class PaymentService {
 
         // 校验订单金额，异常则回写为按当前价格重新计算的值
         BigDecimal computed = BigDecimal.valueOf(totalFee).movePointLeft(2);
-        BigDecimal orderTotal = order.getTotal_amount();
+        BigDecimal orderTotal = order.getTotalAmount();
         if (orderTotal == null || computed.compareTo(orderTotal) != 0) {
 //            TODO 加入日志，追溯异常帐号
-            orderMapper.updateOrderTotal(orderId, computed);
+            orderMapper.updateTotal(orderId, computed);
         }
 
-        String openid = userMapper.findOpenidByUserId(userId);
+        String openid = userMapper.selectOpenidByUserId(userId);
         if (openid == null || openid.isBlank()) {
             throw badRequest("用户数据缺失");
         }
@@ -147,8 +147,8 @@ public class PaymentService {
         if (mock) {
             return Map.of("mock", true);
         }
-        return wxUnifiedOrder(openid, order.getOrder_no(), totalFee,
-                "文旅订单-" + order.getOrder_no());
+        return wxUnifiedOrder(openid, order.getOrderNo(), totalFee,
+                "文旅订单-" + order.getOrderNo());
     }
 
     /**
@@ -157,8 +157,8 @@ public class PaymentService {
      * 注意，目前使用在deductStockAndMarkPaid保证数据库锁操作，之前的代码仅处于弱并发的状态
      */
     // TODO: 当前回调未做微信 V3 验签、未解密 resource.ciphertext，仅适用于 mock/联调。真实微信回调需要平台证书 + WECHAT_APIV3_KEY，属于未完成功能，严禁直接上生产。
-    public Map<String, Object> handleWXPaymentNotify(String orderNo) {
-        Order order = orderMapper.findByOrderNo(orderNo);
+    public Map<String, Object> receiveWechatPaymentNotify(String orderNo) {
+        Order order = orderMapper.selectByOrderNo(orderNo);
         if (order == null) {
 //            改为日志  "订单不存在"
             return successRequest();
@@ -177,10 +177,10 @@ public class PaymentService {
         try {
             paymentTxService.deductStockAndMarkPaid(orderNo, items);
         } catch (BizException e) {
-            orderMapper.markFailure(orderNo, e.getCode());
+            orderMapper.updateStatusByOrderNo(orderNo, e.getCode());
         }
         catch (Exception e) {
-            orderMapper.markFailure(orderNo, 8);
+            orderMapper.updateStatusByOrderNo(orderNo, 8);
         }
         return successRequest();
     }

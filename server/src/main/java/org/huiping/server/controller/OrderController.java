@@ -1,6 +1,5 @@
 package org.huiping.server.controller;
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.huiping.server.auth.CurrentUserId;
 import org.huiping.server.common.Result;
@@ -32,7 +31,7 @@ public class OrderController {
     @PostMapping
     public Result<Object> create(@CurrentUserId Long userId,
                          @RequestBody @Valid OrderCreateRequest req) {
-        return Result.success(orderService.create(userId, req));
+        return Result.success(orderService.createOrder(userId, req));
     }
 
     /**

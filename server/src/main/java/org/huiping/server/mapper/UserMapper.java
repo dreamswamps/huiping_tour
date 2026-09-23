@@ -4,10 +4,10 @@ import org.apache.ibatis.annotations.Param;
 import org.huiping.server.entity.User;
 
 public interface UserMapper {
-    User findByOpenid(@Param("openid") String openid);
-    User findProfile(@Param("userId") Long userId);
-    String findOpenidByUserId(@Param("userId") Long userId);
-    int updateProfile(@Param("userId") Long userId, @Param("nickname") String nickname, @Param("avatar") String avatar);
-    int updateUid(@Param("openid") String openid, @Param("uid") String uid);
+    User selectByOpenid(@Param("openid") String openid);
+    User selectByUserId(@Param("userId") Long userId);
+    String selectOpenidByUserId(@Param("userId") Long userId);
+    int updateProfileByUserId(@Param("userId") Long userId, @Param("nickname") String nickname, @Param("avatar") String avatar);
+    int updateUidByOpenId(@Param("openid") String openid, @Param("uid") String uid);
     int insert(@Param("openid") String openid, @Param("uid") String uid, @Param("nickname") String nickname, @Param("avatar") String avatar);
 }

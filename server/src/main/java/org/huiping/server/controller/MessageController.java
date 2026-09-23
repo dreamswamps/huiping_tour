@@ -1,10 +1,8 @@
 package org.huiping.server.controller;
 
-import jakarta.servlet.http.HttpServletRequest;
 import org.huiping.server.auth.CurrentUserId;
 import org.huiping.server.common.Result;
 import org.huiping.server.entity.Message;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.huiping.server.service.MessageService;
 
@@ -20,16 +18,17 @@ public class MessageController{
 
     /** 留言列表；有合法 token 时做登录用户排序，否则按时间倒序返回。 */
     @GetMapping({"", "/"})
-    public Result<List<Message>> list(@CurrentUserId(required = false) Long userId) {
-        return Result.success(messageService.list(userId));
+    public Result<List<Message>> listMessage(@CurrentUserId(required = false) Long userId) {
+        return Result.success(messageService.listMessage(userId));
     }
 
     /** 发布留言，返回新留言数据。 */
 //    由于该接口调用频率过低，暂时不考虑使用DTO
+//    TODO 想加就加
     @PostMapping({"", "/"})
-    public Result<Message> add(@CurrentUserId Long userId,
-                               @RequestBody Map<String, Object> body) {
+    public Result<Message> addMessage(@CurrentUserId Long userId,
+                                      @RequestBody Map<String, Object> body) {
         String content = body.get("content") instanceof String value ? value : null;
-        return Result.success("发布成功", messageService.add(userId, content));
+        return Result.success("发布成功", messageService.addMessage(userId, content));
     }
 }

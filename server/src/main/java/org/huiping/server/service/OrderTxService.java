@@ -1,6 +1,6 @@
 package org.huiping.server.service;
 
-import org.huiping.server.entity.UserAddress;
+import org.huiping.server.entity.Order;
 import org.huiping.server.exception.ApiException;
 import org.huiping.server.mapper.CartMapper;
 import org.huiping.server.mapper.OrderMapper;
@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -21,15 +20,16 @@ public class OrderTxService {
         this.cartMapper = cartMapper;
     }
 
+    /**
+     * 下单事务：先插入订单，再清空购物车中对应商品。
+     * 通过删除行数判断是否出现并发下同一批商品的情况。
+     * 可能的问题场景：连续多个并发请求 -> A 删除购物车 -> B 更新购物车 -> C 删除购物车。
+     */
     @Transactional
-    public void insertAndClearCart(String orderNo, Long userId, BigDecimal total,
-                                   Long addressId, UserAddress addr, String itemsJson,
-                                   String remark, List<Long> pids) {
-        orderMapper.insert(orderNo, userId, total, addressId, addr, itemsJson, remark);
-        int row = cartMapper.deleteByProductIds(userId, pids);
-//        通过判断清除购物车表数据影响行数判断，是否出现并发操作，有其他操作先添加购物车
-//        该校验可能出现问题的场景： 连续多个并发请求 -> 线程A删除购物车 -> 线程B更新购物车 -> 线程C删除购物车
-        if (row != pids.size()) {
+    public void placeOrder(Order order, List<Long> productIds) {
+        orderMapper.insert(order);
+        int row = cartMapper.deleteByUserIdAndProductIds(order.getUserId(), productIds);
+        if (row != productIds.size()) {
             throw new ApiException(HttpStatus.CONFLICT, "购物车已被其他订单占用，请重新下单");
         }
     }

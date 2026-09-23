@@ -29,7 +29,7 @@ public class PaymentTxService {
     @Transactional(rollbackFor = Exception.class, timeout = 3)
     public void deductStockAndMarkPaid(String orderNo, List<Map<String, Object>> items) {
 //        优先抢订单修改为已支付，cos乐观锁
-        int row = orderMapper.markPaid(orderNo);
+        int row = orderMapper.updateStatusToPaidByOrderNo(orderNo);
         if (row == 0) return;
 
         items.sort(Comparator.comparingLong(

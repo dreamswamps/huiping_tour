@@ -6,5 +6,5 @@ import java.util.List;
 
 /** 景点查询 Mapper。 */
 public interface SpotMapper {
-    List<Spot> findAll();
+    List<Spot> selectAll();
 }
