@@ -2,75 +2,73 @@ package org.huiping.server.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.wechat.pay.java.core.notification.NotificationParser;
+import com.wechat.pay.java.core.notification.RequestParam;
+import com.wechat.pay.java.service.payments.jsapi.JsapiServiceExtension;
+import com.wechat.pay.java.service.payments.jsapi.model.Amount;
+import com.wechat.pay.java.service.payments.jsapi.model.Payer;
+import com.wechat.pay.java.service.payments.jsapi.model.PrepayRequest;
+import com.wechat.pay.java.service.payments.jsapi.model.PrepayWithRequestPaymentResponse;
+import com.wechat.pay.java.service.payments.model.Transaction;
 import org.huiping.server.entity.Order;
 import org.huiping.server.entity.Product;
 import org.huiping.server.exception.ApiException;
 import org.huiping.server.exception.BizException;
+import org.huiping.server.exception.WechatPayNotifyException;
 import org.huiping.server.mapper.OrderMapper;
 import org.huiping.server.mapper.ProductMapper;
 import org.huiping.server.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestClient;
-import org.springframework.web.client.RestClientResponseException;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.nio.charset.StandardCharsets;
-import java.security.PrivateKey;
-import java.security.SecureRandom;
-import java.security.Signature;
 import java.util.*;
 
 /**
  * 微信支付服务（对应 Node 端 api/payment/index.js）。
- * 理论上并不是所有错误都该返回
  * 订单状态常量（与 Node 端 ORDER_STATUS 一致）：
  *   0 待支付 / 1 已支付 / 5 已取消（过期）
  *   6 商品下架或不足 / 8 数据库操作失败
  */
-//  TODO 该页面会包含强制数据类型转换，后续开发可考虑优化，数据强转源于Node JS
 @Service
 public class PaymentService {
     private final PaymentTxService paymentTxService;
     private final OrderMapper orderMapper;
     private final ProductMapper productMapper;
     private final UserMapper userMapper;
-    private final CertHelper certHelper;
+    private final JsapiServiceExtension jsapiServiceExtension;
+    private final NotificationParser notificationParser;
     private final ObjectMapper objectMapper = new ObjectMapper();
-    private final RestClient restClient = RestClient.create();
-    private final SecureRandom secureRandom = new SecureRandom();
 
     private final String appid;
     private final String mchid;
-    private final String serialNo;
     private final String notifyUrl;
-    private final boolean mock;
+    private final String publicKeyId;
 
     public PaymentService(PaymentTxService paymentTxService, OrderMapper orderMapper,
                           ProductMapper productMapper, UserMapper userMapper,
-                          CertHelper certHelper,
+                          JsapiServiceExtension jsapiServiceExtension,
+                          NotificationParser notificationParser,
                           @Value("${app.wechat.appid:}") String appid,
                           @Value("${app.wechat.pay.mchid:}") String mchid,
-                          @Value("${app.wechat.pay.serial-no:}") String serialNo,
                           @Value("${app.wechat.pay.notify-url:}") String notifyUrl,
-                          @Value("${app.wechat.pay.mock:false}") boolean mock) {
+                          @Value("${app.wechat.pay.public-key-id:}") String publicKeyId) {
         this.paymentTxService = paymentTxService;
         this.orderMapper = orderMapper;
         this.productMapper = productMapper;
         this.userMapper = userMapper;
-        this.certHelper = certHelper;
+        this.jsapiServiceExtension = jsapiServiceExtension;
+        this.notificationParser = notificationParser;
         this.appid = appid == null ? "" : appid;
         this.mchid = mchid == null ? "" : mchid;
-        this.serialNo = serialNo == null ? "" : serialNo;
         this.notifyUrl = notifyUrl == null ? "" : notifyUrl;
-        this.mock = mock;
+        this.publicKeyId = publicKeyId == null ? "" : publicKeyId;
     }
 
     /**
-     * 用户发起支付：校验待支付订单与商品价格/库存，再调用微信统一下单（或返回模拟参数）。
+     * 用户发起支付：校验待支付订单与商品价格/库存，再调用微信统一下单。
      */
     public Map<String, Object> createWechatPayment(Long userId, Long orderId) {
         if (orderId == null || orderId < 1) {
@@ -84,7 +82,6 @@ public class PaymentService {
         try {
             items = buildItems(order.getItems());
         } catch (Exception e) {
-//            log.error("订单商品信息异常 orderNo={}", orderNo, e);
             throw badRequest("订单数据异常");
         }
 
@@ -126,16 +123,14 @@ public class PaymentService {
             if (availableStock < qty) {
                 throw badRequest("商品ID " + pid + " 库存不足，当前库存：" + availableStock + "，需要：" + qty);
             }
-//            注意，微信支付按分计算而不是元
             totalFee += price.multiply(BigDecimal.valueOf(qty)).movePointRight(2)
                     .setScale(0, RoundingMode.HALF_UP).longValueExact();
         }
-
+        
         // 校验订单金额，异常则回写为按当前价格重新计算的值
         BigDecimal computed = BigDecimal.valueOf(totalFee).movePointLeft(2);
         BigDecimal orderTotal = order.getTotalAmount();
         if (orderTotal == null || computed.compareTo(orderTotal) != 0) {
-//            TODO 加入日志，追溯异常帐号
             orderMapper.updateTotal(orderId, computed);
         }
 
@@ -144,33 +139,110 @@ public class PaymentService {
             throw badRequest("用户数据缺失");
         }
 
-        if (mock) {
-            return Map.of("mock", true);
-        }
-        return wxUnifiedOrder(openid, order.getOrderNo(), totalFee,
-                "文旅订单-" + order.getOrderNo());
+        // 使用官方 SDK 统一下单并生成小程序支付参数
+        PrepayRequest request = new PrepayRequest();
+        request.setAppid(appid);
+        request.setMchid(mchid);
+        request.setDescription("文旅订单-" + order.getOrderNo());
+        request.setOutTradeNo(order.getOrderNo());
+        request.setNotifyUrl(notifyUrl);
+        Amount amount = new Amount();
+        amount.setTotal((int) totalFee);
+        request.setAmount(amount);
+        Payer payer = new Payer();
+        payer.setOpenid(openid);
+        request.setPayer(payer);
+
+        PrepayWithRequestPaymentResponse response = jsapiServiceExtension.prepayWithRequestPayment(request);
+
+        Map<String, Object> result = new LinkedHashMap<>();
+        result.put("timeStamp", response.getTimeStamp());
+        result.put("nonceStr", response.getNonceStr());
+        result.put("package", response.getPackageVal());
+        result.put("signType", response.getSignType());
+        result.put("paySign", response.getPaySign());
+        return result;
     }
 
     /**
-     * 微信支付回调：幂等检查、下架/库存校验、库存扣减与订单状态更新。
-     * 微信回调未做验签/解密，仅处理业务状态（与 Node 端保持一致）。
-     * 注意，目前使用在deductStockAndMarkPaid保证数据库锁操作，之前的代码仅处于弱并发的状态
+     * 微信支付回调：验签 + 解密 + 业务校验，再扣减库存。
+     * 验签/解密失败抛 {@link WechatPayNotifyException}（由 Controller 转 401 让微信重试）；
+     * 业务校验失败直接返回 SUCCESS（不重试）。
      */
-    // TODO: 当前回调未做微信 V3 验签、未解密 resource.ciphertext，仅适用于 mock/联调。真实微信回调需要平台证书 + WECHAT_APIV3_KEY，属于未完成功能，严禁直接上生产。
-    public Map<String, Object> receiveWechatPaymentNotify(String orderNo) {
+    public Map<String, Object> receiveWechatPaymentNotify(String body, String timestamp, String nonce,
+                                                          String signature, String serial) {
+        // 0. 显式校验序列号：Wechatpay-Serial 必须与配置的 publicKeyId 一致，否则按验签失败处理
+        if (publicKeyId.isBlank() || !publicKeyId.equals(serial)) {
+            throw new WechatPayNotifyException("微信支付回调序列号不匹配", null);
+        }
+
+        // 验签 + 解密，订单号只能从解密后的密文里取
+        Transaction tx;
+        try {
+            RequestParam requestParam = new RequestParam.Builder()
+                    .serialNumber(serial)
+                    .signature(signature)
+                    .timestamp(timestamp)
+                    .nonce(nonce)
+                    .body(body)
+                    .build();
+            tx = notificationParser.parse(requestParam, Transaction.class);
+        } catch (Exception e) {
+            throw new WechatPayNotifyException("微信支付回调验签或解密失败", e);
+        }
+
+        // 1. 取订单号查订单
+        String orderNo = tx.getOutTradeNo();
+        // TODO: 此处应记录 transaction_id（tx.getTransactionId()）和支付流水，当前未落库，后续需补流水表
         Order order = orderMapper.selectByOrderNo(orderNo);
         if (order == null) {
-//            改为日志  "订单不存在"
+            // 需要日志记录订单异常
             return successRequest();
         }
-//        幂等处理，源于微信会有多次回调
-        if (order.getStatus() != null && order.getStatus() != 0) return successRequest();
+
+        // 2. 幂等检查
+        if (order.getStatus() != null && order.getStatus() != 0) {
+            return successRequest();
+        }
+
+        // 3. 支付状态必须为 SUCCESS
+        if (tx.getTradeState() == null || !"SUCCESS".equals(tx.getTradeState().name())) {
+            // 需要日志记录订单异常
+            return successRequest();
+        }
+
+        // 4. 商户号与 appid 必须与配置一致
+        if (!mchid.equals(tx.getMchid()) || !appid.equals(tx.getAppid())) {
+            // 需要日志记录订单异常
+            return successRequest();
+        }
+
+        // 5. 币种校验：必须为 CNY
+        String currency = tx.getAmount() == null ? null : tx.getAmount().getCurrency();
+        if (currency != null && !"CNY".equals(currency)) {
+            orderMapper.updateStatusByOrderNo(orderNo, 11); // 订单异常（OrderStatus.HUMAN_INTERVENTION）
+            // TODO: 需要日志记录异常订单，币种非 CNY，订单号 + orderNo
+            return successRequest();
+        }
+
+        // 6. 金额校验：amount.total（分）与订单 total_amount（元）一致
+        Integer paidFen = tx.getAmount() == null ? null : tx.getAmount().getTotal();
+        if (paidFen == null || order.getTotalAmount() == null) {
+            orderMapper.updateStatusByOrderNo(orderNo, 11); // 订单异常（OrderStatus.HUMAN_INTERVENTION）
+            // TODO: 需要日志记录异常订单，金额缺失，订单号 + orderNo
+            return successRequest();
+        }
+        long orderFen = order.getTotalAmount().movePointRight(2).longValueExact();
+        if (orderFen != paidFen) {
+            orderMapper.updateStatusByOrderNo(orderNo, 11); // 订单异常（OrderStatus.HUMAN_INTERVENTION）
+            // TODO: 需要日志记录异常订单，金额不一致，订单号 + orderNo
+            return successRequest();
+        }
 
         List<Map<String, Object>> items;
         try {
             items = buildItems(order.getItems());
         } catch (Exception e) {
-//            改为日志  "订单商品信息异常"
             return successRequest();
         }
 
@@ -178,109 +250,10 @@ public class PaymentService {
             paymentTxService.deductStockAndMarkPaid(orderNo, items);
         } catch (BizException e) {
             orderMapper.updateStatusByOrderNo(orderNo, e.getCode());
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             orderMapper.updateStatusByOrderNo(orderNo, 8);
         }
         return successRequest();
-    }
-
-    /** 调用微信支付统一下单 API，返回小程序支付参数。 */
-    private Map<String, Object> wxUnifiedOrder(String openid, String outTradeNo, long totalFee, String description) {
-        // 从文件读取证书
-        PrivateKey privateKey;
-        try {
-            privateKey = certHelper.getPrivateKey();
-        } catch (Exception e) {
-            throw new ApiException(HttpStatus.INTERNAL_SERVER_ERROR, "证书文件不存在或无法读取");
-        }
-
-        String url = "https://api.mch.weixin.qq.com/v3/pay/transactions/jsapi";
-        String nonceStr = randomHex(32);
-        long timestamp = System.currentTimeMillis() / 1000;
-
-        Map<String, Object> amount = new LinkedHashMap<>();
-        amount.put("total", totalFee);
-        amount.put("currency", "CNY");
-        Map<String, Object> payer = new LinkedHashMap<>();
-        payer.put("openid", openid);
-        Map<String, Object> bodyMap = new LinkedHashMap<>();
-        bodyMap.put("appid", appid);
-        bodyMap.put("mchid", mchid);
-        bodyMap.put("description", description);
-        bodyMap.put("out_trade_no", outTradeNo);
-        bodyMap.put("notify_url", notifyUrl);
-        bodyMap.put("amount", amount);
-        bodyMap.put("payer", payer);
-
-        String body;
-        try {
-            body = objectMapper.writeValueAsString(bodyMap);
-        } catch (Exception e) {
-            throw new ApiException(HttpStatus.INTERNAL_SERVER_ERROR, "微信支付请求体序列化失败");
-        }
-
-        String signatureStr = "POST\n/v3/pay/transactions/jsapi\n" + timestamp + "\n" + nonceStr + "\n" + body + "\n";
-        String signature = rsaSign(signatureStr, privateKey);
-        String authHeader = "WECHATPAY2-SHA256-RSA2048 mchid=\"" + mchid + "\",nonce_str=\"" + nonceStr
-                + "\",timestamp=\"" + timestamp + "\",serial_no=\"" + serialNo + "\",signature=\"" + signature + "\"";
-
-        Map<String, Object> response;
-        try {
-            String responseBody = restClient.post()
-                    .uri(url)
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .header("Authorization", authHeader)
-                    .header("User-Agent", "Java")
-                    .body(body)
-                    .retrieve()
-                    .body(String.class);
-            response = objectMapper.readValue(responseBody, new TypeReference<Map<String, Object>>() {});
-        } catch (RestClientResponseException e) {
-//            TODO 使用日志记录异常数据
-            throw new ApiException(HttpStatus.INTERNAL_SERVER_ERROR, "微信支付错误: " + e.getResponseBodyAsString());
-        } catch (Exception e) {
-            throw new ApiException(HttpStatus.INTERNAL_SERVER_ERROR, "微信支付服务不可达");
-        }
-
-//        微信支付的回参，可能出现状态码为200的错误变体，此场景没有prepay_id
-        Object prepayIdObj = response.get("prepay_id");
-        if (prepayIdObj == null) {
-            throw new ApiException(HttpStatus.INTERNAL_SERVER_ERROR, "微信未返回 prepay_id");
-        }
-        String prepayId = String.valueOf(prepayIdObj);
-        String packageStr = "prepay_id=" + prepayId;
-        String timeStamp = String.valueOf(System.currentTimeMillis() / 1000);
-        String nonceStr2 = randomHex(32);
-        String signStr = appid + "\n" + timeStamp + "\n" + nonceStr2 + "\n" + packageStr + "\n";
-        String paySign = rsaSign(signStr, privateKey);
-
-        Map<String, Object> result = new LinkedHashMap<>();
-        result.put("timeStamp", timeStamp);
-        result.put("nonceStr", nonceStr2);
-        result.put("package", packageStr);
-        result.put("signType", "RSA");
-        result.put("paySign", paySign);
-        return result;
-    }
-
-    /** RSA-SHA256 签名并 Base64 编码。 */
-    private String rsaSign(String message, PrivateKey privateKey) {
-        try {
-            Signature sig = Signature.getInstance("SHA256withRSA");
-            sig.initSign(privateKey);
-            sig.update(message.getBytes(StandardCharsets.UTF_8));
-            return Base64.getEncoder().encodeToString(sig.sign());
-        } catch (Exception e) {
-            throw new ApiException(HttpStatus.INTERNAL_SERVER_ERROR, "微信支付签名失败");
-        }
-    }
-
-    /** 生成指定长度的十六进制随机串。 */
-    private String randomHex(int length) {
-        byte[] bytes = new byte[length / 2];
-        secureRandom.nextBytes(bytes);
-        return HexFormat.of().formatHex(bytes);
     }
 
     /** 订单 items 可能来自 MyBatis JSON 字符串，也可能已经被驱动解析成 List。 */

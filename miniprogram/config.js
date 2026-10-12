@@ -9,7 +9,7 @@ module.exports = {
   // 本地开发（模拟器）：后端服务端口（server/app.js 默认 3000）
   baseUrl: "https://yaoqihuiping.com",
   // OSS bucket 已设为私有，本地开发时使用本地服务器
-  svgsUrl: "https://svgs1.oss-cn-beijing.aliyuncs.com",
+  svgsUrl: "https://svgs1-company.oss-cn-beijing.aliyuncs.com",
   // 腾讯地图插件 Key（lbs 服务）
   qqMapKey: "AUVBZ-7SPCT-K5UXN-LIJU6-M6PQ2-JCBST",
 };

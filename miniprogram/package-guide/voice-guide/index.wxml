@@ -3,7 +3,7 @@
   <view class="vg-top">
     <view class="nav-bar">
       <view class="back-btn" catchtap="onBack">
-        <image class="back-icon" src="https://svgs1.oss-cn-beijing.aliyuncs.com/svgs/svgs/benefits-back-arrow.svg" mode="aspectFit"></image>
+        <image class="back-icon" src="https://svgs1-company.oss-cn-beijing.aliyuncs.com/svgs/svgs/benefits-back-arrow.svg" mode="aspectFit"></image>
         <text class="back-text">返回</text>
       </view>
       <text class="nav-title">语音导览</text>
@@ -19,7 +19,7 @@
       /> -->
         <image
         class="vg-hero"
-        src="https://svgs1.oss-cn-beijing.aliyuncs.com/voice-guide-hero.png"
+        src="https://svgs1-company.oss-cn-beijing.aliyuncs.com/voice-guide-hero.png"
         mode="aspectFill"
       />
     </view>

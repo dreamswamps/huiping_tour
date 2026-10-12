@@ -194,7 +194,7 @@ const doc = new Document({
           [
             ["后端地址", "http://110.40.187.34:3000"],
             ["数据库", "MySQL 110.40.187.34:3306，库名 hpt"],
-            ["OSS", "svgs1.oss-cn-beijing.aliyuncs.com"],
+            ["OSS", "svgs1-company.oss-cn-beijing.aliyuncs.com"],
             ["代码仓库", "https://gitee.com/redteaball/huiping_tour"],
             ["分支", "616dome"],
             ["AppID", "wx3f0567dc86f7ca12"],

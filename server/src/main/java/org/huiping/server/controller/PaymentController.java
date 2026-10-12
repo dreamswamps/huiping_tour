@@ -2,14 +2,17 @@ package org.huiping.server.controller;
 
 import org.huiping.server.auth.CurrentUserId;
 import org.huiping.server.common.Result;
+import org.huiping.server.exception.WechatPayNotifyException;
 import org.huiping.server.service.PaymentService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
 @RestController
 @RequestMapping("/api/payment")
-public class PaymentController{
+public class PaymentController {
     private final PaymentService paymentService;
     public PaymentController(PaymentService paymentService) { this.paymentService = paymentService; }
 
@@ -24,18 +27,37 @@ public class PaymentController{
     }
 
     /**
-     * 微信支付完成的回调接口callback(官方叫通知notify)
-     * 注意，微信有固定的回调参数结构，不可进行封装
-     * 微信会尝试最多15次直到回参为成功。该成功值回调success，不是业务逻辑的成功。
-     * 即使出现业务失败，也要回参success
+     * 微信支付回调（官方称通知）。微信有固定回调结构：raw body + 4 个 header，不封装。
+     * 验签/解密失败返回 401 让微信重试；业务处理结果返回 200（含 SUCCESS）。
      */
     @PostMapping("/callback")
-    public Map<String, Object> receiveWechatPaymentNotify(@RequestBody Map<String, Object> body) {
-        String orderNo = body.get("out_trade_no") instanceof String value ? value : null;
-        if (orderNo == null || orderNo.isBlank()) {
-            return Map.of("code", "FAIL", "message", "订单号缺失");
+    public ResponseEntity<Map<String, Object>> receiveWechatPaymentNotify(
+            @RequestBody String body,
+            @RequestHeader(value = "Wechatpay-Timestamp", required = false) String timestamp,
+            @RequestHeader(value = "Wechatpay-Nonce", required = false) String nonce,
+            @RequestHeader(value = "Wechatpay-Signature", required = false) String signature,
+            @RequestHeader(value = "Wechatpay-Serial", required = false) String serial) {
+        if (isBlank(timestamp) || isBlank(nonce) || isBlank(signature) || isBlank(serial)) {
+            return fail("微信支付回调报文头缺失");
         }
-//        微信支付需要200的状态码，默认的状态码是200
-        return paymentService.receiveWechatPaymentNotify(orderNo);
+        try {
+            return ResponseEntity.ok(paymentService.receiveWechatPaymentNotify(
+                    body, timestamp, nonce, signature, serial));
+        } catch (WechatPayNotifyException e) {
+            return fail("微信支付回调验签或解密失败");
+        } catch (Exception e) {
+            // TODO: 需要日志记录未预期异常，当前无日志，微信将重试
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Map.of("code", "FAIL", "message", "微信支付回调处理失败"));
+        }
+    }
+
+    private boolean isBlank(String value) {
+        return value == null || value.isBlank();
+    }
+
+    private ResponseEntity<Map<String, Object>> fail(String message) {
+        Map<String, Object> body = Map.of("code", "FAIL", "message", message);
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(body);
     }
 }

@@ -109,7 +109,7 @@ Page({
     wx.previewMedia({
       sources: [
         {
-          url: "https://svgs1.oss-cn-beijing.aliyuncs.com/media/%E9%9B%AA%E5%A6%B9%E7%9A%84%E7%BA%A2%E8%B1%86%E6%9D%89_metool.mp4",
+          url: "https://svgs1-company.oss-cn-beijing.aliyuncs.com/media/%E9%9B%AA%E5%A6%B9%E7%9A%84%E7%BA%A2%E8%B1%86%E6%9D%89_metool.mp4",
           type: "video",
         },
       ],

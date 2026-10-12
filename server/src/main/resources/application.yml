@@ -37,8 +37,10 @@ app:
       notify-url: ${WECHAT_PAY_NOTIFY_URL:}
       private-key-path: ${WECHAT_PRIVATE_KEY_PATH:certs/apiclient_key.enc}
       certs-secret: ${CERTS_SECRET:}
-      # 是否跳过微信支付功能（对应 Node 端 WEIXIN_CONFIG.isMock）
-      mock: ${WECHAT_PAY_MOCK:false}
+      # 微信支付 APIv3 密钥（固定 32 字节，非 Base64），用于回调解密与平台证书下载
+      api-v3-key: ${WECHAT_APIV3_KEY:}
+      public-key-id: ${WECHAT_PUBLIC_KEY_ID:}
+      public-key-path: ${WECHAT_PUBLIC_KEY_PATH:certs/pub_key.pem}
 
   # 顺丰开放平台（EXP_RECE_CREATE_ORDER）配置
   delivery:

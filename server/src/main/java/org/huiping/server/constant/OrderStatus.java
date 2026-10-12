@@ -15,7 +15,8 @@ public enum OrderStatus {
     EXPIRED(5, "已过期"),
     PAY_FAIL_OFFLINE(6, "商品下架或不足"),
     PAY_FAIL_CONN(8, "数据库操作失败"),
-    IN_PROGRESS(10,"处理中");
+    IN_PROGRESS(10,"处理中"),
+    HUMAN_INTERVENTION(11,"异常订单需人工介入");
 
 
     private final int code;
