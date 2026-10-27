@@ -26,11 +26,10 @@ public class JwtUtil {
         this.expiresIn = parseDuration(expires);
     }
 
-    /** 签发 JWT，载荷含 userId 与 openid。 */
-    public String generateToken(Long userId, String openid) {
+    /** 签发 JWT，载荷含 userId。 */
+    public String generateToken(Long userId) {
         return Jwts.builder()
                 .claim("userId", userId)
-                .claim("openid", openid)
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + expiresIn.toMillis()))
                 .signWith(secretKey)

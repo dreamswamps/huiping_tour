@@ -61,7 +61,7 @@ function mapDeclarations(list) {
   return (list || []).map((item) => ({
     id: item.id,
     content: item.content,
-    time: formatRelativeTime(item.createdAt),
+    time: formatRelativeTime(item.created_at),
   }));
 }
 

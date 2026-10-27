@@ -46,6 +46,7 @@ public class UserController {
     /** 查询指定用户的地址列表，仅允许本人访问。 */
     @GetMapping("/{userId}/addresses")
     public Result<List<UserAddress>> listAddress(@CurrentUserId Long userId) {
+        System.out.println(userId);
         return Result.success(addressService.listAddress(userId));
     }
 

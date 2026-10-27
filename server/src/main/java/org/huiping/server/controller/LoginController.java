@@ -27,15 +27,14 @@ public class LoginController{
     /**
      * 微信登录
      */
-    /** 微信登录入口；换取 openid 后由 UserService 查找/创建用户，再签发 JWT。 */
+    /** 微信登录入口；由 UserService 查找/创建用户，再签发含 userId 的 JWT。 */
     @PostMapping
     public Result<Map<String, Object>> login(@RequestBody @Valid LoginRequest req) {
 //        DTO仅与HTTP有关，不应关联到业务逻辑
         Map<String, Object> user = loginService.login(req.getCode(), req.getNickname(), req.getAvatar());
-        String openid = (String) user.get("openid");
         Long id = ((Number) user.get("id")).longValue();
 //        TODO 理论上JWT归Service层管，想改就改
-        String token = jwtUtil.generateToken(id, openid);
+        String token = jwtUtil.generateToken(id);
 
         user.put("token", token);
         return Result.success("登录成功", user);

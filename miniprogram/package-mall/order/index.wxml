@@ -34,8 +34,8 @@
             <view class="addr-dot" wx:if="{{selectedAddressId === item.id}}" />
           </view>
           <view class="addr-body">
-            <text class="addr-line">{{item.receiverName}} {{item.receiverPhone}}</text>
-            <text class="addr-detail">{{item.province}}{{item.city}}{{item.district}}{{item.detailAddress}}</text>
+            <text class="addr-line">{{item.receiver_name}} {{item.receiver_phone}}</text>
+            <text class="addr-detail">{{item.province}}{{item.city}}{{item.district}}{{item.detail_address}}</text>
           </view>
         </view>
       </view>

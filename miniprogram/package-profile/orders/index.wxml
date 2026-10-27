@@ -28,7 +28,7 @@
     <block wx:else>
       <view class="order-card" wx:for="{{list}}" wx:key="id">
         <view class="order-top">
-          <text class="order-no">订单号 {{item.orderNo}}</text>
+          <text class="order-no">订单号 {{item.order_no}}</text>
           <text class="order-status {{item.statusClass}}">{{item.statusText}}</text>
         </view>
         <text class="order-preview">{{item.itemsPreview}}</text>

@@ -127,13 +127,13 @@ Page({
       listThumb || (Array.isArray(detail.images) && detail.images[0]) || "";
     cartStorage.addOrIncrement({
       id: productId,
-      name: detail.productName,
+      name: detail.product_name,
       price: listPrice,
       thumb: thumbForCart,
       spec: "默认",
     });
     this.showMallTip({
-      message: `${detail.productName} 已加入购物车`,
+      message: `${detail.product_name} 已加入购物车`,
       icon: `${svgsUrl}/svgs/svgs/mall-prompt-xinghuo.svg`,
       duration: 2000,
     });
@@ -159,7 +159,7 @@ Page({
   onShareAppMessage() {
     const { productId, detail } = this.data;
     const title =
-      detail && detail.productName ? detail.productName : "商品详情";
+      detail && detail.product_name ? detail.product_name : "商品详情";
     let path = "/package-mall/detail/index";
     if (productId) path += `?productId=${productId}`;
     return { title, path };

@@ -45,10 +45,18 @@ app:
   # 顺丰开放平台（EXP_RECE_CREATE_ORDER）配置
   delivery:
     mock: ${MOCK_DELIVERY:true}
-    sf-url: '${SF_URL:https://sfapi.sf-express.com/std/service}'
+    # 生产地址（暂未启用）：https://bspgw.sf-express.com/std/service
+    sf-url: '${SF_URL:}'
     sf-partner-id: ${SF_PARTNER_ID:}
+    # 丰桥旧体系字段，迁移完成后删除
     sf-checkword: ${SF_CHECKWORD:}
     sf-service-name: ${SF_SERVICE_NAME:EXP_RECE_CREATE_ORDER}
+    # 顺丰开放平台新体系（accessToken + secret）
+    sf-access-token-url: ${SF_ACCESS_TOKEN_URL:}
+    sf-client-secret: ${SF_CLIENT_SECRET:}
+    sf-monthly-card: ${SF_MONTHLY_CARD:}
+    sf-url-sandbox: ${SF_URL_SANDBOX:}
+    sf-use-sandbox: ${SF_USE_SANDBOX:true}
     sf-sender-name: ${SF_SENDER_NAME:红旅薪传}
     sf-sender-phone: ${SF_SENDER_PHONE:}
     sf-sender-province: ${SF_SENDER_PROVINCE:}
@@ -62,4 +70,4 @@ app:
 mybatis:
   mapper-locations: classpath:/mapper/*.xml
   configuration:
-    map-underscore-to-camel-case: false
+    map-underscore-to-camel-case: true

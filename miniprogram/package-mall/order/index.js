@@ -29,7 +29,7 @@ Page({
     needLogin: false,
     needAddress: false,
     submitDisabled: true,
-    //  paying决定是否唤起支付，避免同时唤起多个支付弹窗
+    // paying决定是否唤起支付，避免同时唤起多个支付弹窗
     paying: false,
   },
 
@@ -131,18 +131,20 @@ Page({
         let rows = body.data;
         if (checkoutIds.length > 0) {
           const set = new Set(checkoutIds.map((x) => String(x)));
+          // 【修改点】由 r.product_id 改为 r.productId
           rows = rows.filter((r) => set.has(String(r.productId)));
         }
 
         const lines = rows.map((r) => {
+          // 【修改点】由 r.product_price 改为 r.productPrice
           const price = Number(r.productPrice);
           return {
-            productId: r.productId,
-            productName: r.productName,
+            productId: r.productId,           // 【修改点】
+            productName: r.productName,       // 【修改点】
             quantity: r.quantity,
             productPrice: price,
             priceText: price.toFixed(2),
-            thumbUrl: resolveMediaUrl(r.productThumb, baseUrl),
+            thumbUrl: resolveMediaUrl(r.productThumb, baseUrl), // 【修改点】
           };
         });
 
@@ -199,7 +201,7 @@ Page({
             ? body.data
             : [];
         let selectedAddressId = this.data.selectedAddressId;
-        const def = list.find((a) => a.isDefault);
+        const def = list.find((a) => a.is_default);
         if (def) selectedAddressId = def.id;
         else if (list.length > 0) selectedAddressId = list[0].id;
         else selectedAddressId = null;

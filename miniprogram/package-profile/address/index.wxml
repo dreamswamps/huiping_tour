@@ -21,15 +21,15 @@
       <view class="addr-card">
         <view class="addr-top" data-id="{{item.id}}" bindtap="onEdit">
           <view class="addr-name-row">
-            <text class="addr-name">{{item.receiverName}}</text>
-            <text class="addr-phone">{{item.receiverPhone}}</text>
-            <view class="tag-default" wx:if="{{item.isDefault}}">默认</view>
+            <text class="addr-name">{{item.receiver_name}}</text>
+            <text class="addr-phone">{{item.receiver_phone}}</text>
+            <view class="tag-default" wx:if="{{item.is_default}}">默认</view>
           </view>
-          <text class="addr-full">{{item.province}}{{item.city}}{{item.district}}{{item.detailAddress}}</text>
+          <text class="addr-full">{{item.province}}{{item.city}}{{item.district}}{{item.detail_address}}</text>
           <text class="addr-label" wx:if="{{item.label}}">{{item.label}}</text>
         </view>
         <view class="addr-actions">
-          <text class="act-link" catchtap="onSetDefault" data-id="{{item.id}}" wx:if="{{!item.isDefault}}">设为默认</text>
+          <text class="act-link" catchtap="onSetDefault" data-id="{{item.id}}" wx:if="{{!item.is_default}}">设为默认</text>
           <text class="act-link danger" catchtap="onDelete" data-id="{{item.id}}">删除</text>
         </view>
       </view>

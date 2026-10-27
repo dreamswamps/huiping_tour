@@ -126,7 +126,10 @@ public class PaymentService {
             totalFee += price.multiply(BigDecimal.valueOf(qty)).movePointRight(2)
                     .setScale(0, RoundingMode.HALF_UP).longValueExact();
         }
-        
+
+        // TEST-ONLY: ONE-CENT-PAY 强制1分钱支付测试，上线前删除
+        totalFee = 1L;
+
         // 校验订单金额，异常则回写为按当前价格重新计算的值
         BigDecimal computed = BigDecimal.valueOf(totalFee).movePointLeft(2);
         BigDecimal orderTotal = order.getTotalAmount();
@@ -253,6 +256,7 @@ public class PaymentService {
         } catch (Exception e) {
             orderMapper.updateStatusByOrderNo(orderNo, 8);
         }
+        // TODO: 支付成功后自动发货扩展点，当前为手动 ship 触发，暂不实现
         return successRequest();
     }
 

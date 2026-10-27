@@ -33,7 +33,7 @@ public class LoginService {
 
     /**
      * 微信登录：调用 jscode2session 换取 openid，再查找/创建本地用户。
-     * 返回的 Map 固定包含 openid / id / nickname / uid / avatar / dbError；
+     * 返回的 Map 固定包含 id / nickname / uid / avatar；
      * 当 id 为 null 时表示微信已通过但用户未写入数据库（对应 Node 端 code:503）。
      */
     public Map<String, Object> login(String code, String nickname, String avatar) {
@@ -82,8 +82,6 @@ public class LoginService {
         }
 
         Map<String, Object> result = new LinkedHashMap<>();
-//        现以不再允许返回openid
-//        result.put("openid", openid);
 
         try {
             User user = userMapper.selectByOpenid(openid);

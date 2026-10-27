@@ -32,7 +32,7 @@
 
     <view wx:elif="{{!loading && detail}}" class="sheet">
       <view class="info-card">
-        <text class="info-title">{{detail.productName}}</text>
+        <text class="info-title">{{detail.product_name}}</text>
         <view wx:if="{{subtitleTagList.length}}" class="tag-row">
           <view wx:for="{{subtitleTagList}}" wx:key="*this" class="tag-pill">
             <text>{{item}}</text>

@@ -38,14 +38,14 @@ function mapOrderRow(o) {
   const meta = statusMeta(st);
   // 只允许待付款取消（待发货走发货流程）
   const canCancel = st === 0;
-  const amt = Number(o.totalAmount);
+  const amt = Number(o.total_amount);
   return {
     ...o,
     statusText: meta.statusText,
     statusClass: meta.statusClass,
     canCancel,
     itemsPreview: itemsPreview(o.items),
-    timeText: formatTime(o.createdAt),
+    timeText: formatTime(o.created_at),
     totalText: Number.isFinite(amt) ? amt.toFixed(2) : "0.00",
   };
 }

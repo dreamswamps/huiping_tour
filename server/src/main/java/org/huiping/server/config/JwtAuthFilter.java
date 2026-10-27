@@ -39,10 +39,8 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                     Claims claims = Jwts.parser().verifyWith(secretKey).build()
                             .parseSignedClaims(matcher.group(1)).getPayload();
                     Object userId = claims.get("userId");
-                    Object openid = claims.get("openid");
-                    if (userId != null && openid != null) {
+                    if (userId != null) {
                         request.setAttribute("userId", Long.valueOf(String.valueOf(userId)));
-                        request.setAttribute("openid", String.valueOf(openid));
                     }
                 } catch (JwtException | IllegalArgumentException ignored) {
                     // Protected endpoints produce the same 401 contract as the Node middleware.

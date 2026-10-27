@@ -11,7 +11,8 @@ public enum OrderStatus {
 
     PENDING_PAYMENT(0, "待支付"),
     PAID(1, "已支付"),
-    // 2/3/4 物流状态待开发，先占位或暂不定义
+    SHIPPED(2, "已发货"),
+    // 3/4 物流状态待开发，先占位或暂不定义
     EXPIRED(5, "已过期"),
     PAY_FAIL_OFFLINE(6, "商品下架或不足"),
     PAY_FAIL_CONN(8, "数据库操作失败"),

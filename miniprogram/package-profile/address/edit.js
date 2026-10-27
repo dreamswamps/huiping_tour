@@ -64,16 +64,16 @@ Page({
         const d = res.data.data;
         const region = [d.province, d.city, d.district].filter(Boolean);
         this.setData({
-          receiverName: d.receiverName || "",
-          receiverPhone: d.receiverPhone || "",
+          receiverName: d.receiver_name || "",
+          receiverPhone: d.receiver_phone || "",
           province: d.province || "",
           city: d.city || "",
           district: d.district || "",
           region: region.length === 3 ? region : [],
           regionText: region.length === 3 ? region.join(" ") : "",
-          detailAddress: d.detailAddress || "",
+          detailAddress: d.detail_address || "",
           label: d.label || "",
-          isDefault: !!d.isDefault,
+          isDefault: !!d.is_default,
         });
       },
       fail: () => {
